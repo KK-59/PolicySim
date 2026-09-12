@@ -1,90 +1,99 @@
-# Parameters
+# Parameters and provenance
 
-12–15 total. Every parameter shows its source tag on screen. **A parameter with no source is
-flagged, never silently defaulted.**
+Every numeric input to the engine is listed here. A value with no evidence is tagged `assumed`;
+it is never silently presented as literature. The runtime definitions are in
+[`src/contracts/baseline.ts`](../src/contracts/baseline.ts).
 
-Owner of this table: **Albert** (sourcing). Owner of the parameter set itself: **Kaavya**.
+Source tags: `measured` (NHS-SIM snapshot), `documented` (policy or handbook),
+`literature` (corpus evidence that measures the same quantity), and `assumed` (visible gap).
+A supporting intervention effect is not a source for an intensity, routing share, or local capacity.
 
-Source tags: `measured` (from the snapshot) · `documented` (from the uploaded policy or the
-handbook) · `literature` (from the corpus, with a range) · `assumed` (flagged amber on screen).
+## Demand
 
-## Policy-invariant primitives
+| Contract path | Value | Range | Source | Citation or note |
+|---|---:|---:|---|---|
+| `arrivals.targetUtilisation` | 0.94 | 0.85-0.99 | `assumed` | No matched English-practice utilisation distribution found; likely tornado driver. |
+| `arrivals.classMix.routine` | 0.80 | 0.70-0.88 | `assumed` | NHS-SIM has no GP demand mix. |
+| `arrivals.classMix.complex` | 0.15 | 0.08-0.25 | `assumed` | Complex is a modelled class, absent from NHS-SIM. |
+| `arrivals.classMix.urgent` | 0.05 | 0.02-0.10 | `assumed` | ED acuity mix is not a valid GP proxy. |
+| `arrivals.perDay.routine` | 58.852 | 46.5-64.4 | `assumed`, derived | From utilisation, capacity, class mix and service times; not sampled independently. |
+| `arrivals.perDay.complex` | 11.035 | 5.3-18.3 | `assumed`, derived | Same derivation; inherits the assumed complex share. |
+| `arrivals.perDay.urgent` | 3.678 | 1.3-7.3 | `assumed`, derived | Same derivation; inherits the assumed urgent share. |
+| `arrivals.edPerDay` | 142 | 140-144 | `measured` | `nhssim-calibration-2026`; 1,312 attendances over about 9 sim-days. |
+| `arrivals.dischargeLettersPerDay` | 6.3 | 5-8 | `measured` | `nhssim-calibration-2026`; 57 summaries over about 9 sim-days. |
 
-Measured from the live snapshot on 12 Sep 2026 — see [calibration-findings.md](calibration-findings.md)
-for how each was derived.
+## Capacity and service
 
-| Parameter | Value | Range | Units | Bounds | Source | Citation |
-|---|---|---|---|---|---|---|
-| A&E arrival rate (all classes) | 142 | 140–144 | /sim-day | [0, ∞) | `measured` | `attendances.createdAt`, 9 sim-days |
-| Arrival rate — routine (acuity 3) | 141.7 | | /sim-day | [0, ∞) | `measured` | 1309/1312 of attendances |
-| Arrival rate — urgent (acuity 2) | 0.3 | | /sim-day | [0, ∞) | `measured` | 3/1312 of attendances |
-| Arrival rate — complex | | | /sim-day | | `assumed` | ⚠️ sim has no complex class; define it yourself |
-| Community visit service time | 90 | — | min | [0, ∞) | `measured` | `provenance.changes`, n=7, zero variance |
-| Discharge letter: sent → reviewed | 60 | — | min | [0, ∞) | `measured` | `provenance.changes`, n=20 |
-| Discharge letter: reviewed → filed | 60 | — | min | [0, ∞) | `measured` | `provenance.changes`, n=8 |
-| Blood result turnaround | | | min | | `documented` | handbook — not yet observed live |
-| Pharmacy approval delay | | | min | | `assumed` | ⚠️ only 1 approved rx in world; not measurable yet |
-| GP sessions/day | 6 | — | count | [0, 24] | `measured` | `appointments?date=2026-09-12` |
-| GP usable slots/day | 90 | — | count | [0, ∞) | `measured` | 6 × (240/15 − 1 protected break) |
-| Community slots/day | 4 | — | count | [0, ∞) | `measured` | `capacity-community.data.total` |
-| Staffed spaces | 8 | — | count | | `measured` | `view.staffing` (4 doctors, 4 nurses) |
-| GP admin share | 0.296 | 0.163–0.296 | share | [0, 1] | `literature` | `gp-workload-trends-2024`; derived 2005–2019 endpoints, not a CI |
-| GP consultation time | 8 | 4.4–11 | min | [0, ∞) | `literature` | `gp-consultation-variation-1999`; old UK observational evidence |
-| Routing: GP → test | | | share | [0, 1] | `assumed` | ⚠️ `fuller-stocktake-2022` supports the pathway but gives no probability |
-| Routing: GP → hospital | | | share | [0, 1] | `assumed` | ⚠️ `fuller-stocktake-2022` supports the pathway but gives no probability |
-| Routing: GP → community | | | share | [0, 1] | `assumed` | ⚠️ `fuller-stocktake-2022` supports the pathway but gives no probability |
-| Routing: letter sent → reviewed | 0.37 | | share | [0, 1] | `measured` | 21 of 57 progressed past `sent` |
-| Routing: letter → filed | 0.16 | | share | [0, 1] | `measured` | 9 of 57 filed |
-| Community referral rejection | | | share | [0, 1] | `assumed` | ⚠️ no observed referral flow and no transferable literature probability |
-| Hospital → community routing share | | | share | [0, 1] | `assumed` | ⚠️ effect evidence exists, but no baseline routing share in the sim |
+| Contract path | Value | Range | Source | Citation or note |
+|---|---:|---:|---|---|
+| `capacities.gpSessionsPerDay` | 6 | none | `measured` | Snapshot appointment diary. |
+| `capacities.gpSlotsPerSession` | 15 | none | `measured` | 240 minutes / 15-minute slots, less one break. |
+| `capacities.communitySlotsPerDay` | 4 | none | `measured` | Snapshot `capacity-community.data.total`. |
+| `capacities.staffedSpaces` | 8 | none | `measured` | Snapshot staffing: 4 doctors and 4 nurses. |
+| `capacities.gpAdminShare` | 0.296 | 0.163-0.296 | `literature` | `gp-workload-trends-2024`; historical endpoints derived from reported workload, not a CI. |
+| `serviceTimes.gpConsultation` | 15 min | none | `measured` | Snapshot `session.data.slotMinutes`; older literature is validation only. |
+| `serviceTimes.communityVisit` | 90 min | none | `measured` | `nhssim-calibration-2026`; n=7, zero variance. |
+| `serviceTimes.documentReviewHop` | 60 min | none | `measured` | Snapshot elapsed transition time, not clinician effort. |
+| `serviceTimes.documentReviewWork` | 4 min | 2-8 | `assumed` | NHS-SIM records elapsed status changes, not work content. |
+| `serviceTimes.bloodResultTurnaround` | 120 min | none | `documented` | `nhssim-handbook`; not observed live. |
+| `serviceTimes.pharmacyApproval` | 60 min | none | `assumed` | Only one approved prescription exists in the snapshot. |
+| `serviceTimes.classMultiplier.routine` | 1.0 | none | `measured` | The measured 15-minute slot is the unit. |
+| `serviceTimes.classMultiplier.complex` | 2.0 | 1.5-3.0 | `assumed` | Double-slot mechanism; NHS-SIM has no complex class. |
+| `serviceTimes.classMultiplier.urgent` | 1.0 | 1.0-1.5 | `assumed` | No matched simulator observation. |
 
-**⚠️ Service rates are not measurable.** 1,307 of 1,312 attendances are `waiting` — the world has
-had 22 actions total and nothing is being served. Arrival rates are solid; anything requiring
-observed throughput is not. See the gridlock caveat in the findings doc.
+## Routing
 
-## Policy levers (5–6)
+| Contract path | Value | Range | Source | Citation or note |
+|---|---:|---:|---|---|
+| `routing.gpToTest` | 0.20 | none | `assumed` | `fuller-stocktake-2022` supports the pathway but gives no probability. |
+| `routing.gpToHospital` | 0.10 | none | `assumed` | No transferable probability found. |
+| `routing.gpToCommunity` | 0.05 | none | `assumed` | No transferable probability found. |
+| `routing.letterSentToReviewed` | 0.37 | none | `measured` | 21 of 57 letters progressed beyond sent. |
+| `routing.letterReviewedToFiled` | 0.16 | none | `measured` | 9 of 57 sent letters were filed. |
+| `routing.communityRejection` | 0 | none | `assumed` | No baseline community referral flow. |
 
-Set by extraction from the uploaded document, then exposed as sliders for post-extraction
-adjustment. They are **not** the way the user gets in.
+## Policy levers
 
-| Lever | Baseline (measured) | Range | Source | Grounded? |
-|---|---|---|---|---|
-| Community capacity multiplier | 4 slots/day | | `measured` | ✅ best lever — small base, so thresholds are visible |
-| Extra GP sessions | 6 sessions/day, 15 slots each | | `measured` | ✅ +1 session = +15 slots ≈ +17% |
-| Follow-up channel mix | 33% telephone (2 of 6 sessions) | | `measured` | ✅ `session.data.mode` |
-| Monitoring intensity | devices active, 484 observations | RR 0.77–0.95 is effect evidence, not intensity | `measured` base; `rpm-utilisation-2025` supporting | ⚠️ no dose-response in the sim; do not map RR to intensity |
-| Hospital → community routing share | no baseline flow | outcome CIs are supporting only | `assumed` | ❌ `cochrane-hospital-at-home-2024` does not provide a routing share |
-| Discharge timing (weekday vs weekend) | — | | `assumed` | ❌ sim has no weekday logic — amber on screen |
+Lever values are no-policy baselines. Extraction changes them only when the uploaded policy makes
+an explicit commitment; otherwise a user may change them in the interface.
 
-## Declared boundaries — defaulted to 0, each with a reverse breakeven
+| Contract path | Baseline | Source | Evidence note |
+|---|---:|---|---|
+| `levers.communityCapacityMultiplier` | 1.0 | `measured` | No change from measured capacity. |
+| `levers.extraGpSessions` | 0 | `measured` | No sessions added. |
+| `levers.telephoneFollowUpShare` | 0.333 | `measured` | 2 of 6 snapshot sessions are telephone. |
+| `levers.monitoringIntensity` | 1.0 | `measured` | Device observations exist; effect is not measurable. |
+| `levers.hospitalToCommunityShare` | 0 | `assumed` | Hospital-at-home outcome CIs do not identify a routing share. |
+| `levers.weekdayDischargeShare` | 1.0 | `assumed` | NHS-SIM has no weekday mechanism. |
 
-| Boundary | Default | Breakeven | Source |
-|---|---|---|---|
-| Induced demand (Roemer) | 0 | | declared |
-| Substitution / bottleneck relocation | 0 | | declared |
-| Gaming / reclassification | 0 | | declared |
+## Effect sizes
 
-**Why 0 is the honest value here.** The simulator generates 142 arrivals/day regardless of what
-anyone does. Induced demand and substitution cannot occur in it, and there is no coding to game.
-These are not parameters we failed to measure — they are effects the ground truth does not contain.
-Declare them at 0 with a reverse breakeven and say so on screen.
+| Contract path | Value | Range | Source | Citation or note |
+|---|---:|---:|---|---|
+| `effects.telephoneServiceMultiplier` | 0.70 | 0.55-0.90 | `assumed` | No matched duration ratio has been curated yet. |
+| `effects.telephoneBaselineShare` | 0.333 | none | `measured` | Same 2-of-6 snapshot session mix; prevents double counting. |
+| `effects.monitoringEscalationReduction` | 0.10 | 0-0.25 | `assumed` | `rpm-utilisation-2025` provides supporting outcome effects, not class redistribution per intensity unit. |
 
-## Environment axis (separate from the three worlds)
+## Environment and boundaries
 
-| Toggle | Maps to sim scenario | Effect | Firable by us? |
-|---|---|---|---|
-| Winter pressure | `winter-pressure` | Increase urgent arrivals, reduce available beds | ❌ operator-gated (403) |
-| Staff shortage | `staff-shortage` | Reduce available home-visit slots | ❌ operator-gated (403) |
+| Contract path | Value | Range | Source | Citation or note |
+|---|---:|---:|---|---|
+| `environment.winterDemandMultiplier` | 1.15 | 1.08-1.25 | `assumed` | Incident exists in NHS-SIM; magnitude remains unsourced. |
+| `environment.winterUrgentMultiplier` | 1.60 | 1.30-2.20 | `assumed` | Incident exists in NHS-SIM; magnitude remains unsourced. |
+| `environment.shortageCommunityMultiplier` | 0.60 | 0.45-0.80 | `assumed` | Incident exists in NHS-SIM; magnitude remains unsourced. |
+| `boundaries.inducedDemand` | 0 | none | `assumed`, declared | NHS-SIM demand does not respond to capacity; report reverse breakeven. |
+| `boundaries.substitution` | 0 | none | `assumed`, declared | Not represented in NHS-SIM; report reverse breakeven. |
+| `boundaries.gaming` | 0 | none | `assumed`, declared | NHS-SIM has no coding or reclassification mechanism. |
 
-Both exist as real scenarios in the sim, so the toggles are faithful — but `/api/control/incidents`
-rejects a team key. They stay engine toggles unless the organisers fire one for us.
+## Outputs, not inputs
 
-## Never parameters — always derived
+Waiting times, queue lengths and utilisation are always derived by the engine. They must never be
+entered as policy parameters.
 
-Waits, queue lengths, utilisation. Waiting time is convex in utilisation; 80→85% barely matters,
-92→97% is catastrophic. This is why the model can extrapolate to a new policy regime: it evaluates
-known mathematics at a new point rather than fitting to past commentary.
+## Current sourcing priorities
 
-## Not modelled, and said plainly on screen
-
-Disease progression, treatment efficacy, adherence, travel, social care.
+The strongest unresolved quantities are `arrivals.targetUtilisation`,
+`serviceTimes.classMultiplier.complex`, `serviceTimes.documentReviewWork`,
+`effects.telephoneServiceMultiplier`, and the three environment multipliers. Their ranges remain
+visible assumptions until matched evidence is found. Use [the coverage matrix](../corpus/coverage.md)
+when reviewing tornado dominance.

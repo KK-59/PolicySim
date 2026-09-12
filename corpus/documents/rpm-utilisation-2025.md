@@ -4,7 +4,7 @@
 - Publisher: JMIR mHealth and uHealth
 - Year: 2025
 - Source: https://pmc.ncbi.nlm.nih.gov/articles/PMC12530163/
-- Parameters: levers.monitoringIntensity
+- Parameters: levers.monitoringIntensity, effects.monitoringEscalationReduction
 - Range or CI: yes
 - Evidence kind: literature
 - Applicability: supporting
@@ -16,4 +16,3 @@ A review of 40 randomised trials found a hospitalisation risk ratio of 0.86 (95%
 ## Modelling use and caveats
 
 The effect compares remote-monitoring programmes with usual care; it does not estimate a linear response to observation frequency. Treat it as a scenario-level effect distribution, not a direct monitoringIntensity multiplier.
-

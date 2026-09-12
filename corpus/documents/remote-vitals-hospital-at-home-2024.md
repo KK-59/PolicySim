@@ -4,7 +4,7 @@
 - Publisher: Journal of the American Medical Directors Association
 - Year: 2024
 - Source: https://pubmed.ncbi.nlm.nih.gov/38908399/
-- Parameters: levers.monitoringIntensity, levers.hospitalToCommunityShare
+- Parameters: levers.monitoringIntensity, levers.hospitalToCommunityShare, effects.monitoringEscalationReduction
 - Range or CI: yes
 - Evidence kind: literature
 - Applicability: supporting

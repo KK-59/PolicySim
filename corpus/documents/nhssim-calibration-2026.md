@@ -4,7 +4,7 @@
 - Publisher: Team 14
 - Year: 2026
 - Source: ../../docs/calibration-findings.md
-- Parameters: arrivals.perDay, capacities.gpSessionsPerDay, capacities.gpSlotsPerSession, capacities.communitySlotsPerDay, capacities.staffedSpaces, routing.letterSentToReviewed, routing.letterReviewedToFiled
+- Parameters: arrivals.edPerDay, arrivals.dischargeLettersPerDay, capacities.gpSessionsPerDay, capacities.gpSlotsPerSession, capacities.communitySlotsPerDay, capacities.staffedSpaces, routing.letterSentToReviewed, routing.letterReviewedToFiled
 - Range or CI: yes
 - Evidence kind: measured
 - Applicability: direct
