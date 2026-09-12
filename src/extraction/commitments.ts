@@ -18,6 +18,9 @@
 
 const OPENAI_URL = 'https://api.openai.com/v1/chat/completions';
 
+/** Roughly 30k tokens of document. Beyond this the call is slow and the tail is rarely policy. */
+const MAX_CHARS = 120_000;
+
 /** The only paths a document is allowed to move. Anything else is not a policy lever. */
 export const LEVER_PATHS = [
   'levers.communityCapacityMultiplier',
@@ -51,6 +54,10 @@ export interface ExtractionResult {
    *  as findings. */
   rejected: { text: string; span: string; reason: string }[];
   model: string;
+  /** Characters actually sent to the model. */
+  charsRead: number;
+  /** True when the document was longer than that. The user is told; it is not hidden. */
+  truncated: boolean;
 }
 
 const SYSTEM = `You read NHS policy documents and identify the operational commitments they make.
@@ -126,6 +133,13 @@ export async function extractCommitments(
 
   // Long documents are truncated rather than chunked. A board paper states its commitments early;
   // chunking would multiply the model calls and the PRD's rule is one call at the boundary.
+  //
+  // The truncation is REPORTED. Silently reading the first fifth of somebody's strategy and
+  // presenting the result as a reading of their strategy is the same failure as an unverified
+  // span: it looks complete and is not.
+  const sent = documentText.slice(0, MAX_CHARS);
+  const truncated = documentText.length > MAX_CHARS;
+
   const body = {
     model,
     temperature: 0,
@@ -140,7 +154,7 @@ export async function extractCommitments(
         content:
           `PARAMETER VOCABULARY\n${VOCABULARY}\n\n`
           + (opts.notes ? `CONTEXT FROM THE USER (not a parameter override)\n${opts.notes}\n\n` : '')
-          + `DOCUMENT\n${documentText.slice(0, 120_000)}`,
+          + `DOCUMENT\n${sent}`,
       },
     ],
   };
@@ -162,7 +176,7 @@ export async function extractCommitments(
   if (!content) throw new Error('OpenAI returned no content');
 
   const parsed = JSON.parse(content) as { commitments: Omit<Commitment, 'id'>[] };
-  return verify(parsed.commitments, documentText, model);
+  return verify(parsed.commitments, sent, model, truncated);
 }
 
 /**
@@ -177,6 +191,7 @@ function verify(
   raw: readonly Omit<Commitment, 'id'>[],
   documentText: string,
   model: string,
+  truncated: boolean,
 ): ExtractionResult {
   const haystack = normalise(documentText);
   const commitments: Commitment[] = [];
@@ -198,7 +213,7 @@ function verify(
     commitments.push({ ...c, id: `c${i + 1}`, span });
   });
 
-  return { commitments, rejected, model };
+  return { commitments, rejected, model, charsRead: documentText.length, truncated };
 }
 
 const normalise = (s: string) => s.replace(/\s+/g, ' ').trim().toLowerCase();

@@ -64,6 +64,7 @@ export function Upload() {
           (r: Record<string, unknown>, i: number) => ({ id: `c${i + 1}`, ...r }),
         ),
         rejected: payload.rejected ?? [],
+        truncated: payload.truncated ? { charsRead: payload.charsRead } : null,
         extracted: true,
       })
       navigate('/parameters')

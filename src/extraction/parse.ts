@@ -32,19 +32,21 @@ export async function parseDocument(
   filename: string,
 ): Promise<ParsedDocument> {
   const format = formatOf(filename);
-  const text = format === 'pdf'
-    ? await parsePdf(bytes)
-    : format === 'docx'
-      ? await parseDocx(bytes)
-      : new TextDecoder().decode(bytes);
 
-  const cleaned = tidy(text);
-  return {
-    text: cleaned,
-    format,
-    pages: format === 'pdf' ? await pdfPageCount(bytes) : 1,
-    chars: cleaned.length,
-  };
+  if (format === 'pdf') {
+    // Text and page count come from ONE parse. pdfjs transfers the underlying ArrayBuffer and
+    // detaches it, so a second getDocument on the same bytes fails with an error about
+    // unsupported types that has nothing to do with the PDF.
+    const { text, pages } = await parsePdf(bytes);
+    const cleaned = tidy(text);
+    return { text: cleaned, format, pages, chars: cleaned.length };
+  }
+
+  const raw = format === 'docx'
+    ? await parseDocx(bytes)
+    : new TextDecoder().decode(bytes);
+  const cleaned = tidy(raw);
+  return { text: cleaned, format, pages: 1, chars: cleaned.length };
 }
 
 /**
@@ -63,10 +65,12 @@ function tidy(raw: string): string {
     .trim();
 }
 
-async function parsePdf(bytes: Uint8Array): Promise<string> {
+async function parsePdf(bytes: Uint8Array): Promise<{ text: string; pages: number }> {
   const pdfjs = await import('pdfjs-dist/legacy/build/pdf.mjs');
   const doc = await pdfjs.getDocument({
-    data: bytes,
+    // A plain Uint8Array copy: pdfjs rejects a Node Buffer outright, and reuses of the same
+    // backing store fail once it has been transferred.
+    data: new Uint8Array(bytes),
     // No worker in Node, and no network fetches for fonts we are not rendering.
     useWorkerFetch: false,
     useSystemFonts: true,
@@ -76,19 +80,9 @@ async function parsePdf(bytes: Uint8Array): Promise<string> {
   for (let i = 1; i <= doc.numPages; i++) {
     const page = await doc.getPage(i);
     const content = await page.getTextContent();
-    pages.push(
-      content.items
-        .map((item) => ('str' in item ? item.str : ''))
-        .join(' '),
-    );
+    pages.push(content.items.map((item) => ('str' in item ? item.str : '')).join(' '));
   }
-  return pages.join('\n\n');
-}
-
-async function pdfPageCount(bytes: Uint8Array): Promise<number> {
-  const pdfjs = await import('pdfjs-dist/legacy/build/pdf.mjs');
-  const doc = await pdfjs.getDocument({ data: bytes, useWorkerFetch: false }).promise;
-  return doc.numPages;
+  return { text: pages.join('\n\n'), pages: doc.numPages };
 }
 
 async function parseDocx(bytes: Uint8Array): Promise<string> {

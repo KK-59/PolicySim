@@ -29,6 +29,19 @@ export function ExtractedParams() {
         </p>
       )}
 
+      {/* A document longer than one model call. Said here rather than nowhere: reading the first
+          fifth of somebody's strategy and presenting it as a reading of their strategy is the
+          same failure as an unverified quote — it looks complete and is not. */}
+      {run.truncated && (
+        <p className="note" role="note">
+          <Glyph name="warning" size={13} />
+          <span>
+            Only the first {run.truncated.charsRead.toLocaleString()} characters were read.
+            Commitments made later in the document will have been missed.
+          </span>
+        </p>
+      )}
+
       {/* Spans the model quoted that are not in the document. Shown, not swallowed: a reading we
           could not verify is the thing a reader most needs to know we discarded. */}
       {run.rejected.length > 0 && (

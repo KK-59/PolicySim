@@ -67,13 +67,30 @@ async function eligibility(policyInput: unknown) {
   }
 }
 
-async function requestJson(request: IncomingMessage): Promise<unknown> {
+/**
+ * Body size caps.
+ *
+ * The policy endpoints take a small JSON object and 64KB is a reasonable guard on them. Uploads
+ * are a different shape entirely: a 24-page board paper is a few megabytes before base64 adds a
+ * third, so the same cap rejected every real document while passing every test fixture.
+ */
+const SMALL_BODY = 64 * 1024
+const UPLOAD_BODY = 32 * 1024 * 1024
+
+async function requestJson(request: IncomingMessage, maxBytes = SMALL_BODY): Promise<unknown> {
   const chunks: Buffer[] = []
   let size = 0
   for await (const chunk of request) {
     const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk)
     size += buffer.length
-    if (size > 64 * 1024) throw new Error("Request body is too large")
+    if (size > maxBytes) {
+      // Name both numbers. "Too large" leaves the user guessing whether they are over by a
+      // kilobyte or a hundred megabytes, and the answer changes what they do next.
+      throw new Error(
+        `Request body is too large: over ${(maxBytes / 1024 / 1024).toFixed(1)}MB. `
+        + "A document this size needs splitting, or the relevant chapter extracting first.",
+      )
+    }
     chunks.push(buffer)
   }
   return JSON.parse(Buffer.concat(chunks).toString("utf8"))
@@ -100,7 +117,7 @@ const server = createServer(async (request, response) => {
      * published, and this is the only part of the product that needs one.
      */
     if (url.pathname === "/api/extract" && request.method === "POST") {
-      const body = await requestJson(request) as {
+      const body = await requestJson(request, UPLOAD_BODY) as {
         filename?: unknown
         contentBase64?: unknown
         notes?: unknown
@@ -139,6 +156,8 @@ const server = createServer(async (request, response) => {
         rejected: extraction.rejected,
         rows: mapped.rows,
         model: extraction.model,
+        charsRead: extraction.charsRead,
+        truncated: extraction.truncated,
       })
     }
 

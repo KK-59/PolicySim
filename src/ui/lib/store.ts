@@ -24,6 +24,8 @@ export interface RunState {
   extracted: boolean
   /** What the model rejected: spans it produced that are not in the document. */
   rejected: { text: string; span: string; reason: string }[]
+  /** Set when the document was longer than the model could be sent in one call. */
+  truncated: { charsRead: number } | null
 }
 
 const initial: RunState = {
@@ -35,6 +37,7 @@ const initial: RunState = {
   hasRun: false,
   extracted: false,
   rejected: [],
+  truncated: null,
 }
 
 let state: RunState = initial
