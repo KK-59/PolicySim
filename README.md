@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="docs/assets/hackathon-banner.webp" alt="OpenAI × Anima Healthcare Hackathon, 12 September 2026, London" width="820">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/atlas-dark.webp">
+    <img src="docs/assets/atlas.webp" alt="Atlas carrying a globe carved with a neighbourhood" width="190">
+  </picture>
 </p>
 
 <h1 align="center">PolicySim</h1>
@@ -7,11 +10,11 @@
 <p align="center"><strong>Don’t discover policy failure in patients. Simulate it first.</strong></p>
 
 <p align="center">
-  <img alt="Tests" src="https://img.shields.io/badge/tests-238%20passing-1D4ED8?style=flat-square&labelColor=0A0A0A">
   <img alt="Typecheck" src="https://img.shields.io/badge/typecheck-strict-1D4ED8?style=flat-square&labelColor=0A0A0A">
   <img alt="Engine" src="https://img.shields.io/badge/engine-deterministic-C026D3?style=flat-square&labelColor=0A0A0A">
-  <img alt="Stack" src="https://img.shields.io/badge/React%2018%20·%20TypeScript%20·%20Vite-E9E63C?style=flat-square&labelColor=0A0A0A">
+  <img alt="Stack" src="https://img.shields.io/badge/React%2018%20·%20TypeScript%20·%20Vite-404040?style=flat-square&labelColor=0A0A0A">
   <img alt="Team" src="https://img.shields.io/badge/Team%2014-7B6BC4?style=flat-square&labelColor=0A0A0A">
+  <img alt="Built at" src="https://img.shields.io/badge/OpenAI%20×%20Anima%20·%20London%20·%20Sep%202026-E9E63C?style=flat-square&labelColor=0A0A0A">
 </p>
 
 ---
