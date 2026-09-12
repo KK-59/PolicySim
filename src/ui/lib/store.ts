@@ -33,6 +33,13 @@ export interface RunState {
    */
   result: { metrics: unknown; sweep: unknown } | null
   running: boolean
+  /**
+   * A document taken off the shelf and dropped, waiting to be read.
+   *
+   * Dropping loads it into the box; it is not read until the user asks for it, exactly as when
+   * they choose a file of their own.
+   */
+  pendingDoc: { id: string; title: string } | null
 }
 
 const initial: RunState = {
@@ -47,6 +54,7 @@ const initial: RunState = {
   truncated: null,
   result: null,
   running: false,
+  pendingDoc: null,
 }
 
 let state: RunState = initial

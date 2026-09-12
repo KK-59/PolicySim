@@ -1,0 +1,45 @@
+{
+  "_note": "Drives the document drawer. `kind` is the only thing separating a real publication from one we wrote, so it is explicit rather than inferred from the folder.",
+  "documents": [
+    {
+      "id": "uec-recovery",
+      "kind": "real",
+      "file": "real/B2034-delivery-plan-for-recovering-urgent-and-emergency-care-services.pdf",
+      "title": "Delivery plan for recovering urgent and emergency care services",
+      "publisher": "NHS England / DHSC",
+      "date": "January 2023",
+      "pages": 49,
+      "note": "Virtual wards, urgent community response and discharge. Touches the most levers of anything published."
+    },
+    {
+      "id": "primary-care-access",
+      "kind": "real",
+      "file": "real/PRN00283-delivery-plan-for-recovering-access-to-primary-care-may-2023.pdf",
+      "title": "Delivery plan for recovering access to primary care",
+      "publisher": "NHS England",
+      "date": "May 2023",
+      "pages": 46,
+      "note": "50 million more appointments and 26,000 more staff. Covers GP capacity and the remote/in-person mix."
+    },
+    {
+      "id": "ten-year-plan",
+      "kind": "real",
+      "file": "real/fit-for-the-future-10-year-health-plan-for-england-executive-summary.pdf",
+      "title": "Fit for the future: 10 Year Health Plan for England (executive summary)",
+      "publisher": "Department of Health and Social Care",
+      "date": "July 2025",
+      "pages": 11,
+      "note": "The hospital-to-community shift, stated as strategy rather than as numbers."
+    },
+    {
+      "id": "brackenmoor",
+      "kind": "generated",
+      "file": "generated/brackenmoor-neighbourhood-plan.md",
+      "title": "Brackenmoor Integrated Neighbourhood Delivery Plan 2026/27",
+      "publisher": "Written by us, not a real organisation",
+      "date": "September 2026",
+      "pages": 1,
+      "note": "A test fixture. Because we wrote the commitments, we know what every extracted value should be, which is how we measure whether extraction is right rather than merely plausible."
+    }
+  ]
+}

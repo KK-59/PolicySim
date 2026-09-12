@@ -14,6 +14,7 @@ import { Tornado } from '../components/Tornado'
 import { WorldChart } from '../components/WorldChart'
 import { Findings } from '../components/WorldPanel'
 import { WorldOutcomes } from '../components/WorldOutcomes'
+import { ObservedRehearsal } from '../components/ObservedRehearsal'
 import { metrics as baselineMetrics, sweep as baselineSweep } from '../data'
 import { useRun } from '../lib/store'
 import { href } from '../lib/router'
@@ -150,6 +151,10 @@ export function ThreeWorlds() {
           </div>
         </div>
       </details>
+
+      {isLive && (
+        <ObservedRehearsal policyName={run.document?.filename ?? 'this policy'} />
+      )}
     </section>
   )
 }

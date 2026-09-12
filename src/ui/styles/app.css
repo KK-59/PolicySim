@@ -1668,6 +1668,282 @@ textarea::placeholder {
 }
 
 /* ---------------------------------------------------------------------------
+   Observed rehearsal. The local model predicts; this section reports what the
+   Anima synthetic worlds actually returned after an approved batch.
+   --------------------------------------------------------------------------- */
+
+.observed { padding-bottom: var(--s-9); }
+
+.observed__intro {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-6);
+}
+
+.observed__intro .lead { max-width: 68ch; }
+
+.observed__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex: none;
+  padding: 0.35rem var(--s-3);
+  border: 1px solid var(--rule-2);
+  border-radius: var(--r-pill);
+  color: var(--blue);
+  font-size: var(--t-tiny);
+  font-weight: 600;
+}
+
+.observed__controls {
+  display: grid;
+  grid-template-columns: minmax(15rem, 2fr) repeat(2, minmax(9rem, 1fr));
+  gap: var(--s-4);
+}
+
+.observed__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  font-size: var(--t-small);
+  font-weight: 600;
+}
+
+.observed__field select,
+.observed__field input[type='number'] {
+  width: 100%;
+  min-height: 42px;
+  padding: 0.55rem var(--s-3);
+  border: 1px solid var(--rule-2);
+  border-radius: var(--r-sm);
+  background: var(--paper);
+}
+
+.observed__field select:hover,
+.observed__field input[type='number']:hover { border-color: var(--ink-3); }
+
+.observed__input-unit {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--ink-3);
+  font-size: var(--t-small);
+  font-weight: 400;
+}
+
+.observed__actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-3);
+  margin-inline: 0;
+  padding: 0;
+  border: 0;
+}
+
+.observed__actions legend {
+  grid-column: 1 / -1;
+  margin-bottom: var(--s-2);
+  font-size: var(--t-small);
+  font-weight: 600;
+}
+
+.observed__actions label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s-3);
+  align-items: start;
+  padding: var(--s-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+}
+
+.observed__actions label:has(input:checked) {
+  border-color: color-mix(in srgb, var(--blue) 45%, var(--rule));
+  background: var(--wash-blue);
+}
+
+.observed__actions input,
+.observed__approval input {
+  width: 17px;
+  height: 17px;
+  margin: 0.15rem 0 0;
+  accent-color: var(--blue);
+}
+
+.observed__actions span {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+}
+
+.observed__actions small {
+  color: var(--ink-3);
+  font-size: var(--t-tiny);
+  font-weight: 400;
+}
+
+.observed__arms {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-block: 1px solid var(--rule);
+}
+
+.observed__arms > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  min-width: 0;
+  padding: var(--s-4);
+  border-left: 1px solid var(--rule);
+}
+
+.observed__arms > div:first-child { border-left: 0; }
+
+.observed__arms span {
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  text-transform: uppercase;
+}
+
+.observed__arms small {
+  color: var(--ink-3);
+  font-size: var(--t-tiny);
+  overflow-wrap: anywhere;
+}
+
+.observed__run,
+.observed__approval {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.observed__eligibility {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  font-size: var(--t-small);
+}
+
+.observed__eligibility strong { font-size: var(--t-h3); }
+
+.observed__error {
+  color: var(--amber);
+  max-width: 65ch;
+}
+
+.observed__approval {
+  padding: var(--s-4);
+  background: var(--paper-sunk);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-sm);
+}
+
+.observed__approval label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+  font-size: var(--t-small);
+  cursor: pointer;
+}
+
+.observed__progress > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-4);
+  margin-bottom: var(--s-2);
+  font-size: var(--t-small);
+}
+
+.observed__track {
+  height: 4px;
+  margin-bottom: var(--s-2);
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--rule);
+}
+
+.observed__track span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: left;
+  background: var(--gradient);
+  transition: transform 300ms var(--ease);
+}
+
+.observed__results {
+  border-top: 1px solid var(--rule-2);
+  padding-top: var(--s-7);
+}
+
+.observed__run-id {
+  color: var(--ink-3);
+  font-size: var(--t-tiny);
+}
+
+.observed__summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-5);
+  padding-block: var(--s-3);
+  border-block: 1px solid var(--rule);
+  font-size: var(--t-small);
+}
+
+.observed__summary span {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+}
+
+.observed__summary strong { font-size: var(--t-h3); }
+
+.observed__table td:first-child { min-width: 16rem; }
+
+.observed__table td:first-child small {
+  display: block;
+  max-width: 58ch;
+  margin-top: var(--s-1);
+  color: var(--ink-3);
+  line-height: 1.4;
+}
+
+.observed__table td:not(:first-child) { white-space: nowrap; }
+
+.observed__delta {
+  font-weight: 600;
+  color: var(--blue);
+}
+
+@media (max-width: 760px) {
+  .observed__intro,
+  .observed__run,
+  .observed__approval {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .observed__status { align-self: flex-start; }
+
+  .observed__controls,
+  .observed__actions,
+  .observed__arms { grid-template-columns: 1fr; }
+
+  .observed__arms > div {
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .observed__arms > div:first-child { border-top: 0; }
+}
+
+/* ---------------------------------------------------------------------------
    The three worlds, as three panels.
 
    Three across on a wide screen, stacked below it. Three read at a glance; five would not, which
@@ -2145,3 +2421,248 @@ textarea::placeholder {
 .nmap__swatch--complex { background: #a33a2a; }
 .nmap__swatch--urgent { background: #b1660f; }
 .nmap__swatch--letter { background: #4a4436; }
+/* --- document drawer ---------------------------------------------------------------------- */
+/* A corner trigger and a panel that slides in. The documents are how you try the thing, not a
+   step in the flow, so they stay out of the way until asked for. */
+
+.docs-trigger {
+  position: fixed;
+  right: var(--s-5);
+  bottom: var(--s-5);
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 0.625rem 1rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-pill);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: var(--t-small);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  box-shadow: var(--lift-lg);
+  transition: transform 150ms var(--ease), box-shadow 150ms var(--ease);
+}
+.docs-trigger:hover {
+  transform: translateY(-1px);
+}
+
+.drawer__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms var(--ease);
+}
+.drawer__scrim[data-open='true'] {
+  opacity: 1;
+}
+/* NEVER pointer-events: auto. The scrim covers the whole viewport, so anything it intercepts is
+   the drop zone. Dimming is all it is for; closing on an outside click is handled on the
+   document, where it cannot swallow a drag. A browser drag test caught this: the scrim was
+   silently eating every drop. */
+.drawer__scrim {
+  pointer-events: none;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 51;
+  width: min(30rem, 92vw);
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border-left: 1px solid var(--rule);
+  box-shadow: var(--lift-lg);
+  transform: translateX(100%);
+  transition: transform 240ms var(--ease);
+}
+.drawer[data-open='true'] {
+  transform: translateX(0);
+}
+/* Slide clear and stop taking pointer events, so the drop zone underneath is both visible and
+   reachable. The drag itself survives: an HTML5 drag in progress does not need its source. */
+.drawer[data-dragging='true'] {
+  transform: translateX(calc(100% - 3.5rem));
+  opacity: 0.55;
+  pointer-events: none;
+}
+.drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-5);
+  border-bottom: 1px solid var(--rule);
+}
+.drawer__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--s-5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .drawer__scrim,
+  .docs-trigger {
+    transition: none;
+  }
+}
+
+/* --- the shelf ---------------------------------------------------------------------------- */
+/* Two shelves rather than one list with a badge: a document we wrote must never be one glance
+   away from looking published. */
+
+.shelfswitch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-1);
+  padding: var(--s-1);
+  margin: var(--s-5) var(--s-5) 0;
+  background: var(--paper-sunk);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+}
+.shelfswitch__tab {
+  padding: 0.5rem 0.75rem;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--ink-2);
+  font-size: var(--t-tiny);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: background 150ms var(--ease), color 150ms var(--ease);
+}
+.shelfswitch__tab[aria-pressed='true'] {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--lift);
+}
+.shelfswitch__tab[aria-pressed='true'][data-kind='real'] {
+  color: var(--blue);
+}
+.shelfswitch__tab[aria-pressed='true'][data-kind='generated'] {
+  color: var(--violet);
+}
+
+.shelf {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-3);
+}
+
+.card {
+  display: flex;
+  gap: var(--s-3);
+  padding: var(--s-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  background: var(--paper);
+  cursor: grab;
+  transition: border-color 150ms var(--ease), box-shadow 150ms var(--ease),
+    transform 150ms var(--ease);
+}
+.card:hover {
+  border-color: var(--ink-3);
+  box-shadow: var(--lift);
+  transform: translateY(-1px);
+}
+.card:active {
+  cursor: grabbing;
+}
+.card__grip {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--r-sm);
+  background: var(--wash-blue);
+  color: var(--blue);
+}
+/* Colour is reinforcement, never the message: the two kinds already live on separate shelves
+   behind explicit labels, so nothing here depends on telling blue from violet. */
+.card--real .card__grip {
+  background: var(--wash-blue);
+  color: var(--blue);
+}
+.card--generated .card__grip {
+  background: var(--wash-violet);
+  color: var(--violet);
+}
+.card--real:hover {
+  border-color: color-mix(in srgb, var(--blue) 45%, transparent);
+}
+.card--generated:hover {
+  border-color: color-mix(in srgb, var(--violet) 45%, transparent);
+}
+.card--generated .card__title:hover {
+  color: var(--violet);
+}
+.card__body {
+  min-width: 0;
+}
+.card__title {
+  font-weight: 600;
+  font-size: var(--t-small);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+.card__title:hover {
+  text-decoration: underline;
+  color: var(--blue);
+}
+
+/* The drop veil. Up only while a card is in flight, and it covers everything, so the drop needs
+   no aim: the shelf has already closed and the whole viewport is the target. */
+.dropveil {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--blue) 8%, transparent);
+  backdrop-filter: blur(1px);
+}
+.dropveil__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--s-7) var(--s-8);
+  border: 1.5px dashed var(--blue);
+  border-radius: var(--r-md);
+  background: var(--paper);
+  color: var(--blue);
+  box-shadow: var(--lift-lg);
+  pointer-events: none;
+}
+
+/* The card in flight. Fixed to the viewport and tracking the cursor, so it is never clipped by
+   the shelf it came from and never at the mercy of the browser's drag implementation. */
+.card--flying {
+  position: fixed;
+  z-index: 70;
+  width: 20rem;
+  pointer-events: none;
+  cursor: grabbing;
+  box-shadow: var(--lift-lg);
+  transform: rotate(-1.5deg);
+  opacity: 0.97;
+}
+/* Its place on the shelf, while it is off being carried. */
+.card[data-lifted='true'] {
+  opacity: 0.4;
+}

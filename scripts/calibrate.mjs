@@ -17,7 +17,11 @@ import { toParams, calibrationFromHandoff } from '../src/integration/calibration
 
 const offline = process.argv.includes('--offline')
 const HANDOFF = 'fixtures/params.calibrated.json'
-const PARAMS = 'fixtures/params.live.json'
+// NOT params.live.json: scripts/build-ui-data.ts owns that file and writes BASELINE into it,
+// and src/ui/data imports it. Two writers on one path means whichever ran last wins and the
+// interface silently renders the loser.
+const PARAMS = 'fixtures/params.measured.json'
+// Elsa's parameter panel renders this. Real calibrated numbers with real source tags.
 const MOCK = 'fixtures/params.mock.json'
 
 let gp

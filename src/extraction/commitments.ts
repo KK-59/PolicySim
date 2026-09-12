@@ -216,4 +216,27 @@ function verify(
   return { commitments, rejected, model, charsRead: documentText.length, truncated };
 }
 
-const normalise = (s: string) => s.replace(/\s+/g, ' ').trim().toLowerCase();
+/**
+ * Fold away formatting that carries no meaning, so a verbatim quote still matches the source.
+ *
+ * The span check is the load-bearing safety property and must stay strict about WORDS. But a
+ * model quoting "share of follow-ups by telephone to 50 per cent" from a line written as
+ * `**share of follow-ups by telephone to 50 per cent**` is quoting it correctly; the asterisks
+ * are markup, not text. Likewise a PDF renders quotes and dashes as typographic characters the
+ * model reproduces as ASCII. Rejecting those is a false negative that silently discards a real,
+ * checkable commitment: in testing it threw away three of six.
+ *
+ * This only removes emphasis markers and normalises punctuation variants. Nothing here can make
+ * two different sentences compare equal.
+ */
+const normalise = (s: string) =>
+  s
+    .replace(/[*_`~]/g, '')              // markdown emphasis, strikethrough, code
+    .replace(/[\u2018\u2019\u201B]/g, "'")  // curly single quotes
+    .replace(/[\u201C\u201D]/g, '"')     // curly double quotes
+    .replace(/[\u2010-\u2015\u2212]/g, '-') // dashes and minus
+    .replace(/\u00AD/g, '')              // soft hyphen, common in justified PDFs
+    .replace(/[\u00A0\u200B-\u200D\uFEFF]/g, ' ') // nbsp and zero-width
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
