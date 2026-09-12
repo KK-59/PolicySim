@@ -5,6 +5,7 @@
  * still matters. Anything tagged `assumed` is amber.
  */
 
+import { useState } from 'react'
 import { Glyph } from '../components/Glyph'
 import { SourceTag } from '../components/SourceTag'
 import { navigate } from '../lib/router'
@@ -14,6 +15,38 @@ import { EXTRACTION_NOTE, IS_EXTRACTION_SYNTHETIC } from '../data'
 export function ExtractedParams() {
   const run = useRun()
   const commitments = run.commitments
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  /**
+   * The run, where the user asks for it. Sixty sampled runs across three worlds takes about ten
+   * seconds; the button says so rather than appearing to hang. Without parameters there is
+   * nothing to run, so the screen falls back to the baseline and says which on arrival.
+   */
+  const runWorlds = async () => {
+    if (!run.params) {
+      setRun({ hasRun: true })
+      navigate('/worlds')
+      return
+    }
+    setBusy(true)
+    setError(null)
+    try {
+      const response = await fetch('/api/run', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ params: run.params }),
+      })
+      const payload = await response.json()
+      if (!response.ok) throw new Error(payload?.error ?? `Run failed (${response.status})`)
+      setRun({ liveMetrics: payload.metrics, hasRun: true })
+      navigate('/worlds')
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : String(cause))
+    } finally {
+      setBusy(false)
+    }
+  }
 
   return (
     <section className="page">
@@ -58,15 +91,21 @@ export function ExtractedParams() {
         <button
           type="button"
           className="btn btn--primary btn--lg"
-          onClick={() => {
-            setRun({ hasRun: true })
-            navigate('/worlds')
-          }}
+          disabled={busy}
+          onClick={() => void runWorlds()}
         >
-          Run in three worlds
+          {busy ? 'Running three worlds' : 'Run in three worlds'}
           <Glyph name="arrow" size={16} />
         </button>
       </div>
+
+      {busy && (
+        <p className="small muted mt-3">
+          Sixty sampled runs across three worlds, at the fidelity the published figures use. About
+          ten seconds.
+        </p>
+      )}
+      {error && <p className="note mt-3">{error}</p>}
 
       <div className="tablewrap mt-5">
         <table>

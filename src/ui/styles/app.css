@@ -1741,23 +1741,87 @@ textarea::placeholder {
   padding: var(--s-5);
 }
 
-.docs {
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .drawer__scrim,
+  .docs-trigger {
+    transition: none;
+  }
+}
+
+/* --- the shelf ---------------------------------------------------------------------------- */
+/* Two shelves rather than one list with a badge: a document we wrote must never be one glance
+   away from looking published. */
+
+.shelfswitch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-1);
+  padding: var(--s-1);
+  margin: var(--s-5) var(--s-5) 0;
+  background: var(--paper-sunk);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+}
+.shelfswitch__tab {
+  padding: 0.5rem 0.75rem;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--ink-2);
+  font-size: var(--t-tiny);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: background 150ms var(--ease), color 150ms var(--ease);
+}
+.shelfswitch__tab[aria-pressed='true'] {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--lift);
+}
+
+.shelf {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   gap: var(--s-3);
 }
-.doc {
+
+.card {
+  display: flex;
+  gap: var(--s-3);
+  padding: var(--s-4);
   border: 1px solid var(--rule);
   border-radius: var(--r-md);
-  padding: var(--s-4);
   background: var(--paper);
+  cursor: grab;
+  transition: border-color 150ms var(--ease), box-shadow 150ms var(--ease),
+    transform 150ms var(--ease);
 }
-.doc__title {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-2);
+.card:hover {
+  border-color: var(--ink-3);
+  box-shadow: var(--lift);
+  transform: translateY(-1px);
+}
+.card:active {
+  cursor: grabbing;
+}
+.card__grip {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--r-sm);
+  background: var(--wash-blue);
+  color: var(--blue);
+}
+.card__body {
+  min-width: 0;
+}
+.card__title {
   font-weight: 600;
   font-size: var(--t-small);
   letter-spacing: -0.01em;
@@ -1765,15 +1829,7 @@ textarea::placeholder {
   text-decoration: none;
   text-underline-offset: 3px;
 }
-.doc__title:hover {
+.card__title:hover {
   text-decoration: underline;
   color: var(--blue);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .drawer,
-  .drawer__scrim,
-  .docs-trigger {
-    transition: none;
-  }
 }

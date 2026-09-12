@@ -33,6 +33,12 @@ export interface RunState {
    * fixture presented as the user's result is the one thing this project may not do.
    */
   liveMetrics: Metrics | null
+  /**
+   * The Params the document mapped to, kept so the run can happen where the user asks for it
+   * rather than the moment the document is read. Opaque here on purpose: the store does not need
+   * to know the shape, only to carry it from the reading to the run.
+   */
+  params: unknown | null
   /** What the run is doing right now. Null when idle. A real run takes about ten seconds. */
   stage: string | null
 }
@@ -48,6 +54,7 @@ const initial: RunState = {
   rejected: [],
   truncated: null,
   liveMetrics: null,
+  params: null,
   stage: null,
 }
 

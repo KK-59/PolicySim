@@ -29,6 +29,39 @@ export function Upload() {
     setRun({ document: { filename: chosen.name, sizeBytes: chosen.size } })
   }
 
+  /**
+   * A document dragged out of the drawer. It is already on the server, so it does not need to
+   * travel to the browser and back; from the read onwards this is the same path as a file the
+   * user dropped, which is the point — the shipped documents are not a special case.
+   */
+  const acceptCatalogued = async (id: string, title: string) => {
+    setBusy(true)
+    setError(null)
+    setRun({ document: { filename: title, sizeBytes: 0 } })
+    try {
+      const response = await fetch(`/api/documents/${id}/extract`, { method: 'POST' })
+      const payload = await response.json()
+      if (!response.ok) throw new Error(payload?.error ?? `Extraction failed (${response.status})`)
+
+      setRun({
+        document: { filename: payload.document?.filename ?? title, sizeBytes: 0 },
+        commitments: (payload.rows ?? []).map(
+          (r: Record<string, unknown>, i: number) => ({ id: `c${i + 1}`, ...r }),
+        ),
+        rejected: payload.rejected ?? [],
+        truncated: payload.truncated ? { charsRead: payload.charsRead } : null,
+        params: payload.params ?? null,
+        extracted: true,
+      })
+      navigate('/parameters')
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : String(cause))
+      setRun({ document: null })
+    } finally {
+      setBusy(false)
+    }
+  }
+
   const start = async () => {
     if (!file) return
     setBusy(true)
@@ -65,6 +98,7 @@ export function Upload() {
         ),
         rejected: payload.rejected ?? [],
         truncated: payload.truncated ? { charsRead: payload.charsRead } : null,
+        params: payload.params ?? null,
         extracted: true,
       })
       navigate('/parameters')
@@ -95,6 +129,13 @@ export function Upload() {
           onDrop={(e) => {
             e.preventDefault()
             setOver(false)
+            // A card from the drawer carries an id; a real file carries bytes. Same destination.
+            const dragged = e.dataTransfer.getData('application/x-policysim-document')
+            if (dragged) {
+              const [id, ...rest] = dragged.split('|')
+              if (id) void acceptCatalogued(id, rest.join('|') || id)
+              return
+            }
             accept(e.dataTransfer.files?.[0])
           }}
         >
