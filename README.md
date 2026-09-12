@@ -44,25 +44,6 @@ flowchart TD
 
 **Rule:** no LLM output feeds another LLM output without a verifiable, deterministic step in between.
 
-## Repo map
-
-| Path | Owner | Holds |
-|---|---|---|
-| `src/contracts/` | Kaavya (`Params`, `Metrics`) · Oriol (`Action`) | **Frozen interfaces. Change only by agreement.** |
-| `src/engine/` | Kaavya | DES core, nodes, queues, verification assertions |
-| `src/worlds/` | Kaavya | Sampler, P10/P50/P90, precomputed grid export |
-| `src/analysis/` | Kaavya | Tornado, breakeven, hold-out, accuracy diff |
-| `src/integration/` | Oriol | Watcher, snapshot client, calibration extractor |
-| `src/agent/` | Oriol | ADK tool wrappers, approval pause, live apply loop |
-| `src/extraction/` | Oriol + Albert | Document parse, commitment extraction, RAG |
-| `src/clinical/` | Albert | Safe state, auto-vs-approve matrix, red flags, plans |
-| `src/ui/` | Elsa | Both modes, screens, components |
-| `fixtures/` | everyone | Mock `Params` / `Metrics` / `Action` — **nobody waits for real data** |
-| `corpus/` | Albert | ~30 evidence documents + source table |
-| `precomputed/` | Kaavya | Grid bundle shipped as JSON — the demo safety net |
-| `snapshot/` | Oriol | Raw NHS-SIM JSON, gitignored |
-| `demo/` | Elsa | Runbook, fallback clip, stall state |
-
 ## Getting started
 
 ```bash
