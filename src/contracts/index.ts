@@ -21,9 +21,9 @@ export type {
   ParamPath,
   FlatParam,
   ParamFlag,
-} from './params';
+} from './params.ts';
 
-export { BASELINE } from './baseline';
+export { BASELINE } from './baseline.ts';
 
 export type {
   Metrics,
@@ -46,6 +46,6 @@ export type {
   EventDiff,
   RankedPlan,
   PlanOutcome,
-} from './metrics';
+} from './metrics.ts';
 
 // TODO(oriol): export the Action contract here once it is defined.

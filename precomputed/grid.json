@@ -1,0 +1,2971 @@
+{
+ "builtAt": "2026-09-12T13:38:33.713Z",
+ "world": "team-4551d2471320",
+ "snapshot": "2026-09-21T12:02:00Z",
+ "samples": 40,
+ "horizonDays": 550,
+ "tornado": [
+  {
+   "path": "arrivals.targetUtilisation",
+   "label": "arrivals.targetUtilisation",
+   "swing": 4922.869486273848,
+   "source": "literature",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "serviceTimes.classMultiplier.complex",
+   "label": "serviceTimes.classMultiplier.complex",
+   "swing": 225.72171918925596,
+   "source": "assumed",
+   "dominantButUnsourced": true
+  },
+  {
+   "path": "serviceTimes.classMultiplier.urgent",
+   "label": "serviceTimes.classMultiplier.urgent",
+   "swing": 210.7888211827958,
+   "source": "assumed",
+   "dominantButUnsourced": true
+  },
+  {
+   "path": "arrivals.classMix.complex",
+   "label": "arrivals.classMix.complex",
+   "swing": 110.81263796825078,
+   "source": "assumed",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "arrivals.classMix.urgent",
+   "label": "arrivals.classMix.urgent",
+   "swing": 50.06616988737369,
+   "source": "assumed",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "arrivals.dischargeLettersPerDay",
+   "label": "arrivals.dischargeLettersPerDay",
+   "swing": 24.3344085488352,
+   "source": "measured",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "serviceTimes.documentReviewWork",
+   "label": "serviceTimes.documentReviewWork",
+   "swing": 9.352044956176542,
+   "source": "assumed",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "arrivals.classMix.routine",
+   "label": "arrivals.classMix.routine",
+   "swing": 0.463874549488537,
+   "source": "assumed",
+   "dominantButUnsourced": false
+  }
+ ],
+ "flags": [
+  {
+   "path": "arrivals.classMix.complex",
+   "reason": "assumed",
+   "message": "arrivals.classMix.complex is assumed, not sourced"
+  },
+  {
+   "path": "arrivals.classMix.routine",
+   "reason": "assumed",
+   "message": "arrivals.classMix.routine is assumed, not sourced"
+  },
+  {
+   "path": "arrivals.classMix.urgent",
+   "reason": "assumed",
+   "message": "arrivals.classMix.urgent is assumed, not sourced"
+  },
+  {
+   "path": "arrivals.perDay.complex",
+   "reason": "assumed",
+   "message": "arrivals.perDay.complex is assumed, not sourced"
+  },
+  {
+   "path": "arrivals.perDay.urgent",
+   "reason": "assumed",
+   "message": "arrivals.perDay.urgent is assumed, not sourced"
+  },
+  {
+   "path": "arrivals.targetUtilisation",
+   "reason": "no-citation",
+   "message": "arrivals.targetUtilisation has no citation"
+  },
+  {
+   "path": "boundaries.gaming",
+   "reason": "assumed",
+   "message": "boundaries.gaming is assumed, not sourced"
+  },
+  {
+   "path": "boundaries.gaming",
+   "reason": "no-range",
+   "message": "boundaries.gaming is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "boundaries.inducedDemand",
+   "reason": "assumed",
+   "message": "boundaries.inducedDemand is assumed, not sourced"
+  },
+  {
+   "path": "boundaries.inducedDemand",
+   "reason": "no-range",
+   "message": "boundaries.inducedDemand is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "boundaries.substitution",
+   "reason": "assumed",
+   "message": "boundaries.substitution is assumed, not sourced"
+  },
+  {
+   "path": "boundaries.substitution",
+   "reason": "no-range",
+   "message": "boundaries.substitution is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "capacities.communitySlotsPerDay",
+   "reason": "no-range",
+   "message": "capacities.communitySlotsPerDay is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "capacities.gpAdminShare",
+   "reason": "no-citation",
+   "message": "capacities.gpAdminShare has no citation"
+  },
+  {
+   "path": "capacities.gpAdminShare",
+   "reason": "no-range",
+   "message": "capacities.gpAdminShare is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "capacities.gpSessionsPerDay",
+   "reason": "no-range",
+   "message": "capacities.gpSessionsPerDay is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "capacities.gpSlotsPerSession",
+   "reason": "no-range",
+   "message": "capacities.gpSlotsPerSession is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "capacities.staffedSpaces",
+   "reason": "no-range",
+   "message": "capacities.staffedSpaces is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "environment.shortageCommunityMultiplier",
+   "reason": "no-citation",
+   "message": "environment.shortageCommunityMultiplier has no citation"
+  },
+  {
+   "path": "environment.winterDemandMultiplier",
+   "reason": "no-citation",
+   "message": "environment.winterDemandMultiplier has no citation"
+  },
+  {
+   "path": "environment.winterUrgentMultiplier",
+   "reason": "no-citation",
+   "message": "environment.winterUrgentMultiplier has no citation"
+  },
+  {
+   "path": "levers.communityCapacityMultiplier",
+   "reason": "no-range",
+   "message": "levers.communityCapacityMultiplier is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "levers.extraGpSessions",
+   "reason": "no-range",
+   "message": "levers.extraGpSessions is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "levers.hospitalToCommunityShare",
+   "reason": "no-citation",
+   "message": "levers.hospitalToCommunityShare has no citation"
+  },
+  {
+   "path": "levers.hospitalToCommunityShare",
+   "reason": "no-range",
+   "message": "levers.hospitalToCommunityShare is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "levers.monitoringIntensity",
+   "reason": "no-range",
+   "message": "levers.monitoringIntensity is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "levers.telephoneFollowUpShare",
+   "reason": "no-range",
+   "message": "levers.telephoneFollowUpShare is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "levers.weekdayDischargeShare",
+   "reason": "assumed",
+   "message": "levers.weekdayDischargeShare is assumed, not sourced"
+  },
+  {
+   "path": "levers.weekdayDischargeShare",
+   "reason": "no-range",
+   "message": "levers.weekdayDischargeShare is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "routing.communityRejection",
+   "reason": "assumed",
+   "message": "routing.communityRejection is assumed, not sourced"
+  },
+  {
+   "path": "routing.communityRejection",
+   "reason": "no-range",
+   "message": "routing.communityRejection is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "routing.gpToCommunity",
+   "reason": "assumed",
+   "message": "routing.gpToCommunity is assumed, not sourced"
+  },
+  {
+   "path": "routing.gpToCommunity",
+   "reason": "no-range",
+   "message": "routing.gpToCommunity is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "routing.gpToHospital",
+   "reason": "assumed",
+   "message": "routing.gpToHospital is assumed, not sourced"
+  },
+  {
+   "path": "routing.gpToHospital",
+   "reason": "no-range",
+   "message": "routing.gpToHospital is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "routing.gpToTest",
+   "reason": "assumed",
+   "message": "routing.gpToTest is assumed, not sourced"
+  },
+  {
+   "path": "routing.gpToTest",
+   "reason": "no-range",
+   "message": "routing.gpToTest is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "routing.letterReviewedToFiled",
+   "reason": "no-range",
+   "message": "routing.letterReviewedToFiled is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "routing.letterSentToReviewed",
+   "reason": "no-range",
+   "message": "routing.letterSentToReviewed is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "serviceTimes.bloodResultTurnaround",
+   "reason": "no-range",
+   "message": "serviceTimes.bloodResultTurnaround is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "serviceTimes.classMultiplier.complex",
+   "reason": "assumed",
+   "message": "serviceTimes.classMultiplier.complex is assumed, not sourced"
+  },
+  {
+   "path": "serviceTimes.classMultiplier.routine",
+   "reason": "no-range",
+   "message": "serviceTimes.classMultiplier.routine is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "serviceTimes.classMultiplier.urgent",
+   "reason": "assumed",
+   "message": "serviceTimes.classMultiplier.urgent is assumed, not sourced"
+  },
+  {
+   "path": "serviceTimes.communityVisit",
+   "reason": "no-range",
+   "message": "serviceTimes.communityVisit is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "serviceTimes.documentReviewHop",
+   "reason": "no-range",
+   "message": "serviceTimes.documentReviewHop is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "serviceTimes.documentReviewWork",
+   "reason": "assumed",
+   "message": "serviceTimes.documentReviewWork is assumed, not sourced"
+  },
+  {
+   "path": "serviceTimes.gpConsultation",
+   "reason": "no-range",
+   "message": "serviceTimes.gpConsultation is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "serviceTimes.pharmacyApproval",
+   "reason": "assumed",
+   "message": "serviceTimes.pharmacyApproval is assumed, not sourced"
+  },
+  {
+   "path": "serviceTimes.pharmacyApproval",
+   "reason": "no-range",
+   "message": "serviceTimes.pharmacyApproval is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "serviceTimes.classMultiplier.complex",
+   "reason": "dominant-but-unsourced",
+   "message": "serviceTimes.classMultiplier.complex dominates the result and rests on an assumption"
+  },
+  {
+   "path": "serviceTimes.classMultiplier.urgent",
+   "reason": "dominant-but-unsourced",
+   "message": "serviceTimes.classMultiplier.urgent dominates the result and rests on an assumption"
+  }
+ ],
+ "baseline": {
+  "waits": {
+   "routine": {
+    "optimistic": {
+     "p50": 508.5442845635116,
+     "p90": 906.8112239834154
+    },
+    "realistic": {
+     "p50": 811.7842601907905,
+     "p90": 1745.6107352176914
+    },
+    "pessimistic": {
+     "p50": 19559.848008381843,
+     "p90": 29705.435461333254
+    }
+   },
+   "complex": {
+    "optimistic": {
+     "p50": 549.355089486402,
+     "p90": 940.1970148214023
+    },
+    "realistic": {
+     "p50": 844.483975928626,
+     "p90": 1805.7913639199105
+    },
+    "pessimistic": {
+     "p50": 19509.82378011057,
+     "p90": 29661.36305921024
+    }
+   },
+   "urgent": {
+    "optimistic": {
+     "p50": 233.77622002293356,
+     "p90": 782.7862485911464
+    },
+    "realistic": {
+     "p50": 232.541638664552,
+     "p90": 790.3241922811139
+    },
+    "pessimistic": {
+     "p50": 221.77164722268935,
+     "p90": 797.4308899501339
+    }
+   }
+  },
+  "stable": {
+   "optimistic": true,
+   "realistic": true,
+   "pessimistic": false
+  },
+  "utilisation": {
+   "gp": 0.9356614505376044,
+   "community": 0.9015676246043016
+  },
+  "rejections": 255,
+  "findings": [
+   {
+    "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
+    "survivesAllThree": false,
+    "optimisticOnly": false,
+    "holdsIn": [
+     "optimistic",
+     "realistic"
+    ]
+   },
+   {
+    "statement": "holds while share of care shifted to community stays below 5%",
+    "survivesAllThree": false,
+    "optimisticOnly": false,
+    "holdsIn": [
+     "optimistic",
+     "realistic"
+    ]
+   },
+   {
+    "statement": "13 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+    "survivesAllThree": false,
+    "optimisticOnly": false,
+    "holdsIn": [
+     "optimistic",
+     "realistic"
+    ]
+   }
+  ],
+  "thresholds": [
+   "holds while share of care shifted to community stays below 5%"
+  ]
+ },
+ "sweeps": {
+  "levers.communityCapacityMultiplier": {
+   "label": "Community capacity",
+   "points": [
+    {
+     "value": 1,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 508.5442845635116,
+        "p90": 906.8112239834154
+       },
+       "realistic": {
+        "p50": 811.7842601907905,
+        "p90": 1745.6107352176914
+       },
+       "pessimistic": {
+        "p50": 19559.848008381843,
+        "p90": 29705.435461333254
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 549.355089486402,
+        "p90": 940.1970148214023
+       },
+       "realistic": {
+        "p50": 844.483975928626,
+        "p90": 1805.7913639199105
+       },
+       "pessimistic": {
+        "p50": 19509.82378011057,
+        "p90": 29661.36305921024
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 233.77622002293356,
+        "p90": 782.7862485911464
+       },
+       "realistic": {
+        "p50": 232.541638664552,
+        "p90": 790.3241922811139
+       },
+       "pessimistic": {
+        "p50": 221.77164722268935,
+        "p90": 797.4308899501339
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.9356614505376044,
+      "community": 0.9015676246043016
+     },
+     "rejections": 255,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 5%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "13 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 5%"
+     ]
+    },
+    {
+     "value": 1.5,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 500.57314190326724,
+        "p90": 903.900445435429
+       },
+       "realistic": {
+        "p50": 706.285515489406,
+        "p90": 1273.2857359738555
+       },
+       "pessimistic": {
+        "p50": 17962.246036077966,
+        "p90": 24036.76837648009
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 559.2487111965893,
+        "p90": 950.0278834300116
+       },
+       "realistic": {
+        "p50": 744.4246060054284,
+        "p90": 1317.202181282686
+       },
+       "pessimistic": {
+        "p50": 17670.44561957114,
+        "p90": 24156.201403718675
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 219.4060866042273,
+        "p90": 786.1066134371213
+       },
+       "realistic": {
+        "p50": 243.23143587628147,
+        "p90": 811.1198359602131
+       },
+       "pessimistic": {
+        "p50": 236.69004594732542,
+        "p90": 789.665847916971
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.9252597004178195,
+      "community": 0.5084968136962624
+     },
+     "rejections": 0,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 9%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "10 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 9%"
+     ]
+    },
+    {
+     "value": 2,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 500.57314190326724,
+        "p90": 903.900445435429
+       },
+       "realistic": {
+        "p50": 706.285515489406,
+        "p90": 1273.2857359738555
+       },
+       "pessimistic": {
+        "p50": 17962.246036077966,
+        "p90": 24036.76837648009
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 559.2487111965893,
+        "p90": 950.0278834300116
+       },
+       "realistic": {
+        "p50": 744.4246060054284,
+        "p90": 1317.202181282686
+       },
+       "pessimistic": {
+        "p50": 17670.44561957114,
+        "p90": 24156.201403718675
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 219.4060866042273,
+        "p90": 786.1066134371213
+       },
+       "realistic": {
+        "p50": 243.23143587628147,
+        "p90": 811.1198359602131
+       },
+       "pessimistic": {
+        "p50": 236.69004594732542,
+        "p90": 789.665847916971
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.9252597004178195,
+      "community": 0.5084968136962624
+     },
+     "rejections": 0,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 9%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "10 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 9%"
+     ]
+    },
+    {
+     "value": 2.5,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 500.57314190326724,
+        "p90": 903.900445435429
+       },
+       "realistic": {
+        "p50": 706.285515489406,
+        "p90": 1273.2857359738555
+       },
+       "pessimistic": {
+        "p50": 17962.246036077966,
+        "p90": 24036.76837648009
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 559.2487111965893,
+        "p90": 950.0278834300116
+       },
+       "realistic": {
+        "p50": 744.4246060054284,
+        "p90": 1317.202181282686
+       },
+       "pessimistic": {
+        "p50": 17670.44561957114,
+        "p90": 24156.201403718675
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 219.4060866042273,
+        "p90": 786.1066134371213
+       },
+       "realistic": {
+        "p50": 243.23143587628147,
+        "p90": 811.1198359602131
+       },
+       "pessimistic": {
+        "p50": 236.69004594732542,
+        "p90": 789.665847916971
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.9252597004178195,
+      "community": 0.3389978757975083
+     },
+     "rejections": 0,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 13%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "10 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 13%"
+     ]
+    },
+    {
+     "value": 3,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 500.57314190326724,
+        "p90": 903.900445435429
+       },
+       "realistic": {
+        "p50": 706.285515489406,
+        "p90": 1273.2857359738555
+       },
+       "pessimistic": {
+        "p50": 17962.246036077966,
+        "p90": 24036.76837648009
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 559.2487111965893,
+        "p90": 950.0278834300116
+       },
+       "realistic": {
+        "p50": 744.4246060054284,
+        "p90": 1317.202181282686
+       },
+       "pessimistic": {
+        "p50": 17670.44561957114,
+        "p90": 24156.201403718675
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 219.4060866042273,
+        "p90": 786.1066134371213
+       },
+       "realistic": {
+        "p50": 243.23143587628147,
+        "p90": 811.1198359602131
+       },
+       "pessimistic": {
+        "p50": 236.69004594732542,
+        "p90": 789.665847916971
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.9252597004178195,
+      "community": 0.3389978757975083
+     },
+     "rejections": 0,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 13%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "10 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 13%"
+     ]
+    },
+    {
+     "value": 4,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 500.57314190326724,
+        "p90": 903.900445435429
+       },
+       "realistic": {
+        "p50": 706.285515489406,
+        "p90": 1273.2857359738555
+       },
+       "pessimistic": {
+        "p50": 17962.246036077966,
+        "p90": 24036.76837648009
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 559.2487111965893,
+        "p90": 950.0278834300116
+       },
+       "realistic": {
+        "p50": 744.4246060054284,
+        "p90": 1317.202181282686
+       },
+       "pessimistic": {
+        "p50": 17670.44561957114,
+        "p90": 24156.201403718675
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 219.4060866042273,
+        "p90": 786.1066134371213
+       },
+       "realistic": {
+        "p50": 243.23143587628147,
+        "p90": 811.1198359602131
+       },
+       "pessimistic": {
+        "p50": 236.69004594732542,
+        "p90": 789.665847916971
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.9252597004178195,
+      "community": 0.2542484068481312
+     },
+     "rejections": 0,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 18%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "10 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 18%"
+     ]
+    },
+    {
+     "value": 5,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 500.57314190326724,
+        "p90": 903.900445435429
+       },
+       "realistic": {
+        "p50": 706.285515489406,
+        "p90": 1273.2857359738555
+       },
+       "pessimistic": {
+        "p50": 17962.246036077966,
+        "p90": 24036.76837648009
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 559.2487111965893,
+        "p90": 950.0278834300116
+       },
+       "realistic": {
+        "p50": 744.4246060054284,
+        "p90": 1317.202181282686
+       },
+       "pessimistic": {
+        "p50": 17670.44561957114,
+        "p90": 24156.201403718675
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 219.4060866042273,
+        "p90": 786.1066134371213
+       },
+       "realistic": {
+        "p50": 243.23143587628147,
+        "p90": 811.1198359602131
+       },
+       "pessimistic": {
+        "p50": 236.69004594732542,
+        "p90": 789.665847916971
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.9252597004178195,
+      "community": 0.203398725478505
+     },
+     "rejections": 0,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 20%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "10 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 20%"
+     ]
+    },
+    {
+     "value": 6,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 500.57314190326724,
+        "p90": 903.900445435429
+       },
+       "realistic": {
+        "p50": 706.285515489406,
+        "p90": 1273.2857359738555
+       },
+       "pessimistic": {
+        "p50": 17962.246036077966,
+        "p90": 24036.76837648009
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 559.2487111965893,
+        "p90": 950.0278834300116
+       },
+       "realistic": {
+        "p50": 744.4246060054284,
+        "p90": 1317.202181282686
+       },
+       "pessimistic": {
+        "p50": 17670.44561957114,
+        "p90": 24156.201403718675
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 219.4060866042273,
+        "p90": 786.1066134371213
+       },
+       "realistic": {
+        "p50": 243.23143587628147,
+        "p90": 811.1198359602131
+       },
+       "pessimistic": {
+        "p50": 236.69004594732542,
+        "p90": 789.665847916971
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.9252597004178195,
+      "community": 0.16949893789875414
+     },
+     "rejections": 0,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 26%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "10 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 26%"
+     ]
+    },
+    {
+     "value": 7,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 500.57314190326724,
+        "p90": 903.900445435429
+       },
+       "realistic": {
+        "p50": 706.285515489406,
+        "p90": 1273.2857359738555
+       },
+       "pessimistic": {
+        "p50": 17962.246036077966,
+        "p90": 24036.76837648009
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 559.2487111965893,
+        "p90": 950.0278834300116
+       },
+       "realistic": {
+        "p50": 744.4246060054284,
+        "p90": 1317.202181282686
+       },
+       "pessimistic": {
+        "p50": 17670.44561957114,
+        "p90": 24156.201403718675
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 219.4060866042273,
+        "p90": 786.1066134371213
+       },
+       "realistic": {
+        "p50": 243.23143587628147,
+        "p90": 811.1198359602131
+       },
+       "pessimistic": {
+        "p50": 236.69004594732542,
+        "p90": 789.665847916971
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.9252597004178195,
+      "community": 0.14528480391321785
+     },
+     "rejections": 0,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 29%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "10 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 29%"
+     ]
+    },
+    {
+     "value": 8,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 500.57314190326724,
+        "p90": 903.900445435429
+       },
+       "realistic": {
+        "p50": 706.285515489406,
+        "p90": 1273.2857359738555
+       },
+       "pessimistic": {
+        "p50": 17962.246036077966,
+        "p90": 24036.76837648009
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 559.2487111965893,
+        "p90": 950.0278834300116
+       },
+       "realistic": {
+        "p50": 744.4246060054284,
+        "p90": 1317.202181282686
+       },
+       "pessimistic": {
+        "p50": 17670.44561957114,
+        "p90": 24156.201403718675
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 219.4060866042273,
+        "p90": 786.1066134371213
+       },
+       "realistic": {
+        "p50": 243.23143587628147,
+        "p90": 811.1198359602131
+       },
+       "pessimistic": {
+        "p50": 236.69004594732542,
+        "p90": 789.665847916971
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.9252597004178195,
+      "community": 0.1271242034240656
+     },
+     "rejections": 0,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 34%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "10 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 34%"
+     ]
+    }
+   ]
+  },
+  "levers.hospitalToCommunityShare": {
+   "label": "Care shifted to community",
+   "points": [
+    {
+     "value": 0,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 508.5442845635116,
+        "p90": 906.8112239834154
+       },
+       "realistic": {
+        "p50": 811.7842601907905,
+        "p90": 1745.6107352176914
+       },
+       "pessimistic": {
+        "p50": 19559.848008381843,
+        "p90": 29705.435461333254
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 549.355089486402,
+        "p90": 940.1970148214023
+       },
+       "realistic": {
+        "p50": 844.483975928626,
+        "p90": 1805.7913639199105
+       },
+       "pessimistic": {
+        "p50": 19509.82378011057,
+        "p90": 29661.36305921024
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 233.77622002293356,
+        "p90": 782.7862485911464
+       },
+       "realistic": {
+        "p50": 232.541638664552,
+        "p90": 790.3241922811139
+       },
+       "pessimistic": {
+        "p50": 221.77164722268935,
+        "p90": 797.4308899501339
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.9356614505376044,
+      "community": 0.9015676246043016
+     },
+     "rejections": 255,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 5%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "13 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 5%"
+     ]
+    },
+    {
+     "value": 0.01,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 524.0575930761406,
+        "p90": 932.3401399135473
+       },
+       "realistic": {
+        "p50": 668.1414012680762,
+        "p90": 1320.6160356606415
+       },
+       "pessimistic": {
+        "p50": 25074.96144340944,
+        "p90": 39587.33373704995
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 541.1467153402045,
+        "p90": 962.4033385863877
+       },
+       "realistic": {
+        "p50": 710.7783895310713,
+        "p90": 1382.6753236787335
+       },
+       "pessimistic": {
+        "p50": 25106.25662410754,
+        "p90": 39589.31467636151
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 223.44171722134342,
+        "p90": 787.5394826079719
+       },
+       "realistic": {
+        "p50": 192.25440538465045,
+        "p90": 791.9133699333761
+       },
+       "pessimistic": {
+        "p50": 202.2099054423743,
+        "p90": 785.989735745592
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.8873322606157199,
+      "community": 0.845847019920905
+     },
+     "rejections": 389,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 5%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "14 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 5%"
+     ]
+    },
+    {
+     "value": 0.02,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 556.9868872888037,
+        "p90": 963.8846009443223
+       },
+       "realistic": {
+        "p50": 632.1045754271327,
+        "p90": 1123.5199954983545
+       },
+       "pessimistic": {
+        "p50": 32179.18005089491,
+        "p90": 48171.40470355912
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 577.1820738945971,
+        "p90": 996.7359872417874
+       },
+       "realistic": {
+        "p50": 669.400244114775,
+        "p90": 1151.0558092596184
+       },
+       "pessimistic": {
+        "p50": 32421.672059583885,
+        "p90": 48558.39842081792
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 232.22761320625432,
+        "p90": 780.7475014768424
+       },
+       "realistic": {
+        "p50": 216.24962316488381,
+        "p90": 782.910557786352
+       },
+       "pessimistic": {
+        "p50": 194.2596545559354,
+        "p90": 774.6763874782482
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.8946756990128568,
+      "community": 0.8110652093390261
+     },
+     "rejections": 916,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 5%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "13 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 5%"
+     ]
+    },
+    {
+     "value": 0.03,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 594.4612275942927,
+        "p90": 1070.32276436768
+       },
+       "realistic": {
+        "p50": 1441.8600124566,
+        "p90": 2656.1354891166848
+       },
+       "pessimistic": {
+        "p50": 35354.73992635717,
+        "p90": 54127.499957212945
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 626.0785303887678,
+        "p90": 1085.5914877075702
+       },
+       "realistic": {
+        "p50": 1466.2669313312508,
+        "p90": 2693.421343051421
+       },
+       "pessimistic": {
+        "p50": 35480.02368582861,
+        "p90": 54027.00654213666
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 161.28224797162693,
+        "p90": 785.9177802653285
+       },
+       "realistic": {
+        "p50": 225.75514533300884,
+        "p90": 780.4625267887022
+       },
+       "pessimistic": {
+        "p50": 235.9539173945086,
+        "p90": 791.5339350916329
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.9160737034321902,
+      "community": 0.847085303337751
+     },
+     "rejections": 1341,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 5%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "16 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 5%"
+     ]
+    },
+    {
+     "value": 0.05,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 820.4555784789263,
+        "p90": 1646.1377081647515
+       },
+       "realistic": {
+        "p50": 11368.88837180665,
+        "p90": 20157.69608330261
+       },
+       "pessimistic": {
+        "p50": 41939.26605101215,
+        "p90": 67253.2250483951
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 848.5858036017162,
+        "p90": 1661.2918528774753
+       },
+       "realistic": {
+        "p50": 11432.144304582733,
+        "p90": 20154.09765574755
+       },
+       "pessimistic": {
+        "p50": 41810.56877088797,
+        "p90": 67260.01305323082
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 168.3961031632498,
+        "p90": 783.4399502156884
+       },
+       "realistic": {
+        "p50": 251.75690890365513,
+        "p90": 797.9169960710569
+       },
+       "pessimistic": {
+        "p50": 174.3747723014094,
+        "p90": 780.0975258743274
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": false,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.9266132596613258,
+      "community": 0.8369010351451478
+     },
+     "rejections": 1848,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in 1 of three worlds (optimistic).",
+       "survivesAllThree": false,
+       "optimisticOnly": true,
+       "holdsIn": [
+        "optimistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 5%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic"
+       ]
+      },
+      {
+       "statement": "holds while community capacity multiplier stays above 1.5",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic"
+       ]
+      },
+      {
+       "statement": "24 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 5%",
+      "holds while community capacity multiplier stays above 1.5"
+     ]
+    },
+    {
+     "value": 0.08,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 1409.5899009922286,
+        "p90": 2590.7706200915854
+       },
+       "realistic": {
+        "p50": 23207.599597589986,
+        "p90": 36315
+       },
+       "pessimistic": {
+        "p50": 58372.7230189275,
+        "p90": 88761.3538260007
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 1478.6992924632505,
+        "p90": 2615.1577911274508
+       },
+       "realistic": {
+        "p50": 24125.568244495662,
+        "p90": 36372.296846588375
+       },
+       "pessimistic": {
+        "p50": 58534.790710672445,
+        "p90": 88707.18000198819
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 164.30030961928423,
+        "p90": 787.5828713339288
+       },
+       "realistic": {
+        "p50": 228.16796147701098,
+        "p90": 788.824102254468
+       },
+       "pessimistic": {
+        "p50": 133.6550967830699,
+        "p90": 783.6311147710076
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": false,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.930324350205497,
+      "community": 0.7932766353199006
+     },
+     "rejections": 3413,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in 1 of three worlds (optimistic).",
+       "survivesAllThree": false,
+       "optimisticOnly": true,
+       "holdsIn": [
+        "optimistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 5%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic"
+       ]
+      },
+      {
+       "statement": "holds while community capacity multiplier stays above 1.5",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic"
+       ]
+      },
+      {
+       "statement": "32 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 5%",
+      "holds while community capacity multiplier stays above 1.5"
+     ]
+    },
+    {
+     "value": 0.12,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 18515.983780434646,
+        "p90": 32205.986003530328
+       },
+       "realistic": {
+        "p50": 38813.43814909557,
+        "p90": 66822.60854196304
+       },
+       "pessimistic": {
+        "p50": 70750.87074433704,
+        "p90": 110326.07133191498
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 18600.15871876676,
+        "p90": 32331.4839581782
+       },
+       "realistic": {
+        "p50": 40052.33582483302,
+        "p90": 66887.00571345445
+       },
+       "pessimistic": {
+        "p50": 70168.76131328288,
+        "p90": 110296.45047903387
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 197.4389733032731,
+        "p90": 807.6619212428341
+       },
+       "realistic": {
+        "p50": 150.43673639546614,
+        "p90": 773.0142849292606
+       },
+       "pessimistic": {
+        "p50": 160.90932268928736,
+        "p90": 789.9901033460046
+       }
+      }
+     },
+     "stable": {
+      "optimistic": false,
+      "realistic": false,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.9294378283690967,
+      "community": 0.7800650344127106
+     },
+     "rejections": 4841,
+     "findings": [
+      {
+       "statement": "The practice has no stable operating point in any world — waits grow without bound.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": []
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 5%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": []
+      },
+      {
+       "statement": "holds while community capacity multiplier stays above 2.5",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": []
+      },
+      {
+       "statement": "40 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": []
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 5%",
+      "holds while community capacity multiplier stays above 2.5"
+     ]
+    },
+    {
+     "value": 0.16,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 38286.76600230753,
+        "p90": 61686.28166704113
+       },
+       "realistic": {
+        "p50": 64044.41151124949,
+        "p90": 93864.80442169122
+       },
+       "pessimistic": {
+        "p50": 81999.40261237789,
+        "p90": 124536.83967399958
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 38236.1095540282,
+        "p90": 61593.04217630206
+       },
+       "realistic": {
+        "p50": 63281.52947015944,
+        "p90": 93956.55713559536
+       },
+       "pessimistic": {
+        "p50": 80594.07998245338,
+        "p90": 124327.67273957492
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 101.61420133529464,
+        "p90": 775.7041433242848
+       },
+       "realistic": {
+        "p50": 191.21931973460596,
+        "p90": 784.7487077985425
+       },
+       "pessimistic": {
+        "p50": 128.2767900309991,
+        "p90": 789.1391314349603
+       }
+      }
+     },
+     "stable": {
+      "optimistic": false,
+      "realistic": false,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.927385813086288,
+      "community": 0.8596504533417908
+     },
+     "rejections": 5641,
+     "findings": [
+      {
+       "statement": "The practice has no stable operating point in any world — waits grow without bound.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": []
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 5%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": []
+      },
+      {
+       "statement": "holds while community capacity multiplier stays above 3.5",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": []
+      },
+      {
+       "statement": "40 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": []
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 5%",
+      "holds while community capacity multiplier stays above 3.5"
+     ]
+    },
+    {
+     "value": 0.25,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 83867.03642805142,
+        "p90": 129537.24366110866
+       },
+       "realistic": {
+        "p50": 86242.82422326878,
+        "p90": 133369.1115521856
+       },
+       "pessimistic": {
+        "p50": 107194.658516175,
+        "p90": 161310
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 83132.07085167349,
+        "p90": 129610.17280943517
+       },
+       "realistic": {
+        "p50": 86003.94706997281,
+        "p90": 132606.2229071732
+       },
+       "pessimistic": {
+        "p50": 106401.55326993205,
+        "p90": 161593.23270169634
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 90.64041420968715,
+        "p90": 778.8687755308347
+       },
+       "realistic": {
+        "p50": 137.61567365197698,
+        "p90": 787.6152009919751
+       },
+       "pessimistic": {
+        "p50": 98.66831662785262,
+        "p90": 787.4543226141832
+       }
+      }
+     },
+     "stable": {
+      "optimistic": false,
+      "realistic": false,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.9311947080365057,
+      "community": 0.7978551778937918
+     },
+     "rejections": 9434,
+     "findings": [
+      {
+       "statement": "The practice has no stable operating point in any world — waits grow without bound.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": []
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 5%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": []
+      },
+      {
+       "statement": "holds while community capacity multiplier stays above 5.5",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": []
+      },
+      {
+       "statement": "40 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": []
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 5%",
+      "holds while community capacity multiplier stays above 5.5"
+     ]
+    },
+    {
+     "value": 0.35,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 112330.98079110088,
+        "p90": 166003.4198405207
+       },
+       "realistic": {
+        "p50": 113208.96336859022,
+        "p90": 169860
+       },
+       "pessimistic": {
+        "p50": 132876.74162651494,
+        "p90": 197513.81047965423
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 112524.99679943267,
+        "p90": 165637.9405314813
+       },
+       "realistic": {
+        "p50": 113175.02055695793,
+        "p90": 170784.5482081751
+       },
+       "pessimistic": {
+        "p50": 132248.45218558976,
+        "p90": 197239.75429630443
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 42.04427684241091,
+        "p90": 744.8284465647885
+       },
+       "realistic": {
+        "p50": 49.02314925962128,
+        "p90": 747.6600514622987
+       },
+       "pessimistic": {
+        "p50": 66.36081736220513,
+        "p90": 741.2636341592879
+       }
+      }
+     },
+     "stable": {
+      "optimistic": false,
+      "realistic": false,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.931566187662032,
+      "community": 0.8029708534815101
+     },
+     "rejections": 12789,
+     "findings": [
+      {
+       "statement": "The practice has no stable operating point in any world — waits grow without bound.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": []
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 5%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": []
+      },
+      {
+       "statement": "40 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": []
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 5%"
+     ]
+    }
+   ]
+  },
+  "levers.extraGpSessions": {
+   "label": "Extra GP sessions",
+   "points": [
+    {
+     "value": 0,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 508.5442845635116,
+        "p90": 906.8112239834154
+       },
+       "realistic": {
+        "p50": 811.7842601907905,
+        "p90": 1745.6107352176914
+       },
+       "pessimistic": {
+        "p50": 19559.848008381843,
+        "p90": 29705.435461333254
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 549.355089486402,
+        "p90": 940.1970148214023
+       },
+       "realistic": {
+        "p50": 844.483975928626,
+        "p90": 1805.7913639199105
+       },
+       "pessimistic": {
+        "p50": 19509.82378011057,
+        "p90": 29661.36305921024
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 233.77622002293356,
+        "p90": 782.7862485911464
+       },
+       "realistic": {
+        "p50": 232.541638664552,
+        "p90": 790.3241922811139
+       },
+       "pessimistic": {
+        "p50": 221.77164722268935,
+        "p90": 797.4308899501339
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": false
+     },
+     "utilisation": {
+      "gp": 0.9356614505376044,
+      "community": 0.9015676246043016
+     },
+     "rejections": 255,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 5%",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      },
+      {
+       "statement": "13 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "survivesAllThree": false,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 5%"
+     ]
+    },
+    {
+     "value": 1,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 365.1868098855484,
+        "p90": 815.587239737506
+       },
+       "realistic": {
+        "p50": 398.11514130147407,
+        "p90": 841.441772544611
+       },
+       "pessimistic": {
+        "p50": 362.41352063464,
+        "p90": 820.5061677850899
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 382.87966981579666,
+        "p90": 828.2910413532518
+       },
+       "realistic": {
+        "p50": 419.3233395725838,
+        "p90": 854.9868372587953
+       },
+       "pessimistic": {
+        "p50": 375.6975370927248,
+        "p90": 841.6713567080442
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 223.08581857994432,
+        "p90": 794.7251858087257
+       },
+       "realistic": {
+        "p50": 196.3689552647993,
+        "p90": 790.6102823039982
+       },
+       "pessimistic": {
+        "p50": 241.00607772317016,
+        "p90": 812.373834100028
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": true
+     },
+     "utilisation": {
+      "gp": 0.8361069270354329,
+      "community": 0.8703896162610719
+     },
+     "rejections": 415,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in all three worlds.",
+       "survivesAllThree": true,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic",
+        "pessimistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 19%",
+       "survivesAllThree": true,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic",
+        "pessimistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 19%"
+     ]
+    },
+    {
+     "value": 2,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 360.84648952109274,
+        "p90": 819.3653790420503
+       },
+       "realistic": {
+        "p50": 371.35635101865046,
+        "p90": 820.2748495544074
+       },
+       "pessimistic": {
+        "p50": 381.01558990206104,
+        "p90": 829.1850367453299
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 399.2781524277525,
+        "p90": 838.786794921034
+       },
+       "realistic": {
+        "p50": 371.27739644708345,
+        "p90": 832.675518825592
+       },
+       "pessimistic": {
+        "p50": 414.6453784634359,
+        "p90": 846.8699997533695
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 222.71185952133965,
+        "p90": 788.9547609979345
+       },
+       "realistic": {
+        "p50": 235.6471618550131,
+        "p90": 786.6056275885785
+       },
+       "pessimistic": {
+        "p50": 214.20753191004042,
+        "p90": 782.299151824438
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": true
+     },
+     "utilisation": {
+      "gp": 0.7159095702061271,
+      "community": 0.8973443410735775
+     },
+     "rejections": 338,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in all three worlds.",
+       "survivesAllThree": true,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic",
+        "pessimistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 30%",
+       "survivesAllThree": true,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic",
+        "pessimistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 30%"
+     ]
+    },
+    {
+     "value": 3,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 319.8368001440831,
+        "p90": 808.1904047136195
+       },
+       "realistic": {
+        "p50": 329.40679522114806,
+        "p90": 810.2344199162908
+       },
+       "pessimistic": {
+        "p50": 323.677361465554,
+        "p90": 806.2796334237792
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 337.6686847166857,
+        "p90": 830.2149114856147
+       },
+       "realistic": {
+        "p50": 341.7972834079992,
+        "p90": 828.2608967485139
+       },
+       "pessimistic": {
+        "p50": 326.3986920292082,
+        "p90": 823.3763697681716
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 185.70828308764612,
+        "p90": 793.5946205902146
+       },
+       "realistic": {
+        "p50": 218.16718952392694,
+        "p90": 795.4236498046666
+       },
+       "pessimistic": {
+        "p50": 228.18725320661906,
+        "p90": 802.3494253880344
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": true
+     },
+     "utilisation": {
+      "gp": 0.6477646094102986,
+      "community": 0.868574159239348
+     },
+     "rejections": 355,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in all three worlds.",
+       "survivesAllThree": true,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic",
+        "pessimistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 40%",
+       "survivesAllThree": true,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic",
+        "pessimistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 40%"
+     ]
+    },
+    {
+     "value": 4,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 320.4908964611823,
+        "p90": 804.9634925370337
+       },
+       "realistic": {
+        "p50": 328.8736566110747,
+        "p90": 808.947001470835
+       },
+       "pessimistic": {
+        "p50": 336.61406117584556,
+        "p90": 822.2134903741535
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 348.0191508887219,
+        "p90": 817.0193543875357
+       },
+       "realistic": {
+        "p50": 324.61111019185046,
+        "p90": 816.6291876538598
+       },
+       "pessimistic": {
+        "p50": 360.1343383464264,
+        "p90": 834.0293026518775
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 170.39736590837128,
+        "p90": 770.9004920062143
+       },
+       "realistic": {
+        "p50": 211.2168408500147,
+        "p90": 798.8192950021476
+       },
+       "pessimistic": {
+        "p50": 247.9237749533495,
+        "p90": 807.1862910430646
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": true
+     },
+     "utilisation": {
+      "gp": 0.5598961427683344,
+      "community": 0.9325945573528018
+     },
+     "rejections": 230,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in all three worlds.",
+       "survivesAllThree": true,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic",
+        "pessimistic"
+       ]
+      },
+      {
+       "statement": "holds while share of care shifted to community stays below 49%",
+       "survivesAllThree": true,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic",
+        "pessimistic"
+       ]
+      }
+     ],
+     "thresholds": [
+      "holds while share of care shifted to community stays below 49%"
+     ]
+    },
+    {
+     "value": 5,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 296.10461392707657,
+        "p90": 801.1870041775983
+       },
+       "realistic": {
+        "p50": 305.8436158829718,
+        "p90": 807.1202743552858
+       },
+       "pessimistic": {
+        "p50": 291.6079656663351,
+        "p90": 796.9893982791109
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 316.63831870706053,
+        "p90": 820.388123163837
+       },
+       "realistic": {
+        "p50": 322.7706583334948,
+        "p90": 816.5776083507808
+       },
+       "pessimistic": {
+        "p50": 302.76683715352556,
+        "p90": 808.9836039239308
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 202.44102184195071,
+        "p90": 771.4189369191881
+       },
+       "realistic": {
+        "p50": 211.0449148080661,
+        "p90": 774.1542813226406
+       },
+       "pessimistic": {
+        "p50": 214.1892702371697,
+        "p90": 786.1812985202996
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": true
+     },
+     "utilisation": {
+      "gp": 0.4915838240293175,
+      "community": 0.8775931843546341
+     },
+     "rejections": 230,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in all three worlds.",
+       "survivesAllThree": true,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic",
+        "pessimistic"
+       ]
+      }
+     ],
+     "thresholds": []
+    },
+    {
+     "value": 6,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 295.83692388702184,
+        "p90": 806.3676169890387
+       },
+       "realistic": {
+        "p50": 305.46978954435326,
+        "p90": 802.5268050003797
+       },
+       "pessimistic": {
+        "p50": 300.2845567384211,
+        "p90": 805.4899934745044
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 320.49390262790257,
+        "p90": 820.7685304133629
+       },
+       "realistic": {
+        "p50": 322.6497551606153,
+        "p90": 831.2380469242926
+       },
+       "pessimistic": {
+        "p50": 318.26890161749907,
+        "p90": 822.5771620718297
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 218.95514988928335,
+        "p90": 786.0525421757775
+       },
+       "realistic": {
+        "p50": 217.9027744787163,
+        "p90": 793.5736011501867
+       },
+       "pessimistic": {
+        "p50": 226.49726695584832,
+        "p90": 802.2638467201032
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": true
+     },
+     "utilisation": {
+      "gp": 0.4928662147182366,
+      "community": 0.8125866254911196
+     },
+     "rejections": 478,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in all three worlds.",
+       "survivesAllThree": true,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic",
+        "pessimistic"
+       ]
+      }
+     ],
+     "thresholds": []
+    },
+    {
+     "value": 8,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 282.07639434945304,
+        "p90": 795.4322256647865
+       },
+       "realistic": {
+        "p50": 290.03997777600307,
+        "p90": 805.5575131295482
+       },
+       "pessimistic": {
+        "p50": 283.8994605114858,
+        "p90": 799.1272343987075
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 330.0080434230622,
+        "p90": 827.7674998514121
+       },
+       "realistic": {
+        "p50": 292.92923674709164,
+        "p90": 814.7342424347298
+       },
+       "pessimistic": {
+        "p50": 304.0041225401219,
+        "p90": 814.6691026702174
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 202.0423450396629,
+        "p90": 798.0935582971142
+       },
+       "realistic": {
+        "p50": 213.1528364904225,
+        "p90": 794.3574751922861
+       },
+       "pessimistic": {
+        "p50": 194.9151675592293,
+        "p90": 778.3615517022554
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": true
+     },
+     "utilisation": {
+      "gp": 0.37578830657327766,
+      "community": 0.9301865922547775
+     },
+     "rejections": 12,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in all three worlds.",
+       "survivesAllThree": true,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic",
+        "pessimistic"
+       ]
+      }
+     ],
+     "thresholds": []
+    },
+    {
+     "value": 10,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 269.27070223970804,
+        "p90": 788.3051430167397
+       },
+       "realistic": {
+        "p50": 278.5171251625288,
+        "p90": 794.9920590518159
+       },
+       "pessimistic": {
+        "p50": 267.25900696241297,
+        "p90": 798.6904896624619
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 303.7900863409741,
+        "p90": 816.660975513747
+       },
+       "realistic": {
+        "p50": 297.85925343493,
+        "p90": 818.5856168975588
+       },
+       "pessimistic": {
+        "p50": 303.77784663659986,
+        "p90": 823.7951679246617
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 234.6975309351692,
+        "p90": 796.1699559546541
+       },
+       "realistic": {
+        "p50": 217.53400575369596,
+        "p90": 799.7728780481266
+       },
+       "pessimistic": {
+        "p50": 200.79106556402985,
+        "p90": 796.381042094552
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": true
+     },
+     "utilisation": {
+      "gp": 0.32771166912480165,
+      "community": 0.918596305397691
+     },
+     "rejections": 96,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in all three worlds.",
+       "survivesAllThree": true,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic",
+        "pessimistic"
+       ]
+      }
+     ],
+     "thresholds": []
+    },
+    {
+     "value": 12,
+     "waits": {
+      "routine": {
+       "optimistic": {
+        "p50": 263.4818500287365,
+        "p90": 793.09346969123
+       },
+       "realistic": {
+        "p50": 268.6926606298657,
+        "p90": 787.7718416855787
+       },
+       "pessimistic": {
+        "p50": 259.659621955856,
+        "p90": 794.4046919307439
+       }
+      },
+      "complex": {
+       "optimistic": {
+        "p50": 268.61459207878215,
+        "p90": 802.8013350424008
+       },
+       "realistic": {
+        "p50": 277.0964291706914,
+        "p90": 804.8515463902731
+       },
+       "pessimistic": {
+        "p50": 285.8191285362118,
+        "p90": 813.8497525584535
+       }
+      },
+      "urgent": {
+       "optimistic": {
+        "p50": 222.6397531880648,
+        "p90": 789.2105369275087
+       },
+       "realistic": {
+        "p50": 227.64597426191904,
+        "p90": 784.4714419013471
+       },
+       "pessimistic": {
+        "p50": 212.56116456876043,
+        "p90": 800.0658018497634
+       }
+      }
+     },
+     "stable": {
+      "optimistic": true,
+      "realistic": true,
+      "pessimistic": true
+     },
+     "utilisation": {
+      "gp": 0.30339922963155114,
+      "community": 0.943667623408407
+     },
+     "rejections": 86,
+     "findings": [
+      {
+       "statement": "The practice keeps a stable operating point in all three worlds.",
+       "survivesAllThree": true,
+       "optimisticOnly": false,
+       "holdsIn": [
+        "optimistic",
+        "realistic",
+        "pessimistic"
+       ]
+      }
+     ],
+     "thresholds": []
+    }
+   ]
+  }
+ }
+}

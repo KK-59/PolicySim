@@ -7,13 +7,14 @@
   "scripts": {
     "dev": "echo 'TODO (Elsa): wire up Vite dev server' && exit 1",
     "build": "echo 'TODO (Elsa): wire up build' && exit 1",
-    "test": "echo 'TODO (Kaavya): wire up test runner \u2014 verification assertions run here' && exit 1",
+    "test": "node tests/verify.ts",
     "typecheck": "tsc --noEmit",
     "snapshot": "echo 'TODO (Oriol): node scripts/snapshot.mjs' && exit 1",
-    "grid": "echo 'TODO (Kaavya): node scripts/build-grid.mjs' && exit 1"
+    "grid": "node scripts/build-grid.ts"
   },
   "dependencies": {},
   "devDependencies": {
-    "typescript": "^5.6.0"
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0"
   }
 }

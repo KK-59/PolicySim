@@ -46,6 +46,15 @@ export interface Sourced {
   label?: string;
   /** Why this is uncertain, or what the sim does not model here. Rendered on hover. */
   note?: string;
+  /**
+   * True for values COMPUTED from other parameters rather than set independently.
+   *
+   * The sampler and the tornado both skip these. Perturbing a derived value directly would put it
+   * out of step with whatever it was derived from — moving `arrivals.perDay` without moving
+   * `targetUtilisation` produces a run that is not at the utilisation it claims to be at, and
+   * counts the same uncertainty twice.
+   */
+  derived?: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -68,8 +77,53 @@ export type ByClass<T> = Readonly<Record<PatientClass, T>>;
 // ---------------------------------------------------------------------------
 
 export interface Arrivals {
-  /** New demand entering the neighbourhood, per sim-day, per class. */
+  /**
+   * GP demand per sim-day, per class. ABSOLUTE rates, fixed at calibration time.
+   *
+   * These are derived from `targetUtilisation` once, by `deriveGpDemand`, and then held constant
+   * while levers move capacity. That ordering matters: if demand were recomputed from capacity on
+   * every run, adding GP sessions would add demand in lockstep, utilisation would never move, and
+   * every lever would look inert. The hour-one sensitivity check exists to catch exactly that.
+   */
   perDay: ByClass<Sourced>;
+
+  /**
+   * rho — GP demand as a fraction of measured GP capacity.
+   *
+   * NHS-SIM cannot tell us the true GP arrival rate: it registers 50,000 patients against three
+   * clinicians, which is not internally consistent, and its seeded appointment book is nearly
+   * empty. So we calibrate the REGIME rather than the count.
+   *
+   * That is defensible rather than evasive, because waiting time is convex in utilisation and
+   * every claim we make is ordinal, structural or threshold-shaped. 80 -> 85% barely matters;
+   * 92 -> 97% is catastrophic. Which regime we are in is the whole question, and it is the thing
+   * the literature can actually answer.
+   *
+   * Equivalently: 90 slots/day at English appointment rates fits a list of roughly 4,000 patients.
+   * Saying "we model the ~4,000-patient practice this session diary supports" and setting rho are
+   * the same act — the second is just harder to say on stage.
+   *
+   * The sampler varies THIS and re-derives `perDay`, so its range is a direct input to the width
+   * of the three worlds.
+   */
+  targetUtilisation: Sourced;
+
+  /** Share of demand in each class. Normalised before use, so these need not sum to exactly 1. */
+  classMix: ByClass<Sourced>;
+
+  /**
+   * A&E arrivals per sim-day. Measured at 142, sigma ~1.2 — the one arrival rate NHS-SIM does
+   * expose. Parked here until the ED node exists (step 5); it must NOT be fed to the GP.
+   */
+  edPerDay: Sourced;
+
+  /**
+   * Discharge letters reaching the practice per sim-day. Measured: 57 letters over ~9 sim-days.
+   *
+   * A separate stream, not a share of GP contacts — letters come from hospital discharges and
+   * scale with hospital activity, not with how busy the surgery is.
+   */
+  dischargeLettersPerDay: Sourced;
 }
 
 export interface Capacities {
@@ -94,12 +148,38 @@ export interface ServiceTimes {
   gpConsultation: Sourced;
   /** Measured: 90, n=7, zero variance. Matches the handbook figure. */
   communityVisit: Sourced;
-  /** Measured: 60 per hop — sent -> reviewed -> filed. */
+  /**
+   * Measured: 60 minutes per hop, sent -> reviewed -> filed.
+   *
+   * This is ELAPSED TURNAROUND, not clinician effort. Reading it as service time made one
+   * clinician able to handle six letters a day and the admin queue diverge instantly. The work
+   * content is `documentReviewWork`; this figure is what the sim's own status transitions took.
+   */
   documentReviewHop: Sourced;
+
+  /** Clinician minutes actually spent reviewing a letter. Not measurable in NHS-SIM. */
+  documentReviewWork: Sourced;
   /** Handbook figure; not yet observed live. */
   bloodResultTurnaround: Sourced;
   /** Not measurable in the current world — only one approved prescription exists. */
   pharmacyApproval: Sourced;
+
+  /**
+   * Service time multiplier per patient class.
+   *
+   * A complex patient needs a longer appointment than a routine one. This is the mechanism behind
+   * the median-improves-tail-worsens finding, and it is worth being precise about why:
+   *
+   * We do NOT claim anyone deprioritises complex patients. Urgent cases jump the queue, and
+   * routine and complex sit at the same priority level. What happens is geometric — a 30-minute
+   * appointment needs 30 contiguous minutes before the session closes, so as a session fills up
+   * there is a window where a routine patient still fits and a complex one no longer does. Under
+   * pressure the long jobs get squeezed out of the end of every session and roll to the next day.
+   *
+   * That is a real feature of slot-based booking, it emerges from the schedule rather than from an
+   * assumption about clinical priority, and it is defensible to a judge who asks.
+   */
+  classMultiplier: ByClass<Sourced>;
 }
 
 export interface Routing {
@@ -189,6 +269,16 @@ export interface Environment {
   winterPressure: boolean;
   /** `staff-shortage`: fewer community home-visit slots. */
   staffShortage: boolean;
+
+  // Magnitudes, applied only when the matching toggle is on. Sourced so they appear in the
+  // parameter panel and can be argued with, rather than buried as constants in the engine.
+
+  /** Multiplier on total demand under winter pressure. */
+  winterDemandMultiplier: Sourced;
+  /** Multiplier on the urgent share under winter pressure — the mix shifts, not just the volume. */
+  winterUrgentMultiplier: Sourced;
+  /** Multiplier on community capacity under a staffing shortage. */
+  shortageCommunityMultiplier: Sourced;
 }
 
 // ---------------------------------------------------------------------------
