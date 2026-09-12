@@ -14,6 +14,16 @@ export interface RunState {
   commitments: Commitment[]
   /** True once the sandbox has been run at least once this session. */
   hasRun: boolean
+  /**
+   * True once a real document has been read by the API.
+   *
+   * Until then the commitments on screen are the worked example the store seeds itself with, and
+   * the parameters screen says so. One flag rather than inferring it from `document`, because a
+   * filename is set the moment a file is chosen and long before anything has been read.
+   */
+  extracted: boolean
+  /** What the model rejected: spans it produced that are not in the document. */
+  rejected: { text: string; span: string; reason: string }[]
 }
 
 const initial: RunState = {
@@ -21,6 +31,8 @@ const initial: RunState = {
   notes: extraction.document.notes,
   commitments: extraction.commitments,
   hasRun: false,
+  extracted: false,
+  rejected: [],
 }
 
 let state: RunState = initial

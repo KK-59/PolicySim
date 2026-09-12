@@ -1,5 +1,8 @@
 import "dotenv/config"
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http"
+import { parseDocument } from "../extraction/parse.ts"
+import { extractCommitments } from "../extraction/commitments.ts"
+import { toParams } from "../extraction/to-params.ts"
 import { randomUUID } from "node:crypto"
 import { runCommunityExperiment, type CommunityExperimentResult, type ExperimentProgress } from "../clinical/prevention/controlled-experiment.ts"
 import type { Resource, SiteView } from "../clinical/prevention/simulation-types.ts"
@@ -86,6 +89,58 @@ const server = createServer(async (request, response) => {
     const url = new URL(request.url ?? "/", "http://127.0.0.1")
     if (url.pathname === "/api/health") return sendJson(response, { ok: true })
     if (url.pathname === "/api/policy" && request.method === "GET") return sendJson(response, policyData())
+
+    /**
+     * Read an uploaded policy document.
+     *
+     * The document arrives base64-encoded in JSON rather than as multipart, because the whole
+     * exchange is one file and a hand-rolled multipart parser is more code than the feature.
+     *
+     * Server-side because the OpenAI key lives here. A key shipped to the browser is a key
+     * published, and this is the only part of the product that needs one.
+     */
+    if (url.pathname === "/api/extract" && request.method === "POST") {
+      const body = await requestJson(request) as {
+        filename?: unknown
+        contentBase64?: unknown
+        notes?: unknown
+      }
+      if (typeof body.filename !== "string" || typeof body.contentBase64 !== "string") {
+        throw new Error("filename and contentBase64 are required")
+      }
+
+      const bytes = new Uint8Array(Buffer.from(body.contentBase64, "base64"))
+      const document = await parseDocument(bytes, body.filename)
+
+      // A PDF of scanned pages parses to almost nothing. Saying so beats sending an empty
+      // document to the model and rendering whatever it invents to fill the silence.
+      if (document.chars < 200) {
+        throw new Error(
+          `Only ${document.chars} characters of text came out of ${body.filename}. `
+          + "If it is a scan, it needs OCR — there is no text layer to read.",
+        )
+      }
+
+      const extraction = await extractCommitments(document.text, {
+        notes: typeof body.notes === "string" ? body.notes : undefined,
+      })
+      const mapped = await toParams(extraction.commitments)
+
+      return sendJson(response, {
+        document: {
+          filename: body.filename,
+          format: document.format,
+          pages: document.pages,
+          chars: document.chars,
+          extractedAt: Date.now(),
+          notes: typeof body.notes === "string" ? body.notes : "",
+        },
+        commitments: extraction.commitments,
+        rejected: extraction.rejected,
+        rows: mapped.rows,
+        model: extraction.model,
+      })
+    }
 
     if (url.pathname === "/api/policy/interpret" && request.method === "POST") {
       const body = await requestJson(request) as { text?: unknown }

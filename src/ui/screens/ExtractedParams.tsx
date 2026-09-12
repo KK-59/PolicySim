@@ -22,10 +22,22 @@ export function ExtractedParams() {
         than in the site-wide banner, because the banner going quiet must not vouch for a screen
         it was never about.
       */}
-      {IS_EXTRACTION_SYNTHETIC && (
+      {IS_EXTRACTION_SYNTHETIC && !run.extracted && (
         <p className="note row gap-2" role="note">
           <Glyph name="warning" size={13} />
           <span>{EXTRACTION_NOTE}</span>
+        </p>
+      )}
+
+      {/* Spans the model quoted that are not in the document. Shown, not swallowed: a reading we
+          could not verify is the thing a reader most needs to know we discarded. */}
+      {run.rejected.length > 0 && (
+        <p className="note" role="note">
+          <Glyph name="warning" size={13} />
+          <span>
+            {run.rejected.length} reading{run.rejected.length === 1 ? '' : 's'} discarded because
+            the quoted passage could not be found in the document.
+          </span>
         </p>
       )}
       <div className="row between">
