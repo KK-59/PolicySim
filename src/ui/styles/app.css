@@ -1830,8 +1830,8 @@ textarea::placeholder {
 .queueitem[data-state='service'] { background: var(--ink-1); border-color: var(--ink-1); color: #fff; }
 .queueitem[data-selected='true'] { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
 
-/* The class label is italic; the name is not. A person's name should read as a name. */
-.cls { font-style: italic; font-weight: 600; text-transform: capitalize; }
+/* The class is a category: italic, unemphasised, and second. The name carries the weight. */
+.cls { font-style: italic; text-transform: capitalize; }
 .cls--complex { color: #a33a2a; }
 .cls--urgent { color: #b1660f; }
 .cls--letter { color: #4a4436; }
@@ -2122,7 +2122,7 @@ textarea::placeholder {
  * Generated demand is named too, and still never mistakable for a patient the simulator has: the
  * S initial and the absence of a record carry that, rather than a typographic tic on the name.
  */
-.queueitem__synth { opacity: 0.85; }
+.queueitem__synth { font-weight: 600; opacity: 0.85; }
 .record__synthname { font-size: 1rem; font-weight: 600; margin: 0 0 0.25rem; }
 
 /* The dot legend. Colour without a key is decoration. */

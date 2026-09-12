@@ -433,13 +433,13 @@ export function World() {
                     data-selected={openItem === p.item}
                     onClick={() => setOpenItem(openItem === p.item ? null : p.item)}
                   >
-                    <span className={`cls cls--${p.cls}`}>{p.cls}</span>
-                    {/* Both are named, and the two are still told apart: a real patient carries
-                        the simulator's SIM- id, a generated one carries a name beginning with S
-                        and no record behind it. */}
+                    {/* Name first: it is who this is. Both are named, and the two are still told
+                        apart — a real patient carries the simulator's SIM- id, a generated one a
+                        name beginning with S and no record behind it. */}
                     <span className={p.ref ? 'queueitem__ref' : 'queueitem__synth'}>
                       {p.ref ?? syntheticName(p.item)}
                     </span>
+                    <span className={`cls cls--${p.cls}`}>{p.cls}</span>
                     <span>
                       {p.state === 'service' ? 'in service' : 'waiting'} {wait(now - p.since)}
                     </span>
