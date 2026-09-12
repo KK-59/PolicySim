@@ -19,9 +19,13 @@ it tells everyone downstream **in the same message**. Update `fixtures/` in the 
 
 | Contract | Frozen? | When | By |
 |---|---|---|---|
-| `Params` | ☐ | | |
-| `Metrics` | ☐ | | |
-| `Action` | ☐ | | |
+| `Params` | ☑ drafted | 12 Sep 2026 | Kaavya (calibrated from live snapshot) |
+| `Metrics` | ☑ drafted | 12 Sep 2026 | Kaavya |
+| `Action` | ☐ | | Oriol — **blocking Albert and Elsa** |
+
+Drafted, not yet agreed out loud. `Params` and `Metrics` typecheck under `--strict` and
+`BASELINE` in [src/contracts/baseline.ts](../src/contracts/baseline.ts) is populated with values
+measured from the live world — see [calibration-findings.md](calibration-findings.md).
 
 ## Nobody waits for real data
 

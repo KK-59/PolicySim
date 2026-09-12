@@ -89,6 +89,7 @@ npm run dev
 | [docs/integration-moments.md](docs/integration-moments.md) | The four scheduled handoffs |
 | [docs/timeline.md](docs/timeline.md) | Build order and the two hard gates |
 | [docs/parameters.md](docs/parameters.md) | Every parameter, its bounds, its source |
+| [docs/calibration-findings.md](docs/calibration-findings.md) | What the live sim actually exposes — measured values and caveats |
 | [docs/demo-runbook.md](docs/demo-runbook.md) | The three minutes, the never-cut list, the stall |
 | [docs/risks.md](docs/risks.md) | What goes wrong and who owns the mitigation |
 | [docs/pitch.md](docs/pitch.md) | Pitch and narration |
