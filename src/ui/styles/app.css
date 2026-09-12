@@ -1230,8 +1230,12 @@ textarea::placeholder {
 }
 
 /*
- * Chapter numbers. Solid, not a gradient: gradient text is decoration standing in for hierarchy,
- * and the design detector flags it as a tell. Weight and colour do the same job honestly.
+ * Chapter numbers carry the brand gradient.
+ *
+ * The design detector flags gradient text as an anti-pattern and it is usually right: it is
+ * decoration standing in for hierarchy. Kept here deliberately, on Oriol's call. It is four
+ * numerals in a list, not a heading or a metric, nothing depends on reading a value out of it,
+ * and the solid fallback below keeps it legible where background-clip is unsupported.
  */
 .chapter__n {
   font-family: var(--font-mono);
@@ -1239,6 +1243,15 @@ textarea::placeholder {
   font-weight: 700;
   color: var(--blue);
   margin-right: var(--s-2);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .chapter__n {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }
 
 /* ---------------------------------------------------------------------------
