@@ -28,7 +28,9 @@ export function Landing() {
       <img className="atlas" src="/atlas.webp" alt="" width={827} height={1100} />
 
       <h1 className="landing__name">PolicySim</h1>
-      <p className="landing__line">Every policy runs in three worlds.</p>
+      <p className="landing__line">
+        Don’t discover policy failure in patients. Simulate it first.
+      </p>
       <div className="landing__actions">
         <a className="btn btn--primary btn--lg" href={href('/upload')}>
           Run a policy

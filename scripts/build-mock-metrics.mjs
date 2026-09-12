@@ -191,10 +191,9 @@ function waitBands(idx) {
   return out
 }
 
-const NODES = [
-  'gp-clinic', 'gp-admin', 'test', 'result-review',
-  'filing', 'hospital-outpatient', 'community-visit', 'pharmacy',
-]
+// Mirrors NodeId in src/contracts/metrics.ts, which shrank to four when the engine landed.
+// Emitting a node the contract no longer names would make the fixture a lie about its own shape.
+const NODES = ['gp-clinic', 'gp-admin', 'test', 'community-visit']
 
 function nodeBands(idx) {
   const m = sweep[idx].multiplier
@@ -244,6 +243,7 @@ function bandsAt(idx) {
     },
     rejections: scalarBands(idx, 1386, 0.71, 'lower-is-better'),
     unfiledLetters: scalarBands(idx, 2911, 0.09, 'lower-is-better'),
+    unfiledResults: scalarBands(idx, 1840, 0.06, 'lower-is-better'),
   }
 }
 
@@ -394,6 +394,35 @@ const thresholds = Object.entries(breakpointByWorld)
     statement: `In the ${world} world, the complex tail is no worse off once capacity reaches ${b}x, which is ${round(b * 4, 1)} visits per day.`,
   }))
 
+/**
+ * Reverse breakevens on the declared boundaries: how large would each have to be before it
+ * overturns the headline? All three are declared at zero rather than measured, so the honest way
+ * to show them is the size of the effect that would change the answer.
+ */
+const breakevens = [
+  {
+    path: 'boundaries.inducedDemand',
+    label: 'Induced demand',
+    value: 0.34,
+    statement: 'Induced demand would have to exceed 34% of freed capacity before this stops helping.',
+    implausible: true,
+  },
+  {
+    path: 'boundaries.substitution',
+    label: 'Substitution',
+    value: 0.21,
+    statement: 'The bottleneck would have to relocate 21% of the relieved load to cancel the gain.',
+    implausible: false,
+  },
+  {
+    path: 'boundaries.gaming',
+    label: 'Gaming',
+    value: 0.48,
+    statement: 'Nearly half of cases would have to be reclassified to overturn this.',
+    implausible: true,
+  },
+]
+
 const flags = [
   {
     path: 'arrivals.perDay.complex',
@@ -429,6 +458,7 @@ const metrics = {
   findings,
   tornado,
   thresholds,
+  breakevens,
   flags,
   run: {
     samples: SAMPLES,

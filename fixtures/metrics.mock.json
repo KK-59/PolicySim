@@ -213,69 +213,6 @@
         },
         "direction": "lower-is-better"
       },
-      "result-review": {
-        "optimistic": {
-          "utilisation": 0.713,
-          "queueLength": 2.48,
-          "throughput": 59.94,
-          "refused": 2
-        },
-        "realistic": {
-          "utilisation": 0.773,
-          "queueLength": 3.4,
-          "throughput": 59.94,
-          "refused": 2
-        },
-        "pessimistic": {
-          "utilisation": 0.843,
-          "queueLength": 5.36,
-          "throughput": 59.94,
-          "refused": 2
-        },
-        "direction": "lower-is-better"
-      },
-      "filing": {
-        "optimistic": {
-          "utilisation": 0.783,
-          "queueLength": 3.6,
-          "throughput": 65.65,
-          "refused": 2
-        },
-        "realistic": {
-          "utilisation": 0.843,
-          "queueLength": 5.36,
-          "throughput": 65.65,
-          "refused": 2
-        },
-        "pessimistic": {
-          "utilisation": 0.913,
-          "queueLength": 10.45,
-          "throughput": 65.65,
-          "refused": 2
-        },
-        "direction": "lower-is-better"
-      },
-      "hospital-outpatient": {
-        "optimistic": {
-          "utilisation": 0.563,
-          "queueLength": 1.29,
-          "throughput": 71.36,
-          "refused": 2
-        },
-        "realistic": {
-          "utilisation": 0.623,
-          "queueLength": 1.65,
-          "throughput": 71.36,
-          "refused": 2
-        },
-        "pessimistic": {
-          "utilisation": 0.693,
-          "queueLength": 2.25,
-          "throughput": 71.36,
-          "refused": 2
-        },
-        "direction": "lower-is-better"
-      },
       "community-visit": {
         "optimistic": {
           "utilisation": 0.593,
@@ -294,27 +231,6 @@
           "queueLength": 2.61,
           "throughput": 18.55,
           "refused": 15
-        },
-        "direction": "lower-is-better"
-      },
-      "pharmacy": {
-        "optimistic": {
-          "utilisation": 0.703,
-          "queueLength": 2.36,
-          "throughput": 82.77,
-          "refused": 2
-        },
-        "realistic": {
-          "utilisation": 0.763,
-          "queueLength": 3.21,
-          "throughput": 82.77,
-          "refused": 2
-        },
-        "pessimistic": {
-          "utilisation": 0.833,
-          "queueLength": 4.98,
-          "throughput": 82.77,
-          "refused": 2
         },
         "direction": "lower-is-better"
       }
@@ -349,6 +265,12 @@
       "optimistic": 2181.75,
       "realistic": 2660.67,
       "pessimistic": 3299.23,
+      "direction": "lower-is-better"
+    },
+    "unfiledResults": {
+      "optimistic": 1422.3,
+      "realistic": 1734.51,
+      "pessimistic": 2150.79,
       "direction": "lower-is-better"
     }
   },
@@ -565,69 +487,6 @@
         },
         "direction": "lower-is-better"
       },
-      "result-review": {
-        "optimistic": {
-          "utilisation": -0.06,
-          "queueLength": -0.87,
-          "throughput": 0,
-          "refused": -2
-        },
-        "realistic": {
-          "utilisation": -0.06,
-          "queueLength": -1.48,
-          "throughput": 0,
-          "refused": -2
-        },
-        "pessimistic": {
-          "utilisation": -0.06,
-          "queueLength": -3.64,
-          "throughput": 0,
-          "refused": -2
-        },
-        "direction": "lower-is-better"
-      },
-      "filing": {
-        "optimistic": {
-          "utilisation": -0.06,
-          "queueLength": -1.65,
-          "throughput": 0,
-          "refused": -2
-        },
-        "realistic": {
-          "utilisation": -0.06,
-          "queueLength": -3.64,
-          "throughput": 0,
-          "refused": -2
-        },
-        "pessimistic": {
-          "utilisation": -0.06,
-          "queueLength": -21.88,
-          "throughput": 0,
-          "refused": -2
-        },
-        "direction": "lower-is-better"
-      },
-      "hospital-outpatient": {
-        "optimistic": {
-          "utilisation": -0.06,
-          "queueLength": -0.34,
-          "throughput": 0,
-          "refused": -2
-        },
-        "realistic": {
-          "utilisation": -0.06,
-          "queueLength": -0.47,
-          "throughput": 0,
-          "refused": -2
-        },
-        "pessimistic": {
-          "utilisation": -0.06,
-          "queueLength": -0.75,
-          "throughput": 0,
-          "refused": -2
-        },
-        "direction": "lower-is-better"
-      },
       "community-visit": {
         "optimistic": {
           "utilisation": -0.29,
@@ -646,27 +505,6 @@
           "queueLength": -63.06,
           "throughput": 11.41,
           "refused": -23
-        },
-        "direction": "lower-is-better"
-      },
-      "pharmacy": {
-        "optimistic": {
-          "utilisation": -0.06,
-          "queueLength": -0.81,
-          "throughput": 0,
-          "refused": -2
-        },
-        "realistic": {
-          "utilisation": -0.06,
-          "queueLength": -1.35,
-          "throughput": 0,
-          "refused": -2
-        },
-        "pessimistic": {
-          "utilisation": -0.06,
-          "queueLength": -3.11,
-          "throughput": 0,
-          "refused": -2
         },
         "direction": "lower-is-better"
       }
@@ -701,6 +539,12 @@
       "optimistic": -205.27,
       "realistic": -250.33,
       "pessimistic": -310.41,
+      "direction": "lower-is-better"
+    },
+    "unfiledResults": {
+      "optimistic": -86.5,
+      "realistic": -105.49,
+      "pessimistic": -130.81,
       "direction": "lower-is-better"
     }
   },
@@ -878,6 +722,29 @@
       "holdsWhen": "above",
       "findingId": "tail-threshold",
       "statement": "In the pessimistic world, the complex tail is no worse off once capacity reaches 5x, which is 20 visits per day."
+    }
+  ],
+  "breakevens": [
+    {
+      "path": "boundaries.inducedDemand",
+      "label": "Induced demand",
+      "value": 0.34,
+      "statement": "Induced demand would have to exceed 34% of freed capacity before this stops helping.",
+      "implausible": true
+    },
+    {
+      "path": "boundaries.substitution",
+      "label": "Substitution",
+      "value": 0.21,
+      "statement": "The bottleneck would have to relocate 21% of the relieved load to cancel the gain.",
+      "implausible": false
+    },
+    {
+      "path": "boundaries.gaming",
+      "label": "Gaming",
+      "value": 0.48,
+      "statement": "Nearly half of cases would have to be reclassified to overturn this.",
+      "implausible": true
     }
   ],
   "flags": [
