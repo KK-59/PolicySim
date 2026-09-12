@@ -1668,6 +1668,282 @@ textarea::placeholder {
 }
 
 /* ---------------------------------------------------------------------------
+   Observed rehearsal. The local model predicts; this section reports what the
+   Anima synthetic worlds actually returned after an approved batch.
+   --------------------------------------------------------------------------- */
+
+.observed { padding-bottom: var(--s-9); }
+
+.observed__intro {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-6);
+}
+
+.observed__intro .lead { max-width: 68ch; }
+
+.observed__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex: none;
+  padding: 0.35rem var(--s-3);
+  border: 1px solid var(--rule-2);
+  border-radius: var(--r-pill);
+  color: var(--blue);
+  font-size: var(--t-tiny);
+  font-weight: 600;
+}
+
+.observed__controls {
+  display: grid;
+  grid-template-columns: minmax(15rem, 2fr) repeat(2, minmax(9rem, 1fr));
+  gap: var(--s-4);
+}
+
+.observed__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  font-size: var(--t-small);
+  font-weight: 600;
+}
+
+.observed__field select,
+.observed__field input[type='number'] {
+  width: 100%;
+  min-height: 42px;
+  padding: 0.55rem var(--s-3);
+  border: 1px solid var(--rule-2);
+  border-radius: var(--r-sm);
+  background: var(--paper);
+}
+
+.observed__field select:hover,
+.observed__field input[type='number']:hover { border-color: var(--ink-3); }
+
+.observed__input-unit {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--ink-3);
+  font-size: var(--t-small);
+  font-weight: 400;
+}
+
+.observed__actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-3);
+  margin-inline: 0;
+  padding: 0;
+  border: 0;
+}
+
+.observed__actions legend {
+  grid-column: 1 / -1;
+  margin-bottom: var(--s-2);
+  font-size: var(--t-small);
+  font-weight: 600;
+}
+
+.observed__actions label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s-3);
+  align-items: start;
+  padding: var(--s-4);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+}
+
+.observed__actions label:has(input:checked) {
+  border-color: color-mix(in srgb, var(--blue) 45%, var(--rule));
+  background: var(--wash-blue);
+}
+
+.observed__actions input,
+.observed__approval input {
+  width: 17px;
+  height: 17px;
+  margin: 0.15rem 0 0;
+  accent-color: var(--blue);
+}
+
+.observed__actions span {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+}
+
+.observed__actions small {
+  color: var(--ink-3);
+  font-size: var(--t-tiny);
+  font-weight: 400;
+}
+
+.observed__arms {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-block: 1px solid var(--rule);
+}
+
+.observed__arms > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  min-width: 0;
+  padding: var(--s-4);
+  border-left: 1px solid var(--rule);
+}
+
+.observed__arms > div:first-child { border-left: 0; }
+
+.observed__arms span {
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  text-transform: uppercase;
+}
+
+.observed__arms small {
+  color: var(--ink-3);
+  font-size: var(--t-tiny);
+  overflow-wrap: anywhere;
+}
+
+.observed__run,
+.observed__approval {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.observed__eligibility {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  font-size: var(--t-small);
+}
+
+.observed__eligibility strong { font-size: var(--t-h3); }
+
+.observed__error {
+  color: var(--amber);
+  max-width: 65ch;
+}
+
+.observed__approval {
+  padding: var(--s-4);
+  background: var(--paper-sunk);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-sm);
+}
+
+.observed__approval label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+  font-size: var(--t-small);
+  cursor: pointer;
+}
+
+.observed__progress > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-4);
+  margin-bottom: var(--s-2);
+  font-size: var(--t-small);
+}
+
+.observed__track {
+  height: 4px;
+  margin-bottom: var(--s-2);
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--rule);
+}
+
+.observed__track span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: left;
+  background: var(--gradient);
+  transition: transform 300ms var(--ease);
+}
+
+.observed__results {
+  border-top: 1px solid var(--rule-2);
+  padding-top: var(--s-7);
+}
+
+.observed__run-id {
+  color: var(--ink-3);
+  font-size: var(--t-tiny);
+}
+
+.observed__summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-5);
+  padding-block: var(--s-3);
+  border-block: 1px solid var(--rule);
+  font-size: var(--t-small);
+}
+
+.observed__summary span {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+}
+
+.observed__summary strong { font-size: var(--t-h3); }
+
+.observed__table td:first-child { min-width: 16rem; }
+
+.observed__table td:first-child small {
+  display: block;
+  max-width: 58ch;
+  margin-top: var(--s-1);
+  color: var(--ink-3);
+  line-height: 1.4;
+}
+
+.observed__table td:not(:first-child) { white-space: nowrap; }
+
+.observed__delta {
+  font-weight: 600;
+  color: var(--blue);
+}
+
+@media (max-width: 760px) {
+  .observed__intro,
+  .observed__run,
+  .observed__approval {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .observed__status { align-self: flex-start; }
+
+  .observed__controls,
+  .observed__actions,
+  .observed__arms { grid-template-columns: 1fr; }
+
+  .observed__arms > div {
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .observed__arms > div:first-child { border-top: 0; }
+}
+
+/* ---------------------------------------------------------------------------
    The three worlds, as three panels.
 
    Three across on a wide screen, stacked below it. Three read at a glance; five would not, which
