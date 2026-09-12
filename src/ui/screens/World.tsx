@@ -16,6 +16,7 @@ import { NeighbourhoodMap, NODE_SITE, type MapFlow, type SiteId } from '../compo
 import { PatientRecord, hasRecord } from '../components/PatientRecord'
 import { navigate } from '../lib/router'
 import { useRun } from '../lib/store'
+import { syntheticName } from '../lib/names'
 import type { Metrics } from '@/contracts/metrics'
 
 const DAY = 1440
@@ -433,10 +434,11 @@ export function World() {
                     onClick={() => setOpenItem(openItem === p.item ? null : p.item)}
                   >
                     <span className={`cls cls--${p.cls}`}>{p.cls}</span>
-                    {/* A real patient from the snapshot is named; demand the model generated
-                        is not, because it is not anybody. */}
-                    <span className={p.ref ? 'queueitem__ref' : 'muted'}>
-                      {p.ref ?? `#${p.item}`}
+                    {/* Both are named, and the two are still told apart: a real patient carries
+                        the simulator's SIM- id, a generated one carries a name beginning with S
+                        and no record behind it. */}
+                    <span className={p.ref ? 'queueitem__ref' : 'queueitem__synth'}>
+                      {p.ref ?? syntheticName(p.item)}
                     </span>
                     <span>
                       {p.state === 'service' ? 'in service' : 'waiting'} {wait(now - p.since)}
@@ -461,6 +463,13 @@ export function World() {
             const ref = journey.find((e) => e.ref)?.ref
             return hasRecord(ref) && ref ? <PatientRecord ref={ref} now={now} /> : null
           })()}
+
+          {!journey.find((e) => e.ref) && (
+            <p className="record__synthname">
+              {syntheticName(openItem)}
+              <span className="muted small"> · generated demand, not a patient the simulator has</span>
+            </p>
+          )}
 
           <h2 className="h2 mt-4">
             What the model does next

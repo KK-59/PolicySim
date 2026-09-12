@@ -2117,3 +2117,7 @@ textarea::placeholder {
 .record__status { color: var(--ink-3); text-align: right; }
 .record__when { color: var(--ink-3); font-variant-numeric: tabular-nums; text-align: right; }
 .record__rows li[data-status='open'] .record__status { color: #b1660f; font-weight: 600; }
+
+/* Generated demand is named too, but never mistakable for a patient the simulator has. */
+.queueitem__synth { font-style: italic; opacity: 0.85; }
+.record__synthname { font-size: 1rem; font-weight: 600; margin: 0 0 0.25rem; }
