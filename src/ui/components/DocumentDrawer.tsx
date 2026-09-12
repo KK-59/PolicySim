@@ -30,6 +30,9 @@ export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () =
   const [documents, setDocuments] = useState<DocumentEntry[]>([])
   const [shelf, setShelf] = useState<Shelf>('real')
   const [error, setError] = useState<string | null>(null)
+  // The shelf sits on top of the page, so while a card is in flight it has to get out of the
+  // way: the drop zone is underneath it and an overlay cannot be dropped through.
+  const [dragging, setDragging] = useState(false)
 
   useEffect(() => {
     if (!open || documents.length) return
@@ -50,8 +53,20 @@ export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () =
 
   return (
     <>
-      <div className="drawer__scrim" data-open={open} onClick={onClose} aria-hidden="true" />
-      <aside className="drawer" data-open={open} aria-hidden={!open} aria-label="Policy documents">
+      <div
+        className="drawer__scrim"
+        data-open={open}
+        data-dragging={dragging}
+        onClick={onClose}
+        aria-hidden="true"
+      />
+      <aside
+        className="drawer"
+        data-open={open}
+        data-dragging={dragging}
+        aria-hidden={!open}
+        aria-label="Policy documents"
+      >
         <div className="drawer__head">
           <h2 className="h3">Documents</h2>
           <button type="button" className="btn btn--ghost" onClick={onClose} aria-label="Close">
@@ -63,6 +78,7 @@ export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () =
           <button
             type="button"
             className="shelfswitch__tab"
+            data-kind="real"
             aria-pressed={shelf === 'real'}
             onClick={() => setShelf('real')}
           >
@@ -71,6 +87,7 @@ export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () =
           <button
             type="button"
             className="shelfswitch__tab"
+            data-kind="generated"
             aria-pressed={shelf === 'generated'}
             onClick={() => setShelf('generated')}
           >
@@ -91,7 +108,7 @@ export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () =
             {shown.map((doc) => (
               <li
                 key={doc.id}
-                className="card"
+                className={`card card--${doc.kind}`}
                 draggable
                 onDragStart={(e) => {
                   e.dataTransfer.setData(
@@ -99,7 +116,9 @@ export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () =
                     `${doc.id}|${doc.title}`,
                   )
                   e.dataTransfer.effectAllowed = 'copy'
+                  setDragging(true)
                 }}
+                onDragEnd={() => setDragging(false)}
               >
                 <span className="card__grip" aria-hidden="true">
                   <Glyph name="document" size={18} />

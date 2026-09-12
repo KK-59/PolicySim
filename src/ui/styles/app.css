@@ -1708,6 +1708,11 @@ textarea::placeholder {
   opacity: 1;
   pointer-events: auto;
 }
+/* A card is in flight. The overlay must stop intercepting the drop. */
+.drawer__scrim[data-dragging='true'] {
+  opacity: 0;
+  pointer-events: none;
+}
 
 .drawer {
   position: fixed;
@@ -1726,6 +1731,13 @@ textarea::placeholder {
 }
 .drawer[data-open='true'] {
   transform: translateX(0);
+}
+/* Slide clear and stop taking pointer events, so the drop zone underneath is both visible and
+   reachable. The drag itself survives: an HTML5 drag in progress does not need its source. */
+.drawer[data-dragging='true'] {
+  transform: translateX(calc(100% - 3.5rem));
+  opacity: 0.55;
+  pointer-events: none;
 }
 .drawer__head {
   display: flex;
@@ -1780,6 +1792,12 @@ textarea::placeholder {
   color: var(--ink);
   box-shadow: var(--lift);
 }
+.shelfswitch__tab[aria-pressed='true'][data-kind='real'] {
+  color: var(--blue);
+}
+.shelfswitch__tab[aria-pressed='true'][data-kind='generated'] {
+  color: var(--violet);
+}
 
 .shelf {
   list-style: none;
@@ -1817,6 +1835,25 @@ textarea::placeholder {
   border-radius: var(--r-sm);
   background: var(--wash-blue);
   color: var(--blue);
+}
+/* Colour is reinforcement, never the message: the two kinds already live on separate shelves
+   behind explicit labels, so nothing here depends on telling blue from violet. */
+.card--real .card__grip {
+  background: var(--wash-blue);
+  color: var(--blue);
+}
+.card--generated .card__grip {
+  background: var(--wash-violet);
+  color: var(--violet);
+}
+.card--real:hover {
+  border-color: color-mix(in srgb, var(--blue) 45%, transparent);
+}
+.card--generated:hover {
+  border-color: color-mix(in srgb, var(--violet) 45%, transparent);
+}
+.card--generated .card__title:hover {
+  color: var(--violet);
 }
 .card__body {
   min-width: 0;
