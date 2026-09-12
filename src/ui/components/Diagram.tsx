@@ -43,7 +43,7 @@ export function SamplingDiagram() {
   const barW = (W - PAD.left - PAD.right) / BINS
 
   return (
-    <figure className="diagram diagram--wide">
+    <figure className="diagram">
       <svg
         viewBox={`0 0 ${W} ${H}`}
         className="diagram__svg"
@@ -180,7 +180,7 @@ const STAGES: Stage[] = [
 
 export function PipelineDiagram() {
   return (
-    <figure className="diagram diagram--wide">
+    <figure className="diagram">
       <ol className="pipeline">
         {STAGES.map((s, i) => (
           <li key={s.id} className={`pipeline__stage pipeline__stage--${s.kind}`}>

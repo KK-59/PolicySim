@@ -75,12 +75,12 @@ export function ThreeWorlds() {
         />
       </div>
 
-      <h2 className="h3 mt-7">Findings</h2>
-      <div className="mt-3">
+      <h2 className="h2 mt-7">Findings</h2>
+      <div className="mt-4">
         <Findings findings={metrics.findings} />
       </div>
 
-      <details className="disclosure mt-6">
+      <details className="disclosure mt-7">
         <summary>
           <Glyph name="flag" size={14} />
           Sensitivity and flagged parameters

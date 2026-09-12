@@ -1071,16 +1071,20 @@ textarea::placeholder {
   padding: var(--s-7) var(--s-5) var(--s-8);
 }
 
-.page--narrow {
-  max-width: 40rem;
-}
-
-/* Prose measure. Body text past about 75 characters a line gets hard to track back. */
-.page--reading {
+/*
+ * Reading measure, INSIDE the page frame rather than instead of it. Body text past about 70
+ * characters a line is hard to track back to, but narrowing the whole container also moved the
+ * heading away from the wordmark, which is what made the pages look like different products.
+ */
+.measure {
   max-width: 46rem;
 }
 
-.page--reading p {
+.measure--form {
+  max-width: 40rem;
+}
+
+.measure p {
   max-width: 68ch;
 }
 
@@ -1092,23 +1096,6 @@ textarea::placeholder {
   margin: 0;
 }
 
-/*
- * Diagrams break out past the reading measure. Prose wants 68 characters; a five stage pipeline
- * squeezed into that width gives every box about 120px and the labels start wrapping to one word
- * a line. The figure is allowed to be wider than the column it explains.
- */
-.diagram--wide {
-  width: 58rem;
-  max-width: calc(100vw - var(--s-6));
-  margin-inline: calc((46rem - 58rem) / 2);
-}
-
-@media (max-width: 62rem) {
-  .diagram--wide {
-    width: 100%;
-    margin-inline: 0;
-  }
-}
 
 .diagram__svg {
   width: 100%;
@@ -1242,15 +1229,15 @@ textarea::placeholder {
   color: var(--ink-3);
 }
 
-/* Chapter numbers carry the brand gradient rather than sitting as another grey. */
+/*
+ * Chapter numbers. Solid, not a gradient: gradient text is decoration standing in for hierarchy,
+ * and the design detector flags it as a tell. Weight and colour do the same job honestly.
+ */
 .chapter__n {
   font-family: var(--font-mono);
   font-size: var(--t-small);
   font-weight: 700;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--blue);
   margin-right: var(--s-2);
 }
 
