@@ -139,82 +139,6 @@ main {
 }
 
 /* ---------------------------------------------------------------------------
-   Masthead
-   --------------------------------------------------------------------------- */
-
-.masthead {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--rule);
-}
-
-.masthead__inner {
-  display: flex;
-  align-items: center;
-  gap: var(--s-5);
-  height: 60px;
-}
-
-.wordmark {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-2);
-  font-weight: 600;
-  font-size: var(--t-body);
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.wordmark__rule {
-  width: 26px;
-  height: 3px;
-  border-radius: var(--r-pill);
-  background: var(--gradient);
-}
-
-.masthead nav {
-  display: flex;
-  align-items: center;
-  gap: var(--s-1);
-  margin-left: auto;
-}
-
-.navlink {
-  padding: var(--s-2) var(--s-3);
-  border-radius: var(--r-sm);
-  font-size: var(--t-small);
-  font-weight: 500;
-  color: var(--ink-2);
-  text-decoration: none;
-  transition: background 150ms var(--ease), color 150ms var(--ease);
-}
-
-.navlink:hover {
-  background: var(--paper-panel);
-  color: var(--ink);
-}
-
-.navlink[aria-current='page'] {
-  color: var(--ink);
-  background: var(--paper-panel);
-}
-
-.navlink--muted {
-  color: var(--ink-3);
-  cursor: not-allowed;
-}
-
-.navlink--muted:hover {
-  background: transparent;
-  color: var(--ink-3);
-}
-
-/* ---------------------------------------------------------------------------
    Buttons
    --------------------------------------------------------------------------- */
 
@@ -968,87 +892,178 @@ textarea::placeholder {
   transition: opacity 200ms var(--ease);
 }
 
+
 /* ---------------------------------------------------------------------------
-   Landing
+   Landing: one screen, no scroll, no chrome.
    --------------------------------------------------------------------------- */
 
-.hero {
-  padding-block: var(--s-8) var(--s-7);
-}
-
-.hero__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--s-6);
-}
-
-.hero__top {
-  gap: var(--s-6);
-}
-
-.hero__claim {
+.landing {
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  gap: var(--s-4);
-  max-width: 46rem;
-}
-
-.hero__actions {
-  display: flex;
-  gap: var(--s-3);
-  flex-wrap: wrap;
   align-items: center;
-  margin-top: var(--s-2);
-}
-
-.modes {
-  display: grid;
+  justify-content: center;
   gap: var(--s-4);
-  grid-template-columns: minmax(0, 1fr);
+  padding: var(--s-6);
+  text-align: center;
 }
 
-.mode {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-3);
-  padding: var(--s-5);
-  border: 1px solid var(--rule);
-  border-radius: var(--r-md);
-  text-decoration: none;
-  color: inherit;
-  transition: border-color 150ms var(--ease), box-shadow 150ms var(--ease),
-    transform 150ms var(--ease);
+.landing__name {
+  margin: 0;
+  font-size: var(--t-display);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  font-weight: 600;
 }
 
-.mode--live:hover {
-  border-color: var(--ink-3);
-  box-shadow: var(--lift);
-  transform: translateY(-2px);
-}
-
-.mode--next {
-  background: var(--paper-sunk);
-  border-style: dashed;
-  cursor: default;
-}
-
-.mode__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--s-3);
-}
-
-.mode__status {
-  font-family: var(--font-mono);
-  font-size: var(--t-micro);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+.landing__line {
+  font-size: var(--t-lead);
   color: var(--ink-3);
+  letter-spacing: -0.012em;
 }
 
-.mode--live .mode__status {
-  color: var(--blue);
+.landing__actions {
+  display: flex;
+  gap: var(--s-3);
+  margin-top: var(--s-4);
+}
+
+/* ---------------------------------------------------------------------------
+   Bar and page frame
+   --------------------------------------------------------------------------- */
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--rule);
+}
+
+.bar__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+  height: 56px;
+  padding-block: 0;
+}
+
+.bar__inner .steps {
+  margin-inline: auto;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-weight: 600;
+  font-size: var(--t-body);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.wordmark__rule {
+  width: 24px;
+  height: 3px;
+  border-radius: var(--r-pill);
+  background: var(--gradient);
+}
+
+.navlink {
+  padding: var(--s-2) var(--s-3);
+  border-radius: var(--r-sm);
+  font-size: var(--t-small);
+  font-weight: 500;
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: background 150ms var(--ease), color 150ms var(--ease);
+}
+
+.navlink:hover {
+  background: var(--paper-panel);
+  color: var(--ink);
+}
+
+.navlink[aria-current='page'] {
+  color: var(--ink);
+  background: var(--paper-panel);
+}
+
+/** One page frame everywhere, so no screen invents its own margins. */
+.page {
+  width: 100%;
+  max-width: 66rem;
+  margin-inline: auto;
+  padding: var(--s-7) var(--s-5) var(--s-8);
+}
+
+.page--narrow {
+  max-width: 40rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Disclosure: present for trust, folded away for reading.
+   --------------------------------------------------------------------------- */
+
+.disclosure {
+  border-top: 1px solid var(--rule);
+  padding-top: var(--s-4);
+}
+
+.disclosure summary {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  cursor: pointer;
+  font-size: var(--t-small);
+  color: var(--ink-2);
+  list-style: none;
+}
+
+.disclosure summary::-webkit-details-marker {
+  display: none;
+}
+
+.disclosure summary:hover {
+  color: var(--ink);
+}
+
+.disclosure__body {
+  padding-top: var(--s-5);
+}
+
+.numfield {
+  width: 5.5rem;
+  text-align: right;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--rule-2);
+  border-radius: var(--r-sm);
+  background: var(--paper);
+}
+
+.numfield:focus {
+  border-color: var(--blue);
+  outline: none;
+}
+
+/* ---------------------------------------------------------------------------
+   The synthetic notice. Quiet, permanent, never dismissible.
+   --------------------------------------------------------------------------- */
+
+.synthetic {
+  margin-top: auto;
+  border-top: 1px solid var(--rule);
+  background: var(--amber-wash);
+  color: var(--amber);
+  font-size: var(--t-tiny);
+}
+
+.synthetic .page {
+  padding-block: var(--s-3);
 }
 
 /* The boundaries list: what is not modelled, said out loud rather than footnoted. */
@@ -1072,25 +1087,6 @@ textarea::placeholder {
 
 .boundary__term {
   font-weight: 600;
-}
-
-/* ---------------------------------------------------------------------------
-   Footer
-   --------------------------------------------------------------------------- */
-
-.footer {
-  border-top: 1px solid var(--rule);
-  padding-block: var(--s-6);
-  margin-top: var(--s-8);
-  color: var(--ink-3);
-  font-size: var(--t-tiny);
-}
-
-.footer__inner {
-  display: flex;
-  gap: var(--s-5);
-  justify-content: space-between;
-  flex-wrap: wrap;
 }
 
 /* ---------------------------------------------------------------------------

@@ -1,14 +1,14 @@
 /**
- * Root. Landing -> upload -> parameters -> worlds, with Mode B reachable from a patient once it
- * exists. The mode list on the landing page is a registry for exactly that reason.
+ * Root.
  *
- * The synthetic banner is not a debug affordance. Until the engine lands, everything on screen is
- * a fixture, and a tool whose entire argument is "every number carries its provenance" cannot
- * quietly present fabricated numbers as measured ones.
+ * The landing page is the whole screen with no chrome: it is a name and two buttons, so a
+ * masthead repeating those buttons would be the duplication that made the old Overview link
+ * meaningless. Every other route gets the bar.
  */
 
 import { Glyph } from './components/Glyph'
 import { Landing } from './screens/Landing'
+import { About } from './screens/About'
 import { Upload } from './screens/Upload'
 import { ExtractedParams } from './screens/ExtractedParams'
 import { ThreeWorlds } from './screens/ThreeWorlds'
@@ -23,100 +23,33 @@ const STEPS: { to: Route; label: string }[] = [
   { to: '/worlds', label: 'Three worlds' },
 ]
 
-function Steps({ route }: { route: Route }) {
-  const current = STEPS.findIndex((s) => s.to === route)
-  if (current === -1) return null
+function Bar({ route }: { route: Route }) {
+  const step = STEPS.findIndex((s) => s.to === route)
 
   return (
-    <nav className="steps" aria-label="Progress">
-      {STEPS.map((s, i) => (
-        <span key={s.to} className="steps__item" data-state={i === current ? 'current' : i < current ? 'done' : 'todo'}>
-          {i > 0 && <span className="steps__sep" aria-hidden="true" />}
-          {i < current ? (
-            <a className="navlink" href={href(s.to)} style={{ padding: 0 }}>
-              {s.label}
-            </a>
-          ) : (
-            <span aria-current={i === current ? 'step' : undefined}>{s.label}</span>
-          )}
-        </span>
-      ))}
-    </nav>
-  )
-}
-
-function Masthead({ route }: { route: Route }) {
-  return (
-    <header className="masthead">
-      <div className="wrap wrap--wide masthead__inner">
+    <header className="bar">
+      <div className="page bar__inner">
         <a className="wordmark" href={href('/')}>
           <span className="wordmark__rule" aria-hidden="true" />
           Policy Sandbox
         </a>
-        <Steps route={route} />
-        <nav>
-          <a className="navlink" href={href('/')} aria-current={route === '/' ? 'page' : undefined}>
-            Overview
-          </a>
-          <a
-            className="navlink"
-            href={href('/worlds')}
-            aria-current={route === '/worlds' ? 'page' : undefined}
-          >
-            Neighbourhood
-          </a>
-          <span className="navlink navlink--muted" title="Not built yet">
-            Clinician
-          </span>
-          <a className="btn btn--primary" href={href('/upload')} style={{ marginLeft: 'var(--s-2)' }}>
-            Run a policy
-          </a>
-        </nav>
+
+        {step !== -1 && (
+          <nav className="steps" aria-label="Progress">
+            {STEPS.map((s, i) => (
+              <span key={s.to} className="steps__item" data-state={i === step ? 'current' : i < step ? 'done' : 'todo'}>
+                {i > 0 && <span className="steps__sep" aria-hidden="true" />}
+                {i < step ? <a href={href(s.to)}>{s.label}</a> : <span>{s.label}</span>}
+              </span>
+            ))}
+          </nav>
+        )}
+
+        <a className="navlink" href={href('/about')} aria-current={route === '/about' ? 'page' : undefined}>
+          About
+        </a>
       </div>
     </header>
-  )
-}
-
-function SyntheticBanner() {
-  if (!IS_SYNTHETIC) return null
-  return (
-    <div
-      className="wrap wrap--wide"
-      style={{
-        display: 'flex',
-        gap: 'var(--s-2)',
-        alignItems: 'center',
-        padding: 'var(--s-2) var(--s-5)',
-        color: 'var(--amber)',
-        fontSize: 'var(--t-tiny)',
-        borderBottom: '1px solid var(--rule)',
-        background: 'var(--amber-wash)',
-        maxWidth: 'none',
-      }}
-    >
-      <Glyph name="warning" size={14} />
-      <span>
-        Outcomes on this build come from a fixture, not from the engine. The baseline they move
-        against is measured; the response curves are not. Nothing here is a measurement.
-      </span>
-    </div>
-  )
-}
-
-function Footer() {
-  return (
-    <footer className="footer">
-      <div className="wrap wrap--wide footer__inner">
-        <span>
-          Policy Sandbox &middot; operational outcomes only, synthetic patients, a human approves
-          every write.
-        </span>
-        <span>
-          The simulator is ground truth. This is a fast, inspectable model of its rules, checked
-          against it.
-        </span>
-      </div>
-    </footer>
   )
 }
 
@@ -127,23 +60,32 @@ export function App() {
   const route = useRoute()
   const run = useRun()
   const blocked = GUARDED.includes(route) && !run.document
+  const effective: Route = blocked ? '/upload' : route
+
+  if (effective === '/') return <Landing />
 
   return (
     <div className="shell">
-      <SyntheticBanner />
-      <Masthead route={blocked ? '/upload' : route} />
+      <Bar route={effective} />
       <main>
-        {blocked || route === '/upload' ? (
+        {effective === '/about' ? (
+          <About />
+        ) : effective === '/upload' ? (
           <Upload />
-        ) : route === '/parameters' ? (
+        ) : effective === '/parameters' ? (
           <ExtractedParams />
-        ) : route === '/worlds' ? (
-          <ThreeWorlds />
         ) : (
-          <Landing />
+          <ThreeWorlds />
         )}
       </main>
-      <Footer />
+      {IS_SYNTHETIC && (
+        <footer className="synthetic">
+          <div className="page row gap-2">
+            <Glyph name="warning" size={13} />
+            <span>Outcomes come from a fixture, not the engine. Nothing here is a measurement.</span>
+          </div>
+        </footer>
+      )}
     </div>
   )
 }
