@@ -29,7 +29,10 @@ import {
  * change in the file.
  */
 const handoff = JSON.parse(
-  readFileSync(new URL('../fixtures/params.calibrated.json', import.meta.url), 'utf8'),
+  // A FROZEN copy, never regenerated. `fixtures/params.calibrated.json` is the live handoff and
+  // is rewritten by `npm run calibrate`, so asserting exact values against it makes the suite
+  // fail whenever the world moves, which says nothing about this adapter.
+  readFileSync(new URL('./fixtures/params.calibrated.frozen.json', import.meta.url), 'utf8'),
 ) as CalibrationHandoff
 
 const SOURCE_TAGS: readonly SourceTag[] = ['measured', 'documented', 'literature', 'assumed']

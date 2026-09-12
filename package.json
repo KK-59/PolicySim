@@ -2,7 +2,7 @@
   "name": "policy-sandbox",
   "version": "0.1.0",
   "private": true,
-  "description": "Every policy runs in three worlds. Team 14 — OpenAI x Anima Healthtech Hackathon.",
+  "description": "Every policy runs in three worlds. Team 14 \u2014 OpenAI x Anima Healthtech Hackathon.",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,7 +14,8 @@
     "snapshot": "tsx scripts/snapshot.mjs",
     "watch": "tsx scripts/watch.mjs",
     "grid": "tsx scripts/build-grid.mjs",
-    "liveloop": "tsx scripts/live-loop.mjs"
+    "liveloop": "tsx scripts/live-loop.mjs",
+    "calibrate": "tsx scripts/calibrate.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",

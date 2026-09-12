@@ -1,22 +1,22 @@
 {
   "meta": {
     "site": "gp",
-    "observedAt": 1790001720000,
-    "observedAtIso": "2026-09-21T14:42:00.000Z",
+    "observedAt": 1789993320000,
+    "observedAtIso": "2026-09-21T12:22:00.000Z",
     "windowStart": 1789200900000,
-    "windowEnd": 1790001720000,
-    "windowDays": 9.269,
-    "resourcesObserved": 1500,
-    "arrivalsCounted": 899,
-    "historyExcluded": 579,
-    "teamWritesExcluded": 22,
-    "resourceTotal": 375721,
+    "windowEnd": 1789993320000,
+    "windowDays": 9.172,
+    "resourcesObserved": 2000,
+    "arrivalsCounted": 890,
+    "historyExcluded": 1097,
+    "teamWritesExcluded": 13,
+    "resourceTotal": 375703,
     "appointmentsDate": "2026-09-18"
   },
   "params": {
     "population": 50000,
     "arrivals": {
-      "routine": 96.993,
+      "routine": 97.039,
       "complex": 0,
       "urgent": 0
     },
@@ -30,12 +30,12 @@
       "gpSlotsPerDay": 90
     },
     "routing": {
-      "diagnostics->gp": 0.7778,
-      "diagnostics->population": 0.1111,
-      "diagnostics->triage": 0.1111,
-      "gp->diagnostics": 0.5833,
-      "gp->messaging": 0.0833,
-      "gp->triage": 0.3333,
+      "diagnostics->gp": 0.8636,
+      "diagnostics->population": 0.0455,
+      "diagnostics->triage": 0.0909,
+      "gp->diagnostics": 0.8182,
+      "gp->messaging": 0.0455,
+      "gp->triage": 0.1364,
       "population->triage": 1,
       "triage->mental": 0.5,
       "triage->messaging": 0.5
@@ -60,7 +60,7 @@
     "arrivals.routine": {
       "units": "/sim-day",
       "source": "measured",
-      "derivation": "899 routine arrivals with a patientId, created inside a 9.27 sim-day window, divided by that window",
+      "derivation": "890 routine arrivals with a patientId, created inside a 9.17 sim-day window, divided by that window",
       "citation": "GET /api/sites/gp/view → resources[].kind + priority + createdAt",
       "range": [
         0,
@@ -70,7 +70,7 @@
     "arrivals.complex": {
       "units": "/sim-day",
       "source": "measured",
-      "derivation": "0 complex arrivals with a patientId, created inside a 9.27 sim-day window, divided by that window",
+      "derivation": "0 complex arrivals with a patientId, created inside a 9.17 sim-day window, divided by that window",
       "citation": "GET /api/sites/gp/view → resources[].kind + priority + createdAt",
       "range": [
         0,
@@ -80,7 +80,7 @@
     "arrivals.urgent": {
       "units": "/sim-day",
       "source": "measured",
-      "derivation": "0 urgent arrivals with a patientId, created inside a 9.27 sim-day window, divided by that window",
+      "derivation": "0 urgent arrivals with a patientId, created inside a 9.17 sim-day window, divided by that window",
       "citation": "GET /api/sites/gp/view → resources[].kind + priority + createdAt",
       "range": [
         0,
@@ -140,7 +140,7 @@
     "routing.diagnostics->gp": {
       "units": "share",
       "source": "measured",
-      "derivation": "7 of 9 observed handoffs out of diagnostics, from per-patient resource timelines",
+      "derivation": "19 of 22 observed handoffs out of diagnostics, from per-patient resource timelines",
       "citation": "GET /api/sites/gp/view → resources[].owner ordered by patientId + createdAt",
       "range": [
         0,
@@ -150,7 +150,7 @@
     "routing.diagnostics->population": {
       "units": "share",
       "source": "measured",
-      "derivation": "1 of 9 observed handoffs out of diagnostics, from per-patient resource timelines",
+      "derivation": "1 of 22 observed handoffs out of diagnostics, from per-patient resource timelines",
       "citation": "GET /api/sites/gp/view → resources[].owner ordered by patientId + createdAt",
       "range": [
         0,
@@ -160,7 +160,7 @@
     "routing.diagnostics->triage": {
       "units": "share",
       "source": "measured",
-      "derivation": "1 of 9 observed handoffs out of diagnostics, from per-patient resource timelines",
+      "derivation": "2 of 22 observed handoffs out of diagnostics, from per-patient resource timelines",
       "citation": "GET /api/sites/gp/view → resources[].owner ordered by patientId + createdAt",
       "range": [
         0,
@@ -170,7 +170,7 @@
     "routing.gp->diagnostics": {
       "units": "share",
       "source": "measured",
-      "derivation": "7 of 12 observed handoffs out of gp, from per-patient resource timelines",
+      "derivation": "18 of 22 observed handoffs out of gp, from per-patient resource timelines",
       "citation": "GET /api/sites/gp/view → resources[].owner ordered by patientId + createdAt",
       "range": [
         0,
@@ -180,7 +180,7 @@
     "routing.gp->messaging": {
       "units": "share",
       "source": "measured",
-      "derivation": "1 of 12 observed handoffs out of gp, from per-patient resource timelines",
+      "derivation": "1 of 22 observed handoffs out of gp, from per-patient resource timelines",
       "citation": "GET /api/sites/gp/view → resources[].owner ordered by patientId + createdAt",
       "range": [
         0,
@@ -190,7 +190,7 @@
     "routing.gp->triage": {
       "units": "share",
       "source": "measured",
-      "derivation": "4 of 12 observed handoffs out of gp, from per-patient resource timelines",
+      "derivation": "3 of 22 observed handoffs out of gp, from per-patient resource timelines",
       "citation": "GET /api/sites/gp/view → resources[].owner ordered by patientId + createdAt",
       "range": [
         0,
@@ -230,7 +230,7 @@
     "dueWindows.test": {
       "units": "min",
       "source": "documented",
-      "derivation": "median dueAt - createdAt over 4 test resources (identical across every observation); server-set due window, not an observed service time",
+      "derivation": "median dueAt - createdAt over 2 test resources (identical across every observation); server-set due window, not an observed service time",
       "citation": "GET /api/sites/gp/view → resources[].dueAt - createdAt where kind = test",
       "range": [
         0,
@@ -259,8 +259,8 @@
     }
   },
   "gaps": [
-    "no complex arrivals observed in a 9.27 sim-day window; rate reported as 0, do not treat it as calibrated",
-    "no urgent arrivals observed in a 9.27 sim-day window; rate reported as 0, do not treat it as calibrated",
+    "no complex arrivals observed in a 9.17 sim-day window; rate reported as 0, do not treat it as calibrated",
+    "no urgent arrivals observed in a 9.17 sim-day window; rate reported as 0, do not treat it as calibrated",
     "no visit resources in this view; community visits per day come from the declared capacity only",
     "routing shares out of triage, population rest on fewer than 5 observed transitions",
     "no referral resources with a dueAt in this read; its turnaround window is unsourced"
