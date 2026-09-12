@@ -144,7 +144,7 @@ export function Upload() {
           aria-label="Anything else we should know? Optional"
           value={run.notes}
           onChange={(e) => setRun({ notes: e.target.value })}
-          placeholder="Anything else we should know? Optional."
+          placeholder="Add any extra information here"
         />
 
         <button

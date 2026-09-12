@@ -28,7 +28,9 @@ export interface RunState {
 
 const initial: RunState = {
   document: null,
-  notes: extraction.document.notes,
+  // Empty, not seeded from the fixture. Prefilled text in a box the user is meant to fill in
+  // reads as something they typed, and it would be sent to extraction as their context.
+  notes: '',
   commitments: extraction.commitments,
   hasRun: false,
   extracted: false,
