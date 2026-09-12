@@ -41,3 +41,6 @@ live-run-*.log
 # impeccable working files (review screenshots, local config)
 .impeccable/review/
 .impeccable/questions/
+
+# mascot generation candidates (large PNGs; the chosen one ships as public/atlas.webp)
+design/mascot/

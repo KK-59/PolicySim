@@ -963,6 +963,12 @@ textarea::placeholder {
   background: linear-gradient(90deg, var(--brand-violet), var(--brand-yellow));
 }
 
+.atlas {
+  width: auto;
+  height: min(42vh, 340px);
+  margin-bottom: calc(var(--s-4) * -1);
+}
+
 .landing__name {
   margin: 0;
   font-size: var(--t-display);
