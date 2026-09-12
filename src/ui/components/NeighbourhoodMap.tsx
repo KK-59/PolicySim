@@ -1,6 +1,10 @@
 /**
  * The neighbourhood, with our simulation running on it.
  *
+ * Dots are people, coloured by patient class, moving between services. Class is worth colouring
+ * because it is what the engine actually treats differently: urgent jumps the queue, complex
+ * takes a double appointment, a letter is admin rather than a person in a room.
+ *
  * The illustration is NHS-SIM's, credited on screen — it is a picture of the world this project
  * models, the same Riverside Practice and Northbank General the engine has nodes for. What moves
  * on it is ours: every count and every flow comes from the engine's event log.
@@ -118,15 +122,13 @@ export function NeighbourhoodMap({ counts, flows, delta, hasControl, selected, o
               data-selected={selected === id}
               disabled={unmodelled}
               onClick={() => onSelect(selected === id ? null : id)}
-              title={unmodelled ? `${site.name} — in the neighbourhood, not in the model` : site.name}
+              title={unmodelled ? `${site.name} — outside the model` : site.name}
             >
               <span className="nmap__dotmark" data-busy={busy} />
               <span className="nmap__label">
                 <span className="nmap__kind">{site.kind}</span>
                 <span className="nmap__name">{site.name}</span>
-                {unmodelled ? (
-                  <span className="nmap__count nmap__count--off">not modelled</span>
-                ) : (
+                {unmodelled ? null : (
                   <span className="nmap__count">
                     <strong>{c?.waiting ?? 0}</strong> waiting
                     {(c?.service ?? 0) > 0 && <em> · {c?.service} in service</em>}
@@ -148,8 +150,27 @@ export function NeighbourhoodMap({ counts, flows, delta, hasControl, selected, o
         })}
       </div>
 
+      <div className="nmap__legend">
+        {/* Without this the dots are just colours. Class is what decides priority and appointment
+            length, so it is the thing worth colouring and the thing worth naming. */}
+        <span className="nmap__key">
+          <i className="nmap__swatch nmap__swatch--routine" /> Routine
+        </span>
+        <span className="nmap__key">
+          <i className="nmap__swatch nmap__swatch--complex" /> Complex · double appointment
+        </span>
+        <span className="nmap__key">
+          <i className="nmap__swatch nmap__swatch--urgent" /> Urgent · jumps the queue
+        </span>
+        <span className="nmap__key">
+          <i className="nmap__swatch nmap__swatch--letter" /> Discharge letter
+        </span>
+        <span className="nmap__key nmap__key--note">Each dot is one person moving between services.</span>
+      </div>
+
       <figcaption className="nmap__credit">
-        Neighbourhood illustration by NHS-SIM. The movement on it is this engine's.
+        Neighbourhood illustration by NHS-SIM; the movement on it is this engine's. The pharmacy
+        and the home are dimmed: they are in the neighbourhood and not in the model.
       </figcaption>
     </figure>
   )
