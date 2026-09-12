@@ -26,6 +26,13 @@ export interface RunState {
   rejected: { text: string; span: string; reason: string }[]
   /** Set when the document was longer than the model could be sent in one call. */
   truncated: { charsRead: number } | null
+  /**
+   * Engine output for THIS policy, once it has been run. Null until then, and the worlds screen
+   * falls back to the precomputed baseline sweep — which is also the offline path when there is
+   * no API to call.
+   */
+  result: { metrics: unknown; sweep: unknown } | null
+  running: boolean
 }
 
 const initial: RunState = {
@@ -38,6 +45,8 @@ const initial: RunState = {
   extracted: false,
   rejected: [],
   truncated: null,
+  result: null,
+  running: false,
 }
 
 let state: RunState = initial

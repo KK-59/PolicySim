@@ -3,6 +3,10 @@ import { createServer, type IncomingMessage, type ServerResponse } from "node:ht
 import { parseDocument } from "../extraction/parse.ts"
 import { extractCommitments } from "../extraction/commitments.ts"
 import { toParams } from "../extraction/to-params.ts"
+import { BASELINE } from "../contracts/baseline.ts"
+import { runWorlds } from "../worlds/index.ts"
+import { sweepLever } from "../worlds/sweep.ts"
+import type { Params } from "../contracts/params.ts"
 import { randomUUID } from "node:crypto"
 import { runCommunityExperiment, type CommunityExperimentResult, type ExperimentProgress } from "../clinical/prevention/controlled-experiment.ts"
 import type { Resource, SiteView } from "../clinical/prevention/simulation-types.ts"
@@ -159,6 +163,59 @@ const server = createServer(async (request, response) => {
         charsRead: extraction.charsRead,
         truncated: extraction.truncated,
       })
+    }
+
+    /**
+     * Run the engine on the parameters the document produced.
+     *
+     * This is the join. Extraction reads the document, the engine simulates it, and until this
+     * endpoint existed the two never met: the worlds screen drew a sweep precomputed from the
+     * baseline no matter what anyone uploaded.
+     *
+     * Server-side because a sampled sweep is a few seconds of CPU, which is fine on a machine
+     * and not fine on the main thread of a browser mid-demo.
+     */
+    if (url.pathname === "/api/run" && request.method === "POST") {
+      const body = await requestJson(request) as { levers?: unknown; samples?: unknown }
+      const overrides = (body.levers ?? {}) as Record<string, number>
+
+      // Rebuild from BASELINE and apply only the lever values. The client never sends a whole
+      // Params: it has no business setting a measured capacity or a service time, and accepting
+      // one would let the page silently redefine the world it claims to be simulating.
+      const policy: Params = structuredClone(BASELINE)
+      const levers = policy.levers as unknown as Record<string, { value: number; bounds: readonly [number, number] }>
+      for (const [path, value] of Object.entries(overrides)) {
+        const key = path.startsWith("levers.") ? path.slice("levers.".length) : path
+        const leaf = levers[key]
+        if (!leaf || typeof value !== "number" || !Number.isFinite(value)) continue
+        leaf.value = Math.min(leaf.bounds[1], Math.max(leaf.bounds[0], value))
+      }
+
+      const samples = typeof body.samples === "number" ? Math.min(60, Math.max(8, body.samples)) : 24
+      const horizonDays = 450
+
+      const metrics = runWorlds(policy, { samples, horizonDays, baseline: BASELINE })
+
+      // Sweep the constraint the plan turns on, with the policy's own position marked.
+      const positions = [1, 1.5, 2, 2.5, 3, 4, 5, 6, 8]
+      const chosen = policy.levers.communityCapacityMultiplier.value
+      const nearest = positions.reduce(
+        (best, v, i) => (Math.abs(v - chosen) < Math.abs((positions[best] as number) - chosen) ? i : best),
+        0,
+      )
+      const sweep = sweepLever(policy, {
+        path: "levers.communityCapacityMultiplier",
+        label: "Community capacity",
+        unit: "x current",
+        baseValue: BASELINE.capacities.communitySlotsPerDay.value,
+        baseUnit: "visits per day",
+        positions,
+        policyIndex: nearest,
+        samples: Math.min(samples, 20),
+        horizonDays,
+      })
+
+      return sendJson(response, { metrics, sweep, ranAt: Date.now(), samples, horizonDays })
     }
 
     if (url.pathname === "/api/policy/interpret" && request.method === "POST") {

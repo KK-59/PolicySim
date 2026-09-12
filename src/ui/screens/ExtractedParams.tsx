@@ -5,6 +5,7 @@
  * still matters. Anything tagged `assumed` is amber.
  */
 
+import { useState } from 'react'
 import { Glyph } from '../components/Glyph'
 import { SourceTag } from '../components/SourceTag'
 import { navigate } from '../lib/router'
@@ -14,6 +15,44 @@ import { EXTRACTION_NOTE, IS_EXTRACTION_SYNTHETIC } from '../data'
 export function ExtractedParams() {
   const run = useRun()
   const commitments = run.commitments
+  const [error, setError] = useState<string | null>(null)
+
+  /**
+   * Send the parameters to the engine and go to the result.
+   *
+   * The values sent are whatever is on screen — extraction's reading plus any edit the user made
+   * to it. That is the point of showing them before the run rather than after.
+   *
+   * On failure the user stays here with a reason. Navigating anyway would show the precomputed
+   * baseline under a heading claiming it is their policy, which is the one thing this screen
+   * exists to prevent.
+   */
+  async function runPolicy() {
+    setError(null)
+    setRun({ running: true })
+    try {
+      const levers: Record<string, number> = {}
+      for (const c of commitments) levers[c.paramPath] = c.value
+
+      const response = await fetch('/api/run', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ levers, samples: 16 }),
+      })
+      const payload = await response.json()
+      if (!response.ok) throw new Error(payload?.error ?? `Run failed (${response.status})`)
+
+      setRun({
+        hasRun: true,
+        result: { metrics: payload.metrics, sweep: payload.sweep },
+        running: false,
+      })
+      navigate('/worlds')
+    } catch (cause) {
+      setRun({ running: false })
+      setError(cause instanceof Error ? cause.message : String(cause))
+    }
+  }
 
   return (
     <section className="page">
@@ -58,15 +97,22 @@ export function ExtractedParams() {
         <button
           type="button"
           className="btn btn--primary btn--lg"
+          disabled={run.running}
           onClick={() => {
-            setRun({ hasRun: true })
-            navigate('/worlds')
+            void runPolicy()
           }}
         >
-          Run in three worlds
-          <Glyph name="arrow" size={16} />
+          {run.running ? 'Simulating…' : 'Run in three worlds'}
+          {!run.running && <Glyph name="arrow" size={16} />}
         </button>
       </div>
+
+      {error && (
+        <p className="note mt-4" role="alert">
+          <Glyph name="warning" size={13} />
+          <span>{error}</span>
+        </p>
+      )}
 
       <div className="tablewrap mt-5">
         <table>

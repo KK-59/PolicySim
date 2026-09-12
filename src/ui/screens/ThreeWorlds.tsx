@@ -11,18 +11,47 @@ import { Glyph } from '../components/Glyph'
 import { Tornado } from '../components/Tornado'
 import { WorldChart } from '../components/WorldChart'
 import { Findings } from '../components/WorldPanel'
-import { metrics, sweep, seriesFor, leverAt } from '../data'
+import { metrics as baselineMetrics, sweep as baselineSweep } from '../data'
+import { useRun } from '../lib/store'
+import type { Metrics } from '@/contracts/metrics'
+import type { Sweep, SweepSeries } from '../data'
 
 export function ThreeWorlds() {
+  const run = useRun()
+
+  /**
+   * This policy's own run, if it has one; the precomputed baseline otherwise.
+   *
+   * The fallback is not only for the first visit. It is the offline path: the grid is committed,
+   * so the worlds screen renders with no API, no key and no network — which is the state the
+   * demo has to survive if the server goes down again.
+   */
+  const metrics = (run.result?.metrics as Metrics | undefined) ?? baselineMetrics
+  const sweep = (run.result?.sweep as Sweep | undefined) ?? baselineSweep
+  const isLive = Boolean(run.result)
+
   const positions = sweep.lever.positions
   const [idx, setIdx] = useState(sweep.policyIndex)
   const [seriesId, setSeriesId] = useState<'complex' | 'routine'>('complex')
 
-  const series = seriesFor(seriesId)
-  const value = leverAt(idx)
+  const series: SweepSeries =
+    sweep.series.find((x) => x.patientClass === seriesId) ?? (sweep.series[0] as SweepSeries)
+  const value = positions[Math.min(idx, positions.length - 1)] ?? positions[0] ?? 1
 
   return (
     <section className="page">
+      {/* Which numbers these are. A reader must never have to guess whether the chart is their
+          policy or the shipped baseline. */}
+      {!isLive && (
+        <p className="note" role="note">
+          <Glyph name="warning" size={13} />
+          <span>
+            Showing the precomputed baseline sweep. Run a policy from the parameters screen to
+            simulate it.
+          </span>
+        </p>
+      )}
+
       <div className="row between">
         <h1 className="h1">{series.label}</h1>
         <div className="row gap-2" role="group" aria-label="Which outcome to chart">
@@ -49,7 +78,7 @@ export function ThreeWorlds() {
         <WorldChart
           series={series}
           value={value}
-          policyValue={leverAt(sweep.policyIndex)}
+          policyValue={positions[sweep.policyIndex] ?? value}
           breakpoint={sweep.breakpointByWorld.realistic}
           animate={false}
         />
