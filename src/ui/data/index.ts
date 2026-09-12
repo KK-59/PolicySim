@@ -123,13 +123,15 @@ const MIN_PER_DAY = 1440
 export const toDays = (minutes: number) => minutes / MIN_PER_DAY
 
 /** A delta always carries its sign: the reader must never have to infer direction. */
-export function signed(value: number, dp = 1, unit = ''): string {
+export function signed(value: number | null | undefined, dp = 1, unit = ''): string {
+  if (value == null || !Number.isFinite(value)) return '—'
   const v = Number(value.toFixed(dp))
   const sign = v > 0 ? '+' : v < 0 ? '−' : ''
   return `${sign}${Math.abs(v).toFixed(dp)}${unit}`
 }
 
-export const fmt = (value: number, dp = 1) => value.toFixed(dp)
+export const fmt = (value: number | null | undefined, dp = 1) =>
+  value == null || !Number.isFinite(value) ? '—' : value.toFixed(dp)
 
 /**
  * Is this delta an improvement? Depends on the metric's direction, never on its sign.

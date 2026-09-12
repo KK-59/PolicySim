@@ -35,6 +35,14 @@ function delta(minutes: number): { text: string; better: boolean } {
   return { text: `${sign}${magnitude}`, better: minutes < 0 }
 }
 
+function percentage(value: number | null | undefined): string {
+  return value == null || !Number.isFinite(value) ? '—' : `${(value * 100).toFixed(0)}%`
+}
+
+function count(value: number | null | undefined): string {
+  return value == null || !Number.isFinite(value) ? '—' : value.toLocaleString('en-GB')
+}
+
 export function WorldOutcomes({ metrics }: { metrics: Metrics }) {
   return (
     <div className="worlds">
@@ -109,10 +117,9 @@ export function WorldOutcomes({ metrics }: { metrics: Metrics }) {
 
             <footer className="worldcard__foot">
               <span>
-                GP {gp ? `${(gp.utilisation * 100).toFixed(0)}%` : '—'} · community{' '}
-                {community ? `${(community.utilisation * 100).toFixed(0)}%` : '—'}
+                GP {percentage(gp?.utilisation)} · community {percentage(community?.utilisation)}
               </span>
-              <span>{metrics.worlds.rejections[world].toLocaleString()} referrals refused</span>
+              <span>{count(metrics.worlds.rejections[world])} referrals refused</span>
             </footer>
           </article>
         )
