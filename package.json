@@ -2,16 +2,18 @@
   "name": "policy-sandbox",
   "version": "0.1.0",
   "private": true,
-  "description": "Every policy runs in three worlds. Team 14 — OpenAI x Anima Healthtech Hackathon.",
+  "description": "Every policy runs in three worlds. Team 14 \u2014 OpenAI x Anima Healthtech Hackathon.",
   "type": "module",
   "scripts": {
     "dev": "echo 'TODO (Elsa): wire up Vite dev server' && exit 1",
     "build": "echo 'TODO (Elsa): wire up build' && exit 1",
-    "test": "echo 'TODO (Kaavya): wire up test runner — verification assertions run here' && exit 1",
-    "typecheck": "echo 'TODO: tsc --noEmit' && exit 1",
+    "test": "echo 'TODO (Kaavya): wire up test runner \u2014 verification assertions run here' && exit 1",
+    "typecheck": "tsc --noEmit",
     "snapshot": "echo 'TODO (Oriol): node scripts/snapshot.mjs' && exit 1",
     "grid": "echo 'TODO (Kaavya): node scripts/build-grid.mjs' && exit 1"
   },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "typescript": "^5.6.0"
+  }
 }

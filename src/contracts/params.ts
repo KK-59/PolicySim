@@ -1,23 +1,253 @@
 /**
- * Params — the full parameter set the engine accepts.
- * OWNER: Kaavya. CONSUMED BY: Elsa (sliders), Albert (source table), Oriol (extractor).
- * PRD §4.3. FREEZE BEFORE ANYONE BUILDS.
+ * Params — the complete input to the engine.
  *
- * TODO(kaavya): publish this before writing engine code — it unblocks two people.
+ * OWNER: Kaavya.
+ * CONSUMED BY: Elsa (sliders, source tags), Albert (source table), Oriol (extractor output).
+ * PRD §4.3. Measured values and their provenance: docs/calibration-findings.md.
  *
- * Shape to define:
- *   - SourceTag: 'measured' | 'documented' | 'literature' | 'assumed'
- *   - Sourced<T>: a value + range + source tag + citation. Every parameter carries one.
- *     A parameter with no source is FLAGGED, never silently defaulted.
- *   - Policy-invariant primitives: arrival rates per class, service/delay times, capacities,
- *     routing probabilities.
- *   - Policy levers (5-6): community capacity multiplier, hospital→community routing share,
- *     follow-up channel mix, monitoring intensity, extra GP sessions, discharge timing.
- *   - Declared boundaries, each defaulted to 0: induced demand, substitution, gaming.
- *   - Environment axis (separate from the three worlds): winter pressure, staff shortage.
- *   - Physical bounds per parameter, so extraction can clamp to them.
- *
- * NOT parameters — these are always derived, never set: waits, queue lengths, utilisation.
+ * Contract: run(params, seed) -> Metrics. Params is the whole world description. Anything the
+ * engine derives — waits, queue lengths, utilisation — is deliberately absent: putting a wait in
+ * here would be assuming the answer.
  */
 
-export {};
+// ---------------------------------------------------------------------------
+// Sourcing
+// ---------------------------------------------------------------------------
+
+/**
+ * Where a number came from. Rendered next to every value on screen.
+ * - measured   — counted in the NHS-SIM snapshot
+ * - documented — stated in the uploaded policy, or in the NHS-SIM handbook
+ * - literature — retrieved from the evidence corpus, with a published range
+ * - assumed    — neither source covers it. Shown in amber. Never silently defaulted.
+ */
+export type SourceTag = 'measured' | 'documented' | 'literature' | 'assumed';
+
+/**
+ * A number that knows where it came from and how uncertain it is.
+ *
+ * `range` is what the three-worlds sampler draws from. No range means no spread, which means the
+ * three worlds collapse toward each other — so a missing range on a dominant parameter is a
+ * finding, not a detail (PRD §8.3).
+ *
+ * `bounds` are physical, not evidential: extraction clamps to them so a bad LLM read cannot
+ * produce a negative capacity.
+ */
+export interface Sourced {
+  value: number;
+  /** [low, high] for sampling. Absent = point estimate, no contribution to world spread. */
+  range?: readonly [number, number];
+  /** [min, max] physically possible. Extraction clamps to this. */
+  bounds: readonly [number, number];
+  source: SourceTag;
+  /** Corpus id, endpoint, or document span. Rendered on screen; required unless `assumed`. */
+  citation?: string;
+  /** Shown in the parameter panel instead of the field name. */
+  label?: string;
+  /** Why this is uncertain, or what the sim does not model here. Rendered on hover. */
+  note?: string;
+}
+
+// ---------------------------------------------------------------------------
+// Patient classes
+// ---------------------------------------------------------------------------
+
+/**
+ * Three classes under priority discipline. This split is what produces the
+ * median-improves-while-tail-worsens finding (PRD §8.1 step 6).
+ *
+ * NOTE: NHS-SIM has only acuity 2 and 3 (urgent / routine). `complex` is our construct — a
+ * multi-service patient whose pathway touches more than one node. Tag it `assumed` and say so.
+ */
+export type PatientClass = 'routine' | 'complex' | 'urgent';
+
+export type ByClass<T> = Readonly<Record<PatientClass, T>>;
+
+// ---------------------------------------------------------------------------
+// Policy-invariant primitives — measured or documented, never derived
+// ---------------------------------------------------------------------------
+
+export interface Arrivals {
+  /** New demand entering the neighbourhood, per sim-day, per class. */
+  perDay: ByClass<Sourced>;
+}
+
+export interface Capacities {
+  /** GP appointment sessions per day. Measured: 6. */
+  gpSessionsPerDay: Sourced;
+  /** Usable slots per session, after protected breaks. Measured: 15 (16 minus one break). */
+  gpSlotsPerSession: Sourced;
+  /** Community home-visit slots per day. Measured: 4 — the binding constraint. */
+  communitySlotsPerDay: Sourced;
+  /** Concurrently staffed assessment spaces. Measured: 8 (4 doctors + 4 nurses). */
+  staffedSpaces: Sourced;
+  /** Share of a GP's day spent on admin rather than clinic. Couples the two queues. */
+  gpAdminShare: Sourced;
+}
+
+export interface ServiceTimes {
+  /**
+   * Minutes. NHS-SIM's service times are CONSTANT — measured variance is exactly zero across
+   * every observed transition. If the engine draws these from a distribution instead, that is a
+   * deliberate divergence from the ground truth and must be declared (see calibration findings).
+   */
+  gpConsultation: Sourced;
+  /** Measured: 90, n=7, zero variance. Matches the handbook figure. */
+  communityVisit: Sourced;
+  /** Measured: 60 per hop — sent -> reviewed -> filed. */
+  documentReviewHop: Sourced;
+  /** Handbook figure; not yet observed live. */
+  bloodResultTurnaround: Sourced;
+  /** Not measurable in the current world — only one approved prescription exists. */
+  pharmacyApproval: Sourced;
+}
+
+export interface Routing {
+  /** P(GP encounter -> test ordered). */
+  gpToTest: Sourced;
+  /** P(GP encounter -> hospital outpatient referral). */
+  gpToHospital: Sourced;
+  /** P(GP encounter -> community visit referral). */
+  gpToCommunity: Sourced;
+  /** P(discharge letter progresses past `sent`). Measured: 0.37 (21 of 57). */
+  letterSentToReviewed: Sourced;
+  /** P(reviewed letter reaches `filed`). Measured: 0.16 of all sent (9 of 57). */
+  letterReviewedToFiled: Sourced;
+  /** P(community referral rejected and fed back to the GP) when at capacity. */
+  communityRejection: Sourced;
+}
+
+// ---------------------------------------------------------------------------
+// Policy levers — set by extraction, then exposed as sliders
+// ---------------------------------------------------------------------------
+
+/**
+ * The 5-6 things a policy actually changes. Extraction sets these from the uploaded document
+ * (PRD §2); Elsa's sliders move them afterwards for threshold-hunting. They are not the way in.
+ *
+ * Each is a MULTIPLIER or SHARE applied to the primitives above, never an absolute — so a lever
+ * stays meaningful when calibration replaces a primitive underneath it.
+ */
+export interface Levers {
+  /** × communitySlotsPerDay. Base is 4, so this bites hard — best lever we have. */
+  communityCapacityMultiplier: Sourced;
+  /** Additional GP sessions per day. +1 = +15 slots ≈ +17%. */
+  extraGpSessions: Sourced;
+  /** Share of follow-ups by telephone rather than in person. Measured base: 0.33 (2 of 6). */
+  telephoneFollowUpShare: Sourced;
+  /** × wearable observation frequency. Base measurable; effect on admission is literature-only. */
+  monitoringIntensity: Sourced;
+  /**
+   * Share of hospital discharges routed to community rather than outpatient.
+   * ⚠️ NOT GROUNDED — the sim has no baseline community referral flow. Tag `literature`.
+   */
+  hospitalToCommunityShare: Sourced;
+  /**
+   * Share of discharges timed to weekdays.
+   * ⚠️ NOT GROUNDED — NHS-SIM has no weekday logic at all. Tag `assumed`, amber on screen.
+   */
+  weekdayDischargeShare: Sourced;
+}
+
+// ---------------------------------------------------------------------------
+// Declared boundaries — what we choose not to model, said out loud
+// ---------------------------------------------------------------------------
+
+/**
+ * All default to 0, each with a reverse breakeven ("this would have to exceed X to overturn the
+ * conclusion"). Rendered on screen as declared limits, not hidden.
+ *
+ * These are not parameters we failed to measure. NHS-SIM generates 142 arrivals/day regardless of
+ * what anyone does — induced demand and substitution cannot occur in it, and there is no coding to
+ * game. 0 is the truthful value for the ground truth we are modelling, and the breakeven is the
+ * honest way to show what would change the answer.
+ */
+export interface Boundaries {
+  /** Roemer: new capacity generates its own demand. Fraction of freed capacity refilled. */
+  inducedDemand: Sourced;
+  /** The bottleneck relocates rather than clearing. Fraction of relieved load reappearing. */
+  substitution: Sourced;
+  /** Reclassification to meet the target rather than the need. */
+  gaming: Sourced;
+}
+
+// ---------------------------------------------------------------------------
+// Environment — a SEPARATE axis from the three worlds
+// ---------------------------------------------------------------------------
+
+/**
+ * Explicit toggles, deliberately not folded into "pessimistic" — otherwise the pessimistic world
+ * becomes an undifferentiated bag of everything bad (PRD §4.5). Each world runs under calm or
+ * stressed conditions independently.
+ *
+ * Both map to real NHS-SIM incident scenarios (`winter-pressure`, `staff-shortage`), but
+ * /api/control/incidents is operator-gated — 403 with a team key. Engine toggles only unless the
+ * organisers fire one for us.
+ */
+export interface Environment {
+  /** `winter-pressure`: more urgent arrivals, fewer beds. */
+  winterPressure: boolean;
+  /** `staff-shortage`: fewer community home-visit slots. */
+  staffShortage: boolean;
+}
+
+// ---------------------------------------------------------------------------
+// Run configuration — engine mechanics, not policy
+// ---------------------------------------------------------------------------
+
+export interface SimConfig {
+  /** Simulated days per run. Ten years must complete in well under a second. */
+  horizonDays: number;
+  /** Days discarded before metrics collection, so the queue reaches steady state first. */
+  warmupDays: number;
+  /**
+   * NHS-SIM's baseline is an unserved queue: 1,307 of 1,312 attendances still `waiting` after
+   * nine sim-days. If the engine reproduces that, every metric diverges. Start from a served
+   * steady state and say so, or reproduce the gridlock deliberately — but pick one.
+   */
+  startFromSteadyState: boolean;
+}
+
+// ---------------------------------------------------------------------------
+// Params
+// ---------------------------------------------------------------------------
+
+export interface Params {
+  arrivals: Arrivals;
+  capacities: Capacities;
+  serviceTimes: ServiceTimes;
+  routing: Routing;
+  levers: Levers;
+  boundaries: Boundaries;
+  environment: Environment;
+  sim: SimConfig;
+  /** Provenance of the whole set — which snapshot, which document, when. */
+  meta: ParamsMeta;
+}
+
+export interface ParamsMeta {
+  /** NHS-SIM world id, e.g. "team-4551d2471320". */
+  worldId?: string;
+  /** Snapshot directory these were calibrated from. */
+  snapshotId?: string;
+  /** Filename of the uploaded policy, if extraction produced this set. */
+  sourceDocument?: string;
+  calibratedAt?: number;
+}
+
+// ---------------------------------------------------------------------------
+// Helpers the whole team uses
+// ---------------------------------------------------------------------------
+
+/** Every Sourced leaf in a Params, flattened. Drives the parameter panel and the source table. */
+export type ParamPath = string;
+
+export interface FlatParam extends Sourced {
+  path: ParamPath;
+}
+
+/** A parameter needs attention on screen if it is assumed, unsourced, or has no range. */
+export interface ParamFlag {
+  path: ParamPath;
+  reason: 'assumed' | 'no-citation' | 'no-range';
+}
