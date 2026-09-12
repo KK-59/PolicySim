@@ -11,6 +11,7 @@ import { Glyph } from '../components/Glyph'
 import { Tornado } from '../components/Tornado'
 import { WorldChart } from '../components/WorldChart'
 import { Findings } from '../components/WorldPanel'
+import { WorldOutcomes } from '../components/WorldOutcomes'
 import { metrics as baselineMetrics, sweep as baselineSweep } from '../data'
 import { useRun } from '../lib/store'
 import type { Metrics } from '@/contracts/metrics'
@@ -52,7 +53,11 @@ export function ThreeWorlds() {
         </p>
       )}
 
-      <div className="row between">
+      {/* What each world IS, before how it moves. A reader should be able to answer "what
+          happens if the pessimistic one is real" without reading a line chart. */}
+      <WorldOutcomes metrics={metrics} />
+
+      <div className="row between mt-6">
         <h1 className="h1">{series.label}</h1>
         <div className="row gap-2" role="group" aria-label="Which outcome to chart">
           <button
@@ -80,6 +85,7 @@ export function ThreeWorlds() {
           value={value}
           policyValue={positions[sweep.policyIndex] ?? value}
           breakpoint={sweep.breakpointByWorld.realistic}
+          sampleCount={metrics.run.samples}
           animate={false}
         />
       </div>

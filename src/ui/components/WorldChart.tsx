@@ -13,10 +13,15 @@
 
 import { useId, useMemo, useState } from 'react'
 import type { SweepSeries, WorldName } from '../data'
-import { WORLD_ORDER, WORLD_PERCENTILE, signed, worldPoints, metrics } from '../data'
+import { WORLD_ORDER, WORLD_PERCENTILE, signed, worldPoints, metrics as baselineMetrics } from '../data'
 import { Glyph } from './Glyph'
 
-const SAMPLE_COUNT = metrics.run.samples
+/**
+ * Fallback only. The count belongs to the run being drawn, and after a live run that is not the
+ * shipped baseline's — labelling 16 sampled runs as 40 would misstate how much evidence is on
+ * screen.
+ */
+const SAMPLE_COUNT = baselineMetrics.run.samples
 
 const W = 1000
 const H = 380
@@ -30,6 +35,8 @@ interface Props {
   policyValue?: number
   /** Where the harm clears, per world. Drawn only where one exists. */
   breakpoint?: number | null
+  /** Sampled runs behind this chart. Belongs to the run being drawn, not to the shipped fixture. */
+  sampleCount?: number
   animate?: boolean
 }
 
@@ -38,7 +45,7 @@ const pct = (arr: number[], p: number): number => {
   return s[Math.max(0, Math.min(s.length - 1, Math.floor(p * s.length)))] ?? 0
 }
 
-export function WorldChart({ series, value, policyValue, breakpoint, animate = true }: Props) {
+export function WorldChart({ series, value, policyValue, breakpoint, sampleCount, animate = true }: Props) {
   const uid = useId().replace(/:/g, '')
   const [hoverX, setHoverX] = useState<number | null>(null)
 
@@ -264,7 +271,7 @@ export function WorldChart({ series, value, policyValue, breakpoint, animate = t
         </div>
         <p className="tiny muted" style={{ marginLeft: 'auto', maxWidth: '22rem' }}>
           <Glyph name="sweep" size={13} /> Days against the locked baseline. Each grey trace is one
-          of {series.ghosts.length} sampled runs shown from {SAMPLE_COUNT.toLocaleString('en-GB')}.
+          of {series.ghosts.length} sampled runs shown from {(sampleCount ?? SAMPLE_COUNT).toLocaleString('en-GB')}.
         </p>
       </div>
     </div>
