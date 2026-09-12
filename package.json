@@ -2,19 +2,35 @@
   "name": "policy-sandbox",
   "version": "0.1.0",
   "private": true,
-  "description": "Every policy runs in three worlds. Team 14 \u2014 OpenAI x Anima Healthtech Hackathon.",
+  "description": "Every policy runs in three worlds. Team 14 — OpenAI x Anima Healthtech Hackathon.",
   "type": "module",
   "scripts": {
-    "dev": "echo 'TODO (Elsa): wire up Vite dev server' && exit 1",
-    "build": "echo 'TODO (Elsa): wire up build' && exit 1",
-    "test": "node tests/verify.ts",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run && node tests/verify.ts",
+    "test:watch": "vitest",
+    "verify": "node tests/verify.ts",
     "typecheck": "tsc --noEmit",
-    "snapshot": "echo 'TODO (Oriol): node scripts/snapshot.mjs' && exit 1",
-    "grid": "node scripts/build-grid.ts"
+    "snapshot": "tsx scripts/snapshot.mjs",
+    "watch": "tsx scripts/watch.mjs",
+    "grid": "tsx scripts/build-grid.ts",
+    "liveloop": "tsx scripts/live-loop.mjs",
+    "calibrate": "tsx scripts/calibrate.mjs"
   },
-  "dependencies": {},
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
   "devDependencies": {
-    "typescript": "^5.6.0",
-    "@types/node": "^22.0.0"
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "dotenv": "^16.4.7",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7",
+    "vitest": "^2.1.8"
   }
 }

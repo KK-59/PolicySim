@@ -93,6 +93,8 @@ npm run dev
 | [docs/demo-runbook.md](docs/demo-runbook.md) | The three minutes, the never-cut list, the stall |
 | [docs/risks.md](docs/risks.md) | What goes wrong and who owns the mitigation |
 | [docs/pitch.md](docs/pitch.md) | Pitch and narration |
+| [docs/integration-status.md](docs/integration-status.md) | **What the integration track built, how to run it, and what each person needs from it** |
+| [docs/nhssim-verified.md](docs/nhssim-verified.md) | What the NHS-SIM server actually accepts, verified by probing it |
 
 ## Working agreement
 
