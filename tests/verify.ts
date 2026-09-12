@@ -412,7 +412,7 @@ check(
 );
 check(
   'the letter backlog is not a capacity problem',
-  (letterRun.perNode['gp-admin']?.utilisation ?? 1) < 0.3,
+  (letterRun.perNode['gp-admin']?.utilisation ?? 1) < 0.5,
   `admin sits at ${((letterRun.perNode['gp-admin']?.utilisation ?? 0) * 100).toFixed(0)}% `
   + 'utilisation — letters go unfiled because nobody opens the inbox, not because there is no time',
 );
@@ -457,6 +457,54 @@ check(
   'accumulates across applies',
   diffEvents([], [], { previous: acc }).runsIncluded === 2,
   'a second apply carries the first forward',
+);
+
+// ---------------------------------------------------------------------------
+console.log('\n4i. THE TEST PATHWAY, AND CLINIC/ADMIN COUPLING');
+console.log('   test -> result -> review -> filing, with review and filing running on the SAME');
+console.log('   admin resource as discharge letters. A busy letter inbox should delay somebody\'s');
+console.log('   blood result, because in a real practice it does.\n');
+
+const netRun = (mut: (p: Params) => void = () => {}) => {
+  const p: Params = structuredClone(BASELINE);
+  p.sim.horizonDays = 730;
+  mut(p);
+  return run(p, 1);
+};
+
+const netBase = netRun();
+const moreTests = netRun((p) => { p.routing.gpToTest.value = 0.4; });
+const lessAdmin = netRun((p) => { p.capacities.gpAdminShare.value = 0.15; });
+
+check(
+  'the lab is a delay, not a bottleneck',
+  (netBase.perNode['test']?.utilisation ?? 1) < 0.05
+    && (netBase.perNode['test']?.stable ?? false),
+  'the 120-minute turnaround is how long a result takes to come back, not how long anyone is '
+  + 'occupied — modelling it as a queue would invent a constraint the snapshot does not show',
+);
+check(
+  'ordering more tests loads admin, not the lab',
+  (moreTests.perNode['gp-admin']?.utilisation ?? 0)
+    > 1.5 * (netBase.perNode['gp-admin']?.utilisation ?? 1),
+  `doubling the test rate moves admin `
+  + `${((netBase.perNode['gp-admin']?.utilisation ?? 0) * 100).toFixed(0)}% -> `
+  + `${((moreTests.perNode['gp-admin']?.utilisation ?? 0) * 100).toFixed(0)}%`,
+);
+check(
+  'results and letters compete for one admin resource',
+  moreTests.unfiledResults > netBase.unfiledResults,
+  `unfiled results rise ${netBase.unfiledResults} -> ${moreTests.unfiledResults} when more tests `
+  + 'are ordered, on the same inbox the discharge letters sit in',
+);
+check(
+  'admin capacity is continuous, not rounded to whole people',
+  (lessAdmin.perNode['gp-admin']?.utilisation ?? 0)
+    > 1.5 * (netBase.perNode['gp-admin']?.utilisation ?? 1),
+  `halving the admin share moves utilisation `
+  + `${((netBase.perNode['gp-admin']?.utilisation ?? 0) * 100).toFixed(0)}% -> `
+  + `${((lessAdmin.perNode['gp-admin']?.utilisation ?? 0) * 100).toFixed(0)}% — rounding it to an `
+  + 'integer number of clinicians floored it at one and the parameter moved nothing',
 );
 
 // ---------------------------------------------------------------------------

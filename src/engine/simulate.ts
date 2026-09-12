@@ -29,6 +29,8 @@ export interface EntryStream {
    * discharged on a Saturday cannot be reviewed until the practice reopens.
    */
   weekdayOnlyShare?: number;
+  /** Initial pathway stage, so the router can tell this stream's work apart downstream. */
+  stageFor?: (tag: string | undefined) => string;
 }
 
 export interface NetworkSpec {
@@ -161,6 +163,7 @@ export function simulateNetwork(spec: NetworkSpec): NetworkResult {
         tag,
         priority: cls.priority,
         serviceMultiplier: cls.serviceMultiplier,
+        stage: stream.stageFor?.(tag),
       };
       live.set(item.id, item);
       entered++;

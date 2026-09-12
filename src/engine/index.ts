@@ -109,20 +109,50 @@ export function run(params: Params, seed: number): RunOutcome {
 
   const adminShare = clamp01(params.capacities.gpAdminShare.value);
 
-  // Admin gets its share of clinician-blocks, rounded to whole people.
-  const adminServers = Math.max(1, Math.round(
-    serversPerBlock.reduce((a, b) => a + b, 0) * adminShare / BLOCK_STARTS.length));
+  // Admin capacity is expressed in MINUTES, not whole clinicians.
+  //
+  // Rounding a share to an integer number of people floored admin at one clinician for every
+  // share between 0.1 and 0.5, so the parameter moved nothing — the same rounding trap as the
+  // extra-sessions lever. One clinician working fewer minutes is also the truer picture: admin is
+  // done around surgery, in the gaps, not by staffing a second desk.
+  //
+  // The share is of CLINIC time, and additive to it. NHS-SIM's 6 sessions are consulting;
+  // paperwork happens before and after, and the sim does not record it at all.
+  const clinicMinutesPerDay =
+    serversPerBlock.reduce((a, b) => a + b, 0)
+    * params.capacities.gpSlotsPerSession.value * gpService;
+  const adminMinutesPerBlock = (clinicMinutesPerDay * adminShare) / BLOCK_STARTS.length;
 
   const adminConfig: NodeConfig = {
     id: 'gp-admin',
-    servers: adminServers,
+    servers: 1,
     serviceMinutes: params.serviceTimes.documentReviewWork.value,
     serviceDist: 'constant',
     schedule: {
       blockStarts: BLOCK_STARTS,
-      usableMinutes: params.capacities.gpSlotsPerSession.value * gpService,
+      usableMinutes: Math.max(params.serviceTimes.documentReviewWork.value, adminMinutesPerBlock),
       closedWeekends: true,
     },
+    maxQueue: null,
+  };
+
+  // --- Diagnostics -----------------------------------------------------------------------------
+  //
+  // A pure DELAY, not a queue. The measured 120-minute turnaround is how long a result takes to
+  // come back, not how long anyone is occupied — the same distinction that made the letter node
+  // absurd when I first read it as service time. The lab is not a bottleneck in this
+  // neighbourhood and modelling it as one would invent a constraint the snapshot does not show.
+  //
+  // Given enough servers that nothing ever waits, so the node contributes elapsed time and
+  // nothing else. If diagnostics ever becomes the interesting constraint, this is where capacity
+  // goes in.
+
+  const testConfig: NodeConfig = {
+    id: 'test',
+    servers: 100_000,
+    serviceMinutes: params.serviceTimes.bloodResultTurnaround.value,
+    serviceDist: 'constant',
+    schedule: null, // the lab does not keep surgery hours
     maxQueue: null,
   };
 
@@ -157,6 +187,13 @@ export function run(params: Params, seed: number): RunOutcome {
 
   let filed = 0;
   let unfiled = 0;
+  let unfiledResults = 0;
+
+  // Share of GP contacts that generate a test. Assumed — NHS-SIM records no ordering rate.
+  const testShare = clamp01(params.routing.gpToTest.value);
+  // Results reach filing at the same rate letters do; the practice's filing behaviour is one
+  // behaviour, not two. Assumed, and it is the letter funnel that gives it any grounding at all.
+  const resultFiledShare = filedShare;
 
   const lettersPerDay = params.arrivals.dischargeLettersPerDay.value;
   const reviewedShare = clamp01(params.routing.letterSentToReviewed.value);
@@ -166,7 +203,7 @@ export function run(params: Params, seed: number): RunOutcome {
   const neverReviewedPerDay = lettersPerDay * (1 - reviewedShare);
 
   const result = simulateNetwork({
-    nodes: [gpConfig, communityConfig, adminConfig],
+    nodes: [gpConfig, communityConfig, adminConfig, testConfig],
     entries: [
       {
         nodeId: 'gp-clinic',
@@ -184,6 +221,7 @@ export function run(params: Params, seed: number): RunOutcome {
       },
       {
         // Discharge letters, measured independently of GP demand.
+        // Tagged so the admin router can tell a letter from a blood result.
         //
         // Only the share that is ever PICKED UP enters the queue. Measured: 37% of letters that
         // reach the practice get past `sent`. The other 63% are not waiting for capacity — admin
@@ -197,23 +235,45 @@ export function run(params: Params, seed: number): RunOutcome {
         tagFor: (): string => 'letter',
         classOf: (): { priority: number; serviceMultiplier: number } =>
           ({ priority: 1, serviceMultiplier: 1 }),
+        stageFor: (): string => 'letter-review',
       },
     ],
     route: (item, from, rng) => {
+      // --- the document and result pathways, both running on admin -----------------------
       if (from === 'gp-admin') {
-        // reviewed -> filed is a second hop through admin, and most letters never make it.
-        if ((item.bounces ?? 0) >= 1) { filed++; return null; }
-        item.bounces = (item.bounces ?? 0) + 1;
-        if (rng.next() < filedShare) return 'gp-admin';
-        unfiled++; // reviewed, then dropped — the manual-chasing gap
-        return null;
+        switch (item.stage) {
+          case 'letter-review':
+            // Reviewed. Most letters stop here — that is the 84% that never get filed.
+            if (rng.next() < filedShare) { item.stage = 'letter-filing'; return 'gp-admin'; }
+            unfiled++;
+            return null;
+          case 'result-review':
+            // A result nobody files is a result nobody acted on. Same failure as the letters,
+            // and it closes the loop the PRD draws: test -> result -> review -> filing.
+            if (rng.next() < resultFiledShare) { item.stage = 'result-filing'; return 'gp-admin'; }
+            unfiledResults++;
+            return null;
+          default:
+            filed++;
+            return null;
+        }
       }
+
+      if (from === 'test') {
+        item.stage = 'result-review';
+        return 'gp-admin';
+      }
+
       if (from !== 'gp-clinic') return null; // a community visit completes the pathway
+
       // A patient already turned away twice is managed in-practice or escalated rather than
       // re-referred forever. Without this the feedback loop compounds without limit and the
       // model reports waits that are an artefact of the loop, not of the capacity shortfall.
       if ((item.bounces ?? 0) >= MAX_REFERRAL_BOUNCES) return null;
-      return rng.next() < referralShare ? 'community-visit' : null;
+
+      if (rng.next() < referralShare) return 'community-visit';
+      if (rng.next() < testShare) { item.stage = 'awaiting-result'; return 'test'; }
+      return null;
     },
     // The rejection feedback loop (PRD §4.2). A refused referral does not vanish — it comes back
     // as a fresh GP appointment to sort out. This is where over-shifting to community costs the
@@ -227,6 +287,7 @@ export function run(params: Params, seed: number): RunOutcome {
   const gpStats = result.nodes.get('gp-clinic') as NodeStats;
   const communityStats = result.nodes.get('community-visit') as NodeStats;
   const adminStats = result.nodes.get('gp-admin') as NodeStats;
+  const testStats = result.nodes.get('test') as NodeStats;
 
   // --- results --------------------------------------------------------------------------------
 
@@ -250,16 +311,21 @@ export function run(params: Params, seed: number): RunOutcome {
       'gp-clinic': toState(gpStats),
       'community-visit': toState(communityStats),
       'gp-admin': toState(adminStats),
+      test: toState(testStats),
     },
     completed: byClass((c) => tisByClass[c].length),
     rejections: communityStats.refused,
     // Letters reviewed and then dropped, plus any still stuck in the queue. The measured
     // baseline is that 84% of letters never reach `filed` — the manual chasing Chapter 3 is about.
-    unfiledLetters:
-      unfiled
-      + Math.round(neverReviewedPerDay * measuredDays)
-      + Math.max(0, adminStats.admitted - adminStats.completed),
-    verification: verify([gpStats, communityStats, adminStats], horizon - warmup),
+    // Letters reviewed and dropped, plus those never picked up at all. Kept letters-only: this
+    // is the number calibrated against the snapshot's 9-of-57, and mixing results into it would
+    // destroy the only external check the model has on its own routing.
+    unfiledLetters: unfiled + Math.round(neverReviewedPerDay * measuredDays),
+    unfiledResults: unfiledResults + Math.max(0, adminStats.admitted - adminStats.completed),
+    verification: verify(
+      [gpStats, communityStats, adminStats, testStats],
+      horizon - warmup,
+    ),
   };
 }
 

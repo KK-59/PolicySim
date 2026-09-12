@@ -62,16 +62,21 @@ export type MetricDirection = 'lower-is-better' | 'higher-is-better';
 // Outcomes — one run
 // ---------------------------------------------------------------------------
 
-/** The nodes the engine models. Anything not here is declared unmodelled on screen. */
+/**
+ * The nodes the engine models. Anything not here is declared unmodelled on screen.
+ *
+ * `result-review` and `filing` are deliberately absent as separate nodes: both are GP admin work,
+ * and giving each its own servers would split the one resource they actually share. Results and
+ * discharge letters queue together on `gp-admin`, which is the clinic/admin coupling the model is
+ * supposed to have — a busy letter inbox should delay somebody's blood result, because it does.
+ *
+ * `hospital-outpatient` and `pharmacy` are cut (PRD §7): least grounded, least demo-relevant.
+ */
 export type NodeId =
   | 'gp-clinic'
   | 'gp-admin'
   | 'test'
-  | 'result-review'
-  | 'filing'
-  | 'hospital-outpatient'
-  | 'community-visit'
-  | 'pharmacy';
+  | 'community-visit';
 
 export interface NodeState {
   /** Fraction of capacity in use. Waiting time is convex in this — 92→97% is catastrophic. */
@@ -111,8 +116,14 @@ export interface RunOutcome {
   completed: ByClass<number>;
   /** Referrals refused at capacity and fed back to the GP. */
   rejections: number;
-  /** Letters never filed — the manual-chasing attrition, measured at 84% in the baseline. */
+  /**
+   * Discharge letters never filed — the manual-chasing attrition, measured at 84% in the baseline.
+   * Letters ONLY: this figure is calibrated against a real count (9 of 57 filed), so folding
+   * anything else into it breaks the one number in the model that can be checked against the sim.
+   */
   unfiledLetters: number;
+  /** Blood results reviewed and never filed. Same failure, different pathway, separate number. */
+  unfiledResults: number;
   verification: Verification;
 }
 
@@ -168,6 +179,7 @@ export interface WorldBands {
   completed: ByClass<ThreeWorlds<number>>;
   rejections: ThreeWorlds<number>;
   unfiledLetters: ThreeWorlds<number>;
+  unfiledResults: ThreeWorlds<number>;
 }
 
 export interface RunMeta {

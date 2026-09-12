@@ -137,6 +137,13 @@ export interface WorkItem {
   tag?: string;
   /** How many times this item has been refused and sent back upstream. */
   bounces?: number;
+  /**
+   * Where the item is along its pathway. The router reads it to decide the next hop.
+   *
+   * Separate from `bounces`, which counts refusals. Overloading one counter for both meant the
+   * letter pathway and the test pathway could not share the admin node without interfering.
+   */
+  stage?: string;
 }
 
 export class QueueNode {

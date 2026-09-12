@@ -59,7 +59,7 @@ export function pickWorlds(runs: readonly RunOutcome[]): PickedWorlds {
   };
 }
 
-const NODES: readonly NodeId[] = ['gp-clinic', 'gp-admin', 'community-visit'];
+const NODES: readonly NodeId[] = ['gp-clinic', 'gp-admin', 'community-visit', 'test'];
 
 /** Assemble the three picked runs into the banded shape the UI renders. */
 export function toBands(w: PickedWorlds): WorldBands {
@@ -99,5 +99,6 @@ export function toBands(w: PickedWorlds): WorldBands {
     },
     rejections: band((r) => r.rejections, 'lower-is-better'),
     unfiledLetters: band((r) => r.unfiledLetters, 'lower-is-better'),
+    unfiledResults: band((r) => r.unfiledResults, 'lower-is-better'),
   };
 }

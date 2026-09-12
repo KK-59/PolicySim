@@ -1,5 +1,5 @@
 {
- "builtAt": "2026-09-12T13:55:20.900Z",
+ "builtAt": "2026-09-12T14:10:00.891Z",
  "world": "team-4551d2471320",
  "snapshot": "2026-09-21T12:02:00Z",
  "samples": 40,
@@ -8,56 +8,56 @@
   {
    "path": "arrivals.targetUtilisation",
    "label": "arrivals.targetUtilisation",
-   "swing": 7147.047281435574,
+   "swing": 4514.466854438535,
    "source": "literature",
    "dominantButUnsourced": false
   },
   {
    "path": "serviceTimes.classMultiplier.complex",
    "label": "serviceTimes.classMultiplier.complex",
-   "swing": 982.8005561350728,
-   "source": "assumed",
-   "dominantButUnsourced": true
-  },
-  {
-   "path": "arrivals.classMix.complex",
-   "label": "arrivals.classMix.complex",
-   "swing": 165.67834333892097,
+   "swing": 1362.4616026102449,
    "source": "assumed",
    "dominantButUnsourced": true
   },
   {
    "path": "serviceTimes.classMultiplier.urgent",
    "label": "serviceTimes.classMultiplier.urgent",
-   "swing": 130.11735481966753,
+   "swing": 74.4191987736267,
    "source": "assumed",
-   "dominantButUnsourced": false
+   "dominantButUnsourced": true
   },
   {
-   "path": "serviceTimes.documentReviewWork",
-   "label": "serviceTimes.documentReviewWork",
-   "swing": 57.66951252403669,
+   "path": "arrivals.classMix.complex",
+   "label": "arrivals.classMix.complex",
+   "swing": 71.52998894581106,
    "source": "assumed",
    "dominantButUnsourced": false
   },
   {
    "path": "levers.weekdayDischargeShare",
    "label": "levers.weekdayDischargeShare",
-   "swing": 47.030879800004186,
+   "swing": 62.813468756270595,
    "source": "assumed",
    "dominantButUnsourced": false
   },
   {
-   "path": "arrivals.classMix.urgent",
-   "label": "arrivals.classMix.urgent",
-   "swing": 36.647021073004,
+   "path": "serviceTimes.documentReviewWork",
+   "label": "serviceTimes.documentReviewWork",
+   "swing": 33.628089083649684,
+   "source": "assumed",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "arrivals.classMix.routine",
+   "label": "arrivals.classMix.routine",
+   "swing": 29.53700930759078,
    "source": "assumed",
    "dominantButUnsourced": false
   },
   {
    "path": "arrivals.dischargeLettersPerDay",
    "label": "arrivals.dischargeLettersPerDay",
-   "swing": 35.1445834779297,
+   "swing": 26.938772572146263,
    "source": "measured",
    "dominantButUnsourced": false
   }
@@ -324,53 +324,53 @@
    "message": "serviceTimes.classMultiplier.complex dominates the result and rests on an assumption"
   },
   {
-   "path": "arrivals.classMix.complex",
+   "path": "serviceTimes.classMultiplier.urgent",
    "reason": "dominant-but-unsourced",
-   "message": "arrivals.classMix.complex dominates the result and rests on an assumption"
+   "message": "serviceTimes.classMultiplier.urgent dominates the result and rests on an assumption"
   }
  ],
  "baseline": {
   "waits": {
    "routine": {
     "optimistic": {
-     "p50": 499.4061521968106,
-     "p90": 897.8162421914749
+     "p50": 522.626320161391,
+     "p90": 912.4522102220217
     },
     "realistic": {
-     "p50": 2765.666977871326,
-     "p90": 3721.0486274834257
+     "p50": 793.5646313162288,
+     "p90": 1726.828926959337
     },
     "pessimistic": {
-     "p50": 18389.029480077617,
-     "p90": 29102.810337687144
+     "p50": 16654.864445462008,
+     "p90": 24617.210342704202
     }
    },
    "complex": {
     "optimistic": {
-     "p50": 535.3653956808848,
-     "p90": 924.9634446625132
+     "p50": 545.0497610256716,
+     "p90": 930.6799765243777
     },
     "realistic": {
-     "p50": 2811.5386899965815,
-     "p90": 3755.4859944167547
+     "p50": 833.6802698990796,
+     "p90": 1733.4590080342023
     },
     "pessimistic": {
-     "p50": 18195.113961291383,
-     "p90": 29111.86951797607
+     "p50": 16365.088687542826,
+     "p90": 24559.28359021491
     }
    },
    "urgent": {
     "optimistic": {
-     "p50": 222.3493884872296,
-     "p90": 795.2647388653131
+     "p50": 219.9426055685035,
+     "p90": 768.193434111774
     },
     "realistic": {
-     "p50": 225.66661462024786,
-     "p90": 786.6751657936547
+     "p50": 212.63615315558854,
+     "p90": 803.0911865365924
     },
     "pessimistic": {
-     "p50": 208.71507674251916,
-     "p90": 788.3677105081733
+     "p50": 215.2407532337238,
+     "p90": 797.2588829569286
     }
    }
   },
@@ -380,10 +380,10 @@
    "pessimistic": false
   },
   "utilisation": {
-   "gp": 0.9471842896013075,
-   "community": 0.8551588506947155
+   "gp": 0.9091263466506436,
+   "community": 0.8223148164405164
   },
-  "rejections": 252,
+  "rejections": 386,
   "findings": [
    {
     "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
@@ -395,7 +395,7 @@
     ]
    },
    {
-    "statement": "holds while share of care shifted to community stays below 6%",
+    "statement": "holds while share of care shifted to community stays below 5%",
     "survivesAllThree": false,
     "optimisticOnly": false,
     "holdsIn": [
@@ -404,7 +404,7 @@
     ]
    },
    {
-    "statement": "12 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+    "statement": "10 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
     "survivesAllThree": false,
     "optimisticOnly": false,
     "holdsIn": [
@@ -414,7 +414,7 @@
    }
   ],
   "thresholds": [
-   "holds while share of care shifted to community stays below 6%"
+   "holds while share of care shifted to community stays below 5%"
   ]
  },
  "sweeps": {
@@ -426,44 +426,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 499.4061521968106,
-        "p90": 897.8162421914749
+        "p50": 522.626320161391,
+        "p90": 912.4522102220217
        },
        "realistic": {
-        "p50": 2765.666977871326,
-        "p90": 3721.0486274834257
+        "p50": 793.5646313162288,
+        "p90": 1726.828926959337
        },
        "pessimistic": {
-        "p50": 18389.029480077617,
-        "p90": 29102.810337687144
+        "p50": 16654.864445462008,
+        "p90": 24617.210342704202
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 535.3653956808848,
-        "p90": 924.9634446625132
+        "p50": 545.0497610256716,
+        "p90": 930.6799765243777
        },
        "realistic": {
-        "p50": 2811.5386899965815,
-        "p90": 3755.4859944167547
+        "p50": 833.6802698990796,
+        "p90": 1733.4590080342023
        },
        "pessimistic": {
-        "p50": 18195.113961291383,
-        "p90": 29111.86951797607
+        "p50": 16365.088687542826,
+        "p90": 24559.28359021491
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 222.3493884872296,
-        "p90": 795.2647388653131
+        "p50": 219.9426055685035,
+        "p90": 768.193434111774
        },
        "realistic": {
-        "p50": 225.66661462024786,
-        "p90": 786.6751657936547
+        "p50": 212.63615315558854,
+        "p90": 803.0911865365924
        },
        "pessimistic": {
-        "p50": 208.71507674251916,
-        "p90": 788.3677105081733
+        "p50": 215.2407532337238,
+        "p90": 797.2588829569286
        }
       }
      },
@@ -473,10 +473,10 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.9471842896013075,
-      "community": 0.8551588506947155
+      "gp": 0.9091263466506436,
+      "community": 0.8223148164405164
      },
-     "rejections": 252,
+     "rejections": 386,
      "findings": [
       {
        "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
@@ -488,7 +488,7 @@
        ]
       },
       {
-       "statement": "holds while share of care shifted to community stays below 6%",
+       "statement": "holds while share of care shifted to community stays below 5%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -497,7 +497,7 @@
        ]
       },
       {
-       "statement": "12 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "statement": "10 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -507,7 +507,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 6%"
+      "holds while share of care shifted to community stays below 5%"
      ]
     },
     {
@@ -515,44 +515,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 493.6428684112034,
-        "p90": 890.8522571356152
+        "p50": 509.0293884773855,
+        "p90": 891.4037472403725
        },
        "realistic": {
-        "p50": 681.0812641562079,
-        "p90": 1223.4263414789166
+        "p50": 738.655345769017,
+        "p90": 1296.0625938898884
        },
        "pessimistic": {
-        "p50": 12243.623568494397,
-        "p90": 21439.265480012284
+        "p50": 15415.188092622557,
+        "p90": 29239.38537830941
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 519.6633218735224,
-        "p90": 919.7308835622971
+        "p50": 539.422704836179,
+        "p90": 915.4840884202858
        },
        "realistic": {
-        "p50": 727.225129293045,
-        "p90": 1260.872720971005
+        "p50": 753.4398218728602,
+        "p90": 1330.8884443822317
        },
        "pessimistic": {
-        "p50": 12980.371066905558,
-        "p90": 21454.38448123273
+        "p50": 15552.503887102706,
+        "p90": 29199.56394011597
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 193.00988383160438,
-        "p90": 792.434603539994
+        "p50": 198.54019906010944,
+        "p90": 790.410208112502
        },
        "realistic": {
-        "p50": 154.66253053653054,
-        "p90": 768.9036939254729
+        "p50": 232.56307970691705,
+        "p90": 781.8829173882259
        },
        "pessimistic": {
-        "p50": 235.5747005789308,
-        "p90": 804.4661551880417
+        "p50": 237.5802806171123,
+        "p90": 778.4733844517032
        }
       }
      },
@@ -562,8 +562,8 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.8973883973054052,
-      "community": 0.5027164204948033
+      "gp": 0.940365476500235,
+      "community": 0.5226891320015293
      },
      "rejections": 0,
      "findings": [
@@ -604,44 +604,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 493.6428684112034,
-        "p90": 890.8522571356152
+        "p50": 509.0293884773855,
+        "p90": 891.4037472403725
        },
        "realistic": {
-        "p50": 681.0812641562079,
-        "p90": 1223.4263414789166
+        "p50": 738.655345769017,
+        "p90": 1296.0625938898884
        },
        "pessimistic": {
-        "p50": 12243.623568494397,
-        "p90": 21439.265480012284
+        "p50": 15415.188092622557,
+        "p90": 29239.38537830941
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 519.6633218735224,
-        "p90": 919.7308835622971
+        "p50": 539.422704836179,
+        "p90": 915.4840884202858
        },
        "realistic": {
-        "p50": 727.225129293045,
-        "p90": 1260.872720971005
+        "p50": 753.4398218728602,
+        "p90": 1330.8884443822317
        },
        "pessimistic": {
-        "p50": 12980.371066905558,
-        "p90": 21454.38448123273
+        "p50": 15552.503887102706,
+        "p90": 29199.56394011597
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 193.00988383160438,
-        "p90": 792.434603539994
+        "p50": 198.54019906010944,
+        "p90": 790.410208112502
        },
        "realistic": {
-        "p50": 154.66253053653054,
-        "p90": 768.9036939254729
+        "p50": 232.56307970691705,
+        "p90": 781.8829173882259
        },
        "pessimistic": {
-        "p50": 235.5747005789308,
-        "p90": 804.4661551880417
+        "p50": 237.5802806171123,
+        "p90": 778.4733844517032
        }
       }
      },
@@ -651,8 +651,8 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.8973883973054052,
-      "community": 0.5027164204948033
+      "gp": 0.940365476500235,
+      "community": 0.5226891320015293
      },
      "rejections": 0,
      "findings": [
@@ -693,44 +693,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 493.6428684112034,
-        "p90": 890.8522571356152
+        "p50": 509.0293884773855,
+        "p90": 891.4037472403725
        },
        "realistic": {
-        "p50": 681.0812641562079,
-        "p90": 1223.4263414789166
+        "p50": 738.655345769017,
+        "p90": 1296.0625938898884
        },
        "pessimistic": {
-        "p50": 12243.623568494397,
-        "p90": 21439.265480012284
+        "p50": 15415.188092622557,
+        "p90": 29239.38537830941
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 519.6633218735224,
-        "p90": 919.7308835622971
+        "p50": 539.422704836179,
+        "p90": 915.4840884202858
        },
        "realistic": {
-        "p50": 727.225129293045,
-        "p90": 1260.872720971005
+        "p50": 753.4398218728602,
+        "p90": 1330.8884443822317
        },
        "pessimistic": {
-        "p50": 12980.371066905558,
-        "p90": 21454.38448123273
+        "p50": 15552.503887102706,
+        "p90": 29199.56394011597
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 193.00988383160438,
-        "p90": 792.434603539994
+        "p50": 198.54019906010944,
+        "p90": 790.410208112502
        },
        "realistic": {
-        "p50": 154.66253053653054,
-        "p90": 768.9036939254729
+        "p50": 232.56307970691705,
+        "p90": 781.8829173882259
        },
        "pessimistic": {
-        "p50": 235.5747005789308,
-        "p90": 804.4661551880417
+        "p50": 237.5802806171123,
+        "p90": 778.4733844517032
        }
       }
      },
@@ -740,8 +740,8 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.8973883973054052,
-      "community": 0.3351442803298688
+      "gp": 0.940365476500235,
+      "community": 0.3484594213343529
      },
      "rejections": 0,
      "findings": [
@@ -755,7 +755,7 @@
        ]
       },
       {
-       "statement": "holds while share of care shifted to community stays below 13%",
+       "statement": "holds while share of care shifted to community stays below 14%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -774,7 +774,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 13%"
+      "holds while share of care shifted to community stays below 14%"
      ]
     },
     {
@@ -782,44 +782,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 493.6428684112034,
-        "p90": 890.8522571356152
+        "p50": 509.0293884773855,
+        "p90": 891.4037472403725
        },
        "realistic": {
-        "p50": 681.0812641562079,
-        "p90": 1223.4263414789166
+        "p50": 738.655345769017,
+        "p90": 1296.0625938898884
        },
        "pessimistic": {
-        "p50": 12243.623568494397,
-        "p90": 21439.265480012284
+        "p50": 15415.188092622557,
+        "p90": 29239.38537830941
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 519.6633218735224,
-        "p90": 919.7308835622971
+        "p50": 539.422704836179,
+        "p90": 915.4840884202858
        },
        "realistic": {
-        "p50": 727.225129293045,
-        "p90": 1260.872720971005
+        "p50": 753.4398218728602,
+        "p90": 1330.8884443822317
        },
        "pessimistic": {
-        "p50": 12980.371066905558,
-        "p90": 21454.38448123273
+        "p50": 15552.503887102706,
+        "p90": 29199.56394011597
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 193.00988383160438,
-        "p90": 792.434603539994
+        "p50": 198.54019906010944,
+        "p90": 790.410208112502
        },
        "realistic": {
-        "p50": 154.66253053653054,
-        "p90": 768.9036939254729
+        "p50": 232.56307970691705,
+        "p90": 781.8829173882259
        },
        "pessimistic": {
-        "p50": 235.5747005789308,
-        "p90": 804.4661551880417
+        "p50": 237.5802806171123,
+        "p90": 778.4733844517032
        }
       }
      },
@@ -829,8 +829,8 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.8973883973054052,
-      "community": 0.3351442803298688
+      "gp": 0.940365476500235,
+      "community": 0.3484594213343529
      },
      "rejections": 0,
      "findings": [
@@ -844,7 +844,7 @@
        ]
       },
       {
-       "statement": "holds while share of care shifted to community stays below 13%",
+       "statement": "holds while share of care shifted to community stays below 14%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -863,7 +863,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 13%"
+      "holds while share of care shifted to community stays below 14%"
      ]
     },
     {
@@ -871,44 +871,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 493.6428684112034,
-        "p90": 890.8522571356152
+        "p50": 509.0293884773855,
+        "p90": 891.4037472403725
        },
        "realistic": {
-        "p50": 681.0812641562079,
-        "p90": 1223.4263414789166
+        "p50": 738.655345769017,
+        "p90": 1296.0625938898884
        },
        "pessimistic": {
-        "p50": 12243.623568494397,
-        "p90": 21439.265480012284
+        "p50": 15415.188092622557,
+        "p90": 29239.38537830941
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 519.6633218735224,
-        "p90": 919.7308835622971
+        "p50": 539.422704836179,
+        "p90": 915.4840884202858
        },
        "realistic": {
-        "p50": 727.225129293045,
-        "p90": 1260.872720971005
+        "p50": 753.4398218728602,
+        "p90": 1330.8884443822317
        },
        "pessimistic": {
-        "p50": 12980.371066905558,
-        "p90": 21454.38448123273
+        "p50": 15552.503887102706,
+        "p90": 29199.56394011597
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 193.00988383160438,
-        "p90": 792.434603539994
+        "p50": 198.54019906010944,
+        "p90": 790.410208112502
        },
        "realistic": {
-        "p50": 154.66253053653054,
-        "p90": 768.9036939254729
+        "p50": 232.56307970691705,
+        "p90": 781.8829173882259
        },
        "pessimistic": {
-        "p50": 235.5747005789308,
-        "p90": 804.4661551880417
+        "p50": 237.5802806171123,
+        "p90": 778.4733844517032
        }
       }
      },
@@ -918,8 +918,8 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.8973883973054052,
-      "community": 0.2513582102474016
+      "gp": 0.940365476500235,
+      "community": 0.26134456600076467
      },
      "rejections": 0,
      "findings": [
@@ -960,44 +960,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 493.6428684112034,
-        "p90": 890.8522571356152
+        "p50": 509.0293884773855,
+        "p90": 891.4037472403725
        },
        "realistic": {
-        "p50": 681.0812641562079,
-        "p90": 1223.4263414789166
+        "p50": 738.655345769017,
+        "p90": 1296.0625938898884
        },
        "pessimistic": {
-        "p50": 12243.623568494397,
-        "p90": 21439.265480012284
+        "p50": 15415.188092622557,
+        "p90": 29239.38537830941
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 519.6633218735224,
-        "p90": 919.7308835622971
+        "p50": 539.422704836179,
+        "p90": 915.4840884202858
        },
        "realistic": {
-        "p50": 727.225129293045,
-        "p90": 1260.872720971005
+        "p50": 753.4398218728602,
+        "p90": 1330.8884443822317
        },
        "pessimistic": {
-        "p50": 12980.371066905558,
-        "p90": 21454.38448123273
+        "p50": 15552.503887102706,
+        "p90": 29199.56394011597
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 193.00988383160438,
-        "p90": 792.434603539994
+        "p50": 198.54019906010944,
+        "p90": 790.410208112502
        },
        "realistic": {
-        "p50": 154.66253053653054,
-        "p90": 768.9036939254729
+        "p50": 232.56307970691705,
+        "p90": 781.8829173882259
        },
        "pessimistic": {
-        "p50": 235.5747005789308,
-        "p90": 804.4661551880417
+        "p50": 237.5802806171123,
+        "p90": 778.4733844517032
        }
       }
      },
@@ -1007,8 +1007,8 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.8973883973054052,
-      "community": 0.2010865681979213
+      "gp": 0.940365476500235,
+      "community": 0.20907565280061174
      },
      "rejections": 0,
      "findings": [
@@ -1022,7 +1022,7 @@
        ]
       },
       {
-       "statement": "holds while share of care shifted to community stays below 21%",
+       "statement": "holds while share of care shifted to community stays below 22%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -1041,7 +1041,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 21%"
+      "holds while share of care shifted to community stays below 22%"
      ]
     },
     {
@@ -1049,44 +1049,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 493.6428684112034,
-        "p90": 890.8522571356152
+        "p50": 509.0293884773855,
+        "p90": 891.4037472403725
        },
        "realistic": {
-        "p50": 681.0812641562079,
-        "p90": 1223.4263414789166
+        "p50": 738.655345769017,
+        "p90": 1296.0625938898884
        },
        "pessimistic": {
-        "p50": 12243.623568494397,
-        "p90": 21439.265480012284
+        "p50": 15415.188092622557,
+        "p90": 29239.38537830941
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 519.6633218735224,
-        "p90": 919.7308835622971
+        "p50": 539.422704836179,
+        "p90": 915.4840884202858
        },
        "realistic": {
-        "p50": 727.225129293045,
-        "p90": 1260.872720971005
+        "p50": 753.4398218728602,
+        "p90": 1330.8884443822317
        },
        "pessimistic": {
-        "p50": 12980.371066905558,
-        "p90": 21454.38448123273
+        "p50": 15552.503887102706,
+        "p90": 29199.56394011597
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 193.00988383160438,
-        "p90": 792.434603539994
+        "p50": 198.54019906010944,
+        "p90": 790.410208112502
        },
        "realistic": {
-        "p50": 154.66253053653054,
-        "p90": 768.9036939254729
+        "p50": 232.56307970691705,
+        "p90": 781.8829173882259
        },
        "pessimistic": {
-        "p50": 235.5747005789308,
-        "p90": 804.4661551880417
+        "p50": 237.5802806171123,
+        "p90": 778.4733844517032
        }
       }
      },
@@ -1096,8 +1096,8 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.8973883973054052,
-      "community": 0.1675721401649344
+      "gp": 0.940365476500235,
+      "community": 0.17422971066717646
      },
      "rejections": 0,
      "findings": [
@@ -1111,7 +1111,7 @@
        ]
       },
       {
-       "statement": "holds while share of care shifted to community stays below 25%",
+       "statement": "holds while share of care shifted to community stays below 26%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -1130,7 +1130,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 25%"
+      "holds while share of care shifted to community stays below 26%"
      ]
     },
     {
@@ -1138,44 +1138,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 493.6428684112034,
-        "p90": 890.8522571356152
+        "p50": 509.0293884773855,
+        "p90": 891.4037472403725
        },
        "realistic": {
-        "p50": 681.0812641562079,
-        "p90": 1223.4263414789166
+        "p50": 738.655345769017,
+        "p90": 1296.0625938898884
        },
        "pessimistic": {
-        "p50": 12243.623568494397,
-        "p90": 21439.265480012284
+        "p50": 15415.188092622557,
+        "p90": 29239.38537830941
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 519.6633218735224,
-        "p90": 919.7308835622971
+        "p50": 539.422704836179,
+        "p90": 915.4840884202858
        },
        "realistic": {
-        "p50": 727.225129293045,
-        "p90": 1260.872720971005
+        "p50": 753.4398218728602,
+        "p90": 1330.8884443822317
        },
        "pessimistic": {
-        "p50": 12980.371066905558,
-        "p90": 21454.38448123273
+        "p50": 15552.503887102706,
+        "p90": 29199.56394011597
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 193.00988383160438,
-        "p90": 792.434603539994
+        "p50": 198.54019906010944,
+        "p90": 790.410208112502
        },
        "realistic": {
-        "p50": 154.66253053653054,
-        "p90": 768.9036939254729
+        "p50": 232.56307970691705,
+        "p90": 781.8829173882259
        },
        "pessimistic": {
-        "p50": 235.5747005789308,
-        "p90": 804.4661551880417
+        "p50": 237.5802806171123,
+        "p90": 778.4733844517032
        }
       }
      },
@@ -1185,8 +1185,8 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.8973883973054052,
-      "community": 0.14363326299851523
+      "gp": 0.940365476500235,
+      "community": 0.14933975200043695
      },
      "rejections": 0,
      "findings": [
@@ -1200,7 +1200,7 @@
        ]
       },
       {
-       "statement": "holds while share of care shifted to community stays below 29%",
+       "statement": "holds while share of care shifted to community stays below 30%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -1219,7 +1219,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 29%"
+      "holds while share of care shifted to community stays below 30%"
      ]
     },
     {
@@ -1227,44 +1227,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 493.6428684112034,
-        "p90": 890.8522571356152
+        "p50": 509.0293884773855,
+        "p90": 891.4037472403725
        },
        "realistic": {
-        "p50": 681.0812641562079,
-        "p90": 1223.4263414789166
+        "p50": 738.655345769017,
+        "p90": 1296.0625938898884
        },
        "pessimistic": {
-        "p50": 12243.623568494397,
-        "p90": 21439.265480012284
+        "p50": 15415.188092622557,
+        "p90": 29239.38537830941
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 519.6633218735224,
-        "p90": 919.7308835622971
+        "p50": 539.422704836179,
+        "p90": 915.4840884202858
        },
        "realistic": {
-        "p50": 727.225129293045,
-        "p90": 1260.872720971005
+        "p50": 753.4398218728602,
+        "p90": 1330.8884443822317
        },
        "pessimistic": {
-        "p50": 12980.371066905558,
-        "p90": 21454.38448123273
+        "p50": 15552.503887102706,
+        "p90": 29199.56394011597
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 193.00988383160438,
-        "p90": 792.434603539994
+        "p50": 198.54019906010944,
+        "p90": 790.410208112502
        },
        "realistic": {
-        "p50": 154.66253053653054,
-        "p90": 768.9036939254729
+        "p50": 232.56307970691705,
+        "p90": 781.8829173882259
        },
        "pessimistic": {
-        "p50": 235.5747005789308,
-        "p90": 804.4661551880417
+        "p50": 237.5802806171123,
+        "p90": 778.4733844517032
        }
       }
      },
@@ -1274,8 +1274,8 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.8973883973054052,
-      "community": 0.1256791051237008
+      "gp": 0.940365476500235,
+      "community": 0.13067228300038233
      },
      "rejections": 0,
      "findings": [
@@ -1289,7 +1289,7 @@
        ]
       },
       {
-       "statement": "holds while share of care shifted to community stays below 34%",
+       "statement": "holds while share of care shifted to community stays below 33%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -1308,7 +1308,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 34%"
+      "holds while share of care shifted to community stays below 33%"
      ]
     }
    ]
@@ -1321,44 +1321,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 499.4061521968106,
-        "p90": 897.8162421914749
+        "p50": 522.626320161391,
+        "p90": 912.4522102220217
        },
        "realistic": {
-        "p50": 2765.666977871326,
-        "p90": 3721.0486274834257
+        "p50": 793.5646313162288,
+        "p90": 1726.828926959337
        },
        "pessimistic": {
-        "p50": 18389.029480077617,
-        "p90": 29102.810337687144
+        "p50": 16654.864445462008,
+        "p90": 24617.210342704202
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 535.3653956808848,
-        "p90": 924.9634446625132
+        "p50": 545.0497610256716,
+        "p90": 930.6799765243777
        },
        "realistic": {
-        "p50": 2811.5386899965815,
-        "p90": 3755.4859944167547
+        "p50": 833.6802698990796,
+        "p90": 1733.4590080342023
        },
        "pessimistic": {
-        "p50": 18195.113961291383,
-        "p90": 29111.86951797607
+        "p50": 16365.088687542826,
+        "p90": 24559.28359021491
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 222.3493884872296,
-        "p90": 795.2647388653131
+        "p50": 219.9426055685035,
+        "p90": 768.193434111774
        },
        "realistic": {
-        "p50": 225.66661462024786,
-        "p90": 786.6751657936547
+        "p50": 212.63615315558854,
+        "p90": 803.0911865365924
        },
        "pessimistic": {
-        "p50": 208.71507674251916,
-        "p90": 788.3677105081733
+        "p50": 215.2407532337238,
+        "p90": 797.2588829569286
        }
       }
      },
@@ -1368,10 +1368,10 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.9471842896013075,
-      "community": 0.8551588506947155
+      "gp": 0.9091263466506436,
+      "community": 0.8223148164405164
      },
-     "rejections": 252,
+     "rejections": 386,
      "findings": [
       {
        "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
@@ -1383,7 +1383,7 @@
        ]
       },
       {
-       "statement": "holds while share of care shifted to community stays below 6%",
+       "statement": "holds while share of care shifted to community stays below 5%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -1392,7 +1392,7 @@
        ]
       },
       {
-       "statement": "12 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "statement": "10 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -1402,7 +1402,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 6%"
+      "holds while share of care shifted to community stays below 5%"
      ]
     },
     {
@@ -1410,44 +1410,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 522.5821990269469,
-        "p90": 918.4093835520034
+        "p50": 529.2588539208518,
+        "p90": 939.8626347100362
        },
        "realistic": {
-        "p50": 700.1915711204638,
-        "p90": 1306.772515880526
+        "p50": 579.4419163542334,
+        "p90": 1046.5972411407856
        },
        "pessimistic": {
-        "p50": 25974.68869533646,
-        "p90": 42520.00441581593
+        "p50": 24206.44423305738,
+        "p90": 38356.42383628164
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 539.859410844103,
-        "p90": 935.0091758627677
+        "p50": 555.1812655051472,
+        "p90": 971.8301252269885
        },
        "realistic": {
-        "p50": 750.131899920525,
-        "p90": 1369.4684850623016
+        "p50": 613.1497960963752,
+        "p90": 1073.6573251032387
        },
        "pessimistic": {
-        "p50": 25973.23764528148,
-        "p90": 42498.96107617521
+        "p50": 24261.304846964485,
+        "p90": 38444.736188827315
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 229.86530958750518,
-        "p90": 798.9193028232548
+        "p50": 201.217954630265,
+        "p90": 780.384178495442
        },
        "realistic": {
-        "p50": 208.932729455526,
-        "p90": 793.4001407626201
+        "p50": 195.59954301000107,
+        "p90": 772.9129225617507
        },
        "pessimistic": {
-        "p50": 200.78212900384096,
-        "p90": 795.9115682858974
+        "p50": 208.3694836216746,
+        "p90": 804.0008669702802
        }
       }
      },
@@ -1457,10 +1457,10 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.8918594548188781,
-      "community": 0.8404412962042008
+      "gp": 0.8935746386292608,
+      "community": 0.7987904380996833
      },
-     "rejections": 466,
+     "rejections": 710,
      "findings": [
       {
        "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
@@ -1472,7 +1472,7 @@
        ]
       },
       {
-       "statement": "holds while share of care shifted to community stays below 6%",
+       "statement": "holds while share of care shifted to community stays below 5%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -1491,7 +1491,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 6%"
+      "holds while share of care shifted to community stays below 5%"
      ]
     },
     {
@@ -1499,44 +1499,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 560.380444349139,
-        "p90": 968.8734872392379
+        "p50": 556.3008237925824,
+        "p90": 983.9646652325755
        },
        "realistic": {
-        "p50": 985.0843260552501,
-        "p90": 1817.9400332539517
+        "p50": 744.7781553156674,
+        "p90": 1658.5243717877602
        },
        "pessimistic": {
-        "p50": 27407.522811094183,
-        "p90": 44688.18446882302
+        "p50": 25591.87645849219,
+        "p90": 35999.853608727106
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 593.8414621188422,
-        "p90": 1009.9369054341223
+        "p50": 570.6523127470864,
+        "p90": 1004.0276213901816
        },
        "realistic": {
-        "p50": 1035.4612443302758,
-        "p90": 1868.4038422115846
+        "p50": 778.0183204580098,
+        "p90": 1673.3797466562828
        },
        "pessimistic": {
-        "p50": 27610.007788986026,
-        "p90": 44637.545904163504
+        "p50": 25224.783761998115,
+        "p90": 35670.83736051223
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 225.17048262950266,
-        "p90": 761.1340198093094
+        "p50": 224.20984587815474,
+        "p90": 782.9098971756175
        },
        "realistic": {
-        "p50": 206.1327342421282,
-        "p90": 791.4660709988093
+        "p50": 233.44164439919405,
+        "p90": 805.7069560558884
        },
        "pessimistic": {
-        "p50": 265.6708587514004,
-        "p90": 817.8457918983186
+        "p50": 224.1286319938372,
+        "p90": 786.7101531082881
        }
       }
      },
@@ -1546,10 +1546,10 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.9178842437645597,
-      "community": 0.8899820550516344
+      "gp": 0.9091882216130976,
+      "community": 0.8097072572964902
      },
-     "rejections": 842,
+     "rejections": 1003,
      "findings": [
       {
        "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
@@ -1561,7 +1561,7 @@
        ]
       },
       {
-       "statement": "holds while share of care shifted to community stays below 6%",
+       "statement": "holds while share of care shifted to community stays below 5%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -1580,7 +1580,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 6%"
+      "holds while share of care shifted to community stays below 5%"
      ]
     },
     {
@@ -1588,44 +1588,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 681.5737392131705,
-        "p90": 1409.200594720547
+        "p50": 637.3630563154875,
+        "p90": 1213.832285081182
        },
        "realistic": {
-        "p50": 2736.542406726978,
-        "p90": 6388.182676852914
+        "p50": 4162.858236569969,
+        "p90": 10807.110280787689
        },
        "pessimistic": {
-        "p50": 28205.187904123624,
-        "p90": 43902.18413291336
+        "p50": 32798.73315217381,
+        "p90": 50403.18446882302
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 699.2479020783794,
-        "p90": 1446.76864668692
+        "p50": 645.9307372185867,
+        "p90": 1229.9801837070845
        },
        "realistic": {
-        "p50": 2764.8128290763707,
-        "p90": 6429.42801070225
+        "p50": 4330.302056326764,
+        "p90": 10947.002121430938
        },
        "pessimistic": {
-        "p50": 28374.292457291274,
-        "p90": 44152.10317490972
+        "p50": 32781.96264054824,
+        "p90": 50499.72468457476
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 245.20986259402707,
-        "p90": 798.8295430741273
+        "p50": 221.82509988581296,
+        "p90": 785.4367991250474
        },
        "realistic": {
-        "p50": 233.57978831988294,
-        "p90": 802.4481505803706
+        "p50": 235.64104147127364,
+        "p90": 814.5107378419489
        },
        "pessimistic": {
-        "p50": 185.8875020731648,
-        "p90": 795.0092567836982
+        "p50": 260.63496570684947,
+        "p90": 799.6628933051834
        }
       }
      },
@@ -1635,10 +1635,10 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.9214375801242135,
-      "community": 0.8254351319318749
+      "gp": 0.9522408906503351,
+      "community": 0.8616040941577724
      },
-     "rejections": 1210,
+     "rejections": 1487,
      "findings": [
       {
        "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
@@ -1650,7 +1650,7 @@
        ]
       },
       {
-       "statement": "holds while share of care shifted to community stays below 6%",
+       "statement": "holds while share of care shifted to community stays below 5%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -1659,7 +1659,7 @@
        ]
       },
       {
-       "statement": "17 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "statement": "18 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -1669,7 +1669,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 6%"
+      "holds while share of care shifted to community stays below 5%"
      ]
     },
     {
@@ -1677,44 +1677,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 1187.606592254364,
-        "p90": 2502.3904133338656
+        "p50": 1196.034688616346,
+        "p90": 2103.933241380262
        },
        "realistic": {
-        "p50": 12840.740133589134,
-        "p90": 18499.976042035385
+        "p50": 13205.057035340054,
+        "p90": 25132.256718015647
        },
        "pessimistic": {
-        "p50": 34589.09702808538,
-        "p90": 56056.533265569364
+        "p50": 37591.74967701931,
+        "p90": 57407.51250037865
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 1231.3063475141535,
-        "p90": 2510.7712302042637
+        "p50": 1253.5313923274516,
+        "p90": 2202.2835375228315
        },
        "realistic": {
-        "p50": 12893.379876264953,
-        "p90": 18499.56887113885
+        "p50": 13362.009988422913,
+        "p90": 25140.60653737653
        },
        "pessimistic": {
-        "p50": 34457.75920009095,
-        "p90": 56095.892219710164
+        "p50": 37083.85887938476,
+        "p90": 56941.88639004156
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 182.49317626003176,
-        "p90": 780.8748846014205
+        "p50": 194.87665348895825,
+        "p90": 795.6892333320575
        },
        "realistic": {
-        "p50": 231.60194075485924,
-        "p90": 801.2538531784085
+        "p50": 194.41011664294638,
+        "p90": 794.8940368987387
        },
        "pessimistic": {
-        "p50": 217.28819674719125,
-        "p90": 801.9840443618596
+        "p50": 178.01812973676715,
+        "p90": 792.3520462175366
        }
       }
      },
@@ -1724,10 +1724,10 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.9413093036885096,
-      "community": 0.8284039309779156
+      "gp": 0.9385570838636491,
+      "community": 0.8335034510614249
      },
-     "rejections": 2159,
+     "rejections": 2130,
      "findings": [
       {
        "statement": "The practice keeps a stable operating point in 1 of three worlds (optimistic).",
@@ -1738,7 +1738,7 @@
        ]
       },
       {
-       "statement": "holds while share of care shifted to community stays below 6%",
+       "statement": "holds while share of care shifted to community stays below 5%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -1754,7 +1754,7 @@
        ]
       },
       {
-       "statement": "22 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "statement": "25 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -1763,7 +1763,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 6%",
+      "holds while share of care shifted to community stays below 5%",
       "holds while community capacity multiplier stays above 1.5"
      ]
     },
@@ -1772,44 +1772,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 1678.4938309255813,
-        "p90": 4316.075724471593
+        "p50": 2838.2116907607997,
+        "p90": 4279.461940247333
        },
        "realistic": {
-        "p50": 21766.981335121032,
-        "p90": 28500.296379295178
+        "p50": 26749.760737990495,
+        "p90": 37529.876111550955
        },
        "pessimistic": {
-        "p50": 48982.08710177336,
-        "p90": 75641.39737546281
+        "p50": 54483.88483491854,
+        "p90": 80926.85495279287
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 1775.7960466366203,
-        "p90": 4376.452795447665
+        "p50": 2862.6013678753516,
+        "p90": 4310.028980753152
        },
        "realistic": {
-        "p50": 21812.622905241617,
-        "p90": 28575.369844623026
+        "p50": 26970.949869171367,
+        "p90": 37703.129379961174
        },
        "pessimistic": {
-        "p50": 48261.80936644942,
-        "p90": 75942.76355968672
+        "p50": 54330.4256031462,
+        "p90": 81182.70931366237
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 189.5856497338973,
-        "p90": 781.41255004704
+        "p50": 200.9348097750917,
+        "p90": 792.7406957756612
        },
        "realistic": {
-        "p50": 159.74209616379812,
-        "p90": 776.5497261058335
+        "p50": 179.88514710147865,
+        "p90": 783.3825426762342
        },
        "pessimistic": {
-        "p50": 211.41728960632463,
-        "p90": 782.7753527277382
+        "p50": 194.09350551798707,
+        "p90": 805.7617750611389
        }
       }
      },
@@ -1819,10 +1819,10 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.972214074658524,
-      "community": 0.9010623841474982
+      "gp": 0.9409148964776173,
+      "community": 0.8367148290811557
      },
-     "rejections": 3729,
+     "rejections": 3317,
      "findings": [
       {
        "statement": "The practice keeps a stable operating point in 1 of three worlds (optimistic).",
@@ -1833,7 +1833,7 @@
        ]
       },
       {
-       "statement": "holds while share of care shifted to community stays below 6%",
+       "statement": "holds while share of care shifted to community stays below 5%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -1849,7 +1849,7 @@
        ]
       },
       {
-       "statement": "35 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "statement": "34 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -1858,7 +1858,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 6%",
+      "holds while share of care shifted to community stays below 5%",
       "holds while community capacity multiplier stays above 1.5"
      ]
     },
@@ -1867,44 +1867,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 23185.232600829913,
-        "p90": 38099.99240107264
+        "p50": 22466.698086916702,
+        "p90": 33165.91163817304
        },
        "realistic": {
-        "p50": 43701.594388456084,
-        "p90": 67179.78756307357
+        "p50": 41010.28539019404,
+        "p90": 67582.25113972742
        },
        "pessimistic": {
-        "p50": 60091.45605951804,
-        "p90": 95025.84705570037
+        "p50": 63904.38388640212,
+        "p90": 100911.56927605125
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 23096.132479373482,
-        "p90": 38323.00642606197
+        "p50": 22582.98547855206,
+        "p90": 33134.12812557863
        },
        "realistic": {
-        "p50": 43694.266148367955,
-        "p90": 67175.02232345799
+        "p50": 42372.2940126115,
+        "p90": 67884.429039235
        },
        "pessimistic": {
-        "p50": 61568.05035899696,
-        "p90": 95682.61326541798
+        "p50": 64657.475530209544,
+        "p90": 100840.24967299425
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 164.83582737713004,
-        "p90": 778.4808734463295
+        "p50": 157.50798948685406,
+        "p90": 786.7980654796702
        },
        "realistic": {
-        "p50": 187.87705369951436,
-        "p90": 784.4553407767089
+        "p50": 200.57265903032385,
+        "p90": 796.4922137559624
        },
        "pessimistic": {
-        "p50": 170.5695909135975,
-        "p90": 771.5163020388281
+        "p50": 164.07225528545678,
+        "p90": 793.6567555182846
        }
       }
      },
@@ -1914,10 +1914,10 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.9392533937678391,
-      "community": 0.8483126638548286
+      "gp": 0.9421616047089678,
+      "community": 0.8360788773363785
      },
-     "rejections": 4560,
+     "rejections": 4647,
      "findings": [
       {
        "statement": "The practice has no stable operating point in any world — waits grow without bound.",
@@ -1926,7 +1926,7 @@
        "holdsIn": []
       },
       {
-       "statement": "holds while share of care shifted to community stays below 6%",
+       "statement": "holds while share of care shifted to community stays below 5%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": []
@@ -1938,14 +1938,14 @@
        "holdsIn": []
       },
       {
-       "statement": "40 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "statement": "39 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": []
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 6%",
+      "holds while share of care shifted to community stays below 5%",
       "holds while community capacity multiplier stays above 2.5"
      ]
     },
@@ -1954,44 +1954,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 42512.85247356194,
-        "p90": 72158.29320236796
+        "p50": 40799.6262420055,
+        "p90": 65391.97981237515
        },
        "realistic": {
-        "p50": 53684.01926300622,
-        "p90": 81766.95965893578
+        "p50": 53706.64322069951,
+        "p90": 79203.65356453042
        },
        "pessimistic": {
-        "p50": 82456.24971975735,
-        "p90": 124292.59368163825
+        "p50": 73889.77625055413,
+        "p90": 116298.77747276868
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 42964.27879127272,
-        "p90": 72158.86930883804
+        "p50": 40655.35771867365,
+        "p90": 65191.89771042555
        },
        "realistic": {
-        "p50": 53660.18741654203,
-        "p90": 81727.94434415642
+        "p50": 54456.02977840963,
+        "p90": 79729.22511398094
        },
        "pessimistic": {
-        "p50": 82957.32160191674,
-        "p90": 125553.53419333906
+        "p50": 73447.16137422889,
+        "p90": 116617.2646619752
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 176.45613419922302,
-        "p90": 779.8937615012401
+        "p50": 174.37030242709443,
+        "p90": 795.3493471621186
        },
        "realistic": {
-        "p50": 133.12861601467011,
-        "p90": 791.3551134638255
+        "p50": 146.69033541239332,
+        "p90": 761.6466668415815
        },
        "pessimistic": {
-        "p50": 155.16865151934326,
-        "p90": 779.6971694757231
+        "p50": 139.92928866361035,
+        "p90": 772.9922227737552
        }
       }
      },
@@ -2001,10 +2001,10 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.9550104386824243,
-      "community": 0.8472380225873127
+      "gp": 0.9721332983418755,
+      "community": 0.8776951318497278
      },
-     "rejections": 7113,
+     "rejections": 7029,
      "findings": [
       {
        "statement": "The practice has no stable operating point in any world — waits grow without bound.",
@@ -2013,7 +2013,7 @@
        "holdsIn": []
       },
       {
-       "statement": "holds while share of care shifted to community stays below 6%",
+       "statement": "holds while share of care shifted to community stays below 5%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": []
@@ -2032,7 +2032,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 6%",
+      "holds while share of care shifted to community stays below 5%",
       "holds while community capacity multiplier stays above 3.5"
      ]
     },
@@ -2041,44 +2041,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 72455.95068553771,
-        "p90": 118228.03163219418
+        "p50": 73673.86338610668,
+        "p90": 116698.74915239518
        },
        "realistic": {
-        "p50": 83541.1416058832,
-        "p90": 126975.32165819907
+        "p50": 88663.07237216562,
+        "p90": 132776.0129777958
        },
        "pessimistic": {
-        "p50": 107987.83022704424,
-        "p90": 161999.14067599585
+        "p50": 109324.65717807878,
+        "p90": 170664.41468638286
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 74633.09890141804,
-        "p90": 119135.79642608948
+        "p50": 75208.92050296243,
+        "p90": 116661.68884581665
        },
        "realistic": {
-        "p50": 85071.7536816565,
-        "p90": 127771.66123062896
+        "p50": 87825.92557976895,
+        "p90": 132754.68940069864
        },
        "pessimistic": {
-        "p50": 107185.53198830952,
-        "p90": 162622.47268860193
+        "p50": 109235.5246949275,
+        "p90": 171176.11798923172
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 100.11928978620563,
-        "p90": 792.8806173641351
+        "p50": 90.05121541273547,
+        "p90": 778.5437666314538
        },
        "realistic": {
-        "p50": 88.71862718893681,
-        "p90": 762.134035543655
+        "p50": 91.07788813579828,
+        "p90": 769.8258197805844
        },
        "pessimistic": {
-        "p50": 88.17508842982352,
-        "p90": 770.3205532924621
+        "p50": 92.3991150490474,
+        "p90": 773.3994555120589
        }
       }
      },
@@ -2088,10 +2088,10 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.9699623991897895,
-      "community": 0.8752553053281862
+      "gp": 0.9687078321011229,
+      "community": 0.8679440408083989
      },
-     "rejections": 10609,
+     "rejections": 10569,
      "findings": [
       {
        "statement": "The practice has no stable operating point in any world — waits grow without bound.",
@@ -2100,7 +2100,7 @@
        "holdsIn": []
       },
       {
-       "statement": "holds while share of care shifted to community stays below 6%",
+       "statement": "holds while share of care shifted to community stays below 5%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": []
@@ -2119,7 +2119,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 6%",
+      "holds while share of care shifted to community stays below 5%",
       "holds while community capacity multiplier stays above 5.5"
      ]
     },
@@ -2128,44 +2128,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 107375.25589621882,
-        "p90": 163190.56651371275
+        "p50": 110041.09898812597,
+        "p90": 164666.1342301456
        },
        "realistic": {
-        "p50": 115260.52650238329,
-        "p90": 170910.82294751168
+        "p50": 143540.06855017348,
+        "p90": 212091.56263231777
        },
        "pessimistic": {
-        "p50": 144047.189678344,
-        "p90": 213059.64704455627
+        "p50": 144631.5344720459,
+        "p90": 217654.06459537556
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 107858.31488937372,
-        "p90": 164150.73910778097
+        "p50": 110265.61594810325,
+        "p90": 164556.83309368743
        },
        "realistic": {
-        "p50": 116166.8468052076,
-        "p90": 170274.77219142776
+        "p50": 143997.35417506297,
+        "p90": 211956.3689492619
        },
        "pessimistic": {
-        "p50": 145283.46979511977,
-        "p90": 213916.0644419972
+        "p50": 145480.9219861182,
+        "p90": 216682.36007383728
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 57.4053059075959,
-        "p90": 752.007182763773
+        "p50": 58.98943129822146,
+        "p90": 753.993167116656
        },
        "realistic": {
-        "p50": 37.068887359579094,
-        "p90": 750.0852963431971
+        "p50": 59.16946257057134,
+        "p90": 758.4145799865364
        },
        "pessimistic": {
-        "p50": 38.13634760165587,
-        "p90": 750.7766137082072
+        "p50": 56.63901232223725,
+        "p90": 759.4772295472794
        }
       }
      },
@@ -2175,10 +2175,10 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.9556306722304887,
-      "community": 0.8326565080989182
+      "gp": 0.9259654776829492,
+      "community": 0.8444677138528989
      },
-     "rejections": 14508,
+     "rejections": 11449,
      "findings": [
       {
        "statement": "The practice has no stable operating point in any world — waits grow without bound.",
@@ -2187,7 +2187,7 @@
        "holdsIn": []
       },
       {
-       "statement": "holds while share of care shifted to community stays below 6%",
+       "statement": "holds while share of care shifted to community stays below 5%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": []
@@ -2200,7 +2200,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 6%"
+      "holds while share of care shifted to community stays below 5%"
      ]
     }
    ]
@@ -2213,44 +2213,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 499.4061521968106,
-        "p90": 897.8162421914749
+        "p50": 522.626320161391,
+        "p90": 912.4522102220217
        },
        "realistic": {
-        "p50": 2765.666977871326,
-        "p90": 3721.0486274834257
+        "p50": 793.5646313162288,
+        "p90": 1726.828926959337
        },
        "pessimistic": {
-        "p50": 18389.029480077617,
-        "p90": 29102.810337687144
+        "p50": 16654.864445462008,
+        "p90": 24617.210342704202
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 535.3653956808848,
-        "p90": 924.9634446625132
+        "p50": 545.0497610256716,
+        "p90": 930.6799765243777
        },
        "realistic": {
-        "p50": 2811.5386899965815,
-        "p90": 3755.4859944167547
+        "p50": 833.6802698990796,
+        "p90": 1733.4590080342023
        },
        "pessimistic": {
-        "p50": 18195.113961291383,
-        "p90": 29111.86951797607
+        "p50": 16365.088687542826,
+        "p90": 24559.28359021491
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 222.3493884872296,
-        "p90": 795.2647388653131
+        "p50": 219.9426055685035,
+        "p90": 768.193434111774
        },
        "realistic": {
-        "p50": 225.66661462024786,
-        "p90": 786.6751657936547
+        "p50": 212.63615315558854,
+        "p90": 803.0911865365924
        },
        "pessimistic": {
-        "p50": 208.71507674251916,
-        "p90": 788.3677105081733
+        "p50": 215.2407532337238,
+        "p90": 797.2588829569286
        }
       }
      },
@@ -2260,10 +2260,10 @@
       "pessimistic": false
      },
      "utilisation": {
-      "gp": 0.9471842896013075,
-      "community": 0.8551588506947155
+      "gp": 0.9091263466506436,
+      "community": 0.8223148164405164
      },
-     "rejections": 252,
+     "rejections": 386,
      "findings": [
       {
        "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
@@ -2275,7 +2275,7 @@
        ]
       },
       {
-       "statement": "holds while share of care shifted to community stays below 6%",
+       "statement": "holds while share of care shifted to community stays below 5%",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -2284,7 +2284,7 @@
        ]
       },
       {
-       "statement": "12 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+       "statement": "10 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
        "survivesAllThree": false,
        "optimisticOnly": false,
        "holdsIn": [
@@ -2294,7 +2294,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 6%"
+      "holds while share of care shifted to community stays below 5%"
      ]
     },
     {
@@ -2302,44 +2302,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 365.2702240856015,
-        "p90": 830.2483337213052
+        "p50": 362.9423704239307,
+        "p90": 823.6916209067276
        },
        "realistic": {
-        "p50": 391.2713489996968,
-        "p90": 831.9659615954442
+        "p50": 389.88601566152647,
+        "p90": 836.3897816543467
        },
        "pessimistic": {
-        "p50": 386.909366329317,
-        "p90": 827.2987281316891
+        "p50": 383.6984476777143,
+        "p90": 831.8734148896765
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 398.23056164296577,
-        "p90": 851.094019615557
+        "p50": 382.3180912642274,
+        "p90": 836.339970786823
        },
        "realistic": {
-        "p50": 411.9220825007069,
-        "p90": 857.9680735362926
+        "p50": 407.08955168473767,
+        "p90": 847.0335510557052
        },
        "pessimistic": {
-        "p50": 398.7302008118131,
-        "p90": 847.5895534562878
+        "p50": 390.58267668576445,
+        "p90": 844.1712849565083
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 207.31292582748574,
-        "p90": 790.0321099581197
+        "p50": 202.20423450227827,
+        "p90": 777.6519529893412
        },
        "realistic": {
-        "p50": 191.79121825483162,
-        "p90": 766.8322095795302
+        "p50": 200.13711021322524,
+        "p90": 788.1225878102123
        },
        "pessimistic": {
-        "p50": 215.60753586806823,
-        "p90": 776.637059631641
+        "p50": 206.06832974409917,
+        "p90": 796.1124217091128
        }
       }
      },
@@ -2349,10 +2349,10 @@
       "pessimistic": true
      },
      "utilisation": {
-      "gp": 0.7702710682753084,
-      "community": 0.8932428581736294
+      "gp": 0.8103207642595235,
+      "community": 0.8395339485206615
      },
-     "rejections": 190,
+     "rejections": 369,
      "findings": [
       {
        "statement": "The practice keeps a stable operating point in all three worlds.",
@@ -2384,44 +2384,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 360.37490264183725,
-        "p90": 818.1799249242758
+        "p50": 359.46253278900986,
+        "p90": 814.1772303829202
        },
        "realistic": {
-        "p50": 377.0716171285021,
-        "p90": 831.8485980049009
+        "p50": 374.22213328635553,
+        "p90": 817.8720244716387
        },
        "pessimistic": {
-        "p50": 385.7393085407675,
-        "p90": 831.081872539653
+        "p50": 383.581912111782,
+        "p90": 830.7833050533081
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 372.94976139976643,
-        "p90": 831.2084539620846
+        "p50": 384.96231437590905,
+        "p90": 840.4409327510512
        },
        "realistic": {
-        "p50": 391.6153782061883,
-        "p90": 833.2956015510717
+        "p50": 399.82932561883354,
+        "p90": 844.6664894088171
        },
        "pessimistic": {
-        "p50": 405.24051009851974,
-        "p90": 846.3778287012829
+        "p50": 408.537399662775,
+        "p90": 840.1876702308655
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 241.73823893337976,
-        "p90": 800.6305799050606
+        "p50": 196.3987402957282,
+        "p90": 788.3108123716665
        },
        "realistic": {
-        "p50": 183.60554094583495,
-        "p90": 788.1936936189886
+        "p50": 213.11330596811604,
+        "p90": 802.5028098153416
        },
        "pessimistic": {
-        "p50": 206.28145669877995,
-        "p90": 802.8647317519644
+        "p50": 223.28587553056423,
+        "p90": 802.1162096900516
        }
       }
      },
@@ -2431,10 +2431,10 @@
       "pessimistic": true
      },
      "utilisation": {
-      "gp": 0.6867800132001382,
-      "community": 0.931347071488436
+      "gp": 0.704323180069003,
+      "community": 0.8191079519948486
      },
-     "rejections": 159,
+     "rejections": 375,
      "findings": [
       {
        "statement": "The practice keeps a stable operating point in all three worlds.",
@@ -2447,7 +2447,7 @@
        ]
       },
       {
-       "statement": "holds while share of care shifted to community stays below 31%",
+       "statement": "holds while share of care shifted to community stays below 30%",
        "survivesAllThree": true,
        "optimisticOnly": false,
        "holdsIn": [
@@ -2458,7 +2458,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 31%"
+      "holds while share of care shifted to community stays below 30%"
      ]
     },
     {
@@ -2466,44 +2466,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 320.0341972318711,
-        "p90": 810.9555207056692
+        "p50": 320.5815296553483,
+        "p90": 810.8716189392726
        },
        "realistic": {
-        "p50": 329.7480308780214,
-        "p90": 811.3904760982841
+        "p50": 330.4735719754826,
+        "p90": 820.3939393729088
        },
        "pessimistic": {
-        "p50": 342.32467155047925,
-        "p90": 820.412836346426
+        "p50": 314.95288857695414,
+        "p90": 814.056474555633
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 333.8019024502719,
-        "p90": 820.2251829964807
+        "p50": 345.15013388579246,
+        "p90": 833.5337703011464
        },
        "realistic": {
-        "p50": 352.97144210882834,
-        "p90": 828.5157784353942
+        "p50": 347.3597187898122,
+        "p90": 828.827198912506
        },
        "pessimistic": {
-        "p50": 367.2557980577694,
-        "p90": 833.3215807457455
+        "p50": 332.3323336967733,
+        "p90": 828.7339457061607
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 225.20933127810713,
-        "p90": 790.5541226236965
+        "p50": 189.54257102892734,
+        "p90": 800.2833679785253
        },
        "realistic": {
-        "p50": 200.9561635524733,
-        "p90": 797.8326152422524
+        "p50": 207.57845567062031,
+        "p90": 789.7934700475307
        },
        "pessimistic": {
-        "p50": 230.93229045590851,
-        "p90": 792.1929686088115
+        "p50": 213.90780669928063,
+        "p90": 795.720295203093
        }
       }
      },
@@ -2513,10 +2513,10 @@
       "pessimistic": true
      },
      "utilisation": {
-      "gp": 0.5976779106764281,
-      "community": 0.9047066622674996
+      "gp": 0.6356065667557793,
+      "community": 0.9078060174042627
      },
-     "rejections": 112,
+     "rejections": 349,
      "findings": [
       {
        "statement": "The practice keeps a stable operating point in all three worlds.",
@@ -2548,44 +2548,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 321.7641087445081,
-        "p90": 805.0505374434288
+        "p50": 321.25759088620543,
+        "p90": 805.7260892182821
        },
        "realistic": {
-        "p50": 328.43269969098037,
-        "p90": 806.0692966555944
+        "p50": 327.72481850202894,
+        "p90": 809.9291468372103
        },
        "pessimistic": {
-        "p50": 345.5924845795962,
-        "p90": 822.5939782478381
+        "p50": 339.8001253831899,
+        "p90": 823.9695689416258
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 330.5235225710785,
-        "p90": 815.7127763805911
+        "p50": 345.5598368708743,
+        "p90": 825.9846710367128
        },
        "realistic": {
-        "p50": 353.7726048847253,
-        "p90": 819.2267975930008
+        "p50": 343.6421586526558,
+        "p90": 831.9556304721627
        },
        "pessimistic": {
-        "p50": 368.7243118864717,
-        "p90": 834.4940997633385
+        "p50": 349.0868226137827,
+        "p90": 830.1162149620941
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 247.63483450212516,
-        "p90": 808.8670477366541
+        "p50": 169.9669253177126,
+        "p90": 801.7113635466085
        },
        "realistic": {
-        "p50": 202.3399159850087,
-        "p90": 792.4803790948354
+        "p50": 233.14886093582027,
+        "p90": 791.6804741937667
        },
        "pessimistic": {
-        "p50": 209.0465688215918,
-        "p90": 778.6458605629159
+        "p50": 226.60582735110074,
+        "p90": 778.4694123691879
        }
       }
      },
@@ -2595,10 +2595,10 @@
       "pessimistic": true
      },
      "utilisation": {
-      "gp": 0.5452384774618599,
-      "community": 0.8447339512345143
+      "gp": 0.5438464131739963,
+      "community": 0.8347083647173587
      },
-     "rejections": 297,
+     "rejections": 262,
      "findings": [
       {
        "statement": "The practice keeps a stable operating point in all three worlds.",
@@ -2611,7 +2611,7 @@
        ]
       },
       {
-       "statement": "holds while share of care shifted to community stays below 49%",
+       "statement": "holds while share of care shifted to community stays below 50%",
        "survivesAllThree": true,
        "optimisticOnly": false,
        "holdsIn": [
@@ -2622,7 +2622,7 @@
       }
      ],
      "thresholds": [
-      "holds while share of care shifted to community stays below 49%"
+      "holds while share of care shifted to community stays below 50%"
      ]
     },
     {
@@ -2630,44 +2630,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 296.0023905824637,
-        "p90": 806.5125485466851
+        "p50": 298.72920565574896,
+        "p90": 804.2325172153069
        },
        "realistic": {
-        "p50": 305.66142765048426,
-        "p90": 805.7115274523385
+        "p50": 306.98719658053597,
+        "p90": 815.2249875019188
        },
        "pessimistic": {
-        "p50": 313.9420979882125,
-        "p90": 811.731191661529
+        "p50": 293.7715569114662,
+        "p90": 805.8050812566653
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 317.18382503604516,
-        "p90": 818.7088524650317
+        "p50": 310.73785509285517,
+        "p90": 813.8541820145911
        },
        "realistic": {
-        "p50": 317.585570315714,
-        "p90": 819.2766886176541
+        "p50": 316.129126051208,
+        "p90": 823.4617501430039
        },
        "pessimistic": {
-        "p50": 330.96334786491934,
-        "p90": 824.0491807623766
+        "p50": 314.0591590363765,
+        "p90": 822.8637538492912
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 215.0316187479766,
-        "p90": 796.8362306139607
+        "p50": 238.91171260096598,
+        "p90": 796.2626459096791
        },
        "realistic": {
-        "p50": 194.83287719031796,
-        "p90": 784.5322698220552
+        "p50": 224.8929935944616,
+        "p90": 784.3971372286323
        },
        "pessimistic": {
-        "p50": 195.00539162600762,
-        "p90": 781.9543524301844
+        "p50": 207.1326707827393,
+        "p90": 786.2125215890119
        }
       }
      },
@@ -2677,10 +2677,10 @@
       "pessimistic": true
      },
      "utilisation": {
-      "gp": 0.5421616463975739,
-      "community": 0.9387747642477853
+      "gp": 0.5244304979614004,
+      "community": 0.9072001219799226
      },
-     "rejections": 276,
+     "rejections": 281,
      "findings": [
       {
        "statement": "The practice keeps a stable operating point in all three worlds.",
@@ -2700,44 +2700,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 297.23383547295816,
-        "p90": 804.6843128379551
+        "p50": 296.1693872024771,
+        "p90": 805.7103165773442
        },
        "realistic": {
-        "p50": 305.9344411638449,
-        "p90": 805.3818819554872
+        "p50": 304.65495746419765,
+        "p90": 806.2594664160861
        },
        "pessimistic": {
-        "p50": 313.93858527042903,
-        "p90": 799.9226881396316
+        "p50": 312.6650735489093,
+        "p90": 815.0805700488854
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 326.06813273817534,
-        "p90": 820.648662737105
+        "p50": 318.55337825929746,
+        "p90": 821.9713268054184
        },
        "realistic": {
-        "p50": 327.1087830835022,
-        "p90": 833.3289465670241
+        "p50": 312.18123776925495,
+        "p90": 832.6226934948936
        },
        "pessimistic": {
-        "p50": 330.24629945110064,
-        "p90": 825.2031248993007
+        "p50": 307.83599471196067,
+        "p90": 821.2400480748038
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 217.27478802378755,
-        "p90": 816.552221545775
+        "p50": 204.55353121750522,
+        "p90": 779.2307611801662
        },
        "realistic": {
-        "p50": 196.27793237997685,
-        "p90": 791.6635220241733
+        "p50": 185.91026329249144,
+        "p90": 785.2846512245014
        },
        "pessimistic": {
-        "p50": 158.30642533907667,
-        "p90": 804.1504961270839
+        "p50": 210.5558770201169,
+        "p90": 784.518945746473
        }
       }
      },
@@ -2747,10 +2747,10 @@
       "pessimistic": true
      },
      "utilisation": {
-      "gp": 0.4686498506979962,
-      "community": 0.8379635732975262
+      "gp": 0.49145068655662794,
+      "community": 0.8840293437525322
      },
-     "rejections": 322,
+     "rejections": 382,
      "findings": [
       {
        "statement": "The practice keeps a stable operating point in all three worlds.",
@@ -2770,44 +2770,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 285.3009210153832,
-        "p90": 798.8732364095049
+        "p50": 284.89660656102933,
+        "p90": 800.0071920704213
        },
        "realistic": {
-        "p50": 290.99437930167187,
-        "p90": 798.7054433325538
+        "p50": 290.821077722474,
+        "p90": 801.3770123309223
        },
        "pessimistic": {
-        "p50": 297.8990820188774,
-        "p90": 804.1195126368839
+        "p50": 288.44748699100455,
+        "p90": 803.0349572029663
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 289.4089137702249,
-        "p90": 809.7589926780784
+        "p50": 295.4106848962838,
+        "p90": 819.591847317206
        },
        "realistic": {
-        "p50": 288.52008437528275,
-        "p90": 807.7598776346422
+        "p50": 294.4193576417165,
+        "p90": 809.2805524356372
        },
        "pessimistic": {
-        "p50": 303.80494989373256,
-        "p90": 830.3063475501258
+        "p50": 312.96989493235014,
+        "p90": 815.3076044017798
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 194.85694917367073,
-        "p90": 775.8548976411112
+        "p50": 225.4194948009681,
+        "p90": 764.3815981619991
        },
        "realistic": {
-        "p50": 164.3709793020389,
-        "p90": 780.2373736519367
+        "p50": 222.5873431022046,
+        "p90": 789.566662538331
        },
        "pessimistic": {
-        "p50": 232.32462873577606,
-        "p90": 793.3179898085073
+        "p50": 230.90848717838526,
+        "p90": 818.7044705919689
        }
       }
      },
@@ -2817,10 +2817,10 @@
       "pessimistic": true
      },
      "utilisation": {
-      "gp": 0.4034883983364265,
-      "community": 0.9220556369816895
+      "gp": 0.3781352045942666,
+      "community": 0.9000411289759896
      },
-     "rejections": 205,
+     "rejections": 65,
      "findings": [
       {
        "statement": "The practice keeps a stable operating point in all three worlds.",
@@ -2840,44 +2840,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 271.62298586033285,
-        "p90": 795.6120103290305
+        "p50": 270.4192431329284,
+        "p90": 796.4196187471971
        },
        "realistic": {
-        "p50": 279.8930523577146,
-        "p90": 801.4038544958457
+        "p50": 280.04543581063626,
+        "p90": 801.8094446370087
        },
        "pessimistic": {
-        "p50": 271.11548495144234,
-        "p90": 797.743458574987
+        "p50": 270.7458354154369,
+        "p90": 794.4549364713021
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 309.609390170197,
-        "p90": 821.6574288090342
+        "p50": 299.05262052849866,
+        "p90": 821.3165443998296
        },
        "realistic": {
-        "p50": 279.1639377922402,
-        "p90": 799.0932297820691
+        "p50": 286.970552856219,
+        "p90": 808.3648275155283
        },
        "pessimistic": {
-        "p50": 290.014262952609,
-        "p90": 813.4673634352221
+        "p50": 285.4926001410349,
+        "p90": 809.8708616807126
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 229.31366599720786,
-        "p90": 802.9386073046771
+        "p50": 184.11324705704465,
+        "p90": 790.7040786706784
        },
        "realistic": {
-        "p50": 198.74419723439496,
-        "p90": 787.1624752626522
+        "p50": 200.9142779694521,
+        "p90": 782.7384380911244
        },
        "pessimistic": {
-        "p50": 221.52735107496846,
-        "p90": 811.4192107132403
+        "p50": 244.44362418202218,
+        "p90": 786.0657460567891
        }
       }
      },
@@ -2887,10 +2887,10 @@
       "pessimistic": true
      },
      "utilisation": {
-      "gp": 0.3199161936989412,
-      "community": 0.8897646525590023
+      "gp": 0.35854234601712326,
+      "community": 0.878871524312126
      },
-     "rejections": 63,
+     "rejections": 314,
      "findings": [
       {
        "statement": "The practice keeps a stable operating point in all three worlds.",
@@ -2910,44 +2910,44 @@
      "waits": {
       "routine": {
        "optimistic": {
-        "p50": 262.68786108936183,
-        "p90": 797.9955571960309
+        "p50": 263.7022598798503,
+        "p90": 792.9594288158987
        },
        "realistic": {
-        "p50": 267.32094400015194,
-        "p90": 796.4640451385058
+        "p50": 269.4630834831041,
+        "p90": 792.9468242763542
        },
        "pessimistic": {
-        "p50": 266.95003151439596,
-        "p90": 793.4620483004837
+        "p50": 271.4662957054097,
+        "p90": 791.5584740204504
        }
       },
       "complex": {
        "optimistic": {
-        "p50": 280.02286962547805,
-        "p90": 810.642780538532
+        "p50": 298.0338728755014,
+        "p90": 827.9087491380633
        },
        "realistic": {
-        "p50": 286.4785516958218,
-        "p90": 826.9325189818628
+        "p50": 282.65479028230766,
+        "p90": 812.6254123626277
        },
        "pessimistic": {
-        "p50": 268.0211380737019,
-        "p90": 806.1468720754492
+        "p50": 288.967963442381,
+        "p90": 808.7665336013306
        }
       },
       "urgent": {
        "optimistic": {
-        "p50": 180.19909726595506,
-        "p90": 769.6213263401587
+        "p50": 224.88845424697502,
+        "p90": 792.3754958632635
        },
        "realistic": {
-        "p50": 214.76080888300203,
-        "p90": 797.596467883559
+        "p50": 223.93484612979228,
+        "p90": 787.2104921799328
        },
        "pessimistic": {
-        "p50": 171.50379539257847,
-        "p90": 776.7262448109686
+        "p50": 196.3419206190738,
+        "p90": 785.805063122767
        }
       }
      },
@@ -2957,10 +2957,10 @@
       "pessimistic": true
      },
      "utilisation": {
-      "gp": 0.30174819989783774,
-      "community": 0.8786867272861697
+      "gp": 0.29876922706790693,
+      "community": 0.8712042525468859
      },
-     "rejections": 184,
+     "rejections": 138,
      "findings": [
       {
        "statement": "The practice keeps a stable operating point in all three worlds.",
