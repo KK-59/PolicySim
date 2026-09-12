@@ -35,7 +35,12 @@ observed.
 
 ## Screens
 
-<!-- Screenshots go here. -->
+| | |
+|---|---|
+| <img src="docs/assets/screen-landing.webp" alt="Landing"> | <img src="docs/assets/screen-upload.webp" alt="Upload a policy document"> |
+| **Landing.** One screen, two ways in. | **Upload.** The document is the way in, not a parameter form. |
+| <img src="docs/assets/screen-about.webp" alt="How it works"> | *Results. Coming once the grid is wired in.* |
+| **How it works.** Where the model sits, and where it does not. | **Three worlds.** Every sampled run behind the three percentiles. |
 
 ## How it works
 
