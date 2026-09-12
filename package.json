@@ -5,7 +5,9 @@
   "description": "Every policy runs in three worlds. Team 14 — OpenAI x Anima Healthtech Hackathon.",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently -k -n api,ui \"npm:dev:api\" \"vite\"",
+    "dev:api": "tsx watch src/dashboard/server.ts",
+    "start:api": "tsx src/dashboard/server.ts",
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run && node tests/verify.ts",
@@ -20,13 +22,15 @@
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "zod": "^4.6.2"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^10.0.5",
     "dotenv": "^16.4.7",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
