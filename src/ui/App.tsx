@@ -18,15 +18,19 @@ import { useRun } from './lib/store'
 import { IS_SYNTHETIC } from './data'
 import './styles/app.css'
 
+/**
+ * The flow, and only the flow. `/worlds` is not here: it is the report, reached from a button on
+ * the world it reports on, not a stage anyone passes through.
+ */
 const STEPS: { to: Route; label: string }[] = [
   { to: '/upload', label: 'Policy' },
   { to: '/parameters', label: 'Parameters' },
-  { to: '/worlds', label: 'Three worlds' },
   { to: '/world', label: 'The world' },
 ]
 
 function Bar({ route }: { route: Route }) {
-  const step = STEPS.findIndex((s) => s.to === route)
+  // The report belongs to the world it reports on, so the bar keeps that step lit while reading it.
+  const step = STEPS.findIndex((s) => s.to === (route === '/worlds' ? '/world' : route))
 
   return (
     <header className="bar">
@@ -41,7 +45,12 @@ function Bar({ route }: { route: Route }) {
             {STEPS.map((s, i) => (
               <span key={s.to} className="steps__item" data-state={i === step ? 'current' : i < step ? 'done' : 'todo'}>
                 {i > 0 && <span className="steps__sep" aria-hidden="true" />}
-                {i < step ? <a href={href(s.to)}>{s.label}</a> : <span>{s.label}</span>}
+                {/*
+                  Every step but the current one is a link. Only marking completed steps as
+                  navigable meant the last step could never be reached by clicking it — the one
+                  case where a user is most likely to try.
+                */}
+                {i === step ? <span>{s.label}</span> : <a href={href(s.to)}>{s.label}</a>}
               </span>
             ))}
           </nav>

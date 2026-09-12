@@ -1,9 +1,11 @@
 /**
- * Three worlds. The result, and nothing else.
+ * The report.
  *
- * Chart, the lever that drives it, and the findings. Sensitivity and flags sit behind a disclosure
- * because they matter for trusting the answer but not for reading it. Everything is delta against
- * the locked baseline, never an absolute.
+ * Not a stage in the flow — the world view is where a reader lands, and this is what they open
+ * when they want the analysis behind it: the three worlds side by side, the sweep, the findings,
+ * and the sensitivity and flags behind a disclosure.
+ *
+ * Everything is delta against the locked baseline, never an absolute.
  */
 
 import { useState } from 'react'
@@ -14,6 +16,7 @@ import { Findings } from '../components/WorldPanel'
 import { WorldOutcomes } from '../components/WorldOutcomes'
 import { metrics as baselineMetrics, sweep as baselineSweep } from '../data'
 import { useRun } from '../lib/store'
+import { href } from '../lib/router'
 import type { Metrics } from '@/contracts/metrics'
 import type { Sweep, SweepSeries } from '../data'
 
@@ -52,6 +55,16 @@ export function ThreeWorlds() {
           </span>
         </p>
       )}
+
+      <div className="row between">
+        <a className="btn btn--ghost" href={href('/world')}>
+          <Glyph name="arrow" size={14} />
+          Back to the world
+        </a>
+        <span className="muted small">
+          {isLive ? `${metrics.run.samples} sampled runs` : 'precomputed baseline'}
+        </span>
+      </div>
 
       {/* What each world IS, before how it moves. A reader should be able to answer "what
           happens if the pessimistic one is real" without reading a line chart. */}

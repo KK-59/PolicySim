@@ -12,7 +12,9 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { Glyph } from '../components/Glyph'
+import { navigate } from '../lib/router'
 import { useRun } from '../lib/store'
+import type { Metrics } from '@/contracts/metrics'
 
 const DAY = 1440
 
@@ -102,6 +104,7 @@ const wait = (mins: number) => (mins < 60 ? `${Math.round(mins)}m` : `${(mins / 
 
 export function World() {
   const run = useRun()
+  const metrics = run.result?.metrics as Metrics | undefined
   const [data, setData] = useState<WorldData | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [offset, setOffset] = useState(0)
@@ -189,32 +192,59 @@ export function World() {
         </button>
       </div>
 
-      {/* Which world. Not a re-roll: each is the sampled parameter draw that produced that
-          percentile, so this is the same pessimistic world the chart was drawn from. */}
-      <div className="worldpick mt-3" role="group" aria-label="Which world to watch">
-        {WORLDS.map((w) => (
-          <button
-            type="button"
-            key={w}
-            className={`worldpick__btn world--${w}`}
-            aria-pressed={world === w}
-            data-active={world === w}
-            disabled={loading}
-            onClick={() => setWorld(w)}
-          >
-            <Glyph name={w} size={13} />
-            <span className="worldpick__name">{w}</span>
-            <span className="worldpick__pct">{PERCENTILE[w]}</span>
-          </button>
-        ))}
-        {loading && <span className="muted small">running…</span>}
+      {/*
+        The choice of world is the primary control on this page, so it is the biggest thing on it.
+        Each card carries that world's own headline outcome where a run exists, because "which
+        world do I want to watch" is a question about what happens in them.
+
+        Not a re-roll: each is the sampled parameter draw that produced that percentile, so this
+        is the same pessimistic world the chart was drawn from.
+      */}
+      <div className="worldpick mt-4" role="group" aria-label="Which world to watch">
+        {WORLDS.map((w) => {
+          const band = metrics?.worlds.waits.routine[w]
+          const stable = metrics?.worlds.perNode['gp-clinic']?.[w].stable ?? true
+          return (
+            <button
+              type="button"
+              key={w}
+              className={`worldpick__card world--${w}`}
+              aria-pressed={world === w}
+              data-active={world === w}
+              disabled={loading}
+              onClick={() => setWorld(w)}
+            >
+              <span className="worldpick__top">
+                <Glyph name={w} size={16} />
+                <span className="worldpick__name">{w}</span>
+                <span className="worldpick__pct">{PERCENTILE[w]}</span>
+              </span>
+              <span className="worldpick__stat">
+                {band === undefined
+                  ? '—'
+                  : !stable
+                    ? 'no steady state'
+                    : band.p50 / DAY < 1
+                      ? `${(band.p50 / 60).toFixed(1)}h median wait`
+                      : `${(band.p50 / DAY).toFixed(1)}d median wait`}
+              </span>
+              {world === w && loading && <span className="worldpick__busy">running…</span>}
+            </button>
+          )
+        })}
       </div>
 
-      <p className="lead mt-3">
-        {data.trace.length.toLocaleString()} events over {data.days} simulated days in the{' '}
-        <strong>{data.world}</strong> world, replayed from the engine's own log. Scrub to a minute
-        and click a service to see who is waiting in it.
-      </p>
+      <div className="row between mt-4">
+        <p className="lead" style={{ margin: 0 }}>
+          {data.trace.length.toLocaleString()} events over {data.days} simulated days in the{' '}
+          <strong>{data.world}</strong> world, replayed from the engine's own log. Scrub to a
+          minute and click a service to see who is waiting in it.
+        </p>
+        <button type="button" className="btn btn--ghost" onClick={() => navigate('/worlds')}>
+          <Glyph name="document" size={14} />
+          Full report
+        </button>
+      </div>
 
       <div className="scrubber mt-5">
         <input

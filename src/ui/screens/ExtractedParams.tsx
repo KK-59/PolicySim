@@ -47,7 +47,7 @@ export function ExtractedParams() {
         result: { metrics: payload.metrics, sweep: payload.sweep },
         running: false,
       })
-      navigate('/worlds')
+      navigate('/world')
     } catch (cause) {
       setRun({ running: false })
       setError(cause instanceof Error ? cause.message : String(cause))
@@ -102,7 +102,7 @@ export function ExtractedParams() {
             void runPolicy()
           }}
         >
-          {run.running ? 'Simulating…' : 'Run in three worlds'}
+          {run.running ? 'Simulating…' : 'Run the three worlds'}
           {!run.running && <Glyph name="arrow" size={16} />}
         </button>
       </div>
