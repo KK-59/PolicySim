@@ -898,6 +898,8 @@ textarea::placeholder {
    --------------------------------------------------------------------------- */
 
 .landing {
+  position: relative;
+  isolation: isolate;
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
@@ -907,6 +909,58 @@ textarea::placeholder {
   gap: var(--s-4);
   padding: var(--s-6);
   text-align: center;
+  overflow: hidden;
+}
+
+/*
+ * The neighbourhood the engine actually models, sitting under the page.
+ * Desaturated and held right back: it is atmosphere, not content, and the name and buttons have
+ * to stay the only things anyone reads. The acid-yellow wash is the event palette doing the work
+ * a flat grey tint would have done, and the white vignette keeps the centre clean.
+ */
+.landing__ground {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: url('/neighbourhood.webp');
+  background-size: cover;
+  background-position: center 62%;
+  filter: grayscale(1) contrast(0.88) brightness(1.02);
+  opacity: 0.5;
+}
+
+/*
+ * The yellow has to be its OWN layer. As a ::after on the ground it inherited that element's
+ * grayscale filter and came out as another grey, which is the opposite of the point.
+ */
+.landing__tint {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: var(--brand-yellow);
+  mix-blend-mode: multiply;
+  opacity: 0.2;
+}
+
+/* Vignette: white at the centre so the type never fights the rooftops. */
+.landing__veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(52% 44% at 50% 44%, var(--paper) 26%, rgba(255, 255, 255, 0.78) 56%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(to bottom, var(--paper) 0%, rgba(255, 255, 255, 0) 22%);
+}
+
+/* One violet hairline under the name, from the event identity. */
+.landing__name::after {
+  content: '';
+  display: block;
+  width: 84px;
+  height: 3px;
+  margin: var(--s-4) auto 0;
+  border-radius: var(--r-pill);
+  background: linear-gradient(90deg, var(--brand-violet), var(--brand-yellow));
 }
 
 .landing__name {

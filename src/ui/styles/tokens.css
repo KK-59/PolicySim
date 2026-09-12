@@ -37,6 +37,15 @@
   --w-realistic-wash: var(--paper-panel);
   --w-pessimistic-wash: var(--wash-fuchsia);
 
+  /*
+   * Event palette, from the OpenAI x Anima identity: acid yellow and periwinkle violet.
+   * CHROME ONLY. These never touch data. The three worlds stay blue / ink / fuchsia because
+   * those carry meaning in the chart, and tinting a result with a decorative hue is how a
+   * chart starts lying. Yellow and violet are allowed on grounds, capes and accents.
+   */
+  --brand-yellow: #e9e63c;
+  --brand-violet: #7b6bc4;
+
   /* Source tags. Amber is the one hue outside Anima's palette. */
   --amber: #b45309;
   --amber-wash: #fffbeb;

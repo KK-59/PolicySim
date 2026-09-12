@@ -31,7 +31,7 @@ function Bar({ route }: { route: Route }) {
       <div className="page bar__inner">
         <a className="wordmark" href={href('/')}>
           <span className="wordmark__rule" aria-hidden="true" />
-          Policy Sandbox
+          PolicySim
         </a>
 
         {step !== -1 && (

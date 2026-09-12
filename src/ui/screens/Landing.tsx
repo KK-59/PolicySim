@@ -13,8 +13,11 @@ import { href } from '../lib/router'
 export function Landing() {
   return (
     <section className="landing">
-      <Mascot mood={moodFromFindings(metrics.findings)} size={92} />
-      <h1 className="landing__name">Policy Sandbox</h1>
+      <div className="landing__ground" aria-hidden="true" />
+      <div className="landing__tint" aria-hidden="true" />
+      <div className="landing__veil" aria-hidden="true" />
+      <Mascot mood={moodFromFindings(metrics.findings)} size={128} />
+      <h1 className="landing__name">PolicySim</h1>
       <p className="landing__line">Every policy runs in three worlds.</p>
       <div className="landing__actions">
         <a className="btn btn--primary btn--lg" href={href('/upload')}>

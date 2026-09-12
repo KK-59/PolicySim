@@ -18,7 +18,7 @@ export function About() {
           and its clock moves in minutes while the question spans years.
         </p>
         <p>
-          Policy Sandbox is the missing counterfactual layer. Upload the document you already
+          PolicySim is the missing counterfactual layer. Upload the document you already
           wrote. It becomes engine parameters, each one carrying where it came from, and runs
           forward {metrics.run.samples.toLocaleString('en-GB')} times.
         </p>

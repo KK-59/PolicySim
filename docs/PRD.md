@@ -1,4 +1,4 @@
-# Policy Sandbox — Final PRD
+# PolicySim — Final PRD
 **Team 14 · OpenAI × Anima Healthtech Hackathon · 12 Sep 2026**
 **One line:** *Every policy runs in three worlds — optimistic, realistic, pessimistic. See which conclusions survive all three. Then act, with a clinician approving.*
 
@@ -25,7 +25,7 @@ The 10-Year Health Plan commits to shifting care from hospital to community (Ch.
 
 NHS-SIM lets you observe one world and follow a patient through it. It cannot compare two ways of running the neighbourhood interactively at scale: a world is 50k patients, reads took 90 seconds this morning, and its clock moves in minutes while the question spans years.
 
-**Policy Sandbox is the missing counterfactual layer** — and it closes the loop back to a patient and a clinician.
+**PolicySim is the missing counterfactual layer** — and it closes the loop back to a patient and a clinician.
 
 **Chapters addressed:** 2 (Neighbourhood Health Service design, discharge, community capacity, inverse care law), 3 (single view across services, less manual chasing), 6 (safety signals made visible and actionable; uncertainty shown, not hidden), 8 (evidence before rollout — the trial-to-adoption gap; AI + interoperable data), 9 (productivity).
 

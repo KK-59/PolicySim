@@ -37,7 +37,7 @@ must be able to answer "where did that come from".
 
 ## Product Purpose
 
-Policy Sandbox is the counterfactual layer NHS-SIM is missing. NHS-SIM lets you observe one
+PolicySim is the counterfactual layer NHS-SIM is missing. NHS-SIM lets you observe one
 world and follow a patient through it; it cannot compare two ways of running a neighbourhood,
 because a world is 50k patients, reads take ~90 seconds, and its clock moves in minutes while
 the question spans years.
@@ -103,7 +103,7 @@ clinical safe-state rules belong to other people and may land at any time.
 
 ## Brand Commitments
 
-- Name: **Policy Sandbox**. Team 14.
+- Name: **PolicySim**. Team 14.
 - One line: *Every policy runs in three worlds. See which conclusions survive all three.*
 - Voice: sober, specific, quantified, and willing to state its own limits out loud. The product
   says what it does not model. It never rounds a caveat away.
