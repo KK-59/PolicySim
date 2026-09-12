@@ -27,6 +27,9 @@ const W = 1000
 const H = 380
 const PAD = { top: 18, right: 20, bottom: 38, left: 58 }
 
+const finitePoint = (point: { x: number; y: number }) =>
+  Number.isFinite(point.x) && Number.isFinite(point.y)
+
 interface Props {
   series: SweepSeries
   /** Current lever position, in the series' own x units. */
@@ -50,12 +53,24 @@ export function WorldChart({ series, value, policyValue, breakpoint, sampleCount
   const [hoverX, setHoverX] = useState<number | null>(null)
 
   const { x, y, domain } = useMemo(() => {
-    const xs = worldPoints(series, 'realistic').map((p) => p.x)
-    const xMin = Math.min(...xs)
-    const xMax = Math.max(...xs)
+    const points = [
+      ...series.worlds.flatMap((world) => world.points),
+      ...series.ghosts.flatMap((ghost) => ghost.points),
+    ].filter(finitePoint)
+    const xs = [
+      ...points.map((point) => point.x),
+      value,
+      policyValue,
+      breakpoint,
+    ].filter((candidate): candidate is number => candidate != null && Number.isFinite(candidate))
+    const rawXMin = xs.length > 0 ? Math.min(...xs) : 0
+    const rawXMax = xs.length > 0 ? Math.max(...xs) : 1
+    const xPad = rawXMin === rawXMax ? Math.max(Math.abs(rawXMin) * 0.1, 1) : 0
+    const xMin = rawXMin - xPad
+    const xMax = rawXMax + xPad
 
-    const ghostY = series.ghosts.flatMap((g) => g.points.map((p) => p.y))
-    const worldY = series.worlds.flatMap((w) => w.points.map((p) => p.y))
+    const ghostY = series.ghosts.flatMap((g) => g.points.filter(finitePoint).map((p) => p.y))
+    const worldY = series.worlds.flatMap((w) => w.points.filter(finitePoint).map((p) => p.y))
     // Trim the ghost cloud's extremes so two runaway runs cannot flatten everything else.
     const lo = Math.min(pct(ghostY, 0.02), ...worldY, 0)
     const hi = Math.max(pct(ghostY, 0.98), ...worldY, 0)
@@ -71,10 +86,13 @@ export function WorldChart({ series, value, policyValue, breakpoint, sampleCount
       y: (v: number) =>
         PAD.top + (1 - (v - yMin) / (yMax - yMin)) * (H - PAD.top - PAD.bottom),
     }
-  }, [series])
+  }, [breakpoint, policyValue, series, value])
 
   const line = (pts: { x: number; y: number }[]) =>
-    pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${x(p.x).toFixed(1)} ${y(p.y).toFixed(1)}`).join(' ')
+    pts
+      .filter(finitePoint)
+      .map((p, i) => `${i === 0 ? 'M' : 'L'}${x(p.x).toFixed(1)} ${y(p.y).toFixed(1)}`)
+      .join(' ')
 
   const xTicks = useMemo(() => {
     const out: number[] = []
@@ -95,7 +113,8 @@ export function WorldChart({ series, value, policyValue, breakpoint, sampleCount
   /** Value at the cursor, per world, read off the nearest sampled position. */
   const readAt = (xv: number) =>
     WORLD_ORDER.map((w) => {
-      const pts = worldPoints(series, w)
+      const pts = worldPoints(series, w).filter(finitePoint)
+      if (pts.length === 0) return { world: w, value: null }
       const nearest = pts.reduce((best, p) =>
         Math.abs(p.x - xv) < Math.abs(best.x - xv) ? p : best,
       )
@@ -203,11 +222,11 @@ export function WorldChart({ series, value, policyValue, breakpoint, sampleCount
           y2={H - PAD.bottom}
           opacity={0.35}
         />
-        {readout.map((r) => (
+        {readout.filter((r) => r.value != null).map((r) => (
           <circle
             key={r.world}
             cx={x(cursor)}
-            cy={y(r.value)}
+            cy={y(r.value as number)}
             r={4}
             fill="var(--paper)"
             stroke={`var(--w-${r.world})`}
@@ -262,7 +281,7 @@ export function WorldChart({ series, value, policyValue, breakpoint, sampleCount
         <div className="chart-readout">
           {readout.map((r) => (
             <div key={r.world} className={`readout world world--${r.world}`}>
-              <span className="readout__value">{signed(r.value, 1)}</span>
+              <span className="readout__value">{r.value == null ? 'Unstable' : signed(r.value, 1)}</span>
               <span className="label">
                 {r.world} &middot; {WORLD_PERCENTILE[r.world as WorldName]}
               </span>
