@@ -1,0 +1,32 @@
+# Who reviews what. GitHub auto-requests these people on a PR touching their paths.
+# Replace the placeholder handles with real GitHub usernames before pushing.
+
+# Frozen contracts — a change here breaks three other people. Everyone reviews.
+/src/contracts/            @kaavya-gh @oriol-gh @albert-gh @elsa-gh
+/docs/contracts.md         @kaavya-gh @oriol-gh @albert-gh @elsa-gh
+
+# Kaavya — the spine
+/src/engine/               @kaavya-gh
+/src/worlds/               @kaavya-gh
+/src/analysis/             @kaavya-gh
+/precomputed/              @kaavya-gh
+/tests/                    @kaavya-gh
+
+# Oriol — integration and the live loop
+/src/integration/          @oriol-gh
+/src/agent/                @oriol-gh
+/snapshot/                 @oriol-gh
+/scripts/                  @oriol-gh
+
+# Albert — clinical safety and evidence
+/src/clinical/             @albert-gh
+/corpus/                   @albert-gh
+/docs/parameters.md        @albert-gh
+
+# Oriol + Albert — extraction is a shared seam
+/src/extraction/           @oriol-gh @albert-gh
+
+# Elsa — interface and delivery
+/src/ui/                   @elsa-gh
+/demo/                     @elsa-gh
+/README.md                 @elsa-gh

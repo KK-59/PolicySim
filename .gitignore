@@ -1,0 +1,38 @@
+# dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# build output
+dist/
+build/
+.vite/
+*.tsbuildinfo
+
+# environment and secrets — NEVER commit the team API key
+.env
+.env.*
+!.env.example
+
+# NHS-SIM snapshots (raw dumps, large, regenerable)
+snapshot/*
+!snapshot/.gitkeep
+!snapshot/README.md
+
+# demo media (large; keep the clip out of git unless it's small)
+demo/*.mp4
+demo/*.mov
+demo/screenshots/
+
+# logs and scratch
+*.log
+npm-debug.log*
+.cache/
+tmp/
+scratch/
+
+# editors / OS
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
