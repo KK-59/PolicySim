@@ -24,6 +24,9 @@ interface TraceEvent {
   node: string
   item: number
   cls: string
+  /** Present for work seeded from the snapshot: the simulator's own patient. */
+  ref?: string
+  title?: string
 }
 
 type WorldName = 'optimistic' | 'realistic' | 'pessimistic'
@@ -36,6 +39,7 @@ const PERCENTILE: Record<WorldName, string> = {
 
 interface WorldData {
   world: WorldName
+  seed?: { capturedAt: string; items: number; source: string }
   windowStart: number
   windowEnd: number
   days: number
@@ -57,6 +61,8 @@ interface Placed {
   cls: string
   state: 'waiting' | 'service'
   since: number
+  ref?: string
+  title?: string
 }
 
 /**
@@ -67,23 +73,36 @@ interface Placed {
  * precomputed snapshot table would.
  */
 function stateAt(trace: readonly TraceEvent[], t: number): Map<string, Placed[]> {
-  const placed = new Map<number, { node: string; state: 'waiting' | 'service'; since: number; cls: string }>()
+  type Held = {
+    node: string; state: 'waiting' | 'service'; since: number; cls: string
+    ref?: string; title?: string
+  }
+  const placed = new Map<number, Held>()
 
   for (const e of trace) {
     if (e.t > t) break
-    if (e.kind === 'arrive') placed.set(e.item, { node: e.node, state: 'waiting', since: e.t, cls: e.cls })
-    else if (e.kind === 'start') {
+    const prev = placed.get(e.item)
+    // Identity is carried forward: only the arrival event names the patient, and an item is still
+    // the same person once it is in service.
+    const identity = { ref: e.ref ?? prev?.ref, title: e.title ?? prev?.title }
+    if (e.kind === 'arrive') {
+      placed.set(e.item, { node: e.node, state: 'waiting', since: e.t, cls: e.cls, ...identity })
+    } else if (e.kind === 'start') {
       // An item can start without a recorded arrival: it was mid-service when the window opened,
       // so its arrival is behind us. Adopt it rather than dropping it on the floor.
-      const p = placed.get(e.item)
-      placed.set(e.item, { node: e.node, state: 'service', since: e.t, cls: p?.cls ?? e.cls })
+      placed.set(e.item, {
+        node: e.node, state: 'service', since: e.t, cls: prev?.cls ?? e.cls, ...identity,
+      })
     } else if (e.kind === 'complete' || e.kind === 'refuse') placed.delete(e.item)
   }
 
   const byNode = new Map<string, Placed[]>()
   for (const [item, p] of placed) {
     const list = byNode.get(p.node) ?? []
-    list.push({ item, cls: p.cls, state: p.state, since: p.since })
+    list.push({
+      item, cls: p.cls, state: p.state, since: p.since,
+      ...(p.ref ? { ref: p.ref } : {}), ...(p.title ? { title: p.title } : {}),
+    })
     byNode.set(p.node, list)
   }
   for (const list of byNode.values()) list.sort((a, b) => a.since - b.since)
@@ -312,7 +331,11 @@ export function World() {
                     onClick={() => setOpenItem(openItem === p.item ? null : p.item)}
                   >
                     <span className={`cls cls--${p.cls}`}>{p.cls}</span>
-                    <span className="muted">#{p.item}</span>
+                    {/* A real patient from the snapshot is named; demand the model generated
+                        is not, because it is not anybody. */}
+                    <span className={p.ref ? 'queueitem__ref' : 'muted'}>
+                      {p.ref ?? `#${p.item}`}
+                    </span>
                     <span>
                       {p.state === 'service' ? 'in service' : 'waiting'} {wait(now - p.since)}
                     </span>
@@ -329,7 +352,12 @@ export function World() {
 
       {openItem !== null && journey.length > 0 && (
         <div className="journey mt-4">
-          <h2 className="h2">Item #{openItem}</h2>
+          <h2 className="h2">
+            {journey.find((e) => e.ref)?.ref ?? `Item #${openItem}`}
+          </h2>
+          {journey.find((e) => e.title) && (
+            <p className="muted small">{journey.find((e) => e.title)?.title}</p>
+          )}
           <ol className="journeylist mt-2">
             {journey.map((e, i) => (
               <li key={i} data-kind={e.kind}>
@@ -349,9 +377,13 @@ export function World() {
       <p className="note mt-5" role="note">
         <Glyph name="warning" size={13} />
         <span>
-          These are simulated work items, not NHS-SIM patients. The model tracks demand moving
-          through services; it does not know who anyone is. Patient identity lives in the
-          simulator, and the clinician view is where you meet it.
+          {data.seed
+            ? `Starts from ${data.seed.items} pieces of open work captured from the real world, `
+              + 'with their own patient ids and the time they had already waited. Everything after '
+              + 'that moment is the model, not a recording — a named patient here is a real '
+              + 'person in the simulator, but what happens to them is our prediction. '
+              + 'Unnamed items are demand the model generated.'
+            : 'These are simulated work items, not NHS-SIM patients.'}
         </span>
       </p>
     </section>

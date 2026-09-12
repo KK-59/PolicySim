@@ -1,0 +1,511 @@
+{
+ "source": "https://sim.animahacks.com · world team-4551d2471320",
+ "capturedAt": "2026-09-12T15:51:51.384Z",
+ "simNow": 1790004120000,
+ "note": "Open work in the real world at the moment of capture, with real patient ids. The engine starts from this rather than from an empty waiting room; everything after t=0 is the model, not a recording.",
+ "items": [
+  {
+   "ref": "SIM-000001",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-filing",
+   "waitedMinutes": 16282,
+   "title": "Cardiology · Monitoring handover"
+  },
+  {
+   "ref": "SIM-000002",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-filing",
+   "waitedMinutes": 17722,
+   "title": "Respiratory · Assessment discharge letter"
+  },
+  {
+   "ref": "SIM-000003",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-filing",
+   "waitedMinutes": 19162,
+   "title": "Orthopaedics · Day-case discharge handover"
+  },
+  {
+   "ref": "SIM-000004",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-filing",
+   "waitedMinutes": 20602,
+   "title": "Gastroenterology · Investigation episode handover"
+  },
+  {
+   "ref": "SIM-000005",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 22042,
+   "title": "Older people's medicine · Supported discharge coordination"
+  },
+  {
+   "ref": "SIM-000006",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 23482,
+   "title": "Renal · Clinic discharge correspondence"
+  },
+  {
+   "ref": "SIM-000007",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 24922,
+   "title": "Neurology · Assessment episode summary"
+  },
+  {
+   "ref": "SIM-000008",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 26362,
+   "title": "Diabetes service · Education visit handover"
+  },
+  {
+   "ref": "SIM-000009",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 27802,
+   "title": "Emergency department · Attendance discharge notification"
+  },
+  {
+   "ref": "SIM-000010",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 29242,
+   "title": "Ophthalmology · Day-unit correspondence"
+  },
+  {
+   "ref": "SIM-000011",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 30682,
+   "title": "General surgery · Post-episode handover"
+  },
+  {
+   "ref": "SIM-000012",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 32122,
+   "title": "Therapy service · Rehabilitation episode handover"
+  },
+  {
+   "ref": "SIM-000013",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 33562,
+   "title": "Cardiology · Monitoring handover"
+  },
+  {
+   "ref": "SIM-000014",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 35002,
+   "title": "Respiratory · Assessment discharge letter"
+  },
+  {
+   "ref": "SIM-000015",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 16282,
+   "title": "Orthopaedics · Day-case discharge handover"
+  },
+  {
+   "ref": "SIM-000016",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 17722,
+   "title": "Gastroenterology · Investigation episode handover"
+  },
+  {
+   "ref": "SIM-000017",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 19162,
+   "title": "Older people's medicine · Supported discharge coordination"
+  },
+  {
+   "ref": "SIM-000018",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 20602,
+   "title": "Renal · Clinic discharge correspondence"
+  },
+  {
+   "ref": "SIM-000019",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 22042,
+   "title": "Neurology · Assessment episode summary"
+  },
+  {
+   "ref": "SIM-000020",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 23482,
+   "title": "Diabetes service · Education visit handover"
+  },
+  {
+   "ref": "SIM-000021",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 24922,
+   "title": "Emergency department · Attendance discharge notification"
+  },
+  {
+   "ref": "SIM-000022",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 26362,
+   "title": "Ophthalmology · Day-unit correspondence"
+  },
+  {
+   "ref": "SIM-000023",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 27802,
+   "title": "General surgery · Post-episode handover"
+  },
+  {
+   "ref": "SIM-000024",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 29242,
+   "title": "Therapy service · Rehabilitation episode handover"
+  },
+  {
+   "ref": "SIM-000025",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 30682,
+   "title": "Cardiology · Monitoring handover"
+  },
+  {
+   "ref": "SIM-000026",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 32122,
+   "title": "Respiratory · Assessment discharge letter"
+  },
+  {
+   "ref": "SIM-000027",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 33562,
+   "title": "Orthopaedics · Day-case discharge handover"
+  },
+  {
+   "ref": "SIM-000028",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 35002,
+   "title": "Gastroenterology · Investigation episode handover"
+  },
+  {
+   "ref": "SIM-000029",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 16282,
+   "title": "Older people's medicine · Supported discharge coordination"
+  },
+  {
+   "ref": "SIM-000030",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 17722,
+   "title": "Renal · Clinic discharge correspondence"
+  },
+  {
+   "ref": "SIM-000031",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 19162,
+   "title": "Neurology · Assessment episode summary"
+  },
+  {
+   "ref": "SIM-000032",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 20602,
+   "title": "Diabetes service · Education visit handover"
+  },
+  {
+   "ref": "SIM-000033",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 22042,
+   "title": "Emergency department · Attendance discharge notification"
+  },
+  {
+   "ref": "SIM-000034",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 23482,
+   "title": "Ophthalmology · Day-unit correspondence"
+  },
+  {
+   "ref": "SIM-000035",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 24922,
+   "title": "General surgery · Post-episode handover"
+  },
+  {
+   "ref": "SIM-000036",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-review",
+   "waitedMinutes": 26362,
+   "title": "Therapy service · Rehabilitation episode handover"
+  },
+  {
+   "ref": "SIM-000037",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-filing",
+   "waitedMinutes": 27802,
+   "title": "Cardiology · Monitoring handover"
+  },
+  {
+   "ref": "SIM-000038",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-filing",
+   "waitedMinutes": 29242,
+   "title": "Respiratory · Assessment discharge letter"
+  },
+  {
+   "ref": "SIM-000039",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-filing",
+   "waitedMinutes": 30682,
+   "title": "Orthopaedics · Day-case discharge handover"
+  },
+  {
+   "ref": "SIM-000040",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-filing",
+   "waitedMinutes": 32122,
+   "title": "Gastroenterology · Investigation episode handover"
+  },
+  {
+   "ref": "SIM-000041",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-filing",
+   "waitedMinutes": 33562,
+   "title": "Older people's medicine · Supported discharge coordination"
+  },
+  {
+   "ref": "SIM-000042",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-filing",
+   "waitedMinutes": 35002,
+   "title": "Renal · Clinic discharge correspondence"
+  },
+  {
+   "ref": "SIM-000043",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-filing",
+   "waitedMinutes": 16282,
+   "title": "Neurology · Assessment episode summary"
+  },
+  {
+   "ref": "SIM-000044",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-filing",
+   "waitedMinutes": 17722,
+   "title": "Diabetes service · Education visit handover"
+  },
+  {
+   "ref": "SIM-000045",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-filing",
+   "waitedMinutes": 19162,
+   "title": "Emergency department · Attendance discharge notification"
+  },
+  {
+   "ref": "SIM-000046",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-filing",
+   "waitedMinutes": 20602,
+   "title": "Ophthalmology · Day-unit correspondence"
+  },
+  {
+   "ref": "SIM-000047",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-filing",
+   "waitedMinutes": 22042,
+   "title": "General surgery · Post-episode handover"
+  },
+  {
+   "ref": "SIM-000048",
+   "node": "gp-admin",
+   "cls": "letter",
+   "stage": "letter-filing",
+   "waitedMinutes": 23482,
+   "title": "Therapy service · Rehabilitation episode handover"
+  },
+  {
+   "ref": "SIM-000001",
+   "node": "gp-clinic",
+   "cls": "urgent",
+   "waitedMinutes": 13402,
+   "title": "Arrange post-discharge monitoring"
+  },
+  {
+   "ref": "SIM-000002",
+   "node": "gp-clinic",
+   "cls": "routine",
+   "waitedMinutes": 13402,
+   "title": "Fourth contact: what happened to my referral?"
+  },
+  {
+   "ref": "SIM-000003",
+   "node": "gp-clinic",
+   "cls": "routine",
+   "waitedMinutes": 13402,
+   "title": "Appointment links expire during working shift"
+  },
+  {
+   "ref": "SIM-000008",
+   "node": "gp-clinic",
+   "cls": "routine",
+   "waitedMinutes": 13402,
+   "title": "Screening invitation unanswered"
+  },
+  {
+   "ref": "SIM-000011",
+   "node": "gp-clinic",
+   "cls": "routine",
+   "waitedMinutes": 17722,
+   "title": "Confirm follow-up arrangements"
+  },
+  {
+   "ref": "SIM-000012",
+   "node": "gp-clinic",
+   "cls": "routine",
+   "waitedMinutes": 17722,
+   "title": "Confirm follow-up arrangements"
+  },
+  {
+   "ref": "SIM-000021",
+   "node": "gp-clinic",
+   "cls": "routine",
+   "waitedMinutes": 17722,
+   "title": "Confirm follow-up arrangements"
+  },
+  {
+   "ref": "SIM-000023",
+   "node": "gp-clinic",
+   "cls": "routine",
+   "waitedMinutes": 17722,
+   "title": "Confirm follow-up arrangements"
+  },
+  {
+   "ref": "SIM-000027",
+   "node": "gp-clinic",
+   "cls": "routine",
+   "waitedMinutes": 17722,
+   "title": "Confirm follow-up arrangements"
+  },
+  {
+   "ref": "SIM-000033",
+   "node": "gp-clinic",
+   "cls": "routine",
+   "waitedMinutes": 17722,
+   "title": "Confirm follow-up arrangements"
+  },
+  {
+   "ref": "SIM-000039",
+   "node": "gp-clinic",
+   "cls": "routine",
+   "waitedMinutes": 17722,
+   "title": "Confirm follow-up arrangements"
+  },
+  {
+   "ref": "SIM-000053",
+   "node": "gp-clinic",
+   "cls": "routine",
+   "waitedMinutes": 17722,
+   "title": "Confirm follow-up arrangements"
+  },
+  {
+   "ref": "SIM-000058",
+   "node": "gp-clinic",
+   "cls": "routine",
+   "waitedMinutes": 17722,
+   "title": "Confirm follow-up arrangements"
+  },
+  {
+   "ref": "SIM-000059",
+   "node": "gp-clinic",
+   "cls": "routine",
+   "waitedMinutes": 17722,
+   "title": "Confirm follow-up arrangements"
+  },
+  {
+   "ref": "SIM-000062",
+   "node": "gp-clinic",
+   "cls": "routine",
+   "waitedMinutes": 17722,
+   "title": "Confirm follow-up arrangements"
+  },
+  {
+   "ref": "SIM-000067",
+   "node": "gp-clinic",
+   "cls": "routine",
+   "waitedMinutes": 17722,
+   "title": "Confirm follow-up arrangements"
+  },
+  {
+   "ref": "SIM-000006",
+   "node": "community-visit",
+   "cls": "complex",
+   "waitedMinutes": 13402,
+   "title": "Home care assessment awaiting allocation"
+  }
+ ]
+}

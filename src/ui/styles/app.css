@@ -1947,3 +1947,7 @@ textarea::placeholder {
 }
 
 .worldpick__busy { color: var(--ink-3); font-size: 0.75rem; }
+
+/* A real patient from the snapshot, distinguished from generated demand. */
+.queueitem__ref { font-variant-numeric: tabular-nums; font-weight: 600; }
+.queueitem[data-state='service'] .queueitem__ref { color: inherit; }

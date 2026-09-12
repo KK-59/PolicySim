@@ -135,8 +135,18 @@ export interface WorkItem {
    * Keeping it opaque is what stops queueing code from acquiring clinical concepts.
    */
   tag?: string;
+  /** What the snapshot called this piece of work, for the world view. */
+  title?: string;
   /** How many times this item has been refused and sent back upstream. */
   bounces?: number;
+  /**
+   * The simulator's own identifier for this piece of work, where it came from a snapshot.
+   *
+   * Opaque to the engine, like `tag`. It exists so the world view can show the people NHS-SIM
+   * actually has waiting instead of anonymous demand — the model does not know or care who
+   * anyone is, and nothing downstream of here may start caring.
+   */
+  ref?: string;
   /**
    * Where the item is along its pathway. The router reads it to decide the next hop.
    *

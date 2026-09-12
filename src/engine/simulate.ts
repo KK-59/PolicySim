@@ -58,6 +58,16 @@ export interface NetworkSpec {
   seed: number;
   /** Record what happened, over a bounded window. Off by default. */
   trace?: TraceOptions;
+  /**
+   * Start with these already queued, rather than with empty services.
+   *
+   * The simulator is ground truth and this is how the engine starts from it: the people actually
+   * waiting, in the service they are actually waiting in, with the time they have already waited
+   * carried over. Everything after t=0 is the model.
+   */
+  seedItems?: readonly SeedItem[];
+  /** Simulated minute at which the seeded work is placed. Usually the trace window's start. */
+  seedAt?: number;
 }
 
 /**
@@ -77,6 +87,21 @@ export interface TraceEvent {
   item: number
   /** Patient class, or 'letter' for the document stream. */
   cls: string
+  /** The simulator's patient id, for work seeded from a snapshot. */
+  ref?: string
+  /** What the snapshot called it. */
+  title?: string
+}
+
+/** Work already in progress when the run starts, taken from a snapshot of the real world. */
+export interface SeedItem {
+  node: string
+  cls: string
+  stage?: string
+  ref?: string
+  title?: string
+  /** How long it had already been waiting at the moment of capture. */
+  waitedMinutes: number
 }
 
 export interface TraceOptions {
@@ -124,7 +149,11 @@ export function simulateNetwork(spec: NetworkSpec): NetworkResult {
     if (traceOpts === undefined) return;
     if (t < traceOpts.from || t > traceOpts.to) return;
     if (trace.length >= maxEvents) return;
-    trace.push({ t, kind, node, item: item.id, cls: item.tag ?? 'routine' });
+    trace.push({
+      t, kind, node, item: item.id, cls: item.tag ?? 'routine',
+      ...(item.ref ? { ref: item.ref } : {}),
+      ...(item.title ? { title: item.title } : {}),
+    });
   };
 
   const scheduleArrival = (streamIdx: number, from: number): void => {
@@ -191,6 +220,31 @@ export function simulateNetwork(spec: NetworkSpec): NetworkResult {
     }
   }
 
+  // Place the snapshot's open work before anything else happens.
+  let seedPlaced = spec.seedItems === undefined || spec.seedItems.length === 0;
+  const placeSeed = (at: number): void => {
+    if (seedPlaced) return;
+    seedPlaced = true;
+    for (const s of spec.seedItems ?? []) {
+      const item: WorkItem = {
+        id: nextId++,
+        // Waiting time already served is carried over, so a letter that has sat unread for three
+        // days is three days old at t=0 rather than brand new.
+        arrivedAt: at - s.waitedMinutes,
+        measured: false,
+        tag: s.cls,
+        priority: s.cls === 'urgent' ? 0 : 1,
+        serviceMultiplier: 1,
+        ...(s.stage ? { stage: s.stage } : {}),
+        ...(s.ref ? { ref: s.ref } : {}),
+        ...(s.title ? { title: s.title } : {}),
+      };
+      live.set(item.id, item);
+      entered++;
+      send(item, s.node, at);
+    }
+  };
+
   // Seed the trace with everyone already queued when the window opens. Without it the view shows
   // an empty waiting room that fills from nothing, which is the opposite of what the model says.
   let seeded = traceOpts === undefined;
@@ -199,6 +253,8 @@ export function simulateNetwork(spec: NetworkSpec): NetworkResult {
     const ev = events.pop();
     if (ev === undefined || ev.time > spec.horizon) break;
     const now = ev.time;
+
+    if (!seedPlaced && now >= (spec.seedAt ?? 0)) placeSeed(now);
 
     if (!seeded && traceOpts !== undefined && now >= traceOpts.from) {
       seeded = true;
@@ -210,6 +266,8 @@ export function simulateNetwork(spec: NetworkSpec): NetworkResult {
             node: id,
             item: held.item.id,
             cls: held.item.tag ?? 'routine',
+            ...(held.item.ref ? { ref: held.item.ref } : {}),
+            ...(held.item.title ? { title: held.item.title } : {}),
           });
         }
       }

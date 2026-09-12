@@ -8,6 +8,7 @@ import { runWorlds } from "../worlds/index.ts"
 import { run } from "../engine/index.ts"
 import { sweepLever } from "../worlds/sweep.ts"
 import { selectWorlds } from "../worlds/select.ts"
+import SEED from "../../fixtures/seed-state.json" with { type: "json" }
 import type { Params } from "../contracts/params.ts"
 import { randomUUID } from "node:crypto"
 import { runCommunityExperiment, type CommunityExperimentResult, type ExperimentProgress } from "../clinical/prevention/controlled-experiment.ts"
@@ -266,12 +267,21 @@ const server = createServer(async (request, response) => {
       world.sim.warmupDays = warmupDays
       world.sim.horizonDays = warmupDays + days
 
+      // Start from the real world's open work, placed at the moment the window opens.
+      //
+      // This is the PRD's claim made literal: the simulator is ground truth, and the engine picks
+      // up where it left off. The people in the queue at t=0 are the ones NHS-SIM actually has
+      // waiting, with the time they have already waited carried over. Everything after is ours,
+      // and the page says so.
       const outcome = run(world, selected.seed, {
         trace: { from: warmupDays * DAY, to: (warmupDays + days) * DAY },
+        seedItems: SEED.items,
+        seedAt: warmupDays * DAY,
       })
 
       return sendJson(response, {
         world: wanted,
+        seed: { capturedAt: SEED.capturedAt, items: SEED.items.length, source: SEED.source },
         windowStart: warmupDays * DAY,
         windowEnd: (warmupDays + days) * DAY,
         days,

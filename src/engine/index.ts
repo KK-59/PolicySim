@@ -32,6 +32,11 @@ const MAX_REFERRAL_BOUNCES = 2;
  */
 export interface RunOptions {
   trace?: { from: number; to: number; maxEvents?: number };
+  /** Open work from a snapshot of the real world, placed at `seedAt`. */
+  seedItems?: readonly {
+    node: string; cls: string; stage?: string; ref?: string; title?: string; waitedMinutes: number;
+  }[];
+  seedAt?: number;
 }
 
 export function run(params: Params, seed: number, opts: RunOptions = {}): RunOutcome {
@@ -291,6 +296,7 @@ export function run(params: Params, seed: number, opts: RunOptions = {}): RunOut
     warmup,
     seed,
     ...(opts.trace ? { trace: opts.trace } : {}),
+    ...(opts.seedItems ? { seedItems: opts.seedItems, seedAt: opts.seedAt ?? 0 } : {}),
   });
 
   const gpStats = result.nodes.get('gp-clinic') as NodeStats;
