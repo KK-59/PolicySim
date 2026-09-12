@@ -28,6 +28,7 @@ import type {
   Arrivals,
   Boundaries,
   Capacities,
+  Effects,
   Environment,
   Levers,
   Params,
@@ -212,6 +213,32 @@ function route(calibration: CalibratedParams, key: string): CalibratedSourced | 
 }
 
 /**
+ * Effect sizes. None of these are in the snapshot: NHS-SIM books every appointment in the same
+ * 15-minute slot, and nothing in it responds to a patient being monitored. Assumed, ranged, and
+ * grouped so the sourcing job is one list rather than a hunt.
+ */
+function effects(): Effects {
+  return {
+    telephoneServiceMultiplier: sourced(0.7, [0.2, 1.5], 'assumed', undefined, {
+      range: [0.55, 0.9],
+      note: 'Telephone appointment length against face-to-face. The sim books both in the same '
+        + '15-minute slot, so it cannot tell us the difference.',
+    }),
+    telephoneBaselineShare: sourced(1 / 3, [0, 1], 'measured',
+      citeHers('Capacities', "2 of 6 sessions have data.mode = 'telephone'"), {
+      note: 'The mix already inside the measured slot length. Not a lever — the engine '
+        + 'normalises against it so the channel lever cannot double-count.',
+    }),
+    monitoringEscalationReduction: sourced(0.1, [0, 0.5], 'assumed', undefined, {
+      range: [0, 0.25],
+      note: 'Urgent demand converted to routine per unit of monitoring intensity. The range '
+        + 'starts at zero on purpose: "monitoring changes nothing" must stay inside the '
+        + 'pessimistic world.',
+    }),
+  }
+}
+
+/**
  * A sampling band around a measured share: +/-20% relative, kept inside [0, 1].
  *
  * Relative rather than absolute, so a share of 0.015 gets a band of 0.012-0.018 rather than one
@@ -232,6 +259,7 @@ export function toParams(calibration: CalibratedParams, opts: ToParamsOptions = 
     serviceTimes: serviceTimes(calibration),
     routing: routing(calibration),
     levers: levers(calibration),
+    effects: effects(),
     boundaries: boundaries(),
     environment: {
       winterPressure: opts.environment?.winterPressure ?? false,

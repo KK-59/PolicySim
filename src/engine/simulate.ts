@@ -21,6 +21,14 @@ export interface EntryStream {
   tagFor?: (rng: Rng) => string;
   /** Priority and service multiplier for that label. */
   classOf?: (tag: string | undefined) => { priority: number; serviceMultiplier: number };
+  /**
+   * Share of this stream's arrivals that are deliberately timed to land on a weekday.
+   *
+   * A drawn arrival that falls at a weekend is pushed to the following Monday with this
+   * probability; the rest arrive whenever they arrive. Used for discharge timing: a letter
+   * discharged on a Saturday cannot be reviewed until the practice reopens.
+   */
+  weekdayOnlyShare?: number;
 }
 
 export interface NetworkSpec {
@@ -78,7 +86,21 @@ export function simulateNetwork(spec: NetworkSpec): NetworkResult {
   const scheduleArrival = (streamIdx: number, from: number): void => {
     const stream = spec.entries[streamIdx];
     if (stream === undefined || stream.ratePerMin <= 0) return;
-    const at = from + rng.exponential(stream.ratePerMin);
+    let at = from + rng.exponential(stream.ratePerMin);
+
+    // Weekday timing. Day 0 is a Monday, so days 5 and 6 of each week are the weekend.
+    const weekdayShare = stream.weekdayOnlyShare;
+    if (weekdayShare !== undefined && weekdayShare > 0) {
+      const day = Math.floor(at / MINUTES_PER_DAY);
+      const dow = day % 7;
+      if (dow >= 5 && rng.next() < weekdayShare) {
+        // Shift to Monday morning, keeping the arrival strictly after `from` so the event queue
+        // never sees a scheduled-in-the-past error.
+        const monday = (day + (7 - dow)) * MINUTES_PER_DAY;
+        at = Math.max(at, monday);
+      }
+    }
+
     // `node` carries the stream index so each stream keeps its own arrival process.
     if (at <= spec.horizon) events.push({ time: at, kind: 'arrival', node: String(streamIdx) });
   };

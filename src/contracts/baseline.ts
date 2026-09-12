@@ -135,7 +135,11 @@ export const BASELINE: Params = {
   levers: {
     communityCapacityMultiplier: s(1, [0, 10], 'measured', `${SNAP} · baseline = no change`),
     extraGpSessions: s(0, [0, 12], 'measured', `${SNAP} · baseline = no change`),
-    telephoneFollowUpShare: s(0.33, [0, 1], 'measured', `${SNAP} · 2 of 6 sessions mode=telephone`),
+    // Exactly 2/6, not 0.33. The engine normalises the channel effect against the measured share,
+    // so a rounding difference here becomes a real change in appointment length — and at rho 0.94
+    // a 0.11% change in appointment length was enough to flip the practice from stable to not.
+    telephoneFollowUpShare: s(1 / 3, [0, 1], 'measured',
+      `${SNAP} · 2 of 6 sessions mode=telephone`),
     monitoringIntensity: s(1, [0, 10], 'measured', `${SNAP} · baseline = no change`, {
       note: 'Base is measurable; the EFFECT of monitoring on admission is not in the sim. '
         + 'Effect size must come from the corpus.',
@@ -145,8 +149,29 @@ export const BASELINE: Params = {
         + 'There is no baseline referral flow to measure.',
     }),
     weekdayDischargeShare: s(1, [0, 1], 'assumed', undefined, {
-      note: '⚠️ NOT GROUNDED. NHS-SIM has no weekday logic — sessions are seeded for a fixed '
-        + '7-day window from world creation. Amber on screen.',
+      range: [0.7, 1],
+      note: '⚠️ The weekend is ours: NHS-SIM has no weekday logic. Acts on letter turnaround '
+        + 'only — admin is shut at weekends, so a Saturday discharge waits for Monday.',
+    }),
+  },
+
+  effects: {
+    telephoneServiceMultiplier: s(0.7, [0.2, 1.5], 'assumed', undefined, {
+      range: [0.55, 0.9],
+      note: 'A telephone consultation is shorter than a face-to-face one, but NHS-SIM books both '
+        + 'in the same 15-minute slot, so it cannot tell us by how much. '
+        + 'TODO(albert): source it — without a real number the telephone lever is decorative.',
+    }),
+    telephoneBaselineShare: s(1 / 3, [0, 1], 'measured',
+      `${SNAP} · 2 of 6 sessions have data.mode = 'telephone'`, {
+      note: 'Not a lever. The mix already inside the measured 15-minute slot, so the engine can '
+        + 'normalise and avoid discounting a slot length that is already an average.',
+    }),
+    monitoringEscalationReduction: s(0.1, [0, 0.5], 'assumed', undefined, {
+      range: [0, 0.25],
+      note: 'Fraction of urgent/complex demand that monitoring turns into routine demand, per '
+        + 'unit of intensity. The range starts at ZERO deliberately: "remote monitoring changes '
+        + 'nothing" has to stay inside the pessimistic world, or the model assumes the answer.',
     }),
   },
 

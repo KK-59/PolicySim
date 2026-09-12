@@ -54,6 +54,15 @@ export interface SessionSchedule {
    * apparent strength of the extra-sessions lever.
    */
   serversPerBlock?: readonly number[];
+  /**
+   * Shut at weekends. Day 0 of the simulation is a Monday, so days 5 and 6 of each week are the
+   * weekend.
+   *
+   * NHS-SIM has no weekday logic — its sessions are seeded for a fixed window from world
+   * creation — so this is a deliberate divergence from the ground truth, and one that only the
+   * admin node uses. Closing the clinic too would cut weekly capacity by two sevenths.
+   */
+  closedWeekends?: boolean;
 }
 
 export interface NodeConfig {
@@ -89,7 +98,9 @@ export function openMinutesPerDay(config: NodeConfig): number {
   const clinicianBlocks = per !== undefined
     ? per.reduce((a, b) => a + b, 0)
     : config.servers * config.schedule.blockStarts.length;
-  return clinicianBlocks * config.schedule.usableMinutes;
+  // Averaged over the week, so utilisation is measured against time the node is really open.
+  const weekdayFraction = config.schedule.closedWeekends === true ? 5 / 7 : 1;
+  return clinicianBlocks * config.schedule.usableMinutes * weekdayFraction;
 }
 
 /** Slots a schedule yields per day. The measured 90 falls out of this, it is not asserted. */
@@ -187,7 +198,9 @@ export class QueueNode {
   private openUntil(now: number): number | null {
     const sched = this.config.schedule;
     if (sched === null) return Number.POSITIVE_INFINITY;
-    const dayStart = Math.floor(now / MINUTES_PER_DAY) * MINUTES_PER_DAY;
+    const dayIndex = Math.floor(now / MINUTES_PER_DAY);
+    if (sched.closedWeekends === true && dayIndex % 7 >= 5) return null;
+    const dayStart = dayIndex * MINUTES_PER_DAY;
     const minuteOfDay = now - dayStart;
     for (const start of sched.blockStarts) {
       if (minuteOfDay >= start && minuteOfDay < start + sched.usableMinutes) {

@@ -223,10 +223,55 @@ export interface Levers {
    */
   hospitalToCommunityShare: Sourced;
   /**
-   * Share of discharges timed to weekdays.
-   * ⚠️ NOT GROUNDED — NHS-SIM has no weekday logic at all. Tag `assumed`, amber on screen.
+   * Share of discharges timed to weekdays rather than Friday evening or the weekend.
+   *
+   * Acts on the LETTER pathway only. Admin is closed at weekends, so a letter discharged on a
+   * Saturday waits until Monday before anyone can review it. The GP clinic is left open seven
+   * days: closing it would cut weekly capacity by two sevenths and destabilise the baseline,
+   * which is a bigger modelling claim than this lever is worth.
+   *
+   * ⚠️ NHS-SIM has no weekday logic at all — its sessions are seeded for a fixed window from
+   * world creation. The weekend is ours. Amber on screen.
    */
   weekdayDischargeShare: Sourced;
+}
+
+// ---------------------------------------------------------------------------
+// Effect sizes — how much a lever actually does
+// ---------------------------------------------------------------------------
+
+/**
+ * The levers say WHAT a policy changes. These say HOW MUCH difference it makes, and NHS-SIM can
+ * measure none of them: it books every appointment in the same 15-minute slot, and it has no
+ * mechanism by which monitoring a patient changes what happens to them.
+ *
+ * Grouped rather than scattered through the parameter set, because they are exactly the list
+ * Albert has to source, and because a lever whose effect size is invented should be visibly so.
+ */
+export interface Effects {
+  /**
+   * Telephone appointment length as a fraction of face-to-face.
+   * The lever moves the MIX; this decides whether moving it is worth anything.
+   */
+  telephoneServiceMultiplier: Sourced;
+  /**
+   * The telephone share ALREADY BAKED INTO the measured slot length.
+   *
+   * NHS-SIM's 15 minutes is the average across its session mix, two of six being telephone. So a
+   * multiplier applied on top of that double-counts: at the measured mix the effective slot must
+   * come out at 15 minutes, not 13.5. The engine normalises against this, which makes the lever a
+   * change FROM the measurement rather than a discount applied to it.
+   */
+  telephoneBaselineShare: Sourced;
+  /**
+   * Fractional reduction in urgent and complex demand per unit of monitoring intensity above 1.
+   *
+   * The mechanism claimed is early detection: a deterioration caught by a wearable becomes a
+   * routine contact instead of an urgent one. Demand is REDISTRIBUTED between classes, never
+   * destroyed — monitoring does not make people less ill, and a model that let it would be
+   * claiming the thing the policy is trying to prove.
+   */
+  monitoringEscalationReduction: Sourced;
 }
 
 // ---------------------------------------------------------------------------
@@ -308,6 +353,7 @@ export interface Params {
   serviceTimes: ServiceTimes;
   routing: Routing;
   levers: Levers;
+  effects: Effects;
   boundaries: Boundaries;
   environment: Environment;
   sim: SimConfig;

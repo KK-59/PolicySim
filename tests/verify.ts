@@ -342,6 +342,57 @@ check(
 );
 
 // ---------------------------------------------------------------------------
+console.log('\n4g. THE THREE PREVIOUSLY-INERT LEVERS');
+console.log('   Slot geometry is discrete: an appointment length that does not divide the');
+console.log('   session exactly wastes a whole slot. 15 x 15.0167 min = 225.25 > 225, so a');
+console.log('   0.11% change in appointment length costs a slot per session — 90/day down to 84.');
+console.log('   That is why the telephone lever must be normalised against the MEASURED mix.\n');
+
+const leverRun = (mut: (p: Params) => void) => {
+  const p: Params = structuredClone(BASELINE);
+  p.sim.horizonDays = 730;
+  mut(p);
+  return run(p, 1);
+};
+
+const telBase = leverRun(() => {});
+const telHigh = leverRun((p) => { p.levers.telephoneFollowUpShare.value = 0.8; });
+check(
+  'telephone lever changes capacity',
+  telHigh.waits.routine.p50 < telBase.waits.routine.p50,
+  `share 1/3 -> 0.8 moves the median ${(telBase.waits.routine.p50 / 60).toFixed(1)}h -> `
+  + `${(telHigh.waits.routine.p50 / 60).toFixed(1)}h`,
+);
+check(
+  'and at the measured share it is exactly neutral',
+  Math.abs((telBase.perNode['gp-clinic']?.utilisation ?? 0)
+    - BASELINE.arrivals.targetUtilisation.value) < 0.02,
+  `baseline lands at ${((telBase.perNode['gp-clinic']?.utilisation ?? 0) * 100).toFixed(1)}% `
+  + `against a target of ${(BASELINE.arrivals.targetUtilisation.value * 100).toFixed(0)}% — the `
+  + 'channel effect does not double-count the slot length it was measured from',
+);
+
+const monBase = leverRun(() => {});
+const monHigh = leverRun((p) => { p.levers.monitoringIntensity.value = 4; });
+check(
+  'monitoring lever redistributes demand',
+  monHigh.completed.urgent < monBase.completed.urgent
+    && monHigh.completed.routine > monBase.completed.routine,
+  `urgent ${monBase.completed.urgent} -> ${monHigh.completed.urgent}, routine `
+  + `${monBase.completed.routine} -> ${monHigh.completed.routine} — moved between classes, `
+  + 'not destroyed',
+);
+
+const wkOff = leverRun((p) => { p.levers.weekdayDischargeShare.value = 0; });
+const wkOn = leverRun((p) => { p.levers.weekdayDischargeShare.value = 1; });
+check(
+  'discharge timing changes letter turnaround',
+  wkOn.unfiledLetters < wkOff.unfiledLetters,
+  `unfiled letters ${wkOff.unfiledLetters} -> ${wkOn.unfiledLetters} when discharges are timed `
+  + 'to weekdays instead of landing while admin is shut',
+);
+
+// ---------------------------------------------------------------------------
 console.log('\n4f. THE LETTER PATHWAY — calibrated against real counts');
 
 const lp: Params = structuredClone(BASELINE);

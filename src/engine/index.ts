@@ -121,6 +121,7 @@ export function run(params: Params, seed: number): RunOutcome {
     schedule: {
       blockStarts: BLOCK_STARTS,
       usableMinutes: params.capacities.gpSlotsPerSession.value * gpService,
+      closedWeekends: true,
     },
     maxQueue: null,
   };
@@ -129,6 +130,16 @@ export function run(params: Params, seed: number): RunOutcome {
 
   const weights = arrivalWeights(params);
   const totalPerDay = weights.reduce((s, w) => s + w, 0);
+
+  // Telephone appointments are shorter, so raising their share raises effective capacity without
+  // adding a clinician. The lever moves the mix; effects.telephoneServiceMultiplier decides
+  // whether that is worth anything.
+  const telShare = clamp01(params.levers.telephoneFollowUpShare.value);
+  const telMultiplier = params.effects.telephoneServiceMultiplier.value;
+  const telBaseShare = clamp01(params.effects.telephoneBaselineShare.value);
+  // Normalised so the measured mix comes out at exactly the measured slot length. Without this,
+  // the baseline quietly gained 10% capacity and stopped sitting at the rho it was calibrated to.
+  const channelBase = 1 - telBaseShare + telBaseShare * telMultiplier;
 
   // Priority. Urgent is served first; routine and complex share a level and are separated by
   // appointment length rather than rank — see ServiceTimes.classMultiplier.
@@ -150,6 +161,7 @@ export function run(params: Params, seed: number): RunOutcome {
   const lettersPerDay = params.arrivals.dischargeLettersPerDay.value;
   const reviewedShare = clamp01(params.routing.letterSentToReviewed.value);
   const reviewedLettersPerDay = lettersPerDay * reviewedShare;
+  const weekdayShare = clamp01(params.levers.weekdayDischargeShare.value);
   // Never picked up at all. Counted directly rather than simulated — they consume no capacity.
   const neverReviewedPerDay = lettersPerDay * (1 - reviewedShare);
 
@@ -162,7 +174,12 @@ export function run(params: Params, seed: number): RunOutcome {
         tagFor: (rng): string => CLASSES[rng.weighted(weights)] as string,
         classOf: (tag): { priority: number; serviceMultiplier: number } => {
           const cls = (tag ?? 'routine') as PatientClass;
-          return { priority: PRIORITY[cls] ?? 1, serviceMultiplier: mult[cls]?.value ?? 1 };
+          const base = mult[cls]?.value ?? 1;
+          // Expected length across the channel mix. Applied as the mean rather than drawn per
+          // patient: which individual gets a phone call is not something the model knows, and
+          // pretending otherwise would add variance we have no evidence for.
+          const channel = (1 - telShare + telShare * telMultiplier) / channelBase;
+          return { priority: PRIORITY[cls] ?? 1, serviceMultiplier: base * channel };
         },
       },
       {
@@ -174,6 +191,9 @@ export function run(params: Params, seed: number): RunOutcome {
         // wrong failure: this is an inbox nobody opens, not a backlog.
         nodeId: 'gp-admin',
         ratePerMin: reviewedLettersPerDay / MINUTES_PER_DAY,
+        // Discharges timed to weekdays land while admin is open. The rest arrive whenever and
+        // wait for Monday, which is the whole content of the discharge-timing lever.
+        weekdayOnlyShare: weekdayShare,
         tagFor: (): string => 'letter',
         classOf: (): { priority: number; serviceMultiplier: number } =>
           ({ priority: 1, serviceMultiplier: 1 }),
@@ -276,7 +296,24 @@ function arrivalWeights(params: Params): number[] {
     weights = weights.map((v) => v * (1 + induced * addedShare));
   }
 
-  // 3. Gaming. Complex presentations recorded as routine: the work is unchanged, the numbers
+  // 3. Monitoring. Deterioration caught early presents as routine rather than urgent. Demand is
+  //    redistributed between classes, never destroyed: monitoring does not make people less ill.
+  const intensity = params.levers.monitoringIntensity.value;
+  const reduction = clamp01(
+    Math.max(0, intensity - 1) * params.effects.monitoringEscalationReduction.value,
+  );
+  if (reduction > 0) {
+    const ri = CLASSES.indexOf('routine');
+    weights = [...weights];
+    for (const cls of ['urgent', 'complex'] as const) {
+      const i = CLASSES.indexOf(cls);
+      const moved = (weights[i] as number) * reduction;
+      weights[i] = (weights[i] as number) - moved;
+      weights[ri] = (weights[ri] as number) + moved;
+    }
+  }
+
+  // 4. Gaming. Complex presentations recorded as routine: the work is unchanged, the numbers
   //    improve. Moves demand between classes, never creates or destroys it.
   const gaming = clamp01(params.boundaries.gaming.value);
   if (gaming > 0) {
