@@ -1,0 +1,1073 @@
+{
+ "worlds": {
+  "waits": {
+   "routine": {
+    "optimistic": {
+     "p50": 484.7139058948669,
+     "p90": 876.9170176199987,
+     "mean": 490.7057629824049,
+     "max": 1261.825421906542,
+     "n": 21482
+    },
+    "realistic": {
+     "p50": 1712.3223785802838,
+     "p90": 2876.063186248881,
+     "mean": 1751.7518891917832,
+     "max": 3816.1371185725584,
+     "n": 19335
+    },
+    "pessimistic": {
+     "p50": 20092.24162288598,
+     "p90": 33916.107375246705,
+     "mean": 20697.583825890146,
+     "max": 38515.142252454534,
+     "n": 14730
+    },
+    "direction": "lower-is-better"
+   },
+   "complex": {
+    "optimistic": {
+     "p50": 495.0080886139767,
+     "p90": 880.3518108392018,
+     "mean": 498.0584395294476,
+     "max": 1306.0426067688968,
+     "n": 3200
+    },
+    "realistic": {
+     "p50": 1699.6705723694758,
+     "p90": 2860.8328235166846,
+     "mean": 1742.889396634397,
+     "max": 3776.398623081477,
+     "n": 4423
+    },
+    "pessimistic": {
+     "p50": 20187.57073754305,
+     "p90": 34098.05667291756,
+     "mean": 20739.929103672377,
+     "max": 38498.610519003705,
+     "n": 4224
+    },
+    "direction": "lower-is-better"
+   },
+   "urgent": {
+    "optimistic": {
+     "p50": 213.92888759684865,
+     "p90": 789.967253632436,
+     "mean": 310.4703247640566,
+     "max": 932.7701642328175,
+     "n": 1682
+    },
+    "realistic": {
+     "p50": 231.76726811227854,
+     "p90": 781.6411227238132,
+     "mean": 309.916292592414,
+     "max": 943.418660939089,
+     "n": 2067
+    },
+    "pessimistic": {
+     "p50": 217.0158012630418,
+     "p90": 790.8416352713248,
+     "mean": 310.7148016338963,
+     "max": 949.6751949680038,
+     "n": 1894
+    },
+    "direction": "lower-is-better"
+   }
+  },
+  "timeInSystem": {
+   "routine": {
+    "optimistic": {
+     "p50": 499.7139058948669,
+     "p90": 891.9170176199987,
+     "mean": 505.7057629824054,
+     "max": 1276.825421906542,
+     "n": 21482
+    },
+    "realistic": {
+     "p50": 1727.3223785802838,
+     "p90": 2891.063186248881,
+     "mean": 1766.7518891917825,
+     "max": 3831.1371185725584,
+     "n": 19335
+    },
+    "pessimistic": {
+     "p50": 20107.24162288598,
+     "p90": 33931.107375246705,
+     "mean": 20712.583825890142,
+     "max": 38530.142252454534,
+     "n": 14730
+    },
+    "direction": "lower-is-better"
+   },
+   "complex": {
+    "optimistic": {
+     "p50": 518.2107188197551,
+     "p90": 903.5544410449802,
+     "mean": 521.2610697352275,
+     "max": 1329.2452369746752,
+     "n": 3200
+    },
+    "realistic": {
+     "p50": 1728.7118202809943,
+     "p90": 2889.874071428203,
+     "mean": 1771.9306445459076,
+     "max": 3805.4398709929956,
+     "n": 4423
+    },
+    "pessimistic": {
+     "p50": 20231.184645103407,
+     "p90": 34141.67058047792,
+     "mean": 20783.543011232752,
+     "max": 38542.22442656406,
+     "n": 4224
+    },
+    "direction": "lower-is-better"
+   },
+   "urgent": {
+    "optimistic": {
+     "p50": 231.94406371287187,
+     "p90": 807.9824297484593,
+     "mean": 328.48550088007977,
+     "max": 950.7853403488407,
+     "n": 1682
+    },
+    "realistic": {
+     "p50": 249.80051320348866,
+     "p90": 799.6743678150233,
+     "mean": 327.94953768362416,
+     "max": 961.4519060302991,
+     "n": 2067
+    },
+    "pessimistic": {
+     "p50": 236.86271309445146,
+     "p90": 810.6885471027344,
+     "mean": 330.56171346530596,
+     "max": 969.5221067994135,
+     "n": 1894
+    },
+    "direction": "lower-is-better"
+   }
+  },
+  "perNode": {
+   "gp-clinic": {
+    "optimistic": {
+     "utilisation": 0.8787666278364019,
+     "stable": true,
+     "queueLength": 25.271362995426006,
+     "throughput": 91.22222222222223,
+     "refused": 0
+    },
+    "realistic": {
+     "utilisation": 0.9439948771490477,
+     "stable": true,
+     "queueLength": 82.94808322405197,
+     "throughput": 90.09722222222223,
+     "refused": 0
+    },
+    "pessimistic": {
+     "utilisation": 0.9202663330170778,
+     "stable": false,
+     "queueLength": 813.3113800036962,
+     "throughput": 73.18888888888888,
+     "refused": 0
+    },
+    "direction": "lower-is-better"
+   },
+   "gp-admin": {
+    "optimistic": {
+     "utilisation": 0.5899662287324129,
+     "stable": true,
+     "queueLength": 11.714631104819608,
+     "throughput": 26.788888888888888,
+     "refused": 0
+    },
+    "realistic": {
+     "utilisation": 0.7719455857953906,
+     "stable": true,
+     "queueLength": 15.612638616127729,
+     "throughput": 25.566666666666666,
+     "refused": 0
+    },
+    "pessimistic": {
+     "utilisation": 0.21141046615938416,
+     "stable": true,
+     "queueLength": 8.299376461271875,
+     "throughput": 22.925,
+     "refused": 0
+    },
+    "direction": "lower-is-better"
+   },
+   "community-visit": {
+    "optimistic": {
+     "utilisation": 0.654499847583173,
+     "stable": true,
+     "queueLength": 3.5912761067830434,
+     "throughput": 9.119444444444444,
+     "refused": 0
+    },
+    "realistic": {
+     "utilisation": 0.7224831022208458,
+     "stable": true,
+     "queueLength": 4.387734557757169,
+     "throughput": 9.238888888888889,
+     "refused": 0
+    },
+    "pessimistic": {
+     "utilisation": 0.6804343712931128,
+     "stable": true,
+     "queueLength": 5.222641166460546,
+     "throughput": 7.355555555555555,
+     "refused": 0
+    },
+    "direction": "lower-is-better"
+   },
+   "test": {
+    "optimistic": {
+     "utilisation": 0.000011749223625887816,
+     "stable": true,
+     "queueLength": 1.1749223625887815,
+     "throughput": 16.26388888888889,
+     "refused": 0
+    },
+    "realistic": {
+     "utilisation": 0.00001255038353991754,
+     "stable": true,
+     "queueLength": 1.255038353991754,
+     "throughput": 16.091666666666665,
+     "refused": 0
+    },
+    "pessimistic": {
+     "utilisation": 0.00001252700661741336,
+     "stable": true,
+     "queueLength": 1.252700661741336,
+     "throughput": 13.158333333333333,
+     "refused": 0
+    },
+    "direction": "lower-is-better"
+   }
+  },
+  "completed": {
+   "routine": {
+    "optimistic": 21482,
+    "realistic": 19335,
+    "pessimistic": 14730,
+    "direction": "higher-is-better"
+   },
+   "complex": {
+    "optimistic": 3200,
+    "realistic": 4423,
+    "pessimistic": 4224,
+    "direction": "higher-is-better"
+   },
+   "urgent": {
+    "optimistic": 1682,
+    "realistic": 2067,
+    "pessimistic": 1894,
+    "direction": "higher-is-better"
+   }
+  },
+  "rejections": {
+   "optimistic": 0,
+   "realistic": 0,
+   "pessimistic": 0,
+   "direction": "lower-is-better"
+  },
+  "unfiledLetters": {
+   "optimistic": 2013,
+   "realistic": 1557,
+   "pessimistic": 2409,
+   "direction": "lower-is-better"
+  },
+  "unfiledResults": {
+   "optimistic": 3328,
+   "realistic": 3316,
+   "pessimistic": 2714,
+   "direction": "lower-is-better"
+  }
+ },
+ "delta": {
+  "waits": {
+   "routine": {
+    "optimistic": {
+     "p50": -227.7680130250228,
+     "p90": -431.36492940969765,
+     "mean": -259.3127594787131,
+     "max": -1562.1820615633624,
+     "n": 21482
+    },
+    "realistic": {
+     "p50": 999.8404596603941,
+     "p90": 1567.7812392191845,
+     "mean": 1001.7333667306652,
+     "max": 992.129635102654,
+     "n": 19335
+    },
+    "pessimistic": {
+     "p50": 19379.75970396609,
+     "p90": 32607.82542821701,
+     "mean": 19947.565303429026,
+     "max": 35691.13476898463,
+     "n": 14730
+    },
+    "direction": "lower-is-better"
+   },
+   "complex": {
+    "optimistic": {
+     "p50": -243.8661884937319,
+     "p90": -495.66048003250035,
+     "mean": -287.03330056027073,
+     "max": -1528.5328185220133,
+     "n": 3200
+    },
+    "realistic": {
+     "p50": 960.7962952617672,
+     "p90": 1484.8205326449824,
+     "mean": 957.7976565446786,
+     "max": 941.8231977905671,
+     "n": 4423
+    },
+    "pessimistic": {
+     "p50": 19448.69646043534,
+     "p90": 32722.04438204586,
+     "mean": 19954.837363582657,
+     "max": 35664.035093712795,
+     "n": 4224
+    },
+    "direction": "lower-is-better"
+   },
+   "urgent": {
+    "optimistic": {
+     "p50": -4.856351855181856,
+     "p90": 10.130385860917158,
+     "mean": 6.755260485671556,
+     "max": 4.486510141985491,
+     "n": 1682
+    },
+    "realistic": {
+     "p50": 12.982028660248034,
+     "p90": 1.8042549522942863,
+     "mean": 6.201228314028924,
+     "max": 15.135006848257035,
+     "n": 2067
+    },
+    "pessimistic": {
+     "p50": -1.7694381889887154,
+     "p90": 11.004767499805894,
+     "mean": 6.999737355511229,
+     "max": 21.391540877171792,
+     "n": 1894
+    },
+    "direction": "lower-is-better"
+   }
+  },
+  "timeInSystem": {
+   "routine": {
+    "optimistic": {
+     "p50": -227.7680130250228,
+     "p90": -431.36492940969765,
+     "mean": -259.312759478713,
+     "max": -1562.1820615633624,
+     "n": 21482
+    },
+    "realistic": {
+     "p50": 999.8404596603941,
+     "p90": 1567.7812392191845,
+     "mean": 1001.7333667306641,
+     "max": 992.129635102654,
+     "n": 19335
+    },
+    "pessimistic": {
+     "p50": 19379.75970396609,
+     "p90": 32607.82542821701,
+     "mean": 19947.565303429023,
+     "max": 35691.13476898463,
+     "n": 14730
+    },
+    "direction": "lower-is-better"
+   },
+   "complex": {
+    "optimistic": {
+     "p50": -250.6635582879535,
+     "p90": -502.45784982672194,
+     "mean": -293.83067035449085,
+     "max": -1535.3301883162349,
+     "n": 3200
+    },
+    "realistic": {
+     "p50": 959.8375431732857,
+     "p90": 1483.861780556501,
+     "mean": 956.8389044561893,
+     "max": 940.8644457020855,
+     "n": 4423
+    },
+    "pessimistic": {
+     "p50": 19462.3103679957,
+     "p90": 32735.658289606217,
+     "mean": 19968.451271143032,
+     "max": 35677.64900127315,
+     "n": 4224
+    },
+    "direction": "lower-is-better"
+   },
+   "urgent": {
+    "optimistic": {
+     "p50": -1.8411757391586434,
+     "p90": 13.145561976940371,
+     "mean": 9.770436601694712,
+     "max": 7.501686258008704,
+     "n": 1682
+    },
+    "realistic": {
+     "p50": 16.015273751458153,
+     "p90": 4.837500043504406,
+     "mean": 9.2344734052391,
+     "max": 18.168251939467154,
+     "n": 2067
+    },
+    "pessimistic": {
+     "p50": 3.077473642420955,
+     "p90": 15.851679331215564,
+     "mean": 11.8466491869209,
+     "max": 26.238452708581463,
+     "n": 1894
+    },
+    "direction": "lower-is-better"
+   }
+  },
+  "perNode": {
+   "gp-clinic": {
+    "optimistic": {
+     "utilisation": 0.8787666278364019,
+     "stable": true,
+     "queueLength": 25.271362995426006,
+     "throughput": 91.22222222222223,
+     "refused": 0
+    },
+    "realistic": {
+     "utilisation": 0.9439948771490477,
+     "stable": true,
+     "queueLength": 82.94808322405197,
+     "throughput": 90.09722222222223,
+     "refused": 0
+    },
+    "pessimistic": {
+     "utilisation": 0.9202663330170778,
+     "stable": false,
+     "queueLength": 813.3113800036962,
+     "throughput": 73.18888888888888,
+     "refused": 0
+    },
+    "direction": "lower-is-better"
+   },
+   "gp-admin": {
+    "optimistic": {
+     "utilisation": 0.5899662287324129,
+     "stable": true,
+     "queueLength": 11.714631104819608,
+     "throughput": 26.788888888888888,
+     "refused": 0
+    },
+    "realistic": {
+     "utilisation": 0.7719455857953906,
+     "stable": true,
+     "queueLength": 15.612638616127729,
+     "throughput": 25.566666666666666,
+     "refused": 0
+    },
+    "pessimistic": {
+     "utilisation": 0.21141046615938416,
+     "stable": true,
+     "queueLength": 8.299376461271875,
+     "throughput": 22.925,
+     "refused": 0
+    },
+    "direction": "lower-is-better"
+   },
+   "community-visit": {
+    "optimistic": {
+     "utilisation": 0.654499847583173,
+     "stable": true,
+     "queueLength": 3.5912761067830434,
+     "throughput": 9.119444444444444,
+     "refused": 0
+    },
+    "realistic": {
+     "utilisation": 0.7224831022208458,
+     "stable": true,
+     "queueLength": 4.387734557757169,
+     "throughput": 9.238888888888889,
+     "refused": 0
+    },
+    "pessimistic": {
+     "utilisation": 0.6804343712931128,
+     "stable": true,
+     "queueLength": 5.222641166460546,
+     "throughput": 7.355555555555555,
+     "refused": 0
+    },
+    "direction": "lower-is-better"
+   },
+   "test": {
+    "optimistic": {
+     "utilisation": 0.000011749223625887816,
+     "stable": true,
+     "queueLength": 1.1749223625887815,
+     "throughput": 16.26388888888889,
+     "refused": 0
+    },
+    "realistic": {
+     "utilisation": 0.00001255038353991754,
+     "stable": true,
+     "queueLength": 1.255038353991754,
+     "throughput": 16.091666666666665,
+     "refused": 0
+    },
+    "pessimistic": {
+     "utilisation": 0.00001252700661741336,
+     "stable": true,
+     "queueLength": 1.252700661741336,
+     "throughput": 13.158333333333333,
+     "refused": 0
+    },
+    "direction": "lower-is-better"
+   }
+  },
+  "completed": {
+   "routine": {
+    "optimistic": 21482,
+    "realistic": 19335,
+    "pessimistic": 14730,
+    "direction": "higher-is-better"
+   },
+   "complex": {
+    "optimistic": 3200,
+    "realistic": 4423,
+    "pessimistic": 4224,
+    "direction": "higher-is-better"
+   },
+   "urgent": {
+    "optimistic": 1682,
+    "realistic": 2067,
+    "pessimistic": 1894,
+    "direction": "higher-is-better"
+   }
+  },
+  "rejections": {
+   "optimistic": 0,
+   "realistic": 0,
+   "pessimistic": 0,
+   "direction": "lower-is-better"
+  },
+  "unfiledLetters": {
+   "optimistic": 2013,
+   "realistic": 1557,
+   "pessimistic": 2409,
+   "direction": "lower-is-better"
+  },
+  "unfiledResults": {
+   "optimistic": 3328,
+   "realistic": 3316,
+   "pessimistic": 2714,
+   "direction": "lower-is-better"
+  }
+ },
+ "findings": [
+  {
+   "id": "stability",
+   "statement": "The practice keeps a stable operating point in 2 of three worlds (optimistic, realistic).",
+   "kind": "robust",
+   "holdsIn": [
+    "optimistic",
+    "realistic"
+   ],
+   "survivesAllThree": false,
+   "optimisticOnly": false,
+   "refersTo": [
+    "perNode.gp-clinic.stable"
+   ]
+  },
+  {
+   "id": "threshold:levers.hospitalToCommunityShare",
+   "statement": "holds while share of care shifted to community stays below 14%",
+   "kind": "threshold",
+   "holdsIn": [
+    "optimistic",
+    "realistic"
+   ],
+   "survivesAllThree": false,
+   "optimisticOnly": false,
+   "refersTo": [
+    "levers.hospitalToCommunityShare"
+   ]
+  },
+  {
+   "id": "unstable-share",
+   "statement": "10 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+   "kind": "structural",
+   "holdsIn": [
+    "optimistic",
+    "realistic"
+   ],
+   "survivesAllThree": false,
+   "optimisticOnly": false
+  }
+ ],
+ "tornado": [
+  {
+   "path": "arrivals.targetUtilisation",
+   "label": "arrivals.targetUtilisation",
+   "low": 442.6572724880825,
+   "high": 6934.364009067067,
+   "swing": 6491.706736578984,
+   "rangeSource": "assumed",
+   "dominantButUnsourced": true
+  },
+  {
+   "path": "serviceTimes.classMultiplier.complex",
+   "label": "serviceTimes.classMultiplier.complex",
+   "low": 571.1912363075535,
+   "high": 935.8153539260093,
+   "swing": 364.6241176184558,
+   "rangeSource": "assumed",
+   "dominantButUnsourced": true
+  },
+  {
+   "path": "serviceTimes.classMultiplier.urgent",
+   "label": "serviceTimes.classMultiplier.urgent",
+   "low": 592.1728075301507,
+   "high": 732.7642771642422,
+   "swing": 140.59146963409148,
+   "rangeSource": "assumed",
+   "dominantButUnsourced": true
+  },
+  {
+   "path": "arrivals.classMix.complex",
+   "label": "arrivals.classMix.complex",
+   "low": 544.1592453831108,
+   "high": 682.6796669288306,
+   "swing": 138.52042154571973,
+   "rangeSource": "assumed",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "serviceTimes.documentReviewWork",
+   "label": "serviceTimes.documentReviewWork",
+   "low": 553.3588233115152,
+   "high": 656.5469734807557,
+   "swing": 103.18815016924054,
+   "rangeSource": "assumed",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "capacities.gpAdminShare",
+   "label": "capacities.gpAdminShare",
+   "low": 653.9918106219266,
+   "high": 592.1728075301507,
+   "swing": 61.81900309177581,
+   "rangeSource": "literature",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "arrivals.classMix.urgent",
+   "label": "arrivals.classMix.urgent",
+   "low": 613.5984379447764,
+   "high": 563.8167477639508,
+   "swing": 49.781690180825535,
+   "rangeSource": "assumed",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "levers.weekdayDischargeShare",
+   "label": "levers.weekdayDischargeShare",
+   "low": 551.4567547005136,
+   "high": 592.1728075301507,
+   "swing": 40.71605282963719,
+   "rangeSource": "assumed",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "arrivals.dischargeLettersPerDay",
+   "label": "arrivals.dischargeLettersPerDay",
+   "low": 600.5531432702555,
+   "high": 563.6932974745287,
+   "swing": 36.85984579572687,
+   "rangeSource": "measured",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "arrivals.classMix.routine",
+   "label": "arrivals.classMix.routine",
+   "low": 597.3611039082753,
+   "high": 569.2810290495399,
+   "swing": 28.080074858735316,
+   "rangeSource": "assumed",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "arrivals.edPerDay",
+   "label": "arrivals.edPerDay",
+   "low": 592.1728075301507,
+   "high": 592.1728075301507,
+   "swing": 0,
+   "rangeSource": "measured",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "effects.monitoringEscalationReduction",
+   "label": "effects.monitoringEscalationReduction",
+   "low": 592.1728075301507,
+   "high": 592.1728075301507,
+   "swing": 0,
+   "rangeSource": "assumed",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "effects.telephoneServiceMultiplier",
+   "label": "effects.telephoneServiceMultiplier",
+   "low": 592.1728075301507,
+   "high": 592.1728075301507,
+   "swing": 0,
+   "rangeSource": "assumed",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "environment.shortageCommunityMultiplier",
+   "label": "environment.shortageCommunityMultiplier",
+   "low": 592.1728075301507,
+   "high": 592.1728075301507,
+   "swing": 0,
+   "rangeSource": "assumed",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "environment.winterDemandMultiplier",
+   "label": "environment.winterDemandMultiplier",
+   "low": 592.1728075301507,
+   "high": 592.1728075301507,
+   "swing": 0,
+   "rangeSource": "assumed",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "environment.winterUrgentMultiplier",
+   "label": "environment.winterUrgentMultiplier",
+   "low": 592.1728075301507,
+   "high": 592.1728075301507,
+   "swing": 0,
+   "rangeSource": "assumed",
+   "dominantButUnsourced": false
+  }
+ ],
+ "thresholds": [
+  {
+   "path": "levers.hospitalToCommunityShare",
+   "label": "share of care shifted to community",
+   "breakpoint": 0.13897705078125,
+   "holdsWhen": "below",
+   "findingId": "stability",
+   "statement": "holds while share of care shifted to community stays below 14%"
+  }
+ ],
+ "breakevens": [
+  {
+   "path": "boundaries.inducedDemand",
+   "label": "induced demand",
+   "value": null,
+   "statement": "induced demand could not overturn this claim at any value",
+   "implausible": true
+  },
+  {
+   "path": "boundaries.substitution",
+   "label": "substitution",
+   "value": null,
+   "statement": "substitution could not overturn this claim at any value",
+   "implausible": true
+  },
+  {
+   "path": "boundaries.gaming",
+   "label": "reclassification",
+   "value": null,
+   "statement": "reclassification could not overturn this claim at any value",
+   "implausible": true
+  }
+ ],
+ "flags": [
+  {
+   "path": "arrivals.classMix.complex",
+   "reason": "assumed",
+   "message": "arrivals.classMix.complex is assumed, not sourced"
+  },
+  {
+   "path": "arrivals.classMix.routine",
+   "reason": "assumed",
+   "message": "arrivals.classMix.routine is assumed, not sourced"
+  },
+  {
+   "path": "arrivals.classMix.urgent",
+   "reason": "assumed",
+   "message": "arrivals.classMix.urgent is assumed, not sourced"
+  },
+  {
+   "path": "arrivals.perDay.complex",
+   "reason": "assumed",
+   "message": "arrivals.perDay.complex is assumed, not sourced"
+  },
+  {
+   "path": "arrivals.perDay.routine",
+   "reason": "assumed",
+   "message": "arrivals.perDay.routine is assumed, not sourced"
+  },
+  {
+   "path": "arrivals.perDay.urgent",
+   "reason": "assumed",
+   "message": "arrivals.perDay.urgent is assumed, not sourced"
+  },
+  {
+   "path": "arrivals.targetUtilisation",
+   "reason": "assumed",
+   "message": "arrivals.targetUtilisation is assumed, not sourced"
+  },
+  {
+   "path": "boundaries.gaming",
+   "reason": "assumed",
+   "message": "boundaries.gaming is assumed, not sourced"
+  },
+  {
+   "path": "boundaries.gaming",
+   "reason": "no-range",
+   "message": "boundaries.gaming is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "boundaries.inducedDemand",
+   "reason": "assumed",
+   "message": "boundaries.inducedDemand is assumed, not sourced"
+  },
+  {
+   "path": "boundaries.inducedDemand",
+   "reason": "no-range",
+   "message": "boundaries.inducedDemand is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "boundaries.substitution",
+   "reason": "assumed",
+   "message": "boundaries.substitution is assumed, not sourced"
+  },
+  {
+   "path": "boundaries.substitution",
+   "reason": "no-range",
+   "message": "boundaries.substitution is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "capacities.communitySlotsPerDay",
+   "reason": "no-range",
+   "message": "capacities.communitySlotsPerDay is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "capacities.gpSessionsPerDay",
+   "reason": "no-range",
+   "message": "capacities.gpSessionsPerDay is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "capacities.gpSlotsPerSession",
+   "reason": "no-range",
+   "message": "capacities.gpSlotsPerSession is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "capacities.staffedSpaces",
+   "reason": "no-range",
+   "message": "capacities.staffedSpaces is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "effects.monitoringEscalationReduction",
+   "reason": "assumed",
+   "message": "effects.monitoringEscalationReduction is assumed, not sourced"
+  },
+  {
+   "path": "effects.telephoneBaselineShare",
+   "reason": "no-range",
+   "message": "effects.telephoneBaselineShare is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "effects.telephoneServiceMultiplier",
+   "reason": "assumed",
+   "message": "effects.telephoneServiceMultiplier is assumed, not sourced"
+  },
+  {
+   "path": "environment.shortageCommunityMultiplier",
+   "reason": "assumed",
+   "message": "environment.shortageCommunityMultiplier is assumed, not sourced"
+  },
+  {
+   "path": "environment.winterDemandMultiplier",
+   "reason": "assumed",
+   "message": "environment.winterDemandMultiplier is assumed, not sourced"
+  },
+  {
+   "path": "environment.winterUrgentMultiplier",
+   "reason": "assumed",
+   "message": "environment.winterUrgentMultiplier is assumed, not sourced"
+  },
+  {
+   "path": "levers.communityCapacityMultiplier",
+   "reason": "no-range",
+   "message": "levers.communityCapacityMultiplier is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "levers.extraGpSessions",
+   "reason": "no-range",
+   "message": "levers.extraGpSessions is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "levers.hospitalToCommunityShare",
+   "reason": "assumed",
+   "message": "levers.hospitalToCommunityShare is assumed, not sourced"
+  },
+  {
+   "path": "levers.hospitalToCommunityShare",
+   "reason": "no-range",
+   "message": "levers.hospitalToCommunityShare is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "levers.monitoringIntensity",
+   "reason": "no-range",
+   "message": "levers.monitoringIntensity is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "levers.telephoneFollowUpShare",
+   "reason": "no-range",
+   "message": "levers.telephoneFollowUpShare is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "levers.weekdayDischargeShare",
+   "reason": "assumed",
+   "message": "levers.weekdayDischargeShare is assumed, not sourced"
+  },
+  {
+   "path": "routing.communityRejection",
+   "reason": "assumed",
+   "message": "routing.communityRejection is assumed, not sourced"
+  },
+  {
+   "path": "routing.communityRejection",
+   "reason": "no-range",
+   "message": "routing.communityRejection is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "routing.gpToCommunity",
+   "reason": "assumed",
+   "message": "routing.gpToCommunity is assumed, not sourced"
+  },
+  {
+   "path": "routing.gpToCommunity",
+   "reason": "no-range",
+   "message": "routing.gpToCommunity is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "routing.gpToHospital",
+   "reason": "assumed",
+   "message": "routing.gpToHospital is assumed, not sourced"
+  },
+  {
+   "path": "routing.gpToHospital",
+   "reason": "no-range",
+   "message": "routing.gpToHospital is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "routing.gpToTest",
+   "reason": "assumed",
+   "message": "routing.gpToTest is assumed, not sourced"
+  },
+  {
+   "path": "routing.gpToTest",
+   "reason": "no-range",
+   "message": "routing.gpToTest is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "routing.letterReviewedToFiled",
+   "reason": "no-range",
+   "message": "routing.letterReviewedToFiled is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "routing.letterSentToReviewed",
+   "reason": "no-range",
+   "message": "routing.letterSentToReviewed is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "serviceTimes.bloodResultTurnaround",
+   "reason": "no-range",
+   "message": "serviceTimes.bloodResultTurnaround is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "serviceTimes.classMultiplier.complex",
+   "reason": "assumed",
+   "message": "serviceTimes.classMultiplier.complex is assumed, not sourced"
+  },
+  {
+   "path": "serviceTimes.classMultiplier.routine",
+   "reason": "no-range",
+   "message": "serviceTimes.classMultiplier.routine is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "serviceTimes.classMultiplier.urgent",
+   "reason": "assumed",
+   "message": "serviceTimes.classMultiplier.urgent is assumed, not sourced"
+  },
+  {
+   "path": "serviceTimes.communityVisit",
+   "reason": "no-range",
+   "message": "serviceTimes.communityVisit is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "serviceTimes.documentReviewHop",
+   "reason": "no-range",
+   "message": "serviceTimes.documentReviewHop is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "serviceTimes.documentReviewWork",
+   "reason": "assumed",
+   "message": "serviceTimes.documentReviewWork is assumed, not sourced"
+  },
+  {
+   "path": "serviceTimes.gpConsultation",
+   "reason": "no-range",
+   "message": "serviceTimes.gpConsultation is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "serviceTimes.pharmacyApproval",
+   "reason": "assumed",
+   "message": "serviceTimes.pharmacyApproval is assumed, not sourced"
+  },
+  {
+   "path": "serviceTimes.pharmacyApproval",
+   "reason": "no-range",
+   "message": "serviceTimes.pharmacyApproval is a point estimate — contributes nothing to the spread between worlds"
+  },
+  {
+   "path": "arrivals.targetUtilisation",
+   "reason": "dominant-but-unsourced",
+   "message": "arrivals.targetUtilisation dominates the result and rests on an assumption"
+  },
+  {
+   "path": "serviceTimes.classMultiplier.complex",
+   "reason": "dominant-but-unsourced",
+   "message": "serviceTimes.classMultiplier.complex dominates the result and rests on an assumption"
+  },
+  {
+   "path": "serviceTimes.classMultiplier.urgent",
+   "reason": "dominant-but-unsourced",
+   "message": "serviceTimes.classMultiplier.urgent dominates the result and rests on an assumption"
+  }
+ ],
+ "run": {
+  "samples": 40,
+  "seed": 1,
+  "horizonDays": 450,
+  "elapsedMs": 0.0004999999946448952,
+  "anyVerificationFailed": false,
+  "paramsMeta": {
+   "worldId": "team-4551d2471320",
+   "snapshotId": "2026-09-21T12:02:00Z",
+   "calibratedAt": 1789992120000
+  }
+ }
+}

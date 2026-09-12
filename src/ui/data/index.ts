@@ -1,18 +1,22 @@
 /**
  * The interface's only data source.
  *
- * Every import here is a FIXTURE. When Kaavya's `run(params, seed) -> Metrics` lands, `metrics`
- * below becomes a call to it and nothing else in src/ui/ moves. That is the whole point of
- * having frozen the contracts first.
+ * `metrics`, `sweep` and `params` now come from the engine, precomputed by
+ * `npm run ui-data` (scripts/build-ui-data.ts). Precomputed rather than run in the browser, per
+ * PRD §0: a thousand sampled simulations is a build step, not a page load, and a lookup cannot be
+ * slow or throw on stage. Nothing else in src/ui/ moved to make this happen, which is what
+ * freezing the contracts first bought.
  *
- * `IS_SYNTHETIC` is rendered on screen, not hidden in a comment. Presenting a fabricated number
- * as a measured one is the single thing this project may not do.
+ * `extraction` is still a fixture — reading a real policy document is not built — and says so on
+ * its own screen rather than hiding behind the general banner. Presenting a fabricated number as
+ * a measured one is the single thing this project may not do, and that applies to a page at a
+ * time, not just to the build as a whole.
  */
 
-import metricsJson from '../../../fixtures/metrics.mock.json'
-import sweepJson from '../../../fixtures/sweep.mock.json'
+import metricsJson from '../../../fixtures/metrics.live.json'
+import sweepJson from '../../../fixtures/sweep.live.json'
 import extractedJson from '../../../fixtures/extracted.mock.json'
-import paramsJson from '../../../fixtures/params.mock.json'
+import paramsJson from '../../../fixtures/params.live.json'
 
 import type { Metrics } from '@/contracts/metrics'
 import type { Params, SourceTag } from '@/contracts/params'
@@ -20,9 +24,23 @@ import type { Params, SourceTag } from '@/contracts/params'
 export const metrics = metricsJson as unknown as Metrics
 export const params = paramsJson as unknown as Params
 
-/** True while the engine does not exist. Drives the banner. */
+/**
+ * True while the outcomes are fabricated. Drives the site-wide banner.
+ *
+ * The engine writes no `_synthetic` key, so this goes false the moment `npm run ui-data` has run
+ * and stays true if it has not — the banner fails safe rather than needing to be remembered.
+ */
 export const IS_SYNTHETIC = Boolean((metricsJson as { _synthetic?: string })._synthetic)
 export const SYNTHETIC_NOTE = (metricsJson as { _synthetic?: string })._synthetic ?? ''
+
+/**
+ * Extraction is separate. The outcomes are real while the document read that produced the
+ * parameters is not, and one screen being honest does not license the other being quiet.
+ */
+export const IS_EXTRACTION_SYNTHETIC = true
+export const EXTRACTION_NOTE =
+  'The commitments below are a worked example, not a document this build parsed. '
+  + 'The parameters they map to are the calibrated baseline, and the outcomes are the engine\'s.'
 
 // ---------------------------------------------------------------------------
 // Sweep: our own shape, standing in for precomputed/grid.json

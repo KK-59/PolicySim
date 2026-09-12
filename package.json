@@ -2,7 +2,7 @@
   "name": "policysim",
   "version": "0.1.0",
   "private": true,
-  "description": "Every policy runs in three worlds. Team 14 — OpenAI x Anima Healthtech Hackathon.",
+  "description": "Every policy runs in three worlds. Team 14 \u2014 OpenAI x Anima Healthtech Hackathon.",
   "type": "module",
   "scripts": {
     "dev": "concurrently -k -n api,ui \"npm:dev:api\" \"vite\"",
@@ -20,7 +20,8 @@
     "liveloop": "tsx scripts/live-loop.mjs",
     "calibrate": "tsx scripts/calibrate.mjs",
     "corpus:build": "tsx scripts/build-corpus.mjs",
-    "corpus:check": "tsx scripts/check-corpus.mjs"
+    "corpus:check": "tsx scripts/check-corpus.mjs",
+    "ui-data": "tsx scripts/build-ui-data.ts"
   },
   "dependencies": {
     "react": "^18.3.1",

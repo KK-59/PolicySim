@@ -1642,3 +1642,27 @@ textarea::placeholder {
     padding-inline: var(--s-2);
   }
 }
+
+/* ---------------------------------------------------------------------------
+   An inline caveat that belongs to one screen.
+
+   Distinct from .synthetic, which is the site-wide footer: this sits in the flow of the page it
+   qualifies, because a reader who never scrolls to the footer must still see it.
+   --------------------------------------------------------------------------- */
+
+.note {
+  align-items: flex-start;
+  background: var(--amber-bg, #fff8e6);
+  border: 1px solid var(--amber-line, #e6d3a3);
+  border-radius: 6px;
+  color: var(--ink-2, #4a4436);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  margin: 0 0 1.25rem;
+  padding: 0.625rem 0.875rem;
+}
+
+.note svg {
+  flex: none;
+  margin-top: 0.15em;
+}

@@ -9,6 +9,7 @@ import { Glyph } from '../components/Glyph'
 import { SourceTag } from '../components/SourceTag'
 import { navigate } from '../lib/router'
 import { setCommitment, setRun, useRun } from '../lib/store'
+import { EXTRACTION_NOTE, IS_EXTRACTION_SYNTHETIC } from '../data'
 
 export function ExtractedParams() {
   const run = useRun()
@@ -16,6 +17,17 @@ export function ExtractedParams() {
 
   return (
     <section className="page">
+      {/*
+        The outcomes are the engine's; this page's document read is not. Saying so here rather
+        than in the site-wide banner, because the banner going quiet must not vouch for a screen
+        it was never about.
+      */}
+      {IS_EXTRACTION_SYNTHETIC && (
+        <p className="note row gap-2" role="note">
+          <Glyph name="warning" size={13} />
+          <span>{EXTRACTION_NOTE}</span>
+        </p>
+      )}
       <div className="row between">
         <h1 className="h1">Here is what it says.</h1>
         <button
