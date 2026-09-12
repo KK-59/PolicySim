@@ -27,6 +27,12 @@
   --fuchsia: #c026d3;
   --wash-blue: #edf1fc;
   --wash-fuchsia: #faeefc;
+  /* Provenance of a DOCUMENT, a different axis from the provenance of a parameter. Blue is
+     already "measured", so a real publication reuses it rather than inventing a meaning. Violet
+     is unspoken-for and clears AA at 7.1:1; amber was rejected because it means "assumed,
+     unsourced" and a fixture we authored with known answers is not that. */
+  --violet: #6d28d9;
+  --wash-violet: #f2ecfd;
   --gradient: linear-gradient(90deg, #1d4ed8 16.3%, #c026d3 100%);
 
   /* The three worlds. Semantic, never decorative. */

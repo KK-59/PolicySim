@@ -64,7 +64,7 @@ Tests: `approval` 15, `tools` 12, `live-loop` 14, `calibration` 23, `calibration
 
 ### To Kaavya (engine)
 
-`npm run calibrate` writes **`fixtures/params.live.json`** in your `Params` shape.
+`npm run calibrate` writes **`fixtures/params.measured.json`** in your `Params` shape.
 
 - **28 parameters**: 14 `measured`, 5 `documented`, 9 `assumed`. No non-`assumed` leaf lacks a
   citation; `sourced()` throws at construction if one does.
