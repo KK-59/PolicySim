@@ -91,6 +91,15 @@ export interface TraceEvent {
   ref?: string
   /** What the snapshot called it. */
   title?: string
+  /**
+   * When this item actually started waiting, if that is earlier than the event.
+   *
+   * Work carried in from the snapshot joins the trace at the window boundary, but it has been
+   * waiting since long before — nine days, for some of these letters. Without this the view
+   * computed every seeded wait from the boundary and showed the whole queue the same number,
+   * which read as a bug and hid the only interesting thing about it.
+   */
+  since?: number
 }
 
 /** Work already in progress when the run starts, taken from a snapshot of the real world. */
@@ -153,6 +162,7 @@ export function simulateNetwork(spec: NetworkSpec): NetworkResult {
       t, kind, node, item: item.id, cls: item.tag ?? 'routine',
       ...(item.ref ? { ref: item.ref } : {}),
       ...(item.title ? { title: item.title } : {}),
+      ...(kind === 'arrive' && item.arrivedAt < t ? { since: item.arrivedAt } : {}),
     });
   };
 
@@ -279,6 +289,7 @@ export function simulateNetwork(spec: NetworkSpec): NetworkResult {
             cls: held.item.tag ?? 'routine',
             ...(held.item.ref ? { ref: held.item.ref } : {}),
             ...(held.item.title ? { title: held.item.title } : {}),
+            ...(held.item.arrivedAt < traceOpts.from ? { since: held.item.arrivedAt } : {}),
           });
         }
       }

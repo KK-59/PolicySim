@@ -30,6 +30,8 @@ interface TraceEvent {
   /** Present for work seeded from the snapshot: the simulator's own patient. */
   ref?: string
   title?: string
+  /** When the item really started waiting, where that predates the window. */
+  since?: number
 }
 
 type WorldName = 'optimistic' | 'realistic' | 'pessimistic'
@@ -92,7 +94,11 @@ function stateAt(trace: readonly TraceEvent[], t: number): Map<string, Placed[]>
     // the same person once it is in service.
     const identity = { ref: e.ref ?? prev?.ref, title: e.title ?? prev?.title }
     if (e.kind === 'arrive') {
-      placed.set(e.item, { node: e.node, state: 'waiting', since: e.t, cls: e.cls, ...identity })
+      // `since` where the item was already waiting before the window opened, so a letter that has
+      // sat for nine days reads as nine days rather than as however far the scrubber has moved.
+      placed.set(e.item, {
+        node: e.node, state: 'waiting', since: e.since ?? e.t, cls: e.cls, ...identity,
+      })
     } else if (e.kind === 'start') {
       // An item can start without a recorded arrival: it was mid-service when the window opened,
       // so its arrival is behind us. Adopt it rather than dropping it on the floor.
@@ -151,7 +157,11 @@ function stamp(minutes: number): string {
   return `${names[day % 7]} ${hh}:${mm}`
 }
 
-const wait = (mins: number) => (mins < 60 ? `${Math.round(mins)}m` : `${(mins / 60).toFixed(1)}h`)
+const wait = (mins: number) => {
+  if (mins < 60) return `${Math.round(mins)}m`
+  if (mins < 48 * 60) return `${(mins / 60).toFixed(1)}h`
+  return `${(mins / 1440).toFixed(1)} days`
+}
 
 export function World() {
   const run = useRun()
