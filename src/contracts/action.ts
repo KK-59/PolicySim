@@ -4,6 +4,10 @@
  *
  * FROZEN 2026-09-12. Change only by agreement in the group chat.
  *
+ * Amended once, same day, before anyone built on it: `messaging_action` needs a conversation
+ * (`resourceId` + `expectedVersion`, not optional) and `process_document` needs `clinician`
+ * on assign and `text` on review. All four were missing. Found by exercising the real server.
+ *
  * Every shape below was verified against the live server, not inferred from the OpenAPI spec.
  * The spec declares only `type` as required and enforces the rest server-side, so the minimum
  * bodies recorded here come from probing https://sim.animahacks.com directly.
@@ -111,12 +115,18 @@ export interface ShareRecordAction extends ActionBase {
   expectedVersion?: number
 }
 
-/** minimum body: patientId + messagingCommand. 400 "Messaging command required" without it. */
+/**
+ * minimum body: patientId + resourceId + expectedVersion + messagingCommand.
+ * The command alone is not enough: without a conversation the server returns
+ * 400 "Choose a practice conversation". Conversations come from
+ * GET /api/sites/{site}/messaging-workspace (e.g. messaging-example-1 for SIM-000001).
+ */
 export interface MessagingAction extends ActionBase {
   type: 'messaging_action'
+  /** An existing conversation resource. Required despite what the spec implies. */
+  resourceId: string
+  expectedVersion: number
   messagingCommand: MessagingCommand
-  resourceId?: string
-  expectedVersion?: number
 }
 
 /**
@@ -129,6 +139,10 @@ export interface ProcessDocumentAction extends ActionBase {
   resourceId: string
   expectedVersion: number
   documentCommand: DocumentCommand
+  /** Required by `assign`. The letter cannot be reviewed until it has one. */
+  clinician?: string
+  /** Required by `review`. Becomes `data.reviewNote` on the document. */
+  text?: string
   documentTags?: string[]
   documentSnomedCodes?: Array<{ code: string; display: string }>
 }
