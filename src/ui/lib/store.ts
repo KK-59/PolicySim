@@ -41,6 +41,14 @@ export interface RunState {
   params: unknown | null
   /** What the run is doing right now. Null when idle. A real run takes about ten seconds. */
   stage: string | null
+  /**
+   * A document card is in flight.
+   *
+   * Dragging out of a fixed overlay onto a small target underneath it is a gesture that has to be
+   * aimed, and the overlay is in the way of the aim. While this is true the whole viewport
+   * accepts the drop instead, so there is nothing to hit.
+   */
+  draggingDoc: boolean
 }
 
 const initial: RunState = {
@@ -56,6 +64,7 @@ const initial: RunState = {
   liveMetrics: null,
   params: null,
   stage: null,
+  draggingDoc: false,
 }
 
 let state: RunState = initial

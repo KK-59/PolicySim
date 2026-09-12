@@ -8,7 +8,7 @@
  * and a key shipped to the browser is a key published.
  */
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Glyph } from '../components/Glyph'
 import { navigate } from '../lib/router'
 import { setRun, useRun } from '../lib/store'
@@ -109,8 +109,51 @@ export function Upload() {
     }
   }
 
+  // The card is unmounted the moment the shelf closes, so its own dragend cannot fire. Clear the
+  // flag from the window instead, or a cancelled drag would leave the veil up forever.
+  useEffect(() => {
+    const clear = () => setRun({ draggingDoc: false })
+    window.addEventListener('dragend', clear)
+    window.addEventListener('drop', clear)
+    return () => {
+      window.removeEventListener('dragend', clear)
+      window.removeEventListener('drop', clear)
+    }
+  }, [])
+
+  const takeDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    setOver(false)
+    setRun({ draggingDoc: false })
+    const dragged = e.dataTransfer.getData('application/x-policysim-document')
+    if (dragged) {
+      const [id, ...rest] = dragged.split('|')
+      if (id) void acceptCatalogued(id, rest.join('|') || id)
+      return
+    }
+    accept(e.dataTransfer.files?.[0])
+  }
+
   return (
     <section className="page">
+      {/* While a card is in flight the whole viewport takes the drop. Nothing to aim at. */}
+      {run.draggingDoc && (
+        <div
+          className="dropveil"
+          onDragEnter={(e) => e.preventDefault()}
+          onDragOver={(e) => {
+            e.preventDefault()
+            e.dataTransfer.dropEffect = 'copy'
+          }}
+          onDrop={takeDrop}
+        >
+          <div className="dropveil__card">
+            <Glyph name="upload" size={26} />
+            <strong className="mt-2">Drop anywhere to read this policy</strong>
+          </div>
+        </div>
+      )}
+
       <div className="focal">
         <h1 className="h1">Drop in the policy.</h1>
         <p className="lead mt-4">
@@ -133,18 +176,7 @@ export function Upload() {
             setOver(true)
           }}
           onDragLeave={() => setOver(false)}
-          onDrop={(e) => {
-            e.preventDefault()
-            setOver(false)
-            // A card from the drawer carries an id; a real file carries bytes. Same destination.
-            const dragged = e.dataTransfer.getData('application/x-policysim-document')
-            if (dragged) {
-              const [id, ...rest] = dragged.split('|')
-              if (id) void acceptCatalogued(id, rest.join('|') || id)
-              return
-            }
-            accept(e.dataTransfer.files?.[0])
-          }}
+          onDrop={takeDrop}
         >
           <input
             ref={inputRef}

@@ -1871,3 +1871,27 @@ textarea::placeholder {
   text-decoration: underline;
   color: var(--blue);
 }
+
+/* The drop veil. Up only while a card is in flight, and it covers everything, so the drop needs
+   no aim: the shelf has already closed and the whole viewport is the target. */
+.dropveil {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--blue) 8%, transparent);
+  backdrop-filter: blur(1px);
+}
+.dropveil__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--s-7) var(--s-8);
+  border: 1.5px dashed var(--blue);
+  border-radius: var(--r-md);
+  background: var(--paper);
+  color: var(--blue);
+  box-shadow: var(--lift-lg);
+  pointer-events: none;
+}

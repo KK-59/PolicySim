@@ -12,6 +12,7 @@
 
 import { useEffect, useState } from 'react'
 import { Glyph } from './Glyph'
+import { setRun } from '../lib/store'
 
 interface DocumentEntry {
   id: string
@@ -126,8 +127,15 @@ export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () =
                   )
                   e.dataTransfer.effectAllowed = 'copy'
                   setDragging(true)
+                  setRun({ draggingDoc: true })
+                  // Out of the way immediately. A drag already in flight survives its source
+                  // being unmounted, so closing here costs nothing and clears the whole screen.
+                  onClose()
                 }}
-                onDragEnd={() => setDragging(false)}
+                onDragEnd={() => {
+                  setDragging(false)
+                  setRun({ draggingDoc: false })
+                }}
               >
                 <span className="card__grip" aria-hidden="true">
                   <Glyph name="document" size={18} />
