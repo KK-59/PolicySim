@@ -4,47 +4,893 @@
       "plannedActionId": "a1",
       "outcome": "applied",
       "result": {
-        "id": "res-1",
+        "id": "r-13530",
         "kind": "task",
-        "title": "create_task",
-        "status": "open",
+        "title": "Discharge follow-up: home-first pathway",
         "owner": "gp",
         "visibleTo": [
+          "gp",
+          "patient"
+        ],
+        "patientId": "SIM-000004",
+        "status": "open",
+        "priority": "routine",
+        "createdAt": 1790001720000,
+        "dueAt": 1790088120000,
+        "data": {},
+        "version": 1,
+        "provenance": {
+          "created": {
+            "actor": {
+              "kind": "team",
+              "name": "team14"
+            },
+            "source": "gp",
+            "action": "create_task",
+            "time": 1790001720000,
+            "version": 1
+          },
+          "changes": [
+            {
+              "actor": {
+                "kind": "team",
+                "name": "team14"
+              },
+              "source": "gp",
+              "action": "create_task",
+              "time": 1790001720000,
+              "version": 1
+            }
+          ]
+        }
+      },
+      "simTime": 1790001720000
+    },
+    {
+      "plannedActionId": "a2",
+      "outcome": "applied",
+      "result": {
+        "id": "document-batch-2-004",
+        "data": {
+          "tags": [],
+          "snomedCodes": [],
+          "sections": {
+            "reason": "Attendance for a planned investigation episode. This is a fictional episode for document workflow practice.",
+            "course": "The episode is complete. The procedural report will be issued through the hospital correspondence service. The discharge coordinator recorded the handover for Thomas Reed.",
+            "diagnoses": "No new coded diagnosis is asserted by this training letter. Check the simulated patient record when classifying the correspondence.",
+            "medicationChanges": "Medication reconciliation was recorded in the source chart. This letter contains no prescribing request.",
+            "results": "One report remains pending. The hospital investigation team is the named result owner.",
+            "followUp": "The hospital team will contact the patient after the outstanding report is authorised.",
+            "gpActions": "Route for GP review and record the pending report with the hospital team as its owner."
+          },
+          "assignee": "Duty GP",
+          "sentAt": 1788771600000,
+          "sentBy": "Dr Robin Wells",
+          "stage": "sent"
+        },
+        "kind": "discharge-summary",
+        "owner": "hospital",
+        "title": "Gastroenterology · Investigation episode handover",
+        "status": "sent",
+        "version": 3,
+        "priority": "routine",
+        "createdAt": 1788768000000,
+        "patientId": "SIM-000004",
+        "visibleTo": [
+          "hospital",
           "gp"
         ],
-        "priority": "routine",
-        "createdAt": 1700000000000,
-        "data": {},
-        "version": 1
+        "provenance": {
+          "changes": [
+            {
+              "time": 1788771600000,
+              "actor": {
+                "kind": "simulation",
+                "name": "Dr Robin Wells"
+              },
+              "action": "seed_document_sent",
+              "source": "hospital",
+              "version": 2
+            },
+            {
+              "actor": {
+                "kind": "team",
+                "name": "team14"
+              },
+              "source": "gp",
+              "action": "process_document",
+              "time": 1790002020000,
+              "version": 3
+            }
+          ],
+          "created": {
+            "time": 1788768000000,
+            "actor": {
+              "kind": "simulation",
+              "name": "Dr Robin Wells"
+            },
+            "action": "seed",
+            "source": "hospital",
+            "version": 1
+          }
+        }
       },
-      "simTime": 1700000000000
+      "simTime": 1790002020000
+    },
+    {
+      "plannedActionId": "a3",
+      "outcome": "applied",
+      "result": {
+        "id": "document-batch-2-004",
+        "data": {
+          "tags": [],
+          "snomedCodes": [],
+          "sections": {
+            "reason": "Attendance for a planned investigation episode. This is a fictional episode for document workflow practice.",
+            "course": "The episode is complete. The procedural report will be issued through the hospital correspondence service. The discharge coordinator recorded the handover for Thomas Reed.",
+            "diagnoses": "No new coded diagnosis is asserted by this training letter. Check the simulated patient record when classifying the correspondence.",
+            "medicationChanges": "Medication reconciliation was recorded in the source chart. This letter contains no prescribing request.",
+            "results": "One report remains pending. The hospital investigation team is the named result owner.",
+            "followUp": "The hospital team will contact the patient after the outstanding report is authorised.",
+            "gpActions": "Route for GP review and record the pending report with the hospital team as its owner."
+          },
+          "assignee": "Duty GP",
+          "sentAt": 1788771600000,
+          "sentBy": "Dr Robin Wells",
+          "stage": "reviewed",
+          "reviewedAt": 1790002620000,
+          "reviewedBy": "team14",
+          "reviewNote": "Monitoring handover checked. Home-first plan appropriate. Carer to be involved."
+        },
+        "kind": "discharge-summary",
+        "owner": "hospital",
+        "title": "Gastroenterology · Investigation episode handover",
+        "status": "reviewed",
+        "version": 4,
+        "priority": "routine",
+        "createdAt": 1788768000000,
+        "patientId": "SIM-000004",
+        "visibleTo": [
+          "hospital",
+          "gp"
+        ],
+        "provenance": {
+          "changes": [
+            {
+              "time": 1788771600000,
+              "actor": {
+                "kind": "simulation",
+                "name": "Dr Robin Wells"
+              },
+              "action": "seed_document_sent",
+              "source": "hospital",
+              "version": 2
+            },
+            {
+              "actor": {
+                "kind": "team",
+                "name": "team14"
+              },
+              "source": "gp",
+              "action": "process_document",
+              "time": 1790002020000,
+              "version": 3
+            },
+            {
+              "actor": {
+                "kind": "team",
+                "name": "team14"
+              },
+              "source": "gp",
+              "action": "process_document",
+              "time": 1790002620000,
+              "version": 4
+            }
+          ],
+          "created": {
+            "time": 1788768000000,
+            "actor": {
+              "kind": "simulation",
+              "name": "Dr Robin Wells"
+            },
+            "action": "seed",
+            "source": "hospital",
+            "version": 1
+          }
+        }
+      },
+      "simTime": 1790002620000
+    },
+    {
+      "plannedActionId": "a4",
+      "outcome": "failed",
+      "result": {
+        "id": "r-13552",
+        "kind": "task",
+        "title": "Coordinator review: order_test conflicted",
+        "owner": "gp",
+        "visibleTo": [
+          "gp",
+          "patient"
+        ],
+        "patientId": "SIM-000004",
+        "status": "open",
+        "priority": "routine",
+        "createdAt": 1790002920000,
+        "dueAt": 1790089320000,
+        "data": {},
+        "version": 1,
+        "provenance": {
+          "created": {
+            "actor": {
+              "kind": "team",
+              "name": "team14"
+            },
+            "source": "gp",
+            "action": "create_task",
+            "time": 1790002920000,
+            "version": 1
+          },
+          "changes": [
+            {
+              "actor": {
+                "kind": "team",
+                "name": "team14"
+              },
+              "source": "gp",
+              "action": "create_task",
+              "time": 1790002920000,
+              "version": 1
+            }
+          ]
+        }
+      },
+      "fallback": {
+        "kind": "coordinator-task",
+        "reason": "No service capacity",
+        "attempts": 2
+      },
+      "error": "409 No service capacity: No service capacity",
+      "simTime": 1790002920000
+    },
+    {
+      "plannedActionId": "a5",
+      "outcome": "applied",
+      "result": {
+        "id": "r-13563",
+        "kind": "visit",
+        "title": "schedule visit",
+        "owner": "community",
+        "visibleTo": [
+          "community",
+          "patient"
+        ],
+        "patientId": "SIM-000004",
+        "status": "scheduled",
+        "priority": "routine",
+        "createdAt": 1790003520000,
+        "dueAt": 1790089920000,
+        "data": {},
+        "version": 1,
+        "provenance": {
+          "created": {
+            "actor": {
+              "kind": "team",
+              "name": "team14"
+            },
+            "source": "community",
+            "action": "schedule_visit",
+            "time": 1790003520000,
+            "version": 1
+          },
+          "changes": [
+            {
+              "actor": {
+                "kind": "team",
+                "name": "team14"
+              },
+              "source": "community",
+              "action": "schedule_visit",
+              "time": 1790003520000,
+              "version": 1
+            }
+          ]
+        }
+      },
+      "simTime": 1790003520000
+    },
+    {
+      "plannedActionId": "a6",
+      "outcome": "applied",
+      "result": {
+        "id": "messaging-example-4",
+        "data": {
+          "assignee": "",
+          "allowReply": false,
+          "entries": [
+            {
+              "id": "messaging-example-4-1",
+              "body": "The practice has received your hospital letter. Our team will record the next administrative step.",
+              "at": 1789167600000,
+              "actor": {
+                "kind": "simulation",
+                "name": "Dr Rowan Page"
+              },
+              "direction": "outgoing",
+              "channel": "email",
+              "delivery": [
+                {
+                  "status": "queued",
+                  "at": 1789167600000,
+                  "actor": {
+                    "kind": "simulation",
+                    "name": "Dr Rowan Page"
+                  }
+                },
+                {
+                  "status": "delivered",
+                  "at": 1789167601000,
+                  "actor": {
+                    "kind": "simulation",
+                    "name": "Dr Rowan Page"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "messaging-example-4-2",
+              "body": "Home visit arranged with the community nurse. Bloods will be taken at home. Your carer is welcome to be there.",
+              "at": 1790004120000,
+              "actor": {
+                "kind": "team",
+                "name": "team14"
+              },
+              "direction": "internal"
+            }
+          ]
+        },
+        "kind": "conversation",
+        "owner": "gp",
+        "title": "Hospital letter received",
+        "status": "open",
+        "version": 2,
+        "priority": "routine",
+        "createdAt": 1789167600000,
+        "patientId": "SIM-000004",
+        "visibleTo": [
+          "gp",
+          "patient"
+        ],
+        "provenance": {
+          "changes": [
+            {
+              "actor": {
+                "kind": "team",
+                "name": "team14"
+              },
+              "source": "gp",
+              "action": "messaging_action",
+              "time": 1790004120000,
+              "version": 2
+            }
+          ],
+          "created": {
+            "time": 1789167600000,
+            "actor": {
+              "kind": "simulation",
+              "name": "Dr Rowan Page"
+            },
+            "action": "seed",
+            "source": "gp",
+            "version": 1
+          }
+        }
+      },
+      "simTime": 1790004120000
     }
   ],
   "observed": [
     {
-      "id": "e-1",
-      "time": 1700000000000,
+      "id": "e-13531",
+      "time": 1790001720000,
       "type": "create_task",
       "actor": "team14",
-      "detail": "create_task accepted",
+      "detail": "Discharge follow-up: home-first pathway",
+      "resourceId": "r-13530",
+      "patientId": "SIM-000004",
+      "visibleTo": [
+        "gp",
+        "patient"
+      ],
       "causedByUs": true,
       "atSimMinutes": 0,
       "sourceActionId": "a1",
       "site": "gp"
     },
     {
-      "id": "w-1",
-      "time": 1700000000000,
+      "id": "e-13533",
+      "time": 1790001900000,
       "type": "request.arrived",
       "actor": "patient-demand",
-      "detail": "referral",
+      "detail": "New synthetic patient request",
+      "resourceId": "r-13532",
+      "patientId": "SIM-020358",
+      "visibleTo": [
+        "triage",
+        "gp",
+        "patient"
+      ],
       "causedByUs": false,
-      "atSimMinutes": 0,
+      "atSimMinutes": 3,
       "sourceActionId": "a1",
+      "site": "gp"
+    },
+    {
+      "id": "e-13534",
+      "time": 1790002020000,
+      "type": "clock.changed",
+      "actor": "team14",
+      "detail": "Advanced simulation by 5 minutes; clock paused",
+      "visibleTo": [
+        "control"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 5,
+      "sourceActionId": "a1",
+      "site": "gp"
+    },
+    {
+      "id": "e-13535",
+      "time": 1790002020000,
+      "type": "process_document",
+      "actor": "team14",
+      "detail": "Gastroenterology · Investigation episode handover",
+      "resourceId": "document-batch-2-004",
+      "patientId": "SIM-000004",
+      "visibleTo": [
+        "hospital",
+        "gp"
+      ],
+      "causedByUs": true,
+      "atSimMinutes": 5,
+      "sourceActionId": "a2",
+      "site": "gp"
+    },
+    {
+      "id": "e-13536",
+      "time": 1790002620000,
+      "type": "clock.changed",
+      "actor": "team14",
+      "detail": "Advanced simulation by 10 minutes; clock paused",
+      "visibleTo": [
+        "control"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 15,
+      "sourceActionId": "a2",
+      "site": "gp"
+    },
+    {
+      "id": "e-13537",
+      "time": 1790002620000,
+      "type": "process_document",
+      "actor": "team14",
+      "detail": "Gastroenterology · Investigation episode handover",
+      "resourceId": "document-batch-2-004",
+      "patientId": "SIM-000004",
+      "visibleTo": [
+        "hospital",
+        "gp"
+      ],
+      "causedByUs": true,
+      "atSimMinutes": 15,
+      "sourceActionId": "a3",
+      "site": "gp"
+    },
+    {
+      "id": "e-13539",
+      "time": 1790002800000,
+      "type": "flow.pressure",
+      "actor": "bed-flow",
+      "detail": "Demand exceeds staffed bed availability",
+      "resourceId": "r-13538",
+      "visibleTo": [
+        "beds",
+        "hospital",
+        "icb"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 18,
+      "sourceActionId": "a3",
+      "site": "gp"
+    },
+    {
+      "id": "e-13541",
+      "time": 1790002800000,
+      "type": "service.requested",
+      "actor": "service-demand",
+      "detail": "New specialist referral",
+      "resourceId": "r-13540",
+      "patientId": "SIM-032644",
+      "visibleTo": [
+        "referrals",
+        "patient"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 18,
+      "sourceActionId": "a3",
+      "site": "gp"
+    },
+    {
+      "id": "e-13542",
+      "time": 1790002800000,
+      "type": "assessment.completed",
+      "actor": "acute-flow",
+      "detail": "Synthetic assessment slot completed",
+      "resourceId": "r-13521",
+      "patientId": "SIM-014349",
+      "visibleTo": [
+        "ambulance",
+        "hospital"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 18,
+      "sourceActionId": "a3",
+      "site": "gp"
+    },
+    {
+      "id": "e-13544",
+      "time": 1790002800000,
+      "type": "emergency.arrived",
+      "actor": "acute-flow",
+      "detail": "New ambulance handover",
+      "resourceId": "r-13543",
+      "patientId": "SIM-032576",
+      "visibleTo": [
+        "ambulance",
+        "hospital"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 18,
+      "sourceActionId": "a3",
+      "site": "gp"
+    },
+    {
+      "id": "e-13546",
+      "time": 1790002800000,
+      "type": "emergency.arrived",
+      "actor": "acute-flow",
+      "detail": "New A&E arrival",
+      "resourceId": "r-13545",
+      "patientId": "SIM-000339",
+      "visibleTo": [
+        "ambulance",
+        "hospital"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 18,
+      "sourceActionId": "a3",
+      "site": "gp"
+    },
+    {
+      "id": "e-13548",
+      "time": 1790002800000,
+      "type": "emergency.arrived",
+      "actor": "acute-flow",
+      "detail": "New A&E arrival",
+      "resourceId": "r-13547",
+      "patientId": "SIM-033834",
+      "visibleTo": [
+        "ambulance",
+        "hospital"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 18,
+      "sourceActionId": "a3",
+      "site": "gp"
+    },
+    {
+      "id": "e-13550",
+      "time": 1790002800000,
+      "type": "request.arrived",
+      "actor": "patient-demand",
+      "detail": "New synthetic patient request",
+      "resourceId": "r-13549",
+      "patientId": "SIM-041941",
+      "visibleTo": [
+        "triage",
+        "gp",
+        "patient"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 18,
+      "sourceActionId": "a3",
+      "site": "gp"
+    },
+    {
+      "id": "e-13551",
+      "time": 1790002920000,
+      "type": "clock.changed",
+      "actor": "team14",
+      "detail": "Advanced simulation by 5 minutes; clock paused",
+      "visibleTo": [
+        "control"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 20,
+      "sourceActionId": "a3",
+      "site": "gp"
+    },
+    {
+      "id": "e-13553",
+      "time": 1790002920000,
+      "type": "create_task",
+      "actor": "team14",
+      "detail": "Coordinator review: order_test conflicted",
+      "resourceId": "r-13552",
+      "patientId": "SIM-000004",
+      "visibleTo": [
+        "gp",
+        "patient"
+      ],
+      "causedByUs": true,
+      "atSimMinutes": 20,
+      "sourceActionId": "a4",
+      "site": "gp"
+    },
+    {
+      "id": "e-13555",
+      "time": 1790003400000,
+      "type": "observation.received",
+      "actor": "home-monitor",
+      "detail": "Home activity reading",
+      "resourceId": "r-13554",
+      "patientId": "SIM-000006",
+      "visibleTo": [
+        "wearables",
+        "community",
+        "patient"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 28,
+      "sourceActionId": "a4",
+      "site": "gp"
+    },
+    {
+      "id": "e-13557",
+      "time": 1790003400000,
+      "type": "observation.received",
+      "actor": "home-monitor",
+      "detail": "Home activity reading",
+      "resourceId": "r-13556",
+      "patientId": "SIM-000001",
+      "visibleTo": [
+        "wearables",
+        "community",
+        "patient"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 28,
+      "sourceActionId": "a4",
+      "site": "gp"
+    },
+    {
+      "id": "e-13559",
+      "time": 1790003400000,
+      "type": "observation.received",
+      "actor": "home-monitor",
+      "detail": "Home activity reading",
+      "resourceId": "r-13558",
+      "patientId": "SIM-000004",
+      "visibleTo": [
+        "wearables",
+        "community",
+        "patient"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 28,
+      "sourceActionId": "a4",
+      "site": "gp"
+    },
+    {
+      "id": "e-13561",
+      "time": 1790003400000,
+      "type": "observation.received",
+      "actor": "home-monitor",
+      "detail": "Home activity reading",
+      "resourceId": "r-13560",
+      "patientId": "SIM-000003",
+      "visibleTo": [
+        "wearables",
+        "community",
+        "patient"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 28,
+      "sourceActionId": "a4",
+      "site": "gp"
+    },
+    {
+      "id": "e-13562",
+      "time": 1790003520000,
+      "type": "clock.changed",
+      "actor": "team14",
+      "detail": "Advanced simulation by 10 minutes; clock paused",
+      "visibleTo": [
+        "control"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 30,
+      "sourceActionId": "a4",
+      "site": "gp"
+    },
+    {
+      "id": "e-13564",
+      "time": 1790003520000,
+      "type": "schedule_visit",
+      "actor": "team14",
+      "detail": "schedule visit",
+      "resourceId": "r-13563",
+      "patientId": "SIM-000004",
+      "visibleTo": [
+        "community",
+        "patient"
+      ],
+      "causedByUs": true,
+      "atSimMinutes": 30,
+      "sourceActionId": "a5",
+      "site": "community"
+    },
+    {
+      "id": "e-13566",
+      "time": 1790003700000,
+      "type": "request.arrived",
+      "actor": "patient-demand",
+      "detail": "New synthetic patient request",
+      "resourceId": "r-13565",
+      "patientId": "SIM-005300",
+      "visibleTo": [
+        "triage",
+        "gp",
+        "patient"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 33,
+      "sourceActionId": "a5",
+      "site": "community"
+    },
+    {
+      "id": "e-13567",
+      "time": 1790004000000,
+      "type": "assessment.completed",
+      "actor": "acute-flow",
+      "detail": "Synthetic assessment slot completed",
+      "resourceId": "r-13543",
+      "patientId": "SIM-032576",
+      "visibleTo": [
+        "ambulance",
+        "hospital"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 38,
+      "sourceActionId": "a5",
+      "site": "community"
+    },
+    {
+      "id": "e-13569",
+      "time": 1790004000000,
+      "type": "emergency.arrived",
+      "actor": "acute-flow",
+      "detail": "New ambulance handover",
+      "resourceId": "r-13568",
+      "patientId": "SIM-016455",
+      "visibleTo": [
+        "ambulance",
+        "hospital"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 38,
+      "sourceActionId": "a5",
+      "site": "community"
+    },
+    {
+      "id": "e-13571",
+      "time": 1790004000000,
+      "type": "emergency.arrived",
+      "actor": "acute-flow",
+      "detail": "New A&E arrival",
+      "resourceId": "r-13570",
+      "patientId": "SIM-045390",
+      "visibleTo": [
+        "ambulance",
+        "hospital"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 38,
+      "sourceActionId": "a5",
+      "site": "community"
+    },
+    {
+      "id": "e-13573",
+      "time": 1790004000000,
+      "type": "emergency.arrived",
+      "actor": "acute-flow",
+      "detail": "New A&E arrival",
+      "resourceId": "r-13572",
+      "patientId": "SIM-024473",
+      "visibleTo": [
+        "ambulance",
+        "hospital"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 38,
+      "sourceActionId": "a5",
+      "site": "community"
+    },
+    {
+      "id": "e-13574",
+      "time": 1790004120000,
+      "type": "visit.completed",
+      "actor": "logistics",
+      "detail": "schedule visit",
+      "resourceId": "r-13467",
+      "patientId": "SIM-000002",
+      "visibleTo": [
+        "community",
+        "patient"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 40,
+      "sourceActionId": "a5",
+      "site": "community"
+    },
+    {
+      "id": "e-13575",
+      "time": 1790004120000,
+      "type": "clock.changed",
+      "actor": "team14",
+      "detail": "Advanced simulation by 10 minutes; clock paused",
+      "visibleTo": [
+        "control"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 40,
+      "sourceActionId": "a5",
+      "site": "community"
+    },
+    {
+      "id": "e-13576",
+      "time": 1790004120000,
+      "type": "messaging_action",
+      "actor": "team14",
+      "detail": "Hospital letter received",
+      "resourceId": "messaging-example-4",
+      "patientId": "SIM-000004",
+      "visibleTo": [
+        "gp",
+        "patient"
+      ],
+      "causedByUs": true,
+      "atSimMinutes": 40,
+      "sourceActionId": "a6",
+      "site": "gp"
+    },
+    {
+      "id": "e-13577",
+      "time": 1790004120000,
+      "type": "clock.changed",
+      "actor": "team14",
+      "detail": "Advanced simulation by 0 minutes; clock paused",
+      "visibleTo": [
+        "control"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 40,
+      "sourceActionId": "a6",
       "site": "gp"
     }
   ],
-  "startSimTime": 1700000000000,
-  "endSimTime": 1700000000000,
+  "startSimTime": 1790001720000,
+  "endSimTime": 1790004120000,
   "observationGaps": []
 }

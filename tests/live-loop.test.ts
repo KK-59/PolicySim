@@ -5,6 +5,7 @@
  */
 
 import { readFile } from 'node:fs/promises'
+import { readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
@@ -298,6 +299,22 @@ describe('resumability', () => {
 })
 
 describe('the observed file', () => {
+  it('never writes the real run report unless a run explicitly asks for one', async () => {
+    // The report is opt-in. A default path means this very suite overwrites the handoff that
+    // Kaavya's accuracy diff reads, with stub ids and a 2023 timestamp.
+    const { existsSync } = await import('node:fs')
+    const real = 'fixtures/run.live.json'
+    const before = existsSync(real) ? readFileSync(real, 'utf8') : null
+
+    await runLiveLoop(makeStub(), makePlan([planned('a1', 0, task('one'))]), [approve('a1')], {
+      observedPath: join(tmpdir(), `observed.${Date.now()}.json`),
+    })
+
+    const after = existsSync(real) ? readFileSync(real, 'utf8') : null
+    expect(after).toBe(before)
+  })
+
+
   it('writes the event list where the accuracy diff reads it', async () => {
     const path = join(tmpdir(), `observed.live.${Date.now()}.json`)
     const client = makeStub({

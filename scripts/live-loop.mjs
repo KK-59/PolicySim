@@ -96,6 +96,7 @@ const result = await runLiveLoop(client, plan, gate.decisions(), {
   // Pinned rather than learned: attribution must be stable from the first event, and a
   // coordinator task belongs in the GP's queue whichever site the conflict happened on.
   teamId: 'team14',
+  runPath: 'fixtures/run.live.json',
   coordinatorSite: 'gp',
   onStep: (step) => {
     const a = step.applied

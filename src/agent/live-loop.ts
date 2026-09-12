@@ -326,8 +326,11 @@ export async function runLiveLoop(
     }
     // Never blanks an existing handoff: a run that dies before it applies anything has nothing
     // to say, and overwriting the previous rehearsal's report with an empty one loses evidence.
-    if (finished.applied.length > 0 || finished.observationGaps.length > 0) {
-      await writeRunReport(options.runPath ?? DEFAULT_RUN_PATH, finished)
+    // OPT-IN, deliberately. A default path here means every test that runs the loop overwrites
+    // the real handoff with stub data, and the accuracy diff gets built on fiction. Only the
+    // CLI, which knows it is doing a real run, asks for the report.
+    if (options.runPath && (finished.applied.length > 0 || finished.observationGaps.length > 0)) {
+      await writeRunReport(options.runPath, finished)
     }
   }
 }
