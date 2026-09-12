@@ -130,8 +130,12 @@ simulator being modelled, and the interface states this on screen rather than in
 
 ## Team
 
-Kaavya (engine, worlds, sensitivity) · Oriol (integration, live loop, interface) · Albert (clinical
-model, evidence corpus, policy workbench) · Elsa (interface, delivery)
+<p align="center">
+  <a href="https://www.linkedin.com/in/oriolmorros/">Oriol Morros Vilaseca</a> ·
+  <a href="https://www.linkedin.com/in/albert-chung-a9b549104/">Albert Chung</a> ·
+  <a href="https://www.linkedin.com/in/kaavya-kumar-679876245/">Kaavya Kumar</a> ·
+  <a href="https://www.linkedin.com/in/elsabhlee/">Elsa Lee</a>
+</p>
 
 ---
 
