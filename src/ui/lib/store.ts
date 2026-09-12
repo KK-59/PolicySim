@@ -5,6 +5,7 @@
 
 import { useSyncExternalStore } from 'react'
 import { extraction, type Commitment } from '../data'
+import type { Metrics } from '@/contracts/metrics'
 
 export interface RunState {
   /** Null until a document has been dropped. Guards /parameters and /worlds. */
@@ -26,6 +27,14 @@ export interface RunState {
   rejected: { text: string; span: string; reason: string }[]
   /** Set when the document was longer than the model could be sent in one call. */
   truncated: { charsRead: number } | null
+  /**
+   * Outcomes the engine produced for THIS document, or null while the screen is showing the
+   * precomputed baseline. The worlds screen renders whichever it has and says which, because a
+   * fixture presented as the user's result is the one thing this project may not do.
+   */
+  liveMetrics: Metrics | null
+  /** What the run is doing right now. Null when idle. A real run takes about ten seconds. */
+  stage: string | null
 }
 
 const initial: RunState = {
@@ -38,6 +47,8 @@ const initial: RunState = {
   extracted: false,
   rejected: [],
   truncated: null,
+  liveMetrics: null,
+  stage: null,
 }
 
 let state: RunState = initial

@@ -4,6 +4,10 @@ import { parseDocument } from "../extraction/parse.ts"
 import { extractCommitments } from "../extraction/commitments.ts"
 import { toParams } from "../extraction/to-params.ts"
 import { randomUUID } from "node:crypto"
+import { readFile } from "node:fs/promises"
+import { extname, join } from "node:path"
+import { runWorlds } from "../worlds/index.ts"
+import { BASELINE } from "../contracts/baseline.ts"
 import { runCommunityExperiment, type CommunityExperimentResult, type ExperimentProgress } from "../clinical/prevention/controlled-experiment.ts"
 import type { Resource, SiteView } from "../clinical/prevention/simulation-types.ts"
 import { NhsSimClient } from "../integration/nhssim-client.ts"
@@ -26,6 +30,73 @@ interface ExperimentJob {
 
 const jobs = new Map<string, ExperimentJob>()
 const port = Number(process.env.API_PORT ?? 4174)
+
+const DOCUMENTS_DIR = "documents"
+
+interface DocumentEntry {
+  id: string
+  kind: "real" | "generated"
+  file: string
+  title: string
+  publisher: string
+  date: string
+  pages: number
+  note: string
+}
+
+let manifestCache: { documents: DocumentEntry[] } | undefined
+
+/** Read once. The catalogue does not change while the server is up. */
+async function documentManifest(): Promise<{ documents: DocumentEntry[] }> {
+  if (!manifestCache) {
+    const raw = await readFile(join(DOCUMENTS_DIR, "manifest.json"), "utf8")
+    manifestCache = JSON.parse(raw) as { documents: DocumentEntry[] }
+  }
+  return manifestCache
+}
+
+/**
+ * Read a document and turn it into parameters. Shared by the upload route and the catalogue
+ * route, because "a document the user dragged in" and "a document we ship" differ only in where
+ * the bytes came from, and nothing downstream should be able to tell them apart.
+ *
+ * Returns `params` as well as `rows`: the rows are what the parameters screen renders, and the
+ * params are what the engine needs. Computing the params and discarding them is what left the
+ * worlds screen showing a precomputed baseline no matter what anyone uploaded.
+ */
+async function extractFrom(bytes: Uint8Array, filename: string, notes: string) {
+  const document = await parseDocument(bytes, filename)
+
+  // A PDF of scanned pages parses to almost nothing. Saying so beats sending an empty
+  // document to the model and rendering whatever it invents to fill the silence.
+  if (document.chars < 200) {
+    throw new Error(
+      `Only ${document.chars} characters of text came out of ${filename}. `
+      + "If it is a scan, it needs OCR — there is no text layer to read.",
+    )
+  }
+
+  const extraction = await extractCommitments(document.text, { notes: notes || undefined })
+  const mapped = await toParams(extraction.commitments)
+
+  return {
+    document: {
+      filename,
+      format: document.format,
+      pages: document.pages,
+      chars: document.chars,
+      extractedAt: Date.now(),
+      notes,
+    },
+    commitments: extraction.commitments,
+    rejected: extraction.rejected,
+    rows: mapped.rows,
+    params: mapped.params,
+    model: extraction.model,
+    charsRead: extraction.charsRead,
+    truncated: extraction.truncated,
+  }
+}
 
 function policyData(sourceText: string = policyExamples[0].text) {
   const policy = interpretPolicy(sourceText)
@@ -76,6 +147,8 @@ async function eligibility(policyInput: unknown) {
  */
 const SMALL_BODY = 64 * 1024
 const UPLOAD_BODY = 32 * 1024 * 1024
+/** A Params object with every leaf and its citation. Bigger than SMALL_BODY, nowhere near an upload. */
+const PARAMS_BODY = 1024 * 1024
 
 async function requestJson(request: IncomingMessage, maxBytes = SMALL_BODY): Promise<unknown> {
   const chunks: Buffer[] = []
@@ -127,38 +200,67 @@ const server = createServer(async (request, response) => {
       }
 
       const bytes = new Uint8Array(Buffer.from(body.contentBase64, "base64"))
-      const document = await parseDocument(bytes, body.filename)
+      return sendJson(response, await extractFrom(bytes, body.filename, typeof body.notes === "string" ? body.notes : ""))
+    }
 
-      // A PDF of scanned pages parses to almost nothing. Saying so beats sending an empty
-      // document to the model and rendering whatever it invents to fill the silence.
-      if (document.chars < 200) {
-        throw new Error(
-          `Only ${document.chars} characters of text came out of ${body.filename}. `
-          + "If it is a scan, it needs OCR — there is no text layer to read.",
-        )
-      }
+    // The same read, for a document already on disk. A catalogued PDF does not need to travel to
+    // the browser and back again just to be read.
+    const docExtract = url.pathname.match(/^\/api\/documents\/([a-z0-9-]+)\/extract$/i)
+    if (docExtract && request.method === "POST") {
+      const manifest = await documentManifest()
+      const entry = manifest.documents.find((d) => d.id === docExtract[1])
+      if (!entry) return sendJson(response, { error: "No such document" }, 404)
+      const bytes = new Uint8Array(await readFile(join(DOCUMENTS_DIR, entry.file)))
+      return sendJson(response, await extractFrom(bytes, entry.file.split("/").pop() ?? entry.file, ""))
+    }
 
-      const extraction = await extractCommitments(document.text, {
-        notes: typeof body.notes === "string" ? body.notes : undefined,
+    // --- documents -----------------------------------------------------------------------
+    // The catalogue the drawer renders. `kind` separates a real publication from one we wrote,
+    // and the interface is required to keep them visibly apart.
+    if (url.pathname === "/api/documents" && request.method === "GET") {
+      return sendJson(response, await documentManifest())
+    }
+
+    // Served BY ID, never by path. A path parameter here would be a directory traversal waiting
+    // to happen; an id can only ever resolve to a file the manifest already names.
+    const doc = url.pathname.match(/^\/api\/documents\/([a-z0-9-]+)$/i)
+    if (doc && request.method === "GET") {
+      const manifest = await documentManifest()
+      const entry = manifest.documents.find((d) => d.id === doc[1])
+      if (!entry) return sendJson(response, { error: "No such document" }, 404)
+
+      const bytes = await readFile(join(DOCUMENTS_DIR, entry.file))
+      const type = extname(entry.file) === ".pdf" ? "application/pdf" : "text/markdown; charset=utf-8"
+      response.writeHead(200, {
+        "Content-Type": type,
+        // Inline so a click opens it in a tab rather than downloading it. Seeing the real
+        // publication is the point: it is what makes the provenance checkable.
+        "Content-Disposition": `inline; filename="${entry.file.split("/").pop()}"`,
+        "Content-Length": bytes.byteLength,
       })
-      const mapped = await toParams(extraction.commitments)
+      return response.end(bytes)
+    }
 
-      return sendJson(response, {
-        document: {
-          filename: body.filename,
-          format: document.format,
-          pages: document.pages,
-          chars: document.chars,
-          extractedAt: Date.now(),
-          notes: typeof body.notes === "string" ? body.notes : "",
-        },
-        commitments: extraction.commitments,
-        rejected: extraction.rejected,
-        rows: mapped.rows,
-        model: extraction.model,
-        charsRead: extraction.charsRead,
-        truncated: extraction.truncated,
+    // --- the run -------------------------------------------------------------------------------
+    // The hop that was missing. /api/extract already computes the Params and threw them away, so
+    // whatever document you uploaded, the worlds screen showed the same precomputed baseline.
+    // This runs the engine on the parameters that came out of YOUR document.
+    if (url.pathname === "/api/run" && request.method === "POST") {
+      const body = await requestJson(request, PARAMS_BODY) as { params?: unknown; samples?: unknown; horizonDays?: unknown }
+      if (!body.params || typeof body.params !== "object") throw new Error("params are required")
+
+      // The fidelity the shipped fixtures are built at (scripts/build-ui-data.ts). Matching it is
+      // what makes this the real thing rather than a cheaper approximation of it.
+      const samples = typeof body.samples === "number" ? body.samples : 60
+      const horizonDays = typeof body.horizonDays === "number" ? body.horizonDays : 550
+
+      const startedAt = Date.now()
+      const metrics = runWorlds(body.params as Parameters<typeof runWorlds>[0], {
+        samples,
+        horizonDays,
+        baseline: BASELINE,
       })
+      return sendJson(response, { metrics, samples, horizonDays, elapsedMs: Date.now() - startedAt })
     }
 
     if (url.pathname === "/api/policy/interpret" && request.method === "POST") {

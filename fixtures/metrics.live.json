@@ -3,73 +3,73 @@
   "waits": {
    "routine": {
     "optimistic": {
-     "p50": 484.7139058948669,
-     "p90": 876.9170176199987,
-     "mean": 490.7057629824049,
-     "max": 1261.825421906542,
-     "n": 21482
+     "p50": 491.50591189650004,
+     "p90": 880.6058384467615,
+     "mean": 495.836129936504,
+     "max": 1320.5328163220547,
+     "n": 27527
     },
     "realistic": {
-     "p50": 1712.3223785802838,
-     "p90": 2876.063186248881,
-     "mean": 1751.7518891917832,
-     "max": 3816.1371185725584,
-     "n": 19335
+     "p50": 1067.6665812614956,
+     "p90": 2035.6438640393026,
+     "mean": 1138.0599863606144,
+     "max": 2919.479637364042,
+     "n": 29002
     },
     "pessimistic": {
-     "p50": 20092.24162288598,
-     "p90": 33916.107375246705,
-     "mean": 20697.583825890146,
-     "max": 38515.142252454534,
-     "n": 14730
+     "p50": 24132.897042741824,
+     "p90": 42577.117235402926,
+     "mean": 25397.904810990643,
+     "max": 48338.006952925934,
+     "n": 18807
     },
     "direction": "lower-is-better"
    },
    "complex": {
     "optimistic": {
-     "p50": 495.0080886139767,
-     "p90": 880.3518108392018,
-     "mean": 498.0584395294476,
+     "p50": 498.80521321564447,
+     "p90": 881.7330473214388,
+     "mean": 500.78139372782226,
      "max": 1306.0426067688968,
-     "n": 3200
+     "n": 4105
     },
     "realistic": {
-     "p50": 1699.6705723694758,
-     "p90": 2860.8328235166846,
-     "mean": 1742.889396634397,
-     "max": 3776.398623081477,
-     "n": 4423
+     "p50": 1083.2684650012525,
+     "p90": 2069.373672104499,
+     "mean": 1159.7221032082168,
+     "max": 2929.9372083609924,
+     "n": 5142
     },
     "pessimistic": {
-     "p50": 20187.57073754305,
-     "p90": 34098.05667291756,
-     "mean": 20739.929103672377,
-     "max": 38498.610519003705,
-     "n": 4224
+     "p50": 24520.94972896349,
+     "p90": 42677.58991613751,
+     "mean": 25549.75261500519,
+     "max": 48352.91614952905,
+     "n": 5436
     },
     "direction": "lower-is-better"
    },
    "urgent": {
     "optimistic": {
-     "p50": 213.92888759684865,
-     "p90": 789.967253632436,
-     "mean": 310.4703247640566,
-     "max": 932.7701642328175,
-     "n": 1682
+     "p50": 209.556764556095,
+     "p90": 787.3934973948053,
+     "mean": 307.3555625214694,
+     "max": 932.8404589639977,
+     "n": 2159
     },
     "realistic": {
-     "p50": 231.76726811227854,
-     "p90": 781.6411227238132,
-     "mean": 309.916292592414,
-     "max": 943.418660939089,
-     "n": 2067
+     "p50": 221.3845484306221,
+     "p90": 783.2169113854179,
+     "mean": 311.6679761257261,
+     "max": 935.8280981172284,
+     "n": 1876
     },
     "pessimistic": {
-     "p50": 217.0158012630418,
+     "p50": 209.78961117437575,
      "p90": 790.8416352713248,
-     "mean": 310.7148016338963,
+     "mean": 307.2123335576583,
      "max": 949.6751949680038,
-     "n": 1894
+     "n": 2402
     },
     "direction": "lower-is-better"
    }
@@ -77,73 +77,73 @@
   "timeInSystem": {
    "routine": {
     "optimistic": {
-     "p50": 499.7139058948669,
-     "p90": 891.9170176199987,
-     "mean": 505.7057629824054,
-     "max": 1276.825421906542,
-     "n": 21482
+     "p50": 506.50591189650004,
+     "p90": 895.6058384467615,
+     "mean": 510.83612993650445,
+     "max": 1335.5328163220547,
+     "n": 27527
     },
     "realistic": {
-     "p50": 1727.3223785802838,
-     "p90": 2891.063186248881,
-     "mean": 1766.7518891917825,
-     "max": 3831.1371185725584,
-     "n": 19335
+     "p50": 1082.6665812614956,
+     "p90": 2050.6438640393026,
+     "mean": 1153.0599863606153,
+     "max": 2934.479637364042,
+     "n": 29002
     },
     "pessimistic": {
-     "p50": 20107.24162288598,
-     "p90": 33931.107375246705,
-     "mean": 20712.583825890142,
-     "max": 38530.142252454534,
-     "n": 14730
+     "p50": 24147.897042741824,
+     "p90": 42592.117235402926,
+     "mean": 25412.904810990643,
+     "max": 48353.006952925934,
+     "n": 18807
     },
     "direction": "lower-is-better"
    },
    "complex": {
     "optimistic": {
-     "p50": 518.2107188197551,
-     "p90": 903.5544410449802,
-     "mean": 521.2610697352275,
+     "p50": 522.0078434214229,
+     "p90": 904.9356775272172,
+     "mean": 523.9840239336017,
      "max": 1329.2452369746752,
-     "n": 3200
+     "n": 4105
     },
     "realistic": {
-     "p50": 1728.7118202809943,
-     "p90": 2889.874071428203,
-     "mean": 1771.9306445459076,
-     "max": 3805.4398709929956,
-     "n": 4423
+     "p50": 1106.9730791003676,
+     "p90": 2093.078286203614,
+     "mean": 1183.426717307332,
+     "max": 2953.6418224601075,
+     "n": 5142
     },
     "pessimistic": {
-     "p50": 20231.184645103407,
-     "p90": 34141.67058047792,
-     "mean": 20783.543011232752,
-     "max": 38542.22442656406,
-     "n": 4224
+     "p50": 24564.563636523846,
+     "p90": 42721.20382369787,
+     "mean": 25593.3665225656,
+     "max": 48396.5300570894,
+     "n": 5436
     },
     "direction": "lower-is-better"
    },
    "urgent": {
     "optimistic": {
-     "p50": 231.94406371287187,
-     "p90": 807.9824297484593,
-     "mean": 328.48550088007977,
-     "max": 950.7853403488407,
-     "n": 1682
+     "p50": 227.57194067211822,
+     "p90": 805.4086735108285,
+     "mean": 325.37073863749254,
+     "max": 950.8556350800209,
+     "n": 2159
     },
     "realistic": {
-     "p50": 249.80051320348866,
-     "p90": 799.6743678150233,
-     "mean": 327.94953768362416,
-     "max": 961.4519060302991,
-     "n": 2067
+     "p50": 236.92718616436468,
+     "p90": 798.7595491191605,
+     "mean": 327.2106138594687,
+     "max": 951.370735850971,
+     "n": 1876
     },
     "pessimistic": {
-     "p50": 236.86271309445146,
+     "p50": 229.63652300578542,
      "p90": 810.6885471027344,
-     "mean": 330.56171346530596,
+     "mean": 327.059245389068,
      "max": 969.5221067994135,
-     "n": 1894
+     "n": 2402
     },
     "direction": "lower-is-better"
    }
@@ -151,96 +151,96 @@
   "perNode": {
    "gp-clinic": {
     "optimistic": {
-     "utilisation": 0.8787666278364019,
+     "utilisation": 0.8813964580870594,
      "stable": true,
-     "queueLength": 25.271362995426006,
-     "throughput": 91.22222222222223,
+     "queueLength": 25.55620613571086,
+     "throughput": 87.53695652173913,
      "refused": 0
     },
     "realistic": {
-     "utilisation": 0.9439948771490477,
+     "utilisation": 0.9458368806197681,
      "stable": true,
-     "queueLength": 82.94808322405197,
-     "throughput": 90.09722222222223,
+     "queueLength": 60.70343405586898,
+     "throughput": 93.78478260869565,
      "refused": 0
     },
     "pessimistic": {
-     "utilisation": 0.9202663330170778,
+     "utilisation": 0.9200430354586289,
      "stable": false,
-     "queueLength": 813.3113800036962,
-     "throughput": 73.18888888888888,
+     "queueLength": 1000.1685003285407,
+     "throughput": 69.8804347826087,
      "refused": 0
     },
     "direction": "lower-is-better"
    },
    "gp-admin": {
     "optimistic": {
-     "utilisation": 0.5899662287324129,
+     "utilisation": 0.5913776686588551,
      "stable": true,
-     "queueLength": 11.714631104819608,
-     "throughput": 26.788888888888888,
+     "queueLength": 11.860148812012318,
+     "throughput": 25.72608695652174,
      "refused": 0
     },
     "realistic": {
-     "utilisation": 0.7719455857953906,
+     "utilisation": 0.3577131414310949,
      "stable": true,
-     "queueLength": 15.612638616127729,
-     "throughput": 25.566666666666666,
+     "queueLength": 10.355242356300222,
+     "throughput": 27.528260869565216,
      "refused": 0
     },
     "pessimistic": {
-     "utilisation": 0.21141046615938416,
+     "utilisation": 0.21152103358623284,
      "stable": true,
-     "queueLength": 8.299376461271875,
-     "throughput": 22.925,
+     "queueLength": 8.282796498970361,
+     "throughput": 21.919565217391305,
      "refused": 0
     },
     "direction": "lower-is-better"
    },
    "community-visit": {
     "optimistic": {
-     "utilisation": 0.654499847583173,
+     "utilisation": 0.6647344584541777,
      "stable": true,
-     "queueLength": 3.5912761067830434,
-     "throughput": 9.119444444444444,
+     "queueLength": 3.6786188793022196,
+     "throughput": 8.81304347826087,
      "refused": 0
     },
     "realistic": {
-     "utilisation": 0.7224831022208458,
+     "utilisation": 0.7064309291511207,
      "stable": true,
-     "queueLength": 4.387734557757169,
-     "throughput": 9.238888888888889,
+     "queueLength": 4.32836006582483,
+     "throughput": 9.210869565217392,
      "refused": 0
     },
     "pessimistic": {
-     "utilisation": 0.6804343712931128,
+     "utilisation": 0.6770833220995922,
      "stable": true,
-     "queueLength": 5.222641166460546,
-     "throughput": 7.355555555555555,
+     "queueLength": 5.07470187836512,
+     "throughput": 7.030434782608696,
      "refused": 0
     },
     "direction": "lower-is-better"
    },
    "test": {
     "optimistic": {
-     "utilisation": 0.000011749223625887816,
+     "utilisation": 0.000011786361598189536,
      "stable": true,
-     "queueLength": 1.1749223625887815,
-     "throughput": 16.26388888888889,
+     "queueLength": 1.1786361598189536,
+     "throughput": 15.619565217391305,
      "refused": 0
     },
     "realistic": {
-     "utilisation": 0.00001255038353991754,
+     "utilisation": 0.000012838706035538158,
      "stable": true,
-     "queueLength": 1.255038353991754,
-     "throughput": 16.091666666666665,
+     "queueLength": 1.2838706035538159,
+     "throughput": 17.06086956521739,
      "refused": 0
     },
     "pessimistic": {
-     "utilisation": 0.00001252700661741336,
+     "utilisation": 0.000012492648922181325,
      "stable": true,
-     "queueLength": 1.252700661741336,
-     "throughput": 13.158333333333333,
+     "queueLength": 1.2492648922181326,
+     "throughput": 12.541304347826086,
      "refused": 0
     },
     "direction": "lower-is-better"
@@ -248,21 +248,21 @@
   },
   "completed": {
    "routine": {
-    "optimistic": 21482,
-    "realistic": 19335,
-    "pessimistic": 14730,
+    "optimistic": 27527,
+    "realistic": 29002,
+    "pessimistic": 18807,
     "direction": "higher-is-better"
    },
    "complex": {
-    "optimistic": 3200,
-    "realistic": 4423,
-    "pessimistic": 4224,
+    "optimistic": 4105,
+    "realistic": 5142,
+    "pessimistic": 5436,
     "direction": "higher-is-better"
    },
    "urgent": {
-    "optimistic": 1682,
-    "realistic": 2067,
-    "pessimistic": 1894,
+    "optimistic": 2159,
+    "realistic": 1876,
+    "pessimistic": 2402,
     "direction": "higher-is-better"
    }
   },
@@ -273,15 +273,15 @@
    "direction": "lower-is-better"
   },
   "unfiledLetters": {
-   "optimistic": 2013,
-   "realistic": 1557,
-   "pessimistic": 2409,
+   "optimistic": 2535,
+   "realistic": 2486,
+   "pessimistic": 3047,
    "direction": "lower-is-better"
   },
   "unfiledResults": {
-   "optimistic": 3328,
-   "realistic": 3316,
-   "pessimistic": 2714,
+   "optimistic": 4070,
+   "realistic": 4513,
+   "pessimistic": 3272,
    "direction": "lower-is-better"
   }
  },
@@ -289,73 +289,73 @@
   "waits": {
    "routine": {
     "optimistic": {
-     "p50": -227.7680130250228,
-     "p90": -431.36492940969765,
-     "mean": -259.3127594787131,
-     "max": -1562.1820615633624,
-     "n": 21482
+     "p50": -209.21556233117008,
+     "p90": -388.10915389598813,
+     "mean": -236.84533257101702,
+     "max": -1503.4746671478497,
+     "n": 27527
     },
     "realistic": {
-     "p50": 999.8404596603941,
-     "p90": 1567.7812392191845,
-     "mean": 1001.7333667306652,
-     "max": 992.129635102654,
-     "n": 19335
+     "p50": 366.9451070338255,
+     "p90": 766.928871696553,
+     "mean": 405.3785238530934,
+     "max": 95.47215389413759,
+     "n": 29002
     },
     "pessimistic": {
-     "p50": 19379.75970396609,
-     "p90": 32607.82542821701,
-     "mean": 19947.565303429026,
-     "max": 35691.13476898463,
-     "n": 14730
+     "p50": 23432.175568514154,
+     "p90": 41308.402243060176,
+     "mean": 24665.223348483123,
+     "max": 45513.99946945603,
+     "n": 18807
     },
     "direction": "lower-is-better"
    },
    "complex": {
     "optimistic": {
-     "p50": -243.8661884937319,
-     "p90": -495.66048003250035,
-     "mean": -287.03330056027073,
+     "p50": -224.457601082162,
+     "p90": -432.09393466141773,
+     "mean": -260.996307456805,
      "max": -1528.5328185220133,
-     "n": 3200
+     "n": 4105
     },
     "realistic": {
-     "p50": 960.7962952617672,
-     "p90": 1484.8205326449824,
-     "mean": 957.7976565446786,
-     "max": 941.8231977905671,
-     "n": 4423
+     "p50": 360.005650703446,
+     "p90": 755.5466901216423,
+     "mean": 397.94440202358953,
+     "max": 95.36178307008231,
+     "n": 5142
     },
     "pessimistic": {
-     "p50": 19448.69646043534,
-     "p90": 32722.04438204586,
-     "mean": 19954.837363582657,
-     "max": 35664.035093712795,
-     "n": 4224
+     "p50": 23797.686914665683,
+     "p90": 41363.762934154656,
+     "mean": 24787.974913820563,
+     "max": 45518.340724238136,
+     "n": 5436
     },
     "direction": "lower-is-better"
    },
    "urgent": {
     "optimistic": {
-     "p50": -4.856351855181856,
-     "p90": 10.130385860917158,
-     "mean": 6.755260485671556,
-     "max": 4.486510141985491,
-     "n": 1682
+     "p50": -6.064528697170317,
+     "p90": 14.56346829177346,
+     "mean": 6.784294539319376,
+     "max": 4.5568048731656745,
+     "n": 2159
     },
     "realistic": {
-     "p50": 12.982028660248034,
-     "p90": 1.8042549522942863,
-     "mean": 6.201228314028924,
-     "max": 15.135006848257035,
-     "n": 2067
+     "p50": 5.763255177356768,
+     "p90": 10.386882282386068,
+     "mean": 11.096708143576109,
+     "max": 7.544444026396377,
+     "n": 1876
     },
     "pessimistic": {
-     "p50": -1.7694381889887154,
-     "p90": 11.004767499805894,
-     "mean": 6.999737355511229,
+     "p50": -5.831682078889571,
+     "p90": 18.01160616829293,
+     "mean": 6.641065575508321,
      "max": 21.391540877171792,
-     "n": 1894
+     "n": 2402
     },
     "direction": "lower-is-better"
    }
@@ -363,73 +363,73 @@
   "timeInSystem": {
    "routine": {
     "optimistic": {
-     "p50": -227.7680130250228,
-     "p90": -431.36492940969765,
-     "mean": -259.312759478713,
-     "max": -1562.1820615633624,
-     "n": 21482
+     "p50": -209.21556233117008,
+     "p90": -388.10915389598813,
+     "mean": -236.84533257101555,
+     "max": -1503.4746671478497,
+     "n": 27527
     },
     "realistic": {
-     "p50": 999.8404596603941,
-     "p90": 1567.7812392191845,
-     "mean": 1001.7333667306641,
-     "max": 992.129635102654,
-     "n": 19335
+     "p50": 366.9451070338255,
+     "p90": 766.928871696553,
+     "mean": 405.3785238530953,
+     "max": 95.47215389413759,
+     "n": 29002
     },
     "pessimistic": {
-     "p50": 19379.75970396609,
-     "p90": 32607.82542821701,
-     "mean": 19947.565303429023,
-     "max": 35691.13476898463,
-     "n": 14730
+     "p50": 23432.175568514154,
+     "p90": 41308.402243060176,
+     "mean": 24665.223348483123,
+     "max": 45513.99946945603,
+     "n": 18807
     },
     "direction": "lower-is-better"
    },
    "complex": {
     "optimistic": {
-     "p50": -250.6635582879535,
-     "p90": -502.45784982672194,
-     "mean": -293.83067035449085,
+     "p50": -231.2549708763836,
+     "p90": -438.89130445563933,
+     "mean": -267.79367725102554,
      "max": -1535.3301883162349,
-     "n": 3200
+     "n": 4105
     },
     "realistic": {
-     "p50": 959.8375431732857,
-     "p90": 1483.861780556501,
-     "mean": 956.8389044561893,
-     "max": 940.8644457020855,
-     "n": 4423
+     "p50": 353.71026480256114,
+     "p90": 749.2513042207574,
+     "mean": 391.64901612270467,
+     "max": 89.06639716919744,
+     "n": 5142
     },
     "pessimistic": {
-     "p50": 19462.3103679957,
-     "p90": 32735.658289606217,
-     "mean": 19968.451271143032,
-     "max": 35677.64900127315,
-     "n": 4224
+     "p50": 23811.30082222604,
+     "p90": 41377.37684171501,
+     "mean": 24801.588821380974,
+     "max": 45531.95463179849,
+     "n": 5436
     },
     "direction": "lower-is-better"
    },
    "urgent": {
     "optimistic": {
-     "p50": -1.8411757391586434,
-     "p90": 13.145561976940371,
-     "mean": 9.770436601694712,
-     "max": 7.501686258008704,
-     "n": 1682
+     "p50": -3.0493525811471045,
+     "p90": 17.578644407796673,
+     "mean": 9.799470655342532,
+     "max": 7.571980989188887,
+     "n": 2159
     },
     "realistic": {
-     "p50": 16.015273751458153,
-     "p90": 4.837500043504406,
-     "mean": 9.2344734052391,
-     "max": 18.168251939467154,
-     "n": 2067
+     "p50": 6.305892911099363,
+     "p90": 10.929520016128663,
+     "mean": 11.639345877318704,
+     "max": 8.087081760138972,
+     "n": 1876
     },
     "pessimistic": {
-     "p50": 3.077473642420955,
-     "p90": 15.851679331215564,
-     "mean": 11.8466491869209,
+     "p50": -0.9847702474799007,
+     "p90": 22.8585179997026,
+     "mean": 11.487977406917992,
      "max": 26.238452708581463,
-     "n": 1894
+     "n": 2402
     },
     "direction": "lower-is-better"
    }
@@ -437,96 +437,96 @@
   "perNode": {
    "gp-clinic": {
     "optimistic": {
-     "utilisation": 0.8787666278364019,
+     "utilisation": 0.8813964580870594,
      "stable": true,
-     "queueLength": 25.271362995426006,
-     "throughput": 91.22222222222223,
+     "queueLength": 25.55620613571086,
+     "throughput": 87.53695652173913,
      "refused": 0
     },
     "realistic": {
-     "utilisation": 0.9439948771490477,
+     "utilisation": 0.9458368806197681,
      "stable": true,
-     "queueLength": 82.94808322405197,
-     "throughput": 90.09722222222223,
+     "queueLength": 60.70343405586898,
+     "throughput": 93.78478260869565,
      "refused": 0
     },
     "pessimistic": {
-     "utilisation": 0.9202663330170778,
+     "utilisation": 0.9200430354586289,
      "stable": false,
-     "queueLength": 813.3113800036962,
-     "throughput": 73.18888888888888,
+     "queueLength": 1000.1685003285407,
+     "throughput": 69.8804347826087,
      "refused": 0
     },
     "direction": "lower-is-better"
    },
    "gp-admin": {
     "optimistic": {
-     "utilisation": 0.5899662287324129,
+     "utilisation": 0.5913776686588551,
      "stable": true,
-     "queueLength": 11.714631104819608,
-     "throughput": 26.788888888888888,
+     "queueLength": 11.860148812012318,
+     "throughput": 25.72608695652174,
      "refused": 0
     },
     "realistic": {
-     "utilisation": 0.7719455857953906,
+     "utilisation": 0.3577131414310949,
      "stable": true,
-     "queueLength": 15.612638616127729,
-     "throughput": 25.566666666666666,
+     "queueLength": 10.355242356300222,
+     "throughput": 27.528260869565216,
      "refused": 0
     },
     "pessimistic": {
-     "utilisation": 0.21141046615938416,
+     "utilisation": 0.21152103358623284,
      "stable": true,
-     "queueLength": 8.299376461271875,
-     "throughput": 22.925,
+     "queueLength": 8.282796498970361,
+     "throughput": 21.919565217391305,
      "refused": 0
     },
     "direction": "lower-is-better"
    },
    "community-visit": {
     "optimistic": {
-     "utilisation": 0.654499847583173,
+     "utilisation": 0.6647344584541777,
      "stable": true,
-     "queueLength": 3.5912761067830434,
-     "throughput": 9.119444444444444,
+     "queueLength": 3.6786188793022196,
+     "throughput": 8.81304347826087,
      "refused": 0
     },
     "realistic": {
-     "utilisation": 0.7224831022208458,
+     "utilisation": 0.7064309291511207,
      "stable": true,
-     "queueLength": 4.387734557757169,
-     "throughput": 9.238888888888889,
+     "queueLength": 4.32836006582483,
+     "throughput": 9.210869565217392,
      "refused": 0
     },
     "pessimistic": {
-     "utilisation": 0.6804343712931128,
+     "utilisation": 0.6770833220995922,
      "stable": true,
-     "queueLength": 5.222641166460546,
-     "throughput": 7.355555555555555,
+     "queueLength": 5.07470187836512,
+     "throughput": 7.030434782608696,
      "refused": 0
     },
     "direction": "lower-is-better"
    },
    "test": {
     "optimistic": {
-     "utilisation": 0.000011749223625887816,
+     "utilisation": 0.000011786361598189536,
      "stable": true,
-     "queueLength": 1.1749223625887815,
-     "throughput": 16.26388888888889,
+     "queueLength": 1.1786361598189536,
+     "throughput": 15.619565217391305,
      "refused": 0
     },
     "realistic": {
-     "utilisation": 0.00001255038353991754,
+     "utilisation": 0.000012838706035538158,
      "stable": true,
-     "queueLength": 1.255038353991754,
-     "throughput": 16.091666666666665,
+     "queueLength": 1.2838706035538159,
+     "throughput": 17.06086956521739,
      "refused": 0
     },
     "pessimistic": {
-     "utilisation": 0.00001252700661741336,
+     "utilisation": 0.000012492648922181325,
      "stable": true,
-     "queueLength": 1.252700661741336,
-     "throughput": 13.158333333333333,
+     "queueLength": 1.2492648922181326,
+     "throughput": 12.541304347826086,
      "refused": 0
     },
     "direction": "lower-is-better"
@@ -534,21 +534,21 @@
   },
   "completed": {
    "routine": {
-    "optimistic": 21482,
-    "realistic": 19335,
-    "pessimistic": 14730,
+    "optimistic": 27527,
+    "realistic": 29002,
+    "pessimistic": 18807,
     "direction": "higher-is-better"
    },
    "complex": {
-    "optimistic": 3200,
-    "realistic": 4423,
-    "pessimistic": 4224,
+    "optimistic": 4105,
+    "realistic": 5142,
+    "pessimistic": 5436,
     "direction": "higher-is-better"
    },
    "urgent": {
-    "optimistic": 1682,
-    "realistic": 2067,
-    "pessimistic": 1894,
+    "optimistic": 2159,
+    "realistic": 1876,
+    "pessimistic": 2402,
     "direction": "higher-is-better"
    }
   },
@@ -559,15 +559,15 @@
    "direction": "lower-is-better"
   },
   "unfiledLetters": {
-   "optimistic": 2013,
-   "realistic": 1557,
-   "pessimistic": 2409,
+   "optimistic": 2535,
+   "realistic": 2486,
+   "pessimistic": 3047,
    "direction": "lower-is-better"
   },
   "unfiledResults": {
-   "optimistic": 3328,
-   "realistic": 3316,
-   "pessimistic": 2714,
+   "optimistic": 4070,
+   "realistic": 4513,
+   "pessimistic": 3272,
    "direction": "lower-is-better"
   }
  },
@@ -602,7 +602,7 @@
   },
   {
    "id": "unstable-share",
-   "statement": "10 of 40 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
+   "statement": "16 of 60 sampled worlds had no stable operating point. Wait figures from those worlds are not reported, because they are a statement about how long the simulation ran.",
    "kind": "structural",
    "holdsIn": [
     "optimistic",
@@ -617,97 +617,97 @@
    "path": "arrivals.targetUtilisation",
    "label": "arrivals.targetUtilisation",
    "low": 442.6572724880825,
-   "high": 6934.364009067067,
-   "swing": 6491.706736578984,
+   "high": 7284.462212673621,
+   "swing": 6841.804940185539,
    "rangeSource": "assumed",
    "dominantButUnsourced": true
   },
   {
    "path": "serviceTimes.classMultiplier.complex",
    "label": "serviceTimes.classMultiplier.complex",
-   "low": 571.1912363075535,
-   "high": 935.8153539260093,
-   "swing": 364.6241176184558,
-   "rangeSource": "assumed",
-   "dominantButUnsourced": true
-  },
-  {
-   "path": "serviceTimes.classMultiplier.urgent",
-   "label": "serviceTimes.classMultiplier.urgent",
-   "low": 592.1728075301507,
-   "high": 732.7642771642422,
-   "swing": 140.59146963409148,
+   "low": 569.1796691386262,
+   "high": 902.650467226631,
+   "swing": 333.4707980880048,
    "rangeSource": "assumed",
    "dominantButUnsourced": true
   },
   {
    "path": "arrivals.classMix.complex",
    "label": "arrivals.classMix.complex",
-   "low": 544.1592453831108,
-   "high": 682.6796669288306,
-   "swing": 138.52042154571973,
+   "low": 538.6808560051722,
+   "high": 659.7340551370289,
+   "swing": 121.05319913185667,
+   "rangeSource": "assumed",
+   "dominantButUnsourced": true
+  },
+  {
+   "path": "serviceTimes.classMultiplier.urgent",
+   "label": "serviceTimes.classMultiplier.urgent",
+   "low": 584.0101864100434,
+   "high": 693.5020786579116,
+   "swing": 109.49189224786824,
    "rangeSource": "assumed",
    "dominantButUnsourced": false
   },
   {
    "path": "serviceTimes.documentReviewWork",
    "label": "serviceTimes.documentReviewWork",
-   "low": 553.3588233115152,
-   "high": 656.5469734807557,
-   "swing": 103.18815016924054,
+   "low": 549.441048388835,
+   "high": 621.4547232910991,
+   "swing": 72.01367490226403,
    "rangeSource": "assumed",
-   "dominantButUnsourced": false
-  },
-  {
-   "path": "capacities.gpAdminShare",
-   "label": "capacities.gpAdminShare",
-   "low": 653.9918106219266,
-   "high": 592.1728075301507,
-   "swing": 61.81900309177581,
-   "rangeSource": "literature",
    "dominantButUnsourced": false
   },
   {
    "path": "arrivals.classMix.urgent",
    "label": "arrivals.classMix.urgent",
-   "low": 613.5984379447764,
-   "high": 563.8167477639508,
-   "swing": 49.781690180825535,
+   "low": 608.6573626926402,
+   "high": 564.0373069881462,
+   "swing": 44.62005570449401,
    "rangeSource": "assumed",
    "dominantButUnsourced": false
   },
   {
    "path": "levers.weekdayDischargeShare",
    "label": "levers.weekdayDischargeShare",
-   "low": 551.4567547005136,
-   "high": 592.1728075301507,
-   "swing": 40.71605282963719,
+   "low": 539.6311464616156,
+   "high": 584.0101864100434,
+   "swing": 44.37903994842782,
+   "rangeSource": "assumed",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "capacities.gpAdminShare",
+   "label": "capacities.gpAdminShare",
+   "low": 624.8630432786304,
+   "high": 584.0101864100434,
+   "swing": 40.85285686858697,
+   "rangeSource": "literature",
+   "dominantButUnsourced": false
+  },
+  {
+   "path": "arrivals.classMix.routine",
+   "label": "arrivals.classMix.routine",
+   "low": 605.811901111505,
+   "high": 568.0333899660036,
+   "swing": 37.7785111455014,
    "rangeSource": "assumed",
    "dominantButUnsourced": false
   },
   {
    "path": "arrivals.dischargeLettersPerDay",
    "label": "arrivals.dischargeLettersPerDay",
-   "low": 600.5531432702555,
-   "high": 563.6932974745287,
-   "swing": 36.85984579572687,
+   "low": 595.5363991517806,
+   "high": 573.3788327306393,
+   "swing": 22.157566421141382,
    "rangeSource": "measured",
-   "dominantButUnsourced": false
-  },
-  {
-   "path": "arrivals.classMix.routine",
-   "label": "arrivals.classMix.routine",
-   "low": 597.3611039082753,
-   "high": 569.2810290495399,
-   "swing": 28.080074858735316,
-   "rangeSource": "assumed",
    "dominantButUnsourced": false
   },
   {
    "path": "arrivals.edPerDay",
    "label": "arrivals.edPerDay",
-   "low": 592.1728075301507,
-   "high": 592.1728075301507,
+   "low": 584.0101864100434,
+   "high": 584.0101864100434,
    "swing": 0,
    "rangeSource": "measured",
    "dominantButUnsourced": false
@@ -715,8 +715,8 @@
   {
    "path": "effects.monitoringEscalationReduction",
    "label": "effects.monitoringEscalationReduction",
-   "low": 592.1728075301507,
-   "high": 592.1728075301507,
+   "low": 584.0101864100434,
+   "high": 584.0101864100434,
    "swing": 0,
    "rangeSource": "assumed",
    "dominantButUnsourced": false
@@ -724,8 +724,8 @@
   {
    "path": "effects.telephoneServiceMultiplier",
    "label": "effects.telephoneServiceMultiplier",
-   "low": 592.1728075301507,
-   "high": 592.1728075301507,
+   "low": 584.0101864100434,
+   "high": 584.0101864100434,
    "swing": 0,
    "rangeSource": "assumed",
    "dominantButUnsourced": false
@@ -733,8 +733,8 @@
   {
    "path": "environment.shortageCommunityMultiplier",
    "label": "environment.shortageCommunityMultiplier",
-   "low": 592.1728075301507,
-   "high": 592.1728075301507,
+   "low": 584.0101864100434,
+   "high": 584.0101864100434,
    "swing": 0,
    "rangeSource": "assumed",
    "dominantButUnsourced": false
@@ -742,8 +742,8 @@
   {
    "path": "environment.winterDemandMultiplier",
    "label": "environment.winterDemandMultiplier",
-   "low": 592.1728075301507,
-   "high": 592.1728075301507,
+   "low": 584.0101864100434,
+   "high": 584.0101864100434,
    "swing": 0,
    "rangeSource": "assumed",
    "dominantButUnsourced": false
@@ -751,8 +751,8 @@
   {
    "path": "environment.winterUrgentMultiplier",
    "label": "environment.winterUrgentMultiplier",
-   "low": 592.1728075301507,
-   "high": 592.1728075301507,
+   "low": 584.0101864100434,
+   "high": 584.0101864100434,
    "swing": 0,
    "rangeSource": "assumed",
    "dominantButUnsourced": false
@@ -762,7 +762,7 @@
   {
    "path": "levers.hospitalToCommunityShare",
    "label": "share of care shifted to community",
-   "breakpoint": 0.13897705078125,
+   "breakpoint": 0.13885498046875,
    "holdsWhen": "below",
    "findingId": "stability",
    "statement": "holds while share of care shifted to community stays below 14%"
@@ -1053,16 +1053,16 @@
    "message": "serviceTimes.classMultiplier.complex dominates the result and rests on an assumption"
   },
   {
-   "path": "serviceTimes.classMultiplier.urgent",
+   "path": "arrivals.classMix.complex",
    "reason": "dominant-but-unsourced",
-   "message": "serviceTimes.classMultiplier.urgent dominates the result and rests on an assumption"
+   "message": "arrivals.classMix.complex dominates the result and rests on an assumption"
   }
  ],
  "run": {
-  "samples": 40,
+  "samples": 60,
   "seed": 1,
-  "horizonDays": 450,
-  "elapsedMs": 0.0004999999946448952,
+  "horizonDays": 550,
+  "elapsedMs": 0.0017499999958090484,
   "anyVerificationFailed": false,
   "paramsMeta": {
    "worldId": "team-4551d2471320",

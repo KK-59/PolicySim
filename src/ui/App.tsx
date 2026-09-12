@@ -6,7 +6,9 @@
  * meaningless. Every other route gets the bar.
  */
 
+import { useState } from 'react'
 import { Glyph } from './components/Glyph'
+import { DocumentDrawer } from './components/DocumentDrawer'
 import { Landing } from './screens/Landing'
 import { About } from './screens/About'
 import { Upload } from './screens/Upload'
@@ -56,13 +58,35 @@ function Bar({ route }: { route: Route }) {
 /** Routes that need a document. Deep-linking past the upload lands on the upload. */
 const GUARDED: Route[] = ['/parameters']
 
+/**
+ * The drawer trigger. A corner button rather than a place in the nav: the documents are how you
+ * try the thing, not a step in it, and the flow already has three steps that mean something.
+ */
+function DocumentsButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button type="button" className="docs-trigger" onClick={onClick}>
+      <Glyph name="document" size={14} />
+      Documents
+    </button>
+  )
+}
+
 export function App() {
   const route = useRoute()
   const run = useRun()
+  const [drawer, setDrawer] = useState(false)
   const blocked = GUARDED.includes(route) && !run.document
   const effective: Route = blocked ? '/upload' : route
 
-  if (effective === '/') return <Landing />
+  if (effective === '/') {
+    return (
+      <>
+        <Landing />
+        <DocumentsButton onClick={() => setDrawer(true)} />
+        <DocumentDrawer open={drawer} onClose={() => setDrawer(false)} />
+      </>
+    )
+  }
 
   return (
     <div className="shell">
@@ -86,6 +110,8 @@ export function App() {
           </div>
         </footer>
       )}
+      <DocumentsButton onClick={() => setDrawer(true)} />
+      <DocumentDrawer open={drawer} onClose={() => setDrawer(false)} />
     </div>
   )
 }

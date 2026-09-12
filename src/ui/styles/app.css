@@ -1666,3 +1666,114 @@ textarea::placeholder {
   flex: none;
   margin-top: 0.15em;
 }
+
+/* --- document drawer ---------------------------------------------------------------------- */
+/* A corner trigger and a panel that slides in. The documents are how you try the thing, not a
+   step in the flow, so they stay out of the way until asked for. */
+
+.docs-trigger {
+  position: fixed;
+  right: var(--s-5);
+  bottom: var(--s-5);
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 0.625rem 1rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--r-pill);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: var(--t-small);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  box-shadow: var(--lift-lg);
+  transition: transform 150ms var(--ease), box-shadow 150ms var(--ease);
+}
+.docs-trigger:hover {
+  transform: translateY(-1px);
+}
+
+.drawer__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms var(--ease);
+}
+.drawer__scrim[data-open='true'] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 51;
+  width: min(30rem, 92vw);
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border-left: 1px solid var(--rule);
+  box-shadow: var(--lift-lg);
+  transform: translateX(100%);
+  transition: transform 240ms var(--ease);
+}
+.drawer[data-open='true'] {
+  transform: translateX(0);
+}
+.drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-5);
+  border-bottom: 1px solid var(--rule);
+}
+.drawer__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--s-5);
+}
+
+.docs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-3);
+}
+.doc {
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  padding: var(--s-4);
+  background: var(--paper);
+}
+.doc__title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-weight: 600;
+  font-size: var(--t-small);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+.doc__title:hover {
+  text-decoration: underline;
+  color: var(--blue);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .drawer__scrim,
+  .docs-trigger {
+    transition: none;
+  }
+}

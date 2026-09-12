@@ -11,9 +11,17 @@ import { Glyph } from '../components/Glyph'
 import { Tornado } from '../components/Tornado'
 import { WorldChart } from '../components/WorldChart'
 import { Findings } from '../components/WorldPanel'
-import { metrics, sweep, seriesFor, leverAt } from '../data'
+import { metrics as baselineMetrics, sweep, seriesFor, leverAt } from '../data'
+import { useRun } from '../lib/store'
 
 export function ThreeWorlds() {
+  const run = useRun()
+  // Outcomes for the document the user actually ran, when there are any. Otherwise the calibrated
+  // baseline. The screen must say which, because showing a precomputed figure while the user
+  // believes they are looking at their own policy is the one failure this project cannot have.
+  const metrics = run.liveMetrics ?? baselineMetrics
+  const isLive = run.liveMetrics !== null
+
   const positions = sweep.lever.positions
   const [idx, setIdx] = useState(sweep.policyIndex)
   const [seriesId, setSeriesId] = useState<'complex' | 'routine'>('complex')
@@ -44,6 +52,21 @@ export function ThreeWorlds() {
           </button>
         </div>
       </div>
+
+      <p className="small muted mt-3">
+        {isLive ? (
+          <>
+            <Glyph name="check" size={13} /> Findings below are the engine&rsquo;s output for{' '}
+            <strong>{run.document?.filename ?? 'your document'}</strong>. The curve is the
+            calibrated baseline sweep, which does not depend on the document.
+          </>
+        ) : (
+          <>
+            <Glyph name="warning" size={13} /> Showing the calibrated baseline. Run a document to
+            see what it changes.
+          </>
+        )}
+      </p>
 
       <div className="mt-5">
         <WorldChart
