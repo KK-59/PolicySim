@@ -12,6 +12,7 @@ import { useRef, useState } from 'react'
 import { Glyph } from '../components/Glyph'
 import { navigate } from '../lib/router'
 import { setRun, useRun } from '../lib/store'
+import { loadCatalogued, loadFile } from '../lib/load-document'
 
 export function Upload() {
   const run = useRun()
@@ -26,49 +27,17 @@ export function Upload() {
     if (!chosen) return
     setError(null)
     setFile(chosen)
-    setRun({ document: { filename: chosen.name, sizeBytes: chosen.size } })
+    setRun({ document: { filename: chosen.name, sizeBytes: chosen.size }, pendingDoc: null })
   }
 
   const start = async () => {
-    if (!file) return
     setBusy(true)
     setError(null)
     try {
-      const bytes = new Uint8Array(await file.arrayBuffer())
-      // Chunked rather than spread: String.fromCharCode(...bytes) blows the call stack on
-      // anything larger than a short document, which is most real board papers.
-      let binary = ''
-      for (let i = 0; i < bytes.length; i += 8192) {
-        binary += String.fromCharCode(...bytes.subarray(i, i + 8192))
-      }
-
-      const response = await fetch('/api/extract', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          filename: file.name,
-          contentBase64: btoa(binary),
-          notes: run.notes,
-        }),
-      })
-      const payload = await response.json()
-      if (!response.ok) throw new Error(payload?.error ?? `Extraction failed (${response.status})`)
-
-      // The screen renders `rows`, not raw commitments: rows carry the label, bounds, source tag
-      // and citation the parameter panel needs, with the corpus and baseline gaps already filled.
-      // The model's own output is deliberately not the render shape — it knows about levers and
-      // spans, and nothing about how to present a source tag.
-      setRun({
-        document: { filename: file.name, sizeBytes: file.size },
-        commitments: (payload.rows ?? []).map(
-          (r: Record<string, unknown>, i: number) => ({ id: `c${i + 1}`, ...r }),
-        ),
-        rejected: payload.rejected ?? [],
-        truncated: payload.truncated ? { charsRead: payload.charsRead } : null,
-        params: payload.params ?? null,
-        extracted: true,
-      })
-      navigate('/parameters')
+      // Same button, either origin: a shelf document is already on the server, a chosen file
+      // still has to be sent. Everything after the read is identical.
+      if (run.pendingDoc) await loadCatalogued(run.pendingDoc.id, run.pendingDoc.title)
+      else if (file) await loadFile(file, run.notes)
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : String(cause))
     } finally {
@@ -126,7 +95,8 @@ export function Upload() {
                 className="btn btn--ghost"
                 onClick={(e) => {
                   e.preventDefault()
-                  setRun({ document: null })
+                  setFile(undefined)
+                  setRun({ document: null, pendingDoc: null })
                   if (inputRef.current) inputRef.current.value = ''
                 }}
               >
@@ -162,7 +132,7 @@ export function Upload() {
           type="button"
           className="btn btn--primary btn--lg mt-4"
           onClick={start}
-          disabled={!doc || busy}
+          disabled={(!file && !run.pendingDoc) || busy}
         >
           {busy ? 'Reading the document…' : 'Run the sandbox'}
           {!busy && <Glyph name="arrow" size={16} />}

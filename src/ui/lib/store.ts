@@ -41,6 +41,14 @@ export interface RunState {
   params: unknown | null
   /** What the run is doing right now. Null when idle. A real run takes about ten seconds. */
   stage: string | null
+  /**
+   * A document taken off the shelf and dropped, waiting to be read.
+   *
+   * Dropping loads it into the box; it is not read until the user asks for it, exactly as when
+   * they choose a file of their own. Reading on drop meant the same gesture did two different
+   * things depending on where the document came from.
+   */
+  pendingDoc: { id: string; title: string } | null
 }
 
 const initial: RunState = {
@@ -56,6 +64,7 @@ const initial: RunState = {
   liveMetrics: null,
   params: null,
   stage: null,
+  pendingDoc: null,
 }
 
 let state: RunState = initial

@@ -14,7 +14,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Glyph } from './Glyph'
-import { loadCatalogued } from '../lib/load-document'
+import { setRun } from '../lib/store'
 
 interface DocumentEntry {
   id: string
@@ -70,13 +70,16 @@ export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () =
     }
   }, [open, flying, onClose])
 
+  // Dropping LOADS the document; it does not read it. The user presses the same button they
+  // would press for a file of their own, and nothing happens behind their back.
   const drop = useCallback(
     (doc: DocumentEntry) => {
       setFlying(null)
       onClose()
-      loadCatalogued(doc.id, doc.title).catch((err: unknown) =>
-        setError(err instanceof Error ? err.message : String(err)),
-      )
+      setRun({
+        pendingDoc: { id: doc.id, title: doc.title },
+        document: { filename: doc.title, sizeBytes: 0 },
+      })
     },
     [onClose],
   )
@@ -212,8 +215,8 @@ export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () =
           </ul>
 
           <p className="tiny muted mt-5">
-            Drag one out and let go anywhere to read and run it. Clicking the title opens the
-            document itself.
+            Drag one out and let go anywhere to load it. Clicking the title opens the document
+            itself.
           </p>
         </div>
       </aside>
