@@ -1,5 +1,5 @@
 {
-  "name": "policy-sandbox",
+  "name": "policysim",
   "version": "0.1.0",
   "private": true,
   "description": "Every policy runs in three worlds. Team 14 — OpenAI x Anima Healthtech Hackathon.",

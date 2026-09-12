@@ -1,7 +1,12 @@
-import ReactDOM from "react-dom/client"
-import App from "./App.tsx"
-import "./policy-workbench.css"
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { App } from './App'
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <App />,
+const el = document.getElementById('root')
+if (!el) throw new Error('#root missing from index.html')
+
+createRoot(el).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
 )

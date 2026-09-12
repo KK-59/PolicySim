@@ -1,0 +1,90 @@
+/**
+ * Design tokens.
+ *
+ * The palette is Anima's own, read off animahealth.com: the neutral scale, #1D4ED8, #C026D3, and
+ * the pale washes their gradient resolves to. One addition beyond it, --amber, earned because
+ * src/ui/README.md mandates amber for anything tagged `assumed` and the brand has no warning hue.
+ *
+ * The three worlds are three samples of Anima's gradient. That is the one decision everything else
+ * hangs off: the uncertainty axis IS the brand gradient, which is why this surface never reaches for
+ * red/amber/green — the coding every NHS board paper already uses, and the one that would make a
+ * pessimistic world look like a failing target rather than a plausible future.
+ */
+
+:root {
+  /* Ground and ink */
+  --paper: #ffffff;
+  --paper-sunk: #fafafa;
+  --paper-panel: #f5f5f5;
+  --ink: #0a0a0a;
+  --ink-2: #404040;
+  --ink-3: #737373;
+  --rule: #e5e5e5;
+  --rule-2: #d4d4d4;
+
+  /* Anima's gradient, sampled */
+  --blue: #1d4ed8;
+  --fuchsia: #c026d3;
+  --wash-blue: #edf1fc;
+  --wash-fuchsia: #faeefc;
+  --gradient: linear-gradient(90deg, #1d4ed8 16.3%, #c026d3 100%);
+
+  /* The three worlds. Semantic, never decorative. */
+  --w-optimistic: var(--blue);
+  --w-realistic: var(--ink);
+  --w-pessimistic: var(--fuchsia);
+  --w-optimistic-wash: var(--wash-blue);
+  --w-realistic-wash: var(--paper-panel);
+  --w-pessimistic-wash: var(--wash-fuchsia);
+
+  /*
+   * Event palette, from the OpenAI x Anima identity: acid yellow and periwinkle violet.
+   * CHROME ONLY. These never touch data. The three worlds stay blue / ink / fuchsia because
+   * those carry meaning in the chart, and tinting a result with a decorative hue is how a
+   * chart starts lying. Yellow and violet are allowed on grounds, capes and accents.
+   */
+  --brand-yellow: #e9e63c;
+  --brand-violet: #7b6bc4;
+
+  /* Source tags. Amber is the one hue outside Anima's palette. */
+  --amber: #b45309;
+  --amber-wash: #fffbeb;
+
+  /* Radii, read off Anima: 6, 12, pill */
+  --r-sm: 6px;
+  --r-md: 12px;
+  --r-pill: 99px;
+
+  /* Type */
+  --font-sans: 'Albert Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Fragment Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Fixed rem scale, ratio ~1.2. Product UI, so no fluid clamping. */
+  --t-micro: 0.6875rem; /* 11 */
+  --t-tiny: 0.75rem; /* 12 */
+  --t-small: 0.8125rem; /* 13 */
+  --t-body: 0.9375rem; /* 15 */
+  --t-lead: 1.125rem; /* 18 */
+  --t-h3: 1.25rem; /* 20 */
+  --t-h2: 1.75rem; /* 28 */
+  --t-h1: 2.5rem; /* 40 */
+  --t-display: 3.75rem; /* 60 */
+
+  /* Spacing */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
+
+  /* Depth. Offset plus blur, never a zero-offset halo. */
+  --lift: 0 1px 2px rgba(10, 10, 10, 0.04), 0 4px 12px rgba(10, 10, 10, 0.06);
+  --lift-lg: 0 2px 4px rgba(10, 10, 10, 0.05), 0 12px 32px rgba(10, 10, 10, 0.09);
+
+  --page-max: 76rem;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}

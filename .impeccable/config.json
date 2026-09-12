@@ -1,0 +1,18 @@
+{
+  "buildPath": "code",
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "src/ui/styles/app.css"
+        ],
+        "createdAt": "2026-09-12T14:46:59.747Z",
+        "reason": "user confirmed: Oriol asked for the brand gradient back on the 10-Year Plan chapter numbers, scoped to .chapter__n with a solid blue fallback"
+      }
+    ]
+  }
+}

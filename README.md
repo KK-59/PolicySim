@@ -1,4 +1,4 @@
-# Policy Sandbox
+# PolicySim
 
 **Every policy runs in three worlds — optimistic, realistic, pessimistic. See which conclusions survive all three. Then act, with a clinician approving.**
 
