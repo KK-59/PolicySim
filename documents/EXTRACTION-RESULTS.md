@@ -50,3 +50,86 @@ holds.
 
 Having a document with known answers is what made a silent 50% loss visible. That is the argument
 for keeping generated fixtures even once real documents are in hand.
+
+---
+
+# Real documents
+
+Three genuine NHS England publications, downloaded from their official source. Full provenance in
+[real/SOURCES.md](real/SOURCES.md). All three parse cleanly and all fit under the 120,000 character
+cap, so nothing is truncated.
+
+There is no "expected" column here. Nobody published a key saying what these documents mean in
+engine units, which is exactly why the synthetic fixture above still earns its place.
+
+## real/B2034 — Delivery plan for recovering urgent and emergency care services (Jan 2023)
+
+99,974 chars, 49 pages, not truncated. **3 commitments accepted, 0 rejected.**
+
+| Lever | Value | Documented? | Quoted from |
+|---|---|---|---|
+| `communityCapacityMultiplier` | 2 | **inferred** | "...we will offer more joined-up care for older people living with frailty, including scaling" |
+| `monitoringIntensity` | 2.5 | **inferred** | "Greater use of 'virtual wards', which allow people to be safely monitored from... their own home" |
+| `hospitalToCommunityShare` | 0.2 | **inferred** | "By autumn 2023, NHS England will develop a new planning framework and national standard for rapid discharge" |
+
+## real/PRN00283 — Delivery plan for recovering access to primary care (May 2023)
+
+96,682 chars, 46 pages, not truncated. **4 commitments accepted, 0 rejected.**
+
+| Lever | Value | Documented? | Quoted from |
+|---|---|---|---|
+| `communityCapacityMultiplier` | 1.15 | inferred | "26,000 more direct patient care professionals in general practice and 50 million more appointments" |
+| `communityCapacityMultiplier` | 1.03 | inferred | "could save 10 million appointments in general practice a year once scaled" |
+| `hospitalToCommunityShare` | 0.5 | inferred | "We estimate up to 50% more patients could be self-referring by March 2024." |
+| `telephoneFollowUpShare` | 0.8 | inferred | "Around 10% of patients request, and around 20% need, a face-to-face appointment." |
+
+## real/10-year-health-plan (executive summary, Jul 2025)
+
+32,894 chars, 11 pages, not truncated. **3 accepted, 1 rejected.** The rejection is the system
+working: a span it could not verify was dropped rather than reported.
+
+| Lever | Value | Documented? | Quoted from |
+|---|---|---|---|
+| `communityCapacityMultiplier` | 2 | inferred | "deliver more urgent care in the community, in people's homes or through neighbourhood health centres" |
+| `telephoneFollowUpShare` | 0.7 | inferred | "care should happen closer to home" |
+| `monitoringIntensity` | 2 | inferred | "use continuous monitoring to help make proactive management of patients the new normal" |
+
+---
+
+# What the real documents actually show
+
+**Zero rejections across the two largest documents.** Every commitment's quote was found verbatim
+in the source. On `main` this would not have happened: the headline "10,000 virtual ward beds"
+sentence fails the old span check purely because of the curly quotes around 'virtual wards'.
+
+**But every single value is `documented: false`.** Not one number was lifted directly; all were
+inferred from prose. "Scaling urgent community response across the whole country" is not a
+multiplier, and the model turning it into `2` is a judgement, not a reading. The extractor is
+being honest by flagging this, and `to-params.ts` tags such values `literature` or `assumed`
+rather than `measured`, which is the right behaviour.
+
+**Read the implication carefully.** Real policy documents state intent, money and headcount. They
+rarely state the operational ratio a queueing model needs. So the pipeline's job on a real
+document is less "read the number" and more "propose a number, show its provenance, and let a
+human correct it". That is a defensible product, but it is a different claim from "we extract
+what the policy says", and the demo should say the honest one.
+
+**Two quality issues visible above, worth naming before a judge does:**
+
+- PRN00283 maps "26,000 more GP staff and 50 million more appointments" onto
+  `communityCapacityMultiplier`. That is general practice capacity, so `extraGpSessions` is the
+  better home for it. The lever set has no clean slot for "more GP appointments via more staff".
+- The same document yields two different values for the same lever (1.15 and 1.03) from two
+  different sentences. Nothing reconciles competing commitments to one parameter.
+
+## Documents we downloaded and cut
+
+Kept out because they produce nothing usable, not because they are bad documents:
+
+| Document | Why cut |
+|---|---|
+| 10 Year Health Plan (full, 171pp) | 468,807 chars; only 26% reaches the model, so the screen shows a truncation warning. The executive summary carries the same commitments intact. |
+| NHS Long Term Plan 2019 | 385,406 chars, truncates, and yields one usable lever. |
+| NHS Long Term Workforce Plan 2023 | Headcount and training places, not service levers. Nothing maps. |
+| UCR 2-hour standards (B0252, 2020) | A data-field specification for CSDS returns. No policy commitments at all. |
+| Community health service UCR guidance | Extracts five commitments whose values are all 1 or 0, meaning "no change". A policy that moves no lever makes an empty demo. |
