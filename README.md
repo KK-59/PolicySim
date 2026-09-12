@@ -1,91 +1,147 @@
-# PolicySim
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/atlas-dark.webp">
+    <img src="docs/assets/atlas.webp" alt="Atlas carrying a globe carved with a neighbourhood" width="190">
+  </picture>
+</p>
 
-**Every policy runs in three worlds — optimistic, realistic, pessimistic. See which conclusions survive all three. Then act, with a clinician approving.**
+<h1 align="center">PolicySim</h1>
 
-Team 14 · OpenAI × Anima Healthtech Hackathon · 12 Sep 2026
+<p align="center"><strong>Don’t discover policy failure in patients. Simulate it first.</strong></p>
 
-> ⚠️ **This is a template scaffold.** No implementation yet — every file under `src/` is a stub
-> with a TODO header naming its owner. Fill in behind the frozen contracts in `src/contracts/`.
+<p align="center">
+  <img alt="Typecheck" src="https://img.shields.io/badge/typecheck-strict-1D4ED8?style=flat-square&labelColor=0A0A0A">
+  <img alt="Engine" src="https://img.shields.io/badge/engine-deterministic-C026D3?style=flat-square&labelColor=0A0A0A">
+  <img alt="Stack" src="https://img.shields.io/badge/React%2018%20·%20TypeScript%20·%20Vite-404040?style=flat-square&labelColor=0A0A0A">
+  <img alt="Team" src="https://img.shields.io/badge/Team%2014-7B6BC4?style=flat-square&labelColor=0A0A0A">
+  <img alt="Built at" src="https://img.shields.io/badge/OpenAI%20×%20Anima%20·%20London%20·%20Sep%202026-E9E63C?style=flat-square&labelColor=0A0A0A">
+</p>
 
 ---
 
-## What it is
+## What it does
 
-A policymaker drops in a real NHS policy document. An LLM extracts it into engine parameters
-(each tagged `measured` / `documented` / `literature` / `assumed`). A deterministic, client-side
-discrete-event simulation of the neighbourhood runs it ~1,000 times and reports **P10 / P50 / P90
-of the outcome** — three plausible worlds, not three input corners. Conclusions that survive all
-three are recommendations; conclusions that only appear in the optimistic world are labelled as such.
+A planner uploads the policy document they already wrote. It becomes engine parameters, each one
+tagged with where it came from. A deterministic simulation of the neighbourhood runs it many times
+and reports the **10th, 50th and 90th percentile of the outcome**: three plausible worlds, not
+three worst cases stacked together.
 
-Then Clinician mode takes the recommended policy down to a named patient, rehearses three concrete
-plans through the same engine, pauses for clinician approval, applies the approved actions to the
-real NHS-SIM world, and measures predicted vs observed.
+You do not get a number. You get which of your conclusions survive all three worlds, and the
+condition each one holds under.
 
-Full spec: **[docs/PRD.md](docs/PRD.md)**.
+Then it closes the loop: the recommendation goes down to a named patient, a clinician approves each
+action, the actions are written to the real NHS-SIM world, and predicted is measured against
+observed.
 
-## Architecture
+## Screens
+
+| | |
+|---|---|
+| <img src="docs/assets/screen-landing.webp" alt="Landing"> | <img src="docs/assets/screen-upload.webp" alt="Upload a policy document"> |
+| **Landing.** One screen, two ways in. | **Upload.** The document is the way in, not a parameter form. |
+| <img src="docs/assets/screen-about.webp" alt="How it works"> | *Results. Coming once the grid is wired in.* |
+| **How it works.** Where the model sits, and where it does not. | **Three worlds.** Every sampled run behind the three percentiles. |
+
+## How it works
 
 ```mermaid
-flowchart TD
-    DOC[Policy document + notes] --> EXT[Extraction<br/>LLM → commitments + spans]
-    EXT --> RAG[RAG over ~30 docs<br/>fills gaps with ranges]
-    RAG --> P[Params + source tags]
-    P --> ENG[DES engine<br/>deterministic, pure, tested]
-    ENG --> W[Three-worlds sampler<br/>P10 / P50 / P90]
-    W --> M[Metrics]
-    M --> BRIEF[Plain-English brief]
-    M --> UI[Mode A — Neighbourhood]
-    UI --> CLIN[Mode B — Clinician<br/>patient-level plans, ranked]
-    CLIN --> ADK[ADK agent<br/>pause for approval]
-    ADK --> APPLY[POST actions to real NHS-SIM]
-    APPLY --> CLOCK[Advance clock → re-read]
-    CLOCK --> ACC[Accuracy panel<br/>predicted vs observed]
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#EDF1FC','primaryTextColor':'#0A0A0A','primaryBorderColor':'#1D4ED8','lineColor':'#737373','tertiaryColor':'#FFFFFF'}}}%%
+flowchart LR
+    DOC["Policy doc"] --> EXT["Extract"]
+    COR[("Corpus")] --> PAR
+    EXT --> PAR["Parameters"]
+    PAR --> ENG["Engine"]
+    ENG --> WOR["Three worlds"]
+    WOR --> FIN["Findings"]
+    FIN --> BRF["Brief"]
+
+    classDef llm fill:#FAEEFC,stroke:#C026D3,color:#0A0A0A;
+    classDef det fill:#EDF1FC,stroke:#1D4ED8,color:#0A0A0A;
+    classDef src fill:#FFFFFF,stroke:#737373,color:#404040;
+    class EXT,BRF llm;
+    class PAR,ENG,WOR,FIN det;
+    class DOC,COR src;
 ```
 
-**Rule:** no LLM output feeds another LLM output without a verifiable, deterministic step in between.
+A language model reads the document at one end and writes the summary at the other. It is never
+allowed between them, so no model output is ever fed straight into another.
 
-## Getting started
+**Three worlds are output percentiles, not input corners.** Setting twelve parameters to their
+worst value at once describes a future with almost no chance of occurring, which makes it useless
+to plan against. Parameters are sampled from their published ranges and the percentiles are taken
+from the *results*.
+
+## Closing the loop
+
+The part that stops this being a toy: the recommendation is applied to the real simulator and
+checked.
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'primaryColor':'#EDF1FC','primaryTextColor':'#0A0A0A','primaryBorderColor':'#1D4ED8','lineColor':'#737373','actorBkg':'#EDF1FC','actorBorder':'#1D4ED8','actorTextColor':'#0A0A0A','signalColor':'#404040','signalTextColor':'#0A0A0A','labelBoxBkg':'#FAEEFC','labelBoxBorderColor':'#C026D3','noteBkgColor':'#FAEEFC','noteBorderColor':'#C026D3','noteTextColor':'#0A0A0A','sequenceNumberColor':'#FFFFFF'}}}%%
+sequenceDiagram
+    autonumber
+    participant C as Clinician
+    participant A as Agent
+    participant S as NHS-SIM
+    A->>C: Here is the plan, action by action
+    C-->>A: Approve, edit or reject each one
+    Note over A: Nothing above low-risk<br/>writes without a decision
+    A->>S: POST approved actions
+    S-->>A: Resource ids, or 409
+    Note over A,S: On conflict: re-read, fall back,<br/>and record that it happened
+    A->>S: Advance the clock
+    A->>S: Read the affected views
+    S-->>A: Observed events
+    A->>C: Predicted vs observed
+```
+
+Proven against the live world: **5 of 6 actions applied**, real resource ids returned, **1 fallback
+fired and recorded**, **30 observed events**. The sixth failed on `No service capacity`, which is
+the world pushing back rather than the system pretending it did not.
+
+## Run it
 
 ```bash
 npm install
-npm run dev
+npm run dev          # interface on :4173, policy API on :4174
+npm test             # 238 tests, never touches the network
+npm run typecheck
 ```
 
-(Scripts are placeholders until the toolchain is wired up — see `package.json`.)
+Against the live simulator, with `NHSSIM_TEAM_KEY` in `.env`:
 
-## Who owns what
+```bash
+npm run snapshot     # bulk-read the world to snapshot/<ISO>/
+npm run calibrate    # snapshot -> engine parameters, with a source tag on each
+npm run grid         # precompute the sweep the interface reads
+npm run liveloop     # approve a plan, apply it for real, observe what happened
+```
 
-| Person | Owns | Task list |
-|---|---|---|
-| **Kaavya** | Engine, parameters, verification, three-worlds sampler, sensitivity, hold-out, accuracy diff | [docs/tasks/kaavya.md](docs/tasks/kaavya.md) |
-| **Oriol** | Snapshot client, calibration extractor, ADK agent, real apply loop, integration, demo tech | [docs/tasks/oriol.md](docs/tasks/oriol.md) |
-| **Albert** | Clinical safety model, patient plans, evidence corpus, parameter sourcing, pitch and narration | [docs/tasks/albert.md](docs/tasks/albert.md) |
-| **Elsa** | Interface, README, video capture and edit, submission, stall logistics | [docs/tasks/elsa.md](docs/tasks/elsa.md) |
+## What is real, and what is not
 
-### Shared docs
-
-| Doc | What it settles |
+| | |
 |---|---|
-| [docs/contracts.md](docs/contracts.md) | The three frozen interfaces and the freeze rule |
-| [docs/integration-moments.md](docs/integration-moments.md) | The four scheduled handoffs |
-| [docs/timeline.md](docs/timeline.md) | Build order and the two hard gates |
-| [docs/parameters.md](docs/parameters.md) | Every parameter, its bounds, its source |
-| [docs/calibration-findings.md](docs/calibration-findings.md) | What the live sim actually exposes — measured values and caveats |
-| [docs/demo-runbook.md](docs/demo-runbook.md) | The three minutes, the never-cut list, the stall |
-| [docs/risks.md](docs/risks.md) | What goes wrong and who owns the mitigation |
-| [docs/pitch.md](docs/pitch.md) | Pitch and narration |
-| [docs/integration-status.md](docs/integration-status.md) | **What the integration track built, how to run it, and what each person needs from it** |
-| [docs/nhssim-verified.md](docs/nhssim-verified.md) | What the NHS-SIM server actually accepts, verified by probing it |
+| Measured from the live world | 14 parameters, including the binding constraint of 4 community visits a day |
+| Verified against the live server | All 7 action types, by probing rather than trusting the OpenAPI spec |
+| Real apply and verify | Recorded, with the conflict fallbacks that fired |
+| Evidence corpus | 30 sources, prioritising anything reporting a range |
+| Still synthetic | The interface renders fixtures until the precomputed grid is wired in. Every page says so |
+| Not built | Clinician mode's interface. The loop behind it works; the screens do not exist |
 
-## Working agreement
+## Not modelled, and said out loud
 
-- **Branch per person per feature:** `kaavya/engine-core`, `elsa/three-worlds-view`.
-- **Commit early and often.** Repo history proves it was built today.
-- **Never break a contract silently.** Change `src/contracts/` only in the group chat, then tell the three people downstream.
-- **Nobody waits for real data.** Build against `fixtures/`.
+Disease progression, treatment efficacy, adherence, travel, social care. None of them exist in the
+simulator being modelled, and the interface states this on screen rather than in a footnote.
 
-## Disclaimer
+## Team
 
-Synthetic patients only. Operational outcomes only — no clinical claims. A human approves every
-write to the simulated world. The simulator is ground truth; this is a fast, inspectable model of
-its rules, verified against it.
+<p align="center">
+  <a href="https://www.linkedin.com/in/oriolmorros/">Oriol Morros Vilaseca</a> ·
+  <a href="https://www.linkedin.com/in/albert-chung-a9b549104/">Albert Chung</a> ·
+  <a href="https://www.linkedin.com/in/kaavya-kumar-679876245/">Kaavya Kumar</a> ·
+  <a href="https://www.linkedin.com/in/elsabhlee/">Elsa Lee</a>
+</p>
+
+---
+
+Operational outcomes only. Synthetic patients. A human approves every write.
