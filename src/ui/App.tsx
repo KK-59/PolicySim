@@ -1,6 +1,5 @@
-/**
- * Root. Upload -> run -> Mode A, with Mode B reachable from any affected patient.
- * OWNER: Elsa. TODO: builds against fixtures/ until the engine is real.
- */
+import { PolicyWorkbench } from "./screens/PolicyWorkbench.tsx"
 
-export {};
+export default function App() {
+  return <PolicyWorkbench />
+}
