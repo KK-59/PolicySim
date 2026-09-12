@@ -56,6 +56,36 @@ export interface NetworkSpec {
   horizon: number;
   warmup: number;
   seed: number;
+  /** Record what happened, over a bounded window. Off by default. */
+  trace?: TraceOptions;
+}
+
+/**
+ * One thing that happened, for the world view.
+ *
+ * Off by default. The engine runs ten simulated years in a third of a second precisely because it
+ * throws these away; recording every event over that horizon would be tens of millions of objects
+ * and the run would be about memory rather than queueing. Tracing is for a short window someone
+ * is going to look at.
+ */
+export interface TraceEvent {
+  /** Simulated minutes from t=0. */
+  t: number
+  kind: 'arrive' | 'start' | 'complete' | 'refuse'
+  node: string
+  /** Work item id, so a journey can be reassembled by filtering on it. */
+  item: number
+  /** Patient class, or 'letter' for the document stream. */
+  cls: string
+}
+
+export interface TraceOptions {
+  /** Record events from this simulated minute. */
+  from: number
+  /** Stop recording at this one. */
+  to: number
+  /** Hard ceiling, so a pathological config cannot exhaust memory. */
+  maxEvents?: number
 }
 
 export interface NetworkResult {
@@ -66,6 +96,8 @@ export interface NetworkResult {
   exited: number;
   /** Hops caused by a refusal — the extra work a full node pushes back upstream. */
   feedbackHops: number;
+  /** Present only when tracing was requested. */
+  trace?: TraceEvent[];
 }
 
 export function simulateNetwork(spec: NetworkSpec): NetworkResult {
@@ -84,6 +116,16 @@ export function simulateNetwork(spec: NetworkSpec): NetworkResult {
   let entered = 0;
   let exited = 0;
   let feedbackHops = 0;
+
+  const traceOpts = spec.trace;
+  const trace: TraceEvent[] = [];
+  const maxEvents = traceOpts?.maxEvents ?? 60_000;
+  const record = (t: number, kind: TraceEvent['kind'], node: string, item: WorkItem): void => {
+    if (traceOpts === undefined) return;
+    if (t < traceOpts.from || t > traceOpts.to) return;
+    if (trace.length >= maxEvents) return;
+    trace.push({ t, kind, node, item: item.id, cls: item.tag ?? 'routine' });
+  };
 
   const scheduleArrival = (streamIdx: number, from: number): void => {
     const stream = spec.entries[streamIdx];
@@ -114,6 +156,7 @@ export function simulateNetwork(spec: NetworkSpec): NetworkResult {
 
     if (node.wouldRefuse(now)) {
       node.refuse(now);
+      record(now, 'refuse', toId, item);
       const fallback = spec.onRefused?.(item, toId, rng) ?? null;
       if (fallback === null) {
         live.delete(item.id);
@@ -126,7 +169,9 @@ export function simulateNetwork(spec: NetworkSpec): NetworkResult {
       return;
     }
 
+    record(now, 'arrive', toId, item);
     for (const s of node.arrive(item, now, rng)) {
+      record(now, 'start', toId, s.item);
       events.push({ time: s.at, kind: 'service-complete', itemId: s.item.id, node: toId });
     }
   };
@@ -146,10 +191,29 @@ export function simulateNetwork(spec: NetworkSpec): NetworkResult {
     }
   }
 
+  // Seed the trace with everyone already queued when the window opens. Without it the view shows
+  // an empty waiting room that fills from nothing, which is the opposite of what the model says.
+  let seeded = traceOpts === undefined;
+
   for (;;) {
     const ev = events.pop();
     if (ev === undefined || ev.time > spec.horizon) break;
     const now = ev.time;
+
+    if (!seeded && traceOpts !== undefined && now >= traceOpts.from) {
+      seeded = true;
+      for (const [id, node] of nodes) {
+        for (const held of node.contents()) {
+          trace.push({
+            t: traceOpts.from,
+            kind: 'arrive',
+            node: id,
+            item: held.item.id,
+            cls: held.item.tag ?? 'routine',
+          });
+        }
+      }
+    }
 
     if (ev.kind === 'arrival') {
       const streamIdx = Number(ev.node ?? '0');
@@ -173,7 +237,9 @@ export function simulateNetwork(spec: NetworkSpec): NetworkResult {
       const nodeId = ev.node as string;
       const node = nodes.get(nodeId) as QueueNode;
       const item = live.get(ev.itemId as number) as WorkItem;
+      record(now, 'complete', nodeId, item);
       for (const s of node.complete(item, now, rng)) {
+        record(now, 'start', nodeId, s.item);
         events.push({ time: s.at, kind: 'service-complete', itemId: s.item.id, node: nodeId });
       }
       const next = spec.route?.(item, nodeId, rng) ?? null;
@@ -191,6 +257,7 @@ export function simulateNetwork(spec: NetworkSpec): NetworkResult {
       const nodeId = ev.node as string;
       const node = nodes.get(nodeId) as QueueNode;
       for (const s of node.openSession(now, rng)) {
+        record(now, 'start', nodeId, s.item);
         events.push({ time: s.at, kind: 'service-complete', itemId: s.item.id, node: nodeId });
       }
     }
@@ -201,5 +268,11 @@ export function simulateNetwork(spec: NetworkSpec): NetworkResult {
     node.finalise(spec.horizon);
     stats.set(id, node.stats);
   }
-  return { nodes: stats, entered, exited, feedbackHops };
+  return {
+    nodes: stats,
+    entered,
+    exited,
+    feedbackHops,
+    ...(traceOpts === undefined ? {} : { trace }),
+  };
 }

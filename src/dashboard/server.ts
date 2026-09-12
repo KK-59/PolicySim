@@ -5,6 +5,7 @@ import { extractCommitments } from "../extraction/commitments.ts"
 import { toParams } from "../extraction/to-params.ts"
 import { BASELINE } from "../contracts/baseline.ts"
 import { runWorlds } from "../worlds/index.ts"
+import { run } from "../engine/index.ts"
 import { sweepLever } from "../worlds/sweep.ts"
 import type { Params } from "../contracts/params.ts"
 import { randomUUID } from "node:crypto"
@@ -216,6 +217,54 @@ const server = createServer(async (request, response) => {
       })
 
       return sendJson(response, { metrics, sweep, ranAt: Date.now(), samples, horizonDays })
+    }
+
+    /**
+     * A traced window of the simulation, for the world view.
+     *
+     * Separate from /api/run because the costs are opposite: a run is seconds of sampling and a
+     * small result, this is one run and a large one. Asking for both at once would make the
+     * result screen wait on a payload it does not use.
+     *
+     * The window is short by construction. Fourteen sim-days is about five thousand events, which
+     * is a scrubber someone can actually drag; a year would be a download.
+     */
+    if (url.pathname === "/api/world" && request.method === "POST") {
+      const body = await requestJson(request) as { levers?: unknown; days?: unknown }
+      const overrides = (body.levers ?? {}) as Record<string, number>
+      const days = typeof body.days === "number" ? Math.min(28, Math.max(3, body.days)) : 14
+
+      const policy: Params = structuredClone(BASELINE)
+      const levers = policy.levers as unknown as Record<string, { value: number; bounds: readonly [number, number] }>
+      for (const [path, value] of Object.entries(overrides)) {
+        const key = path.startsWith("levers.") ? path.slice("levers.".length) : path
+        const leaf = levers[key]
+        if (!leaf || typeof value !== "number" || !Number.isFinite(value)) continue
+        leaf.value = Math.min(leaf.bounds[1], Math.max(leaf.bounds[0], value))
+      }
+
+      // Warm up first, then watch. Opening on an empty waiting room would show a neighbourhood
+      // that has just been switched on rather than one that has been running.
+      const DAY = 1440
+      const warmupDays = 60
+      policy.sim.warmupDays = warmupDays
+      policy.sim.horizonDays = warmupDays + days
+
+      const outcome = run(policy, 1, {
+        trace: { from: warmupDays * DAY, to: (warmupDays + days) * DAY },
+      })
+
+      return sendJson(response, {
+        windowStart: warmupDays * DAY,
+        windowEnd: (warmupDays + days) * DAY,
+        days,
+        trace: outcome.trace ?? [],
+        nodes: Object.entries(outcome.perNode).map(([id, state]) => ({
+          id,
+          utilisation: state?.utilisation ?? 0,
+          stable: state?.stable ?? true,
+        })),
+      })
     }
 
     if (url.pathname === "/api/policy/interpret" && request.method === "POST") {

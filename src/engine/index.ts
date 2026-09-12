@@ -26,7 +26,15 @@ const CLASSES: readonly PatientClass[] = ['routine', 'complex', 'urgent'];
  */
 const MAX_REFERRAL_BOUNCES = 2;
 
-export function run(params: Params, seed: number): RunOutcome {
+/**
+ * Options for a run. Only tracing so far, and it is off by default for a reason: recording every
+ * event over a ten-year horizon is tens of millions of objects.
+ */
+export interface RunOptions {
+  trace?: { from: number; to: number; maxEvents?: number };
+}
+
+export function run(params: Params, seed: number, opts: RunOptions = {}): RunOutcome {
   const horizon = params.sim.horizonDays * MINUTES_PER_DAY;
   const warmup = params.sim.warmupDays * MINUTES_PER_DAY;
 
@@ -282,6 +290,7 @@ export function run(params: Params, seed: number): RunOutcome {
     horizon,
     warmup,
     seed,
+    ...(opts.trace ? { trace: opts.trace } : {}),
   });
 
   const gpStats = result.nodes.get('gp-clinic') as NodeStats;
@@ -326,6 +335,7 @@ export function run(params: Params, seed: number): RunOutcome {
       [gpStats, communityStats, adminStats, testStats],
       horizon - warmup,
     ),
+    ...(result.trace ? { trace: result.trace } : {}),
   };
 }
 

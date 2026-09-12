@@ -125,6 +125,20 @@ export interface RunOutcome {
   /** Blood results reviewed and never filed. Same failure, different pathway, separate number. */
   unfiledResults: number;
   verification: Verification;
+  /**
+   * Every arrival, service start, completion and refusal over a bounded window.
+   *
+   * Present only when the run asked for it. This is what the world view is drawn from: the model
+   * already knows all of it and normally discards it, so showing the simulation is a matter of
+   * keeping the events rather than inventing a second representation of the world.
+   */
+  trace?: readonly {
+    t: number;
+    kind: 'arrive' | 'start' | 'complete' | 'refuse';
+    node: string;
+    item: number;
+    cls: string;
+  }[];
 }
 
 // ---------------------------------------------------------------------------

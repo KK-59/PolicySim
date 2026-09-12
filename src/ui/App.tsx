@@ -12,6 +12,7 @@ import { About } from './screens/About'
 import { Upload } from './screens/Upload'
 import { ExtractedParams } from './screens/ExtractedParams'
 import { ThreeWorlds } from './screens/ThreeWorlds'
+import { World } from './screens/World'
 import { href, useRoute, type Route } from './lib/router'
 import { useRun } from './lib/store'
 import { IS_SYNTHETIC } from './data'
@@ -21,6 +22,7 @@ const STEPS: { to: Route; label: string }[] = [
   { to: '/upload', label: 'Policy' },
   { to: '/parameters', label: 'Parameters' },
   { to: '/worlds', label: 'Three worlds' },
+  { to: '/world', label: 'The world' },
 ]
 
 function Bar({ route }: { route: Route }) {
@@ -74,6 +76,8 @@ export function App() {
           <Upload />
         ) : effective === '/parameters' ? (
           <ExtractedParams />
+        ) : effective === '/world' ? (
+          <World />
         ) : (
           <ThreeWorlds />
         )}
