@@ -1895,3 +1895,20 @@ textarea::placeholder {
   box-shadow: var(--lift-lg);
   pointer-events: none;
 }
+
+/* The card in flight. Fixed to the viewport and tracking the cursor, so it is never clipped by
+   the shelf it came from and never at the mercy of the browser's drag implementation. */
+.card--flying {
+  position: fixed;
+  z-index: 70;
+  width: 20rem;
+  pointer-events: none;
+  cursor: grabbing;
+  box-shadow: var(--lift-lg);
+  transform: rotate(-1.5deg);
+  opacity: 0.97;
+}
+/* Its place on the shelf, while it is off being carried. */
+.card[data-lifted='true'] {
+  opacity: 0.4;
+}

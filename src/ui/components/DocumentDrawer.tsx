@@ -1,18 +1,20 @@
 /**
- * The document shelf.
+ * The document shelf, and the card you pull off it.
  *
- * A catalogue, not a control panel. Nothing here runs anything: you drag a document onto the
- * drop zone the way you would drag in your own, and the pipeline treats it identically. A "run"
- * button beside a shipped document would make a real result look like a canned one, which is the
- * opposite of what this project is trying to demonstrate.
+ * The drag is pointer-driven, not HTML5 drag-and-drop. Native DnD kept dying here for reasons
+ * that were all real and all different: an anchor drags as a link and pre-empts its own card, a
+ * full-screen scrim silently eats the drop, and Chrome cancels a drag outright when the source's
+ * ancestor is hidden or made `pointer-events: none` mid-gesture, which is exactly what closing
+ * the shelf did. Following the pointer ourselves has none of those failure modes: the card is a
+ * fixed-position element that tracks the cursor, and releasing anywhere is a drop.
  *
- * Real publications and the ones we wrote are two separate shelves rather than one list with a
- * badge, because a document we authored must never be mistaken for a published one.
+ * Nothing here runs anything on its own. A card is a document; dropping it is the same act as
+ * dropping a file you brought yourself.
  */
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Glyph } from './Glyph'
-import { setRun } from '../lib/store'
+import { loadCatalogued } from '../lib/load-document'
 
 interface DocumentEntry {
   id: string
@@ -27,13 +29,23 @@ interface DocumentEntry {
 
 type Shelf = 'real' | 'generated'
 
+interface Flying {
+  doc: DocumentEntry
+  x: number
+  y: number
+  dx: number
+  dy: number
+}
+
+/** Below this the gesture is a click, not a drag, so the title link still works. */
+const DRAG_THRESHOLD = 6
+
 export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [documents, setDocuments] = useState<DocumentEntry[]>([])
   const [shelf, setShelf] = useState<Shelf>('real')
   const [error, setError] = useState<string | null>(null)
-  // The shelf sits on top of the page, so while a card is in flight it has to get out of the
-  // way: the drop zone is underneath it and an overlay cannot be dropped through.
-  const [dragging, setDragging] = useState(false)
+  const [flying, setFlying] = useState<Flying | null>(null)
+  const armed = useRef<{ doc: DocumentEntry; x: number; y: number } | null>(null)
 
   useEffect(() => {
     if (!open || documents.length) return
@@ -44,10 +56,8 @@ export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () =
   }, [open, documents.length])
 
   useEffect(() => {
-    if (!open) return
+    if (!open || flying) return
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
-    // Close on an outside click from the document rather than from a scrim element. A full-screen
-    // scrim would sit over the drop zone and intercept every drag, which is exactly what it did.
     const onDown = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null
       if (!target?.closest('.drawer') && !target?.closest('.docs-trigger')) onClose()
@@ -58,22 +68,71 @@ export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () =
       window.removeEventListener('keydown', onKey)
       window.removeEventListener('mousedown', onDown)
     }
-  }, [open, onClose])
+  }, [open, flying, onClose])
+
+  const drop = useCallback(
+    (doc: DocumentEntry) => {
+      setFlying(null)
+      onClose()
+      loadCatalogued(doc.id, doc.title).catch((err: unknown) =>
+        setError(err instanceof Error ? err.message : String(err)),
+      )
+    },
+    [onClose],
+  )
+
+  // The gesture. Move past the threshold and the card lifts off the shelf and follows the cursor;
+  // release anywhere at all and it is dropped.
+  useEffect(() => {
+    if (!open) return
+
+    const onMove = (e: PointerEvent) => {
+      const start = armed.current
+      if (!start) return
+      const dx = e.clientX - start.x
+      const dy = e.clientY - start.y
+      if (!flying && Math.hypot(dx, dy) < DRAG_THRESHOLD) return
+      e.preventDefault()
+      setFlying((prev) =>
+        prev
+          ? { ...prev, x: e.clientX, y: e.clientY }
+          : { doc: start.doc, x: e.clientX, y: e.clientY, dx: -110, dy: -28 },
+      )
+    }
+
+    const onUp = () => {
+      const start = armed.current
+      armed.current = null
+      if (flying && start) drop(start.doc)
+      else setFlying(null)
+    }
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      armed.current = null
+      setFlying(null)
+    }
+
+    window.addEventListener('pointermove', onMove, { passive: false })
+    window.addEventListener('pointerup', onUp)
+    window.addEventListener('keydown', onKey)
+    return () => {
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', onUp)
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [open, flying, drop])
 
   const shown = documents.filter((d) => d.kind === shelf)
 
   return (
     <>
-      <div
-        className="drawer__scrim"
-        data-open={open}
-        data-dragging={dragging}
-        aria-hidden="true"
-      />
+      <div className="drawer__scrim" data-open={open} aria-hidden="true" />
+
       <aside
         className="drawer"
         data-open={open}
-        data-dragging={dragging}
+        data-dragging={flying !== null}
         aria-hidden={!open}
         aria-label="Policy documents"
       >
@@ -119,22 +178,10 @@ export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () =
               <li
                 key={doc.id}
                 className={`card card--${doc.kind}`}
-                draggable
-                onDragStart={(e) => {
-                  e.dataTransfer.setData(
-                    'application/x-policysim-document',
-                    `${doc.id}|${doc.title}`,
-                  )
-                  e.dataTransfer.effectAllowed = 'copy'
-                  setDragging(true)
-                  setRun({ draggingDoc: true })
-                  // Out of the way immediately. A drag already in flight survives its source
-                  // being unmounted, so closing here costs nothing and clears the whole screen.
-                  onClose()
-                }}
-                onDragEnd={() => {
-                  setDragging(false)
-                  setRun({ draggingDoc: false })
+                data-lifted={flying?.doc.id === doc.id}
+                onPointerDown={(e) => {
+                  if (e.button !== 0) return
+                  armed.current = { doc, x: e.clientX, y: e.clientY }
                 }}
               >
                 <span className="card__grip" aria-hidden="true">
@@ -146,10 +193,11 @@ export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () =
                     href={`/api/documents/${doc.id}`}
                     target="_blank"
                     rel="noreferrer"
-                    // A browser drags an anchor as a link by default, and that link drag wins
-                    // over the card's. Grabbing the title then produced a URL drop the drop zone
-                    // could not read. The card still drags; the title still opens the document.
                     draggable={false}
+                    onClick={(e) => {
+                      // A drag that happened to start on the title must not also open the file.
+                      if (flying) e.preventDefault()
+                    }}
                   >
                     {doc.title}
                   </a>
@@ -164,11 +212,35 @@ export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () =
           </ul>
 
           <p className="tiny muted mt-5">
-            Drag one onto the drop zone to read and run it. Clicking the title opens the document
-            itself.
+            Drag one out and let go anywhere to read and run it. Clicking the title opens the
+            document itself.
           </p>
         </div>
       </aside>
+
+      {/* The card in flight, and the whole page saying it will catch it. */}
+      {flying && (
+        <>
+          <div className="dropveil" aria-hidden="true">
+            <div className="dropveil__card">
+              <Glyph name="upload" size={26} />
+              <strong className="mt-2">Let go anywhere to read this policy</strong>
+            </div>
+          </div>
+          <div
+            className={`card card--${flying.doc.kind} card--flying`}
+            style={{ left: flying.x + flying.dx, top: flying.y + flying.dy }}
+            aria-hidden="true"
+          >
+            <span className="card__grip">
+              <Glyph name="document" size={18} />
+            </span>
+            <div className="card__body">
+              <span className="card__title">{flying.doc.title}</span>
+            </div>
+          </div>
+        </>
+      )}
     </>
   )
 }
