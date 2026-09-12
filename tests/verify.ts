@@ -12,6 +12,8 @@ import { simulateNode, MINUTES_PER_DAY } from '../src/engine/single-node.ts';
 import { closedForm } from '../src/engine/assertions.ts';
 import { slotsPerDay } from '../src/engine/nodes.ts';
 import { diffEvents } from '../src/analysis/accuracy-diff.ts';
+import { temporalHoldOut, forwardHoldOut, regimeHoldOut } from '../src/analysis/holdout.ts';
+import { readFileSync } from 'node:fs';
 import {
   deriveGpDemand,
   measuredGpCapacityPerDay,
@@ -455,6 +457,51 @@ check(
   'accumulates across applies',
   diffEvents([], [], { previous: acc }).runsIncluded === 2,
   'a second apply carries the first forward',
+);
+
+// ---------------------------------------------------------------------------
+console.log('\n4h. HOLD-OUT — is the model right about the world, not just consistent?');
+console.log('   Every other check asks whether the engine agrees with itself. This one fits on');
+console.log('   data the model may see and predicts data it may not.\n');
+
+const arrivalsFixture = JSON.parse(
+  readFileSync(new URL('../fixtures/attendance-arrivals.json', import.meta.url), 'utf8'),
+) as { arrivalTimes: number[] };
+
+const temporal = temporalHoldOut({
+  arrivalTimes: arrivalsFixture.arrivalTimes,
+  fitFraction: 0.667,
+  label: 'A&E arrivals in the held-out third',
+});
+for (const r of temporal.rows) {
+  console.log(`        predicted ${r.predicted}, observed ${r.observed} `
+    + `(${r.error >= 0 ? '+' : ''}${r.error}, ${r.absPctError.toFixed(1)}%)`);
+  console.log(`        basis: ${r.basis}`);
+}
+check(
+  'arrival rate fitted on two thirds predicts the last third',
+  temporal.medianAbsPctError < 10,
+  temporal.statement + ' Quoting the fitted 142/day back at ourselves would be a tautology; '
+  + 'this is not.',
+);
+
+// The forward hold-out is the one that runs against the live server. Exercised here on the shape
+// so the wiring is proven before the server is needed.
+const forward = forwardHoldOut(
+  [{ label: 'A&E attendances', before: 1312, predictedRatePerDay: 142, after: 1454 }],
+  1440,
+);
+check(
+  'forward hold-out is wired and ready for the live loop',
+  forward.rows.length === 1 && forward.rows[0]!.absPctError < 1,
+  forward.statement + ' Predict, advance the clock, then read back — in that order.',
+);
+
+check(
+  'regime hold-out reports honestly when it has no data',
+  regimeHoldOut([]).total === 0,
+  'incidents are operator-gated (403 to a team key), so the strongest hold-out cannot run today '
+  + '— it reports nothing rather than something',
 );
 
 // ---------------------------------------------------------------------------
