@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto"
 import { NhsSimClient, configFromEnv, type ClientConfig } from "../../integration/nhssim-client.ts"
-import { PolicyDraftSchema, communityInteractions, resourceFingerprint, selectEligiblePatients, type PolicyDraft } from "../../extraction/policy-workbench.ts"
+import { PolicyDraftSchema, assertLiveExperimentLimits, communityInteractions, resourceFingerprint, selectEligiblePatients, type PolicyDraft } from "../../extraction/policy-workbench.ts"
 import type { Resource, SiteName, SiteView, WorldCredentials } from "./simulation-types.ts"
 
 class ExperimentClient extends NhsSimClient {
@@ -165,6 +165,7 @@ function outcome(label: string, control: number | null, policyA: number | null, 
 
 export async function runCommunityExperiment(input: PolicyDraft, report: ProgressReporter = () => {}): Promise<CommunityExperimentResult> {
   const policy = PolicyDraftSchema.parse(input);
+  assertLiveExperimentLimits(policy);
   if (policy.kind !== "community" || policy.intervention.action !== "schedule_visit") {
     throw new Error("Live execution currently supports the community visit policy only. The other policies remain previewable.");
   }

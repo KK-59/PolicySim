@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react"
 import type { CommunityExperimentResult, ExperimentProgress } from "../../clinical/prevention/controlled-experiment.ts"
-import type { ActionPreview, OutcomeDefinition, PolicyDraft } from "../../extraction/policy-workbench.ts"
+import { LIVE_EXPERIMENT_LIMITS, type ActionPreview, type OutcomeDefinition, type PolicyDraft } from "../../extraction/policy-workbench.ts"
 
 interface WorkbenchData {
   policy: PolicyDraft
@@ -215,8 +215,8 @@ export function PolicyWorkbench() {
           <div className="parameter-grid">
             <div className="field"><span className="label">Population rule</span><div className="field-value">{policy.population.label}</div></div>
             <div className="field"><span className="label">Primary intervention</span><div className="field-value">{actionLabels[intervention.action]}</div></div>
-            <div className="field"><label>Maximum per day</label><input type="number" min="1" max="100" value={policy.constraints.maxPerDay} onChange={(event) => void updatePolicy((draft) => { draft.constraints.maxPerDay = Number(event.target.value) })} /></div>
-            <div className="field"><label>Observation window, hours</label><input type="number" min="1" max="1440" value={policy.horizonHours} onChange={(event) => void updatePolicy((draft) => { draft.horizonHours = Number(event.target.value) })} /></div>
+            <div className="field"><label>Maximum per day</label><input type="number" min="1" max={LIVE_EXPERIMENT_LIMITS.maxPerDay} value={policy.constraints.maxPerDay} onChange={(event) => void updatePolicy((draft) => { draft.constraints.maxPerDay = Math.min(LIVE_EXPERIMENT_LIMITS.maxPerDay, Math.max(1, Number(event.target.value))) })} /></div>
+            <div className="field"><label>Observation window, hours</label><input type="number" min="1" max={LIVE_EXPERIMENT_LIMITS.maxHorizonHours} value={policy.horizonHours} onChange={(event) => void updatePolicy((draft) => { draft.horizonHours = Math.min(LIVE_EXPERIMENT_LIMITS.maxHorizonHours, Math.max(1, Number(event.target.value))) })} /></div>
             <div className="field"><span className="label">Allocation order</span><div className="field-value">Oldest due first</div></div>
             <div className="field"><span className="label">Experiment method</span><div className="field-value">Three matched simulator worlds</div></div>
             {policy.kind === "community" && <>

@@ -18,6 +18,7 @@ import type { Resource, SiteView } from "../clinical/prevention/simulation-types
 import { NhsSimClient } from "../integration/nhssim-client.ts"
 import {
   PolicyDraftSchema,
+  assertLiveExperimentLimits,
   interpretPolicy,
   outcomeDefinitions,
   policyExamples,
@@ -415,6 +416,7 @@ const server = createServer(async (request, response) => {
       const body = await requestJson(request) as { policy?: unknown; confirm?: unknown }
       if (body.confirm !== true) throw new Error("Explicit experiment confirmation is required")
       const policy = PolicyDraftSchema.parse(body.policy)
+      assertLiveExperimentLimits(policy)
       const jobId = randomUUID()
       const job: ExperimentJob = {
         status: "queued",
