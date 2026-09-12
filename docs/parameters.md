@@ -28,9 +28,15 @@ for how each was derived.
 | GP usable slots/day | 90 | — | count | [0, ∞) | `measured` | 6 × (240/15 − 1 protected break) |
 | Community slots/day | 4 | — | count | [0, ∞) | `measured` | `capacity-community.data.total` |
 | Staffed spaces | 8 | — | count | | `measured` | `view.staffing` (4 doctors, 4 nurses) |
+| GP admin share | 0.296 | 0.163–0.296 | share | [0, 1] | `literature` | `gp-workload-trends-2024`; derived 2005–2019 endpoints, not a CI |
+| GP consultation time | 8 | 4.4–11 | min | [0, ∞) | `literature` | `gp-consultation-variation-1999`; old UK observational evidence |
+| Routing: GP → test | | | share | [0, 1] | `assumed` | ⚠️ `fuller-stocktake-2022` supports the pathway but gives no probability |
+| Routing: GP → hospital | | | share | [0, 1] | `assumed` | ⚠️ `fuller-stocktake-2022` supports the pathway but gives no probability |
+| Routing: GP → community | | | share | [0, 1] | `assumed` | ⚠️ `fuller-stocktake-2022` supports the pathway but gives no probability |
 | Routing: letter sent → reviewed | 0.37 | | share | [0, 1] | `measured` | 21 of 57 progressed past `sent` |
 | Routing: letter → filed | 0.16 | | share | [0, 1] | `measured` | 9 of 57 filed |
-| Hospital → community routing share | | | share | [0, 1] | `literature` | ⚠️ no baseline flow in the sim |
+| Community referral rejection | | | share | [0, 1] | `assumed` | ⚠️ no observed referral flow and no transferable literature probability |
+| Hospital → community routing share | | | share | [0, 1] | `assumed` | ⚠️ effect evidence exists, but no baseline routing share in the sim |
 
 **⚠️ Service rates are not measurable.** 1,307 of 1,312 attendances are `waiting` — the world has
 had 22 actions total and nothing is being served. Arrival rates are solid; anything requiring
@@ -46,8 +52,8 @@ adjustment. They are **not** the way the user gets in.
 | Community capacity multiplier | 4 slots/day | | `measured` | ✅ best lever — small base, so thresholds are visible |
 | Extra GP sessions | 6 sessions/day, 15 slots each | | `measured` | ✅ +1 session = +15 slots ≈ +17% |
 | Follow-up channel mix | 33% telephone (2 of 6 sessions) | | `measured` | ✅ `session.data.mode` |
-| Monitoring intensity | devices active, 484 observations | | `measured` base, `literature` effect | ⚠️ effect on admission not in the sim |
-| Hospital → community routing share | no baseline flow | | `literature` | ❌ tag and flag it |
+| Monitoring intensity | devices active, 484 observations | RR 0.77–0.95 is effect evidence, not intensity | `measured` base; `rpm-utilisation-2025` supporting | ⚠️ no dose-response in the sim; do not map RR to intensity |
+| Hospital → community routing share | no baseline flow | outcome CIs are supporting only | `assumed` | ❌ `cochrane-hospital-at-home-2024` does not provide a routing share |
 | Discharge timing (weekday vs weekend) | — | | `assumed` | ❌ sim has no weekday logic — amber on screen |
 
 ## Declared boundaries — defaulted to 0, each with a reverse breakeven

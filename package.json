@@ -18,7 +18,9 @@
     "watch": "tsx scripts/watch.mjs",
     "grid": "tsx scripts/build-grid.ts",
     "liveloop": "tsx scripts/live-loop.mjs",
-    "calibrate": "tsx scripts/calibrate.mjs"
+    "calibrate": "tsx scripts/calibrate.mjs",
+    "corpus:build": "tsx scripts/build-corpus.mjs",
+    "corpus:check": "tsx scripts/check-corpus.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",
