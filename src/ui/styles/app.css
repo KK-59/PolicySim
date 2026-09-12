@@ -1706,11 +1706,12 @@ textarea::placeholder {
 }
 .drawer__scrim[data-open='true'] {
   opacity: 1;
-  pointer-events: auto;
 }
-/* A card is in flight. The overlay must stop intercepting the drop. */
-.drawer__scrim[data-dragging='true'] {
-  opacity: 0;
+/* NEVER pointer-events: auto. The scrim covers the whole viewport, so anything it intercepts is
+   the drop zone. Dimming is all it is for; closing on an outside click is handled on the
+   document, where it cannot swallow a drag. A browser drag test caught this: the scrim was
+   silently eating every drop. */
+.drawer__scrim {
   pointer-events: none;
 }
 

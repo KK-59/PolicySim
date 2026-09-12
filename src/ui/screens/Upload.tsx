@@ -121,8 +121,15 @@ export function Upload() {
           className="dropzone mt-5"
           data-over={over}
           data-loaded={Boolean(doc)}
+          // A drop only fires if the default is prevented on BOTH dragenter and dragover; handling
+          // only dragover leaves the drop silently refused.
+          onDragEnter={(e) => {
+            e.preventDefault()
+            setOver(true)
+          }}
           onDragOver={(e) => {
             e.preventDefault()
+            e.dataTransfer.dropEffect = 'copy'
             setOver(true)
           }}
           onDragLeave={() => setOver(false)}

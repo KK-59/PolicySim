@@ -45,8 +45,18 @@ export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () =
   useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+    // Close on an outside click from the document rather than from a scrim element. A full-screen
+    // scrim would sit over the drop zone and intercept every drag, which is exactly what it did.
+    const onDown = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null
+      if (!target?.closest('.drawer') && !target?.closest('.docs-trigger')) onClose()
+    }
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    window.addEventListener('mousedown', onDown)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      window.removeEventListener('mousedown', onDown)
+    }
   }, [open, onClose])
 
   const shown = documents.filter((d) => d.kind === shelf)
@@ -57,7 +67,6 @@ export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () =
         className="drawer__scrim"
         data-open={open}
         data-dragging={dragging}
-        onClick={onClose}
         aria-hidden="true"
       />
       <aside
@@ -129,6 +138,10 @@ export function DocumentDrawer({ open, onClose }: { open: boolean; onClose: () =
                     href={`/api/documents/${doc.id}`}
                     target="_blank"
                     rel="noreferrer"
+                    // A browser drags an anchor as a link by default, and that link drag wins
+                    // over the card's. Grabbing the title then produced a URL drop the drop zone
+                    // could not read. The card still drags; the title still opens the document.
+                    draggable={false}
                   >
                     {doc.title}
                   </a>
