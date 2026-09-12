@@ -273,8 +273,33 @@ const server = createServer(async (request, response) => {
       // up where it left off. The people in the queue at t=0 are the ones NHS-SIM actually has
       // waiting, with the time they have already waited carried over. Everything after is ours,
       // and the page says so.
+      const traceOpts = { from: warmupDays * DAY, to: (warmupDays + days) * DAY }
       const outcome = run(world, selected.seed, {
-        trace: { from: warmupDays * DAY, to: (warmupDays + days) * DAY },
+        trace: traceOpts,
+        seedItems: SEED.items,
+        seedAt: warmupDays * DAY,
+      })
+
+      /**
+       * The same world with the policy switched off.
+       *
+       * Same seed, same parameter draw, same seeded backlog, same arrival stream — only the
+       * levers differ. That makes the difference between the two traces the policy's effect and
+       * nothing else, which is the whole reason for running a seeded simulation rather than
+       * observing a real one. Two runs you cannot hold everything else constant between can only
+       * be compared statistically; these can be compared item by item.
+       */
+      const control = structuredClone(selected.params)
+      control.sim.warmupDays = warmupDays
+      control.sim.horizonDays = warmupDays + days
+      for (const key of Object.keys(overrides)) {
+        const k = key.startsWith("levers.") ? key.slice("levers.".length) : key
+        const baseLeaf = (BASELINE.levers as unknown as Record<string, { value: number }>)[k]
+        const ctlLeaf = (control.levers as unknown as Record<string, { value: number }>)[k]
+        if (baseLeaf && ctlLeaf) ctlLeaf.value = baseLeaf.value
+      }
+      const controlOutcome = run(control, selected.seed, {
+        trace: traceOpts,
         seedItems: SEED.items,
         seedAt: warmupDays * DAY,
       })
@@ -286,6 +311,13 @@ const server = createServer(async (request, response) => {
         windowEnd: (warmupDays + days) * DAY,
         days,
         trace: outcome.trace ?? [],
+        controlTrace: controlOutcome.trace ?? [],
+        /** Which levers actually differ from baseline, for the legend. */
+        changed: Object.keys(overrides).filter((key) => {
+          const k = key.startsWith("levers.") ? key.slice("levers.".length) : key
+          const b = (BASELINE.levers as unknown as Record<string, { value: number }>)[k]
+          return b !== undefined && b.value !== overrides[key]
+        }),
         nodes: Object.entries(outcome.perNode).map(([id, state]) => ({
           id,
           utilisation: state?.utilisation ?? 0,

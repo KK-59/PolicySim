@@ -12,6 +12,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { Glyph } from '../components/Glyph'
+import { NeighbourhoodMap, NODE_SITE, type MapFlow, type SiteId } from '../components/NeighbourhoodMap'
 import { navigate } from '../lib/router'
 import { useRun } from '../lib/store'
 import type { Metrics } from '@/contracts/metrics'
@@ -40,6 +41,9 @@ const PERCENTILE: Record<WorldName, string> = {
 interface WorldData {
   world: WorldName
   seed?: { capturedAt: string; items: number; source: string }
+  /** The same seed with the policy switched off, so the difference is the policy. */
+  controlTrace?: TraceEvent[]
+  changed?: string[]
   windowStart: number
   windowEnd: number
   days: number
@@ -109,6 +113,32 @@ function stateAt(trace: readonly TraceEvent[], t: number): Map<string, Placed[]>
   return byNode
 }
 
+/**
+ * Every time an item moved from one service to another.
+ *
+ * Derived rather than recorded: the log says where each item arrived, and the previous place it
+ * finished tells you where it came from. Precomputed once per trace so scrubbing stays cheap.
+ */
+function movements(trace: readonly TraceEvent[]): { t: number; from: SiteId; to: SiteId; cls: string; item: number }[] {
+  const lastSite = new Map<number, SiteId>()
+  const out: { t: number; from: SiteId; to: SiteId; cls: string; item: number }[] = []
+  for (const e of trace) {
+    const site = NODE_SITE[e.node]
+    if (!site) continue
+    if (e.kind === 'arrive') {
+      const from = lastSite.get(e.item)
+      if (from && from !== site) out.push({ t: e.t, from, to: site, cls: e.cls, item: e.item })
+      lastSite.set(e.item, site)
+    } else if (e.kind === 'complete' || e.kind === 'refuse') {
+      lastSite.set(e.item, site)
+    }
+  }
+  return out
+}
+
+/** How long a dot spends visibly travelling before it lands, in simulated minutes. */
+const TRAVEL = 60
+
 /** Minutes into the window, as a day and a clock time. Day 0 of the model is a Monday. */
 function stamp(minutes: number): string {
   const day = Math.floor(minutes / DAY)
@@ -128,6 +158,7 @@ export function World() {
   const [error, setError] = useState<string | null>(null)
   const [offset, setOffset] = useState(0)
   const [openNode, setOpenNode] = useState<string | null>(null)
+  const [openSite, setOpenSite] = useState<SiteId | null>(null)
   const [openItem, setOpenItem] = useState<number | null>(null)
   const [playing, setPlaying] = useState(false)
   const [world, setWorld] = useState<WorldName>('realistic')
@@ -178,6 +209,60 @@ export function World() {
     () => (data ? stateAt(data.trace, now) : new Map()),
     [data, now],
   )
+
+  // The same minute with the policy off. Every difference below is the policy and nothing else.
+  const controlByNode = useMemo<Map<string, Placed[]>>(
+    () => (data?.controlTrace ? stateAt(data.controlTrace, now) : new Map()),
+    [data, now],
+  )
+
+  const moves = useMemo(() => (data ? movements(data.trace) : []), [data])
+
+  /** Dots in flight at this minute, gliding in so they land exactly when the item arrives. */
+  const flows = useMemo<MapFlow[]>(
+    () => moves
+      .filter((m) => m.t >= now && m.t <= now + TRAVEL)
+      .slice(0, 40)
+      .map((m) => ({
+        from: m.from,
+        to: m.to,
+        progress: 1 - (m.t - now) / TRAVEL,
+        cls: m.cls,
+        key: `${m.item}-${m.t}`,
+      })),
+    [moves, now],
+  )
+
+  const counts = useMemo(() => {
+    const out: Record<string, { waiting: number; service: number }> = {}
+    for (const [node, list] of byNode) {
+      out[node] = {
+        waiting: list.filter((p) => p.state === 'waiting').length,
+        service: list.filter((p) => p.state === 'service').length,
+      }
+    }
+    return out
+  }, [byNode])
+
+  /** Waiting under the policy minus waiting without it, per site. */
+  const siteDelta = useMemo(() => {
+    const sum = (m: Map<string, Placed[]>) => {
+      const out: Partial<Record<SiteId, number>> = {}
+      for (const [node, list] of m) {
+        const site = NODE_SITE[node]
+        if (!site) continue
+        out[site] = (out[site] ?? 0) + list.filter((p) => p.state === 'waiting').length
+      }
+      return out
+    }
+    const a = sum(byNode)
+    const b = sum(controlByNode)
+    const out: Partial<Record<SiteId, number>> = {}
+    for (const k of new Set([...Object.keys(a), ...Object.keys(b)]) as Set<SiteId>) {
+      out[k] = (a[k] ?? 0) - (b[k] ?? 0)
+    }
+    return out
+  }, [byNode, controlByNode])
 
   const journey = useMemo(() => {
     if (!data || openItem === null) return []
@@ -281,6 +366,22 @@ export function World() {
           <span className="muted">{refusalsSoFar} referrals refused so far</span>
         </div>
       </div>
+
+      <NeighbourhoodMap
+        counts={counts}
+        flows={flows}
+        delta={siteDelta}
+        hasControl={Boolean(data.controlTrace && (data.changed?.length ?? 0) > 0)}
+        selected={openSite}
+        onSelect={(site) => {
+          setOpenSite(site)
+          // A pin opens the biggest queue at that site, so clicking the GP lands somewhere.
+          const nodes = Object.entries(NODE_SITE).filter(([, s2]) => s2 === site).map(([n]) => n)
+          const biggest = nodes.sort((a, b) => (counts[b]?.waiting ?? 0) - (counts[a]?.waiting ?? 0))[0]
+          setOpenNode(site === null ? null : biggest ?? null)
+          setOpenItem(null)
+        }}
+      />
 
       <div className="nodes mt-4">
         {NODE_ORDER.map((id) => {

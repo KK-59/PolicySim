@@ -1951,3 +1951,100 @@ textarea::placeholder {
 /* A real patient from the snapshot, distinguished from generated demand. */
 .queueitem__ref { font-variant-numeric: tabular-nums; font-weight: 600; }
 .queueitem[data-state='service'] .queueitem__ref { color: inherit; }
+
+/* ---------------------------------------------------------------------------
+   The neighbourhood map.
+   --------------------------------------------------------------------------- */
+
+.nmap { margin: 0; }
+
+.nmap__frame {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.nmap__img { display: block; height: 100%; object-fit: cover; width: 100%; }
+
+.nmap__flows { inset: 0; position: absolute; height: 100%; width: 100%; }
+
+.nmap__path { stroke: rgba(20, 30, 40, 0.16); stroke-width: 0.25; }
+
+.nmap__dot { fill: #1c4f7c; filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.9)); }
+.nmap__dot--complex { fill: #a33a2a; }
+.nmap__dot--urgent { fill: #b1660f; }
+.nmap__dot--letter { fill: #4a4436; }
+
+.nmap__pin {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.nmap__pin[data-unmodelled='true'] { cursor: default; opacity: 0.5; }
+
+.nmap__dotmark {
+  background: #fff;
+  border: 2px solid #1c2b36;
+  border-radius: 50%;
+  display: block;
+  height: 11px;
+  margin: 0 auto;
+  width: 11px;
+}
+
+/* A site with a queue pulses, so the map reads as running rather than as a still. */
+.nmap__dotmark[data-busy='true'] { animation: nmap-pulse 1.8s ease-in-out infinite; }
+
+@keyframes nmap-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(28, 79, 124, 0.55); }
+  50% { box-shadow: 0 0 0 7px rgba(28, 79, 124, 0); }
+}
+
+.nmap__label {
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 5px;
+  display: block;
+  margin-top: 6px;
+  padding: 0.3rem 0.55rem;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.nmap__pin[data-selected='true'] .nmap__label { box-shadow: 0 0 0 2px var(--blue); }
+
+.nmap__kind {
+  color: #6b7280;
+  display: block;
+  font-size: 0.5625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nmap__name { display: block; font-size: 0.8125rem; font-weight: 650; }
+
+.nmap__count {
+  display: block;
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.nmap__count em { font-style: normal; }
+.nmap__count--off { color: #6b7280; font-style: italic; }
+.nmap__delta { display: block; font-weight: 600; }
+.nmap__delta.is-better { color: #1f7a4d; }
+.nmap__delta.is-worse { color: #a33a2a; }
+
+.nmap__credit { color: var(--ink-3); font-size: 0.6875rem; margin-top: 0.5rem; }
+
+@media (max-width: 720px) {
+  .nmap__label { padding: 0.2rem 0.35rem; }
+  .nmap__name { font-size: 0.6875rem; }
+  .nmap__kind { display: none; }
+}
