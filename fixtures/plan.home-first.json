@@ -1,11 +1,10 @@
 {
-  "_note": "Worked example of a Plan conforming to src/contracts/action.ts. Built by Oriol for the live-loop run; Albert owns the real clinical plans and should replace the rationales with sourced ones. Every action here was verified against the live server.",
+  "_note": "Worked example of a Plan conforming to src/contracts/action.ts. Built by Oriol for the live-loop run. The CLI retargets it onto a patient with an unreviewed letter at run time, so it is patient-agnostic; Albert owns the real clinical plans and should replace the rationales with sourced ones. Every action here was verified against the live server.",
   "_patient": "SIM-000001 Amira Khan. Goals: understand the next step, avoid unnecessary travel, stay at home with a clear contact. Needs: home visit, carer involvement.",
   "_versions": "expectedVersion values are resolved at RUN TIME by re-reading the resource. The values below are the versions observed at authoring time; if the world has moved on, the loop gets a 409 'Stale resource version' and its reread-retry fallback fires. That is correct behaviour, not a bug.",
-
-  "id": "plan-amira-home-first",
+  "id": "plan-home-first",
   "patientId": "SIM-000001",
-  "rationale": "Keep Amira at home: review the discharge letter, bring the carer in, and bring the monitoring to her rather than her to the clinic.",
+  "rationale": "Keep the patient at home: review the discharge letter, bring the carer in, and take the monitoring to them rather than them to the clinic.",
   "actions": [
     {
       "id": "a1",
@@ -74,7 +73,7 @@
       "site": "community",
       "offsetMinutes": 30,
       "tier": "requires-approval",
-      "rationale": "The home visit is the whole point of the plan: it is what lets her avoid the journey.",
+      "rationale": "The home visit is the whole point of the plan: it is what removes the journey.",
       "action": {
         "type": "schedule_visit",
         "patientId": "SIM-000001",
@@ -88,7 +87,7 @@
       "site": "gp",
       "offsetMinutes": 40,
       "tier": "low-risk",
-      "rationale": "Give her the clear point of contact she asked for, in the conversation she already uses.",
+      "rationale": "Give the patient the clear point of contact they asked for, in the conversation they already use.",
       "action": {
         "type": "messaging_action",
         "patientId": "SIM-000001",

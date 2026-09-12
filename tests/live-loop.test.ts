@@ -27,7 +27,9 @@ interface Stub extends SimClient {
 }
 
 /** Clock stub: advances exactly the minutes asked for, and echoes our writes back as events. */
-function makeStub(options: { failClockOnAdvance?: number; worldEvents?: ClockEvent[] } = {}): Stub {
+function makeStub(
+  options: { failClockOnAdvance?: number; failReadClock?: boolean; worldEvents?: ClockEvent[] } = {},
+): Stub {
   let seq = 0
   const pending: ClockEvent[] = []
 
@@ -36,7 +38,10 @@ function makeStub(options: { failClockOnAdvance?: number; worldEvents?: ClockEve
     actionPosts: [],
     now: T0,
     async get<T>(path: string): Promise<T> {
-      if (path === '/api/clock') return { now: stub.now, paused: true, speed: 60 } as T
+      if (path === '/api/clock') {
+        if (options.failReadClock) throw new Error('world unreachable')
+        return { now: stub.now, paused: true, speed: 60 } as T
+      }
       return { resources: [] } as T
     },
     async post<T>(path: string, body: unknown, key?: string): Promise<T> {
@@ -222,20 +227,30 @@ describe('resumability', () => {
     expect(resumed.advances).toEqual([30, 0])
   })
 
-  it('records what it did before it died, and says how far it got', async () => {
-    const client = makeStub({ failClockOnAdvance: 1 })
+  it('survives a failed clock advance and records the observation gap', async () => {
+    // The write already landed in the world. Aborting the run because the follow-up
+    // observation call failed would discard work we cannot undo, and the sim server is
+    // intermittently flaky, so the gap is recorded and the run continues.
+    const client = makeStub({ failClockOnAdvance: 0 }) // the advance that follows a1
     const plan = makePlan([planned('a1', 0, task('one')), planned('a2', 30, task('two'))])
 
-    await expect(runLiveLoop(client, plan, [approve('a1'), approve('a2')], noFile))
-      .rejects.toThrow(LiveLoopAbort)
+    const result = await runLiveLoop(client, plan, [approve('a1'), approve('a2')], noFile)
 
-    try {
-      await runLiveLoop(makeStub({ failClockOnAdvance: 1 }), plan, [approve('a1'), approve('a2')], noFile)
-    } catch (err) {
-      const abort = err as LiveLoopAbort
-      expect(abort.partial.applied.map((a) => a.plannedActionId)).toEqual(['a1', 'a2'])
-      expect(abort.message).toContain('of 2 actions')
-    }
+    expect(result.applied.map((a) => a.plannedActionId)).toEqual(['a1', 'a2'])
+    expect(result.applied.every((a) => a.outcome === 'applied')).toBe(true)
+    // The stub keeps failing, so every advance is lost. Both writes still land, and every
+    // gap is recorded: the accuracy diff must see that observation was incomplete rather
+    // than conclude the world did nothing.
+    expect(result.observationGaps.map((g) => g.afterActionId)).toEqual(['a1', 'a2'])
+    expect(result.observed).toHaveLength(0)
+  })
+
+  it('still aborts, with partial state, when the world itself is unreachable', async () => {
+    const client = makeStub({ failReadClock: true })
+    const plan = makePlan([planned('a1', 0, task('one'))])
+
+    await expect(runLiveLoop(client, plan, [approve('a1')], noFile))
+      .rejects.toThrow(LiveLoopAbort)
   })
 })
 

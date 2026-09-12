@@ -67,11 +67,20 @@ export interface ObservedEvent extends ClockEvent {
   site?: Site
 }
 
+/** A clock advance whose response we never got. The world moved; we did not see it move. */
+export interface ObservationGap {
+  afterActionId: string
+  minutes: number
+  error: string
+}
+
 export interface LiveLoopResult {
   applied: AppliedAction[]
   observed: ObservedEvent[]
   startSimTime: number
   endSimTime: number
+  /** Empty on a clean run. Non-empty means the observed list has holes in it. */
+  observationGaps: ObservationGap[]
 }
 
 // ---------------------------------------------------------------------------
@@ -168,6 +177,9 @@ export async function runLiveLoop(
   const applied: AppliedAction[] = [...(resume?.applied ?? [])]
   const observed: ObservedEvent[] = [...(resume?.observed ?? [])]
   const seenEventIds = new Set(observed.map((e) => e.id))
+  // Clock advances we could not read back. The accuracy diff must know the observation is
+  // incomplete rather than conclude nothing happened.
+  const observationGaps: ObservationGap[] = [...(resume?.observationGaps ?? [])]
 
   // A resumed run assumes the clock is where the previous run left it: at the offset of the
   // last action it applied.
@@ -188,7 +200,7 @@ export async function runLiveLoop(
     versions: new Map<string, number>(),
   }
 
-  const result = (): LiveLoopResult => ({ applied, observed, startSimTime, endSimTime })
+  const result = (): LiveLoopResult => ({ applied, observed, startSimTime, endSimTime, observationGaps })
 
   const absorb = (res: ClockResponse, planned: PlannedAction | undefined): ObservedEvent[] => {
     if (typeof res.now === 'number') {
@@ -199,6 +211,10 @@ export async function runLiveLoop(
     // Newest-first on the wire; the observed list reads oldest-first, like the predicted list.
     for (const event of [...(res.events ?? [])].reverse()) {
       if (seenEventIds.has(event.id)) continue // windows overlap between advances
+      // The first clock read returns the last ~100 events, most of which predate this run.
+      // Attributing those to the action we just sent would overstate what we caused, which is
+      // exactly the number the accuracy diff is measuring. History is not an observation.
+      if (startSimTime > 0 && typeof event.time === 'number' && event.time < startSimTime) continue
       seenEventIds.add(event.id)
       const ours = OUR_EVENT_TYPES.has(event.type)
       if (ours && !teamId) teamId = event.actor // learn the team id from our own echo
@@ -264,8 +280,20 @@ export async function runLiveLoop(
 
       // Posted even when delta is 0: the clock response is the only place our own write is
       // echoed back, so skipping it would lose the observation.
-      const clock = await advanceClock(client, delta)
-      const fresh = absorb(clock, planned)
+      //
+      // A failure here is NOT fatal. The write already landed in the world; losing the whole
+      // run because the observation call was slow would throw away work we cannot undo. The
+      // sim server is intermittently flaky, so we record the gap and keep going.
+      let fresh: ObservedEvent[] = []
+      try {
+        fresh = absorb(await advanceClock(client, delta), planned)
+      } catch (err) {
+        observationGaps.push({
+          afterActionId: planned.id,
+          minutes: delta,
+          error: err instanceof Error ? err.message : String(err),
+        })
+      }
 
       options.onStep?.({ planned, applied: step, advancedMinutes: delta, elapsedMinutes, observed: fresh })
     }
