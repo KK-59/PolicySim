@@ -1848,3 +1848,31 @@ textarea::placeholder {
 
 .journeylist li[data-kind='refuse'] { color: #a33a2a; }
 .journey__t { color: var(--ink-3); font-variant-numeric: tabular-nums; }
+
+/* The world picker. Same vocabulary as the chart legend, so switching world here and reading a
+   band there are visibly the same three things. */
+
+.worldpick { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+.worldpick__btn {
+  align-items: center;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  font-size: 0.8125rem;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  text-transform: capitalize;
+}
+
+.worldpick__btn[data-active='true'] {
+  border-color: currentColor;
+  box-shadow: inset 0 0 0 1px currentColor;
+  font-weight: 600;
+}
+
+.worldpick__btn:disabled { cursor: progress; opacity: 0.6; }
+.worldpick__pct { color: var(--ink-3); font-size: 0.6875rem; font-variant-numeric: tabular-nums; }

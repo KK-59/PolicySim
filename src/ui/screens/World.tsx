@@ -24,7 +24,16 @@ interface TraceEvent {
   cls: string
 }
 
+type WorldName = 'optimistic' | 'realistic' | 'pessimistic'
+const WORLDS: WorldName[] = ['optimistic', 'realistic', 'pessimistic']
+const PERCENTILE: Record<WorldName, string> = {
+  optimistic: 'P10',
+  realistic: 'P50',
+  pessimistic: 'P90',
+}
+
 interface WorldData {
+  world: WorldName
   windowStart: number
   windowEnd: number
   days: number
@@ -99,23 +108,37 @@ export function World() {
   const [openNode, setOpenNode] = useState<string | null>(null)
   const [openItem, setOpenItem] = useState<number | null>(null)
   const [playing, setPlaying] = useState(false)
+  const [world, setWorld] = useState<WorldName>('realistic')
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const levers: Record<string, number> = {}
     for (const c of run.commitments) levers[c.paramPath] = c.value
 
+    let cancelled = false
+    setLoading(true)
+    setError(null)
+    // Keep the scrub position across a world change. Comparing the same Tuesday morning in two
+    // worlds is the point of being able to switch; being thrown back to Monday would defeat it.
     fetch('/api/world', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ levers, days: 14 }),
+      body: JSON.stringify({ levers, days: 14, world }),
     })
       .then(async (r) => {
         const payload = await r.json()
         if (!r.ok) throw new Error(payload?.error ?? `Failed (${r.status})`)
+        if (cancelled) return
         setData(payload)
+        setOpenItem(null)
       })
-      .catch((cause) => setError(cause instanceof Error ? cause.message : String(cause)))
-  }, [])
+      .catch((cause) => {
+        if (!cancelled) setError(cause instanceof Error ? cause.message : String(cause))
+      })
+      .finally(() => { if (!cancelled) setLoading(false) })
+
+    return () => { cancelled = true }
+  }, [world])
 
   // Play advances by half an hour a frame. Fast enough to see a session fill and empty, slow
   // enough that the queue is legible while it does.
@@ -166,9 +189,31 @@ export function World() {
         </button>
       </div>
 
-      <p className="lead mt-2">
-        {data.trace.length.toLocaleString()} events over {data.days} simulated days, replayed from
-        the engine's own log. Scrub to a minute and click a service to see who is waiting in it.
+      {/* Which world. Not a re-roll: each is the sampled parameter draw that produced that
+          percentile, so this is the same pessimistic world the chart was drawn from. */}
+      <div className="worldpick mt-3" role="group" aria-label="Which world to watch">
+        {WORLDS.map((w) => (
+          <button
+            type="button"
+            key={w}
+            className={`worldpick__btn world--${w}`}
+            aria-pressed={world === w}
+            data-active={world === w}
+            disabled={loading}
+            onClick={() => setWorld(w)}
+          >
+            <Glyph name={w} size={13} />
+            <span className="worldpick__name">{w}</span>
+            <span className="worldpick__pct">{PERCENTILE[w]}</span>
+          </button>
+        ))}
+        {loading && <span className="muted small">running…</span>}
+      </div>
+
+      <p className="lead mt-3">
+        {data.trace.length.toLocaleString()} events over {data.days} simulated days in the{' '}
+        <strong>{data.world}</strong> world, replayed from the engine's own log. Scrub to a minute
+        and click a service to see who is waiting in it.
       </p>
 
       <div className="scrubber mt-5">

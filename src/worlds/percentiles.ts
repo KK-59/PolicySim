@@ -35,7 +35,7 @@ export interface PickedWorlds {
  */
 const UNSTABLE_FLOOR = 1e9;
 
-function score(r: RunOutcome): number {
+export function score(r: RunOutcome): number {
   const gp = r.perNode['gp-clinic'];
   const broken = (gp !== undefined && !gp.stable) || !r.verification.passed;
   if (!broken) return r.waits.routine.p50;

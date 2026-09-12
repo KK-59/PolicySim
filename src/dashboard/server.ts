@@ -7,6 +7,7 @@ import { BASELINE } from "../contracts/baseline.ts"
 import { runWorlds } from "../worlds/index.ts"
 import { run } from "../engine/index.ts"
 import { sweepLever } from "../worlds/sweep.ts"
+import { selectWorlds } from "../worlds/select.ts"
 import type { Params } from "../contracts/params.ts"
 import { randomUUID } from "node:crypto"
 import { runCommunityExperiment, type CommunityExperimentResult, type ExperimentProgress } from "../clinical/prevention/controlled-experiment.ts"
@@ -230,9 +231,16 @@ const server = createServer(async (request, response) => {
      * is a scrubber someone can actually drag; a year would be a download.
      */
     if (url.pathname === "/api/world" && request.method === "POST") {
-      const body = await requestJson(request) as { levers?: unknown; days?: unknown }
+      const body = await requestJson(request) as {
+        levers?: unknown
+        days?: unknown
+        world?: unknown
+      }
       const overrides = (body.levers ?? {}) as Record<string, number>
       const days = typeof body.days === "number" ? Math.min(28, Math.max(3, body.days)) : 14
+      const wanted = body.world === "optimistic" || body.world === "pessimistic"
+        ? body.world
+        : "realistic" as const
 
       const policy: Params = structuredClone(BASELINE)
       const levers = policy.levers as unknown as Record<string, { value: number; bounds: readonly [number, number] }>
@@ -243,18 +251,27 @@ const server = createServer(async (request, response) => {
         leaf.value = Math.min(leaf.bounds[1], Math.max(leaf.bounds[0], value))
       }
 
+      // Which of the three worlds to watch.
+      //
+      // Not a re-roll: the same draws, seed and scoring as the sweep, so the pessimistic world
+      // scrubbed here is the pessimistic world the chart was drawn from. Watching a differently
+      // sampled pessimistic run would be a second answer to the same question.
+      const selected = selectWorlds(policy, { samples: 16, horizonDays: 450, seed: 1 })[wanted]
+
       // Warm up first, then watch. Opening on an empty waiting room would show a neighbourhood
       // that has just been switched on rather than one that has been running.
       const DAY = 1440
       const warmupDays = 60
-      policy.sim.warmupDays = warmupDays
-      policy.sim.horizonDays = warmupDays + days
+      const world = structuredClone(selected.params)
+      world.sim.warmupDays = warmupDays
+      world.sim.horizonDays = warmupDays + days
 
-      const outcome = run(policy, 1, {
+      const outcome = run(world, selected.seed, {
         trace: { from: warmupDays * DAY, to: (warmupDays + days) * DAY },
       })
 
       return sendJson(response, {
+        world: wanted,
         windowStart: warmupDays * DAY,
         windowEnd: (warmupDays + days) * DAY,
         days,
