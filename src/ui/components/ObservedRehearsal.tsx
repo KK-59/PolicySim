@@ -3,7 +3,7 @@ import type {
   CommunityExperimentResult,
   ExperimentProgress,
 } from '../../clinical/prevention/controlled-experiment'
-import type { PolicyDraft } from '../../extraction/policy-workbench'
+import { LIVE_EXPERIMENT_LIMITS, type PolicyDraft } from '../../extraction/policy-workbench'
 import { Glyph } from './Glyph'
 
 interface WorkbenchData {
@@ -74,6 +74,12 @@ export function ObservedRehearsal({ policyName }: { policyName: string }) {
       || policy?.intervention.orderTest,
   )
   const canRun = Boolean(eligibility?.available && eligibility.count && hasIntegratedAction)
+  const runPatientCount = policy && eligibility?.count
+    ? Math.min(
+        eligibility.count,
+        policy.constraints.maxPerDay * Math.ceil(policy.horizonHours / 24),
+      )
+    : 0
 
   const actionSummary = useMemo(() => {
     if (!policy) return ''
@@ -198,10 +204,13 @@ export function ObservedRehearsal({ policyName }: { policyName: string }) {
             className="num"
             type="number"
             min={1}
-            max={100}
+            max={LIVE_EXPERIMENT_LIMITS.maxPerDay}
             value={policy.constraints.maxPerDay}
             onChange={(event) => update((draft) => {
-              draft.constraints.maxPerDay = Math.min(100, Math.max(1, Number(event.target.value)))
+              draft.constraints.maxPerDay = Math.min(
+                LIVE_EXPERIMENT_LIMITS.maxPerDay,
+                Math.max(1, Number(event.target.value)),
+              )
             })}
           />
         </label>
@@ -212,10 +221,13 @@ export function ObservedRehearsal({ policyName }: { policyName: string }) {
               className="num"
               type="number"
               min={1}
-              max={60}
+              max={LIVE_EXPERIMENT_LIMITS.maxHorizonHours / 24}
               value={Math.ceil(policy.horizonHours / 24)}
               onChange={(event) => update((draft) => {
-                draft.horizonHours = Math.min(60, Math.max(1, Number(event.target.value))) * 24
+                draft.horizonHours = Math.min(
+                  LIVE_EXPERIMENT_LIMITS.maxHorizonHours / 24,
+                  Math.max(1, Number(event.target.value)),
+                ) * 24
               })}
             />
             days
@@ -280,7 +292,8 @@ export function ObservedRehearsal({ policyName }: { policyName: string }) {
               onChange={(event) => setApproved(event.target.checked)}
             />
             <span>
-              Approve both policy batches in fresh synthetic worlds. Control receives no actions.
+              Approve both policy batches for {runPatientCount} patients in fresh synthetic worlds.
+              Control receives no actions.
             </span>
           </label>
           <button className="btn btn--primary" type="button" disabled={!approved || !canRun || running} onClick={() => void runExperiment()}>

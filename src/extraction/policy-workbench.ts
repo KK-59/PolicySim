@@ -52,11 +52,29 @@ export interface OutcomeDefinition {
   source: string;
 }
 
+/** Keep live simulator rehearsals small enough to finish reliably during an interactive demo. */
+export const LIVE_EXPERIMENT_LIMITS = {
+  maxPerDay: 3,
+  maxHorizonHours: 72,
+} as const;
+
+export function assertLiveExperimentLimits(policy: PolicyDraft): void {
+  if (
+    policy.constraints.maxPerDay > LIVE_EXPERIMENT_LIMITS.maxPerDay
+    || policy.horizonHours > LIVE_EXPERIMENT_LIMITS.maxHorizonHours
+  ) {
+    throw new Error(
+      `Live comparisons are limited to ${LIVE_EXPERIMENT_LIMITS.maxPerDay} patients per day `
+      + `and ${LIVE_EXPERIMENT_LIMITS.maxHorizonHours / 24} days so they finish reliably.`,
+    );
+  }
+}
+
 export const policyExamples = [
   {
     id: "community",
     label: "Community capacity",
-    text: "Over the next 30 days, schedule community visits, create GP follow-up tasks and send simulated SMS reminders for patients with open community-care tasks due now or during that period, up to 8 patients per day.",
+    text: "Over the next 2 days, schedule community visits, create GP follow-up tasks and send simulated SMS reminders for patients with open community-care tasks due now or during that period, up to 2 patients per day.",
   },
   {
     id: "appointments",

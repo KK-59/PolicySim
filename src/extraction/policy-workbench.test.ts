@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest"
 import {
   communityInteractions,
+  assertLiveExperimentLimits,
   interpretPolicy,
   outcomeDefinitions,
   policyExamples,
@@ -15,8 +16,8 @@ describe("policy workbench", () => {
     const policy = interpretPolicy(policyExamples[0].text)
     expect(policy.kind).toBe("community")
     expect(policy.population.rule).toBe("due_within_horizon")
-    expect(policy.constraints.maxPerDay).toBe(8)
-    expect(policy.horizonHours).toBe(720)
+    expect(policy.constraints.maxPerDay).toBe(2)
+    expect(policy.horizonHours).toBe(48)
     expect(policy.intervention.createGpTask).toBe(true)
     expect(policy.intervention.sendMessage).toBe(true)
     expect(communityInteractions(policy, "SIM-1").map((item) => item.action.type)).toEqual([
@@ -38,6 +39,14 @@ describe("policy workbench", () => {
     expect(communityInteractions(policy, "SIM-1").map((item) => item.action.type)).toEqual([
       "schedule_visit", "create_task", "messaging_action", "order_test",
     ])
+  })
+
+  it("keeps live comparisons within the interactive demo budget", () => {
+    const policy = interpretPolicy(policyExamples[0].text)
+    expect(() => assertLiveExperimentLimits(policy)).not.toThrow()
+
+    policy.horizonHours = 96
+    expect(() => assertLiveExperimentLimits(policy)).toThrow(/limited to 3 patients per day and 3 days/)
   })
 
   it("parses pharmacy and diagnostics constraints", () => {
