@@ -67,34 +67,50 @@ const byPath = new Map(leaves.map((entry) => [entry.path, entry.leaf]))
 
 /** Every leaf Kaavya's `Params` declares. Written out so a dropped section cannot pass quietly. */
 const EXPECTED_PATHS = [
-  'arrivals.perDay.routine',
+  'arrivals.classMix.complex',
+  'arrivals.classMix.routine',
+  'arrivals.classMix.urgent',
+  'arrivals.dischargeLettersPerDay',
+  'arrivals.edPerDay',
   'arrivals.perDay.complex',
+  'arrivals.perDay.routine',
   'arrivals.perDay.urgent',
-  'capacities.gpSessionsPerDay',
-  'capacities.gpSlotsPerSession',
-  'capacities.communitySlotsPerDay',
-  'capacities.staffedSpaces',
-  'capacities.gpAdminShare',
-  'serviceTimes.gpConsultation',
-  'serviceTimes.communityVisit',
-  'serviceTimes.documentReviewHop',
-  'serviceTimes.bloodResultTurnaround',
-  'serviceTimes.pharmacyApproval',
-  'routing.gpToTest',
-  'routing.gpToHospital',
-  'routing.gpToCommunity',
-  'routing.letterSentToReviewed',
-  'routing.letterReviewedToFiled',
-  'routing.communityRejection',
-  'levers.communityCapacityMultiplier',
-  'levers.extraGpSessions',
-  'levers.telephoneFollowUpShare',
-  'levers.monitoringIntensity',
-  'levers.hospitalToCommunityShare',
-  'levers.weekdayDischargeShare',
+  'arrivals.targetUtilisation',
+  'boundaries.gaming',
+  'effects.monitoringEscalationReduction',
+  'effects.telephoneBaselineShare',
+  'effects.telephoneServiceMultiplier',
   'boundaries.inducedDemand',
   'boundaries.substitution',
-  'boundaries.gaming',
+  'capacities.communitySlotsPerDay',
+  'capacities.gpAdminShare',
+  'capacities.gpSessionsPerDay',
+  'capacities.gpSlotsPerSession',
+  'capacities.staffedSpaces',
+  'environment.shortageCommunityMultiplier',
+  'environment.winterDemandMultiplier',
+  'environment.winterUrgentMultiplier',
+  'levers.communityCapacityMultiplier',
+  'levers.extraGpSessions',
+  'levers.hospitalToCommunityShare',
+  'levers.monitoringIntensity',
+  'levers.telephoneFollowUpShare',
+  'levers.weekdayDischargeShare',
+  'routing.communityRejection',
+  'routing.gpToCommunity',
+  'routing.gpToHospital',
+  'routing.gpToTest',
+  'routing.letterReviewedToFiled',
+  'routing.letterSentToReviewed',
+  'serviceTimes.bloodResultTurnaround',
+  'serviceTimes.classMultiplier.complex',
+  'serviceTimes.classMultiplier.routine',
+  'serviceTimes.classMultiplier.urgent',
+  'serviceTimes.communityVisit',
+  'serviceTimes.documentReviewHop',
+  'serviceTimes.documentReviewWork',
+  'serviceTimes.gpConsultation',
+  'serviceTimes.pharmacyApproval',
 ]
 
 function leafAt(path: string): Sourced {
@@ -111,6 +127,7 @@ describe('toParams — structural completeness', () => {
       'arrivals',
       'boundaries',
       'capacities',
+      'effects',
       'environment',
       'levers',
       'meta',
@@ -129,7 +146,13 @@ describe('toParams — structural completeness', () => {
   })
 
   it('sets the environment axis explicitly rather than folding it into a world', () => {
-    expect(params.environment).toEqual({ winterPressure: false, staffShortage: false })
+    // The toggles are off by default and the magnitudes travel with them, so a world can be run
+    // calm or stressed without "pessimistic" quietly absorbing the incident.
+    expect(params.environment.winterPressure).toBe(false)
+    expect(params.environment.staffShortage).toBe(false)
+    expect(params.environment.winterDemandMultiplier.value).toBeGreaterThan(1)
+    expect(params.environment.winterUrgentMultiplier.value).toBeGreaterThan(1)
+    expect(params.environment.shortageCommunityMultiplier.value).toBeLessThan(1)
   })
 
   it('declares whether the run starts from a served steady state', () => {

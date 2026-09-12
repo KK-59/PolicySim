@@ -13,7 +13,7 @@
  *                   the user and a bad number.
  */
 
-import type { ByClass, PatientClass, ParamPath } from './params';
+import type { ByClass, PatientClass, ParamPath } from './params.ts';
 
 // ---------------------------------------------------------------------------
 // TWO DIFFERENT PERCENTILE AXES. Do not conflate them.
@@ -62,20 +62,37 @@ export type MetricDirection = 'lower-is-better' | 'higher-is-better';
 // Outcomes — one run
 // ---------------------------------------------------------------------------
 
-/** The nodes the engine models. Anything not here is declared unmodelled on screen. */
+/**
+ * The nodes the engine models. Anything not here is declared unmodelled on screen.
+ *
+ * `result-review` and `filing` are deliberately absent as separate nodes: both are GP admin work,
+ * and giving each its own servers would split the one resource they actually share. Results and
+ * discharge letters queue together on `gp-admin`, which is the clinic/admin coupling the model is
+ * supposed to have — a busy letter inbox should delay somebody's blood result, because it does.
+ *
+ * `hospital-outpatient` and `pharmacy` are cut (PRD §7): least grounded, least demo-relevant.
+ */
 export type NodeId =
   | 'gp-clinic'
   | 'gp-admin'
   | 'test'
-  | 'result-review'
-  | 'filing'
-  | 'hospital-outpatient'
-  | 'community-visit'
-  | 'pharmacy';
+  | 'community-visit';
 
 export interface NodeState {
   /** Fraction of capacity in use. Waiting time is convex in this — 92→97% is catastrophic. */
   utilisation: number;
+  /**
+   * False when the queue is still growing at the end of the run — the node has no stable
+   * operating point at this configuration.
+   *
+   * When this is false EVERY WAIT FIGURE FROM THIS NODE IS MEANINGLESS: the queue grows for as
+   * long as you run it, so the "median wait" is really a statement about the horizon. The UI must
+   * show "no stable operating point" rather than a number. That is not a limitation to apologise
+   * for — a policy that leaves a service with no steady state is the strongest finding the model
+   * can produce, and reporting it as "waits rise to 4,604 hours" would understate it while
+   * looking like false precision.
+   */
+  stable: boolean;
   /** Mean number of work items in the node. Little's Law checks this against λW. */
   queueLength: number;
   /** Items completed per sim-day. */
@@ -90,13 +107,23 @@ export interface RunOutcome {
   waits: ByClass<Tail>;
   /** Minutes from request to pathway completion, per class. */
   timeInSystem: ByClass<Tail>;
-  perNode: Readonly<Record<NodeId, NodeState>>;
+  /**
+   * Partial: the engine grows nodes one at a time, and a zero-filled node is indistinguishable
+   * from an implemented-but-idle one. A missing key means "not modelled yet".
+   */
+  perNode: Partial<Readonly<Record<NodeId, NodeState>>>;
   /** Items completed over the whole run, per class. */
   completed: ByClass<number>;
   /** Referrals refused at capacity and fed back to the GP. */
   rejections: number;
-  /** Letters never filed — the manual-chasing attrition, measured at 84% in the baseline. */
+  /**
+   * Discharge letters never filed — the manual-chasing attrition, measured at 84% in the baseline.
+   * Letters ONLY: this figure is calibrated against a real count (9 of 57 filed), so folding
+   * anything else into it breaks the one number in the model that can be checked against the sim.
+   */
   unfiledLetters: number;
+  /** Blood results reviewed and never filed. Same failure, different pathway, separate number. */
+  unfiledResults: number;
   verification: Verification;
 }
 
@@ -137,6 +164,8 @@ export interface Metrics {
   tornado: readonly TornadoRow[];
   /** "Holds while community capacity ≥ X." */
   thresholds: readonly Threshold[];
+  /** "Induced demand would have to exceed 34% before this stops helping." */
+  breakevens: readonly Breakeven[];
   /** Parameters that need flagging on screen: assumed, uncited, or range-less. */
   flags: readonly MetricFlag[];
   run: RunMeta;
@@ -146,10 +175,11 @@ export interface Metrics {
 export interface WorldBands {
   waits: ByClass<ThreeWorlds<Tail>>;
   timeInSystem: ByClass<ThreeWorlds<Tail>>;
-  perNode: Readonly<Record<NodeId, ThreeWorlds<NodeState>>>;
+  perNode: Partial<Readonly<Record<NodeId, ThreeWorlds<NodeState>>>>;
   completed: ByClass<ThreeWorlds<number>>;
   rejections: ThreeWorlds<number>;
   unfiledLetters: ThreeWorlds<number>;
+  unfiledResults: ThreeWorlds<number>;
 }
 
 export interface RunMeta {
@@ -251,6 +281,20 @@ export interface MetricFlag {
 //
 // Not a run output: produced by comparing a prediction against NHS-SIM after the clock advances.
 // It lives here because Elsa renders it and needs the shape frozen at the same time.
+
+/**
+ * One event, either predicted by the engine or observed in NHS-SIM after a real apply.
+ * Oriol produces the observed list from re-reads; the engine produces the predicted list.
+ */
+export interface EventRecord {
+  /** e.g. 'visit.completed', 'document.filed', 'prescription.dispensed'. */
+  eventType: string;
+  patientId?: string;
+  /** Absolute sim time in ms, matching NHS-SIM's clock. */
+  at: number;
+  /** Anything useful for explaining a divergence — the resource id, the fallback taken. */
+  detail?: string;
+}
 
 export interface AccuracyReport {
   matchedPct: number;

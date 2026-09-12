@@ -1084,6 +1084,90 @@ textarea::placeholder {
   max-width: 40rem;
 }
 
+/*
+ * Entry screens centre; working screens sit against the frame.
+ *
+ * The landing and the upload are single-task focal screens, so a centred column reads as placed.
+ * Parameters, results and About are working surfaces where the heading lines up with the masthead
+ * and the eye returns to the same left edge on every scroll.
+ */
+.focal {
+  max-width: 40rem;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.focal .dropzone,
+.focal textarea {
+  text-align: left;
+}
+
+/* What the button is about to do. Same colour language as the pipeline on /about. */
+.next-steps {
+  display: flex;
+  justify-content: center;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+
+.next-step {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-3);
+  border-radius: var(--r-pill);
+  background: var(--paper-panel);
+  font-size: var(--t-tiny);
+  color: var(--ink-2);
+}
+
+.next-step__glyph {
+  display: inline-flex;
+  color: var(--ink-3);
+}
+
+.next-step--model {
+  background: var(--wash-fuchsia);
+  color: var(--fuchsia);
+}
+
+.next-step--model .next-step__glyph {
+  color: var(--fuchsia);
+}
+
+.next-step--engine {
+  background: var(--wash-blue);
+  color: var(--blue);
+}
+
+.next-step--engine .next-step__glyph {
+  color: var(--blue);
+}
+
+/* Accepted formats, as chips rather than a sentence. */
+.formats {
+  display: flex;
+  justify-content: center;
+  gap: var(--s-1);
+  flex-wrap: wrap;
+}
+
+.format {
+  font-family: var(--font-mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.04em;
+  padding: 0.125rem 0.4375rem;
+  border-radius: var(--r-sm);
+  background: var(--paper-panel);
+  color: var(--ink-3);
+}
+
+.dropzone[data-loaded='true'] .format,
+.dropzone[data-over='true'] .format {
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--blue);
+}
+
 .measure p {
   max-width: 68ch;
 }

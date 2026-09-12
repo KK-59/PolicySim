@@ -28,6 +28,7 @@ import type {
   Arrivals,
   Boundaries,
   Capacities,
+  Effects,
   Environment,
   Levers,
   Params,
@@ -211,6 +212,42 @@ function route(calibration: CalibratedParams, key: string): CalibratedSourced | 
   return calibration.routing[key]
 }
 
+/**
+ * Effect sizes. None of these are in the snapshot: NHS-SIM books every appointment in the same
+ * 15-minute slot, and nothing in it responds to a patient being monitored. Assumed, ranged, and
+ * grouped so the sourcing job is one list rather than a hunt.
+ */
+function effects(): Effects {
+  return {
+    telephoneServiceMultiplier: sourced(0.7, [0.2, 1.5], 'assumed', undefined, {
+      range: [0.55, 0.9],
+      note: 'Telephone appointment length against face-to-face. The sim books both in the same '
+        + '15-minute slot, so it cannot tell us the difference.',
+    }),
+    telephoneBaselineShare: sourced(1 / 3, [0, 1], 'measured',
+      citeHers('Capacities', "2 of 6 sessions have data.mode = 'telephone'"), {
+      note: 'The mix already inside the measured slot length. Not a lever — the engine '
+        + 'normalises against it so the channel lever cannot double-count.',
+    }),
+    monitoringEscalationReduction: sourced(0.1, [0, 0.5], 'assumed', undefined, {
+      range: [0, 0.25],
+      note: 'Urgent demand converted to routine per unit of monitoring intensity. The range '
+        + 'starts at zero on purpose: "monitoring changes nothing" must stay inside the '
+        + 'pessimistic world.',
+    }),
+  }
+}
+
+/**
+ * A sampling band around a measured share: +/-20% relative, kept inside [0, 1].
+ *
+ * Relative rather than absolute, so a share of 0.015 gets a band of 0.012-0.018 rather than one
+ * wide enough to swamp it.
+ */
+function shareBand(share: number): readonly [number, number] {
+  return [round(Math.max(0, share * 0.8), 4), round(Math.min(1, share * 1.2), 4)]
+}
+
 // ---------------------------------------------------------------------------
 // The mapping
 // ---------------------------------------------------------------------------
@@ -222,10 +259,26 @@ export function toParams(calibration: CalibratedParams, opts: ToParamsOptions = 
     serviceTimes: serviceTimes(calibration),
     routing: routing(calibration),
     levers: levers(calibration),
+    effects: effects(),
     boundaries: boundaries(),
     environment: {
       winterPressure: opts.environment?.winterPressure ?? false,
       staffShortage: opts.environment?.staffShortage ?? false,
+      // Magnitudes are not in the snapshot: NHS-SIM's incident scenarios are operator-gated
+      // (/api/control/incidents returns 403 to a team key), so we cannot fire one and measure it.
+      // Carried from the baseline as literature until Albert sources them.
+      winterDemandMultiplier: sourced(1.15, [1, 2], 'assumed', undefined, {
+        range: [1.08, 1.25],
+        note: 'Winter demand uplift. Not measurable — incidents are operator-gated.',
+      }),
+      winterUrgentMultiplier: sourced(1.6, [1, 5], 'assumed', undefined, {
+        range: [1.3, 2.2],
+        note: 'Urgent-share uplift under winter pressure. Not measurable here.',
+      }),
+      shortageCommunityMultiplier: sourced(0.6, [0, 1], 'assumed', undefined, {
+        range: [0.45, 0.8],
+        note: 'Home-visit slots lost to a staffing shortage. Not measurable here.',
+      }),
     },
     sim: sim(opts),
     meta: meta(calibration, opts),
@@ -296,6 +349,61 @@ function arrivals(calibration: CalibratedParams, opts: ToParamsOptions): Arrival
         },
       ),
     },
+
+    /**
+     * The measured total is ~142/sim-day against 90 GP slots/day, i.e. rho ~1.58 — a practice
+     * with no steady state, which is exactly what the snapshot shows (1,307 of 1,312 attendances
+     * still waiting). That is a true description of the seeded world and an unusable calibration
+     * for a policy comparison, because every lever then reads as "still broken".
+     *
+     * So the engine's own baseline derives demand from rho instead. This field records the
+     * utilisation the MEASURED demand implies, so the two can be compared rather than one quietly
+     * overwriting the other.
+     */
+    targetUtilisation: (() => {
+      const implied = Math.min(1.2, round(total / 90, 3))
+      return sourced(implied, [0, 1.2], 'measured', citeOurs(routineLeaf), {
+        range: [round(Math.max(0, implied * 0.95), 3), round(Math.min(1.2, implied * 1.05), 3)],
+        note:
+          `Implied by the measured total of ${total}/sim-day against 90 slots/day. Above 1.0 this `
+          + 'describes a practice with no steady state, which is exactly what the snapshot shows '
+          + '(1,307 of 1,312 attendances still waiting). True, and unusable for ranking policies '
+          + '— so the engine baseline derives demand from a literature rho instead. Both numbers '
+          + 'are kept so the gap is visible rather than resolved silently.',
+      })
+    })(),
+
+    /**
+     * Shares of the measured total. The ranges bracket what we counted rather than what the
+     * baseline guessed — this mix (~68/1.5/31) is a long way from the assumed 80/15/5, and a
+     * hardcoded band would have excluded our own measurement.
+     */
+    classMix: {
+      routine: sourced(round(routineValue / total, 4), [0, 1], 'measured', citeOurs(routineLeaf), {
+        range: shareBand(routineValue / total),
+      }),
+      complex: sourced(round(complexValue / total, 4), [0, 1], 'measured',
+        opts.hospital ? citeOurs(opts.hospital.arrivals.complex) : HOSPITAL_ARRIVALS.complex.citation,
+        {
+          range: shareBand(complexValue / total),
+          note: 'Measured under our complex/urgent boundary, not the sim\'s.',
+        }),
+      urgent: sourced(round(urgentValue / total, 4), [0, 1], 'measured',
+        opts.hospital ? citeOurs(opts.hospital.arrivals.urgent) : HOSPITAL_ARRIVALS.urgent.citation,
+        { range: shareBand(urgentValue / total) }),
+    },
+
+    edPerDay: sourced(HER_ARRIVAL_TOTAL, [0, 10000], 'measured',
+      citeHers('Arrivals', 'A&E attendances, 9 sim-days'), {
+      range: [HER_ARRIVAL_BAND[0], HER_ARRIVAL_BAND[1]],
+      note: 'Parked for the ED node. Must not be fed to the GP node.',
+    }),
+
+    dischargeLettersPerDay: sourced(6.3, [0, 500], 'measured',
+      citeHers('Arrivals', '57 discharge summaries over ~9 sim-days'), {
+      range: [5, 8],
+      note: 'A hospital-driven stream, independent of GP demand.',
+    }),
   }
 }
 
@@ -445,6 +553,34 @@ function serviceTimes(calibration: CalibratedParams): ServiceTimes {
           + 'optimistic end of the range: that spread is the genuine uncertainty here.',
       },
     ),
+    /**
+     * Clinician minutes per letter — NOT the 60-minute figure above, which is elapsed turnaround
+     * between status changes. NHS-SIM records when a status changed, never how long the work took.
+     */
+    documentReviewWork: sourced(4, [1, 60], 'assumed', undefined, {
+      range: [2, 8],
+      note: 'Work content, not turnaround. Not measurable in NHS-SIM.',
+    }),
+
+    /**
+     * Appointment length per class. The sim has one slot length, so the multipliers are ours.
+     */
+    classMultiplier: {
+      routine: sourced(1, [1, 1], 'measured', citeHers('ServiceTimes', 'the 15-minute slot'), {
+        note: 'No range: the 15-minute slot IS the unit, so a routine appointment is 1.0 by '
+          + 'definition. A spread here would be uncertainty about our own denominator.',
+      }),
+      complex: sourced(2, [1, 6], 'assumed', undefined, {
+        range: [1.5, 3],
+        note: 'A double appointment. Drives the tail finding, so its range feeds the three worlds.',
+      }),
+      urgent: sourced(1, [1, 6], 'assumed', undefined, {
+        range: [1, 1.5],
+        note: 'Assumed: NHS-SIM books every appointment in the same 15-minute slot, so it cannot '
+          + 'tell us whether urgent contacts run longer. Held at parity, with room upward.',
+      }),
+    },
+
   }
 }
 

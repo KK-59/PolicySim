@@ -10,14 +10,17 @@
     "start:api": "tsx src/dashboard/server.ts",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest run",
+    "test": "vitest run && node tests/verify.ts",
     "test:watch": "vitest",
+    "verify": "node tests/verify.ts",
     "typecheck": "tsc --noEmit",
     "snapshot": "tsx scripts/snapshot.mjs",
     "watch": "tsx scripts/watch.mjs",
-    "grid": "tsx scripts/build-grid.mjs",
+    "grid": "tsx scripts/build-grid.ts",
     "liveloop": "tsx scripts/live-loop.mjs",
-    "calibrate": "tsx scripts/calibrate.mjs"
+    "calibrate": "tsx scripts/calibrate.mjs",
+    "corpus:build": "tsx scripts/build-corpus.mjs",
+    "corpus:check": "tsx scripts/check-corpus.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",

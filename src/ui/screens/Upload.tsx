@@ -32,8 +32,11 @@ export function Upload() {
 
   return (
     <section className="page">
-      <div className="measure--form">
+      <div className="focal">
         <h1 className="h1">Drop in the policy.</h1>
+        <p className="lead mt-4">
+          A board paper, a service specification, a strategy. Whatever you already wrote.
+        </p>
 
         <label
           className="dropzone mt-5"
@@ -81,7 +84,13 @@ export function Upload() {
                 <Glyph name="upload" size={26} />
               </span>
               <strong>Drop a document, or choose one</strong>
-              <span className="tiny muted">PDF, DOCX, MD or TXT</span>
+              <div className="formats mt-2">
+                {['PDF', 'DOCX', 'MD', 'TXT'].map((f) => (
+                  <span className="format" key={f}>
+                    {f}
+                  </span>
+                ))}
+              </div>
             </div>
           )}
         </label>
@@ -103,6 +112,28 @@ export function Upload() {
           {busy ? 'Reading…' : 'Run the sandbox'}
           {!busy && <Glyph name="arrow" size={16} />}
         </button>
+
+        {/* What the button is about to do, in the same colours /about uses for the pipeline. */}
+        <ol className="next-steps mt-5">
+          <li className="next-step next-step--model">
+            <span className="next-step__glyph">
+              <Glyph name="document" size={13} />
+            </span>
+            Read the document
+          </li>
+          <li className="next-step">
+            <span className="next-step__glyph">
+              <Glyph name="flag" size={13} />
+            </span>
+            Show you the parameters
+          </li>
+          <li className="next-step next-step--engine">
+            <span className="next-step__glyph">
+              <Glyph name="sweep" size={13} />
+            </span>
+            Run three worlds
+          </li>
+        </ol>
       </div>
     </section>
   )
