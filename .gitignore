@@ -37,3 +37,7 @@ scratch/
 .vscode/*
 !.vscode/extensions.json
 live-run-*.log
+
+# impeccable working files (review screenshots, local config)
+.impeccable/review/
+.impeccable/questions/
