@@ -1085,6 +1085,176 @@ textarea::placeholder {
 }
 
 /* ---------------------------------------------------------------------------
+   Diagrams
+   --------------------------------------------------------------------------- */
+
+.diagram {
+  margin: 0;
+}
+
+/*
+ * Diagrams break out past the reading measure. Prose wants 68 characters; a five stage pipeline
+ * squeezed into that width gives every box about 120px and the labels start wrapping to one word
+ * a line. The figure is allowed to be wider than the column it explains.
+ */
+.diagram--wide {
+  width: 58rem;
+  max-width: calc(100vw - var(--s-6));
+  margin-inline: calc((46rem - 58rem) / 2);
+}
+
+@media (max-width: 62rem) {
+  .diagram--wide {
+    width: 100%;
+    margin-inline: 0;
+  }
+}
+
+.diagram__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.diagram__tick {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.diagram__cap {
+  margin-top: var(--s-3);
+  font-size: var(--t-tiny);
+  color: var(--ink-3);
+  max-width: 62ch;
+}
+
+/* Pipeline */
+
+.pipeline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0;
+}
+
+.pipeline__stage {
+  display: flex;
+  align-items: stretch;
+  flex: 1 1 0;
+  min-width: 8.5rem;
+}
+
+.pipeline__arrow {
+  flex: none;
+  color: var(--rule-2);
+  padding-inline: 0.375rem;
+}
+
+.pipeline__box {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: var(--s-3);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-md);
+  background: var(--paper);
+}
+
+.pipeline__glyph {
+  color: var(--ink-3);
+}
+
+.pipeline__label {
+  font-size: var(--t-small);
+  letter-spacing: -0.01em;
+}
+
+.pipeline__detail {
+  font-size: var(--t-micro);
+  color: var(--ink-3);
+  line-height: 1.4;
+}
+
+.pipeline__kind {
+  margin-top: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* The two ends are the model. The middle is not, and the colour says so at a glance. */
+.pipeline__stage--model .pipeline__box {
+  border-color: color-mix(in srgb, var(--fuchsia) 32%, transparent);
+  background: var(--wash-fuchsia);
+}
+
+.pipeline__stage--model .pipeline__glyph,
+.pipeline__stage--model .pipeline__kind {
+  color: var(--fuchsia);
+}
+
+.pipeline__stage--deterministic .pipeline__box {
+  border-color: color-mix(in srgb, var(--blue) 24%, transparent);
+  background: var(--wash-blue);
+}
+
+.pipeline__stage--deterministic .pipeline__glyph,
+.pipeline__stage--deterministic .pipeline__kind {
+  color: var(--blue);
+}
+
+/* Claim kinds */
+
+.claims {
+  display: grid;
+  gap: 0;
+}
+
+.claim {
+  display: grid;
+  grid-template-columns: 22px minmax(6rem, 8rem) 1fr;
+  gap: var(--s-3);
+  align-items: baseline;
+  padding-block: var(--s-3);
+  border-top: 1px solid var(--rule);
+  font-size: var(--t-small);
+}
+
+.claim:first-child {
+  border-top: 0;
+}
+
+.claim__glyph {
+  color: var(--blue);
+  transform: translateY(3px);
+}
+
+.claim__kind {
+  font-weight: 600;
+}
+
+.claim__example {
+  color: var(--ink-3);
+}
+
+/* Chapter numbers carry the brand gradient rather than sitting as another grey. */
+.chapter__n {
+  font-family: var(--font-mono);
+  font-size: var(--t-small);
+  font-weight: 700;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-right: var(--s-2);
+}
+
+/* ---------------------------------------------------------------------------
    Disclosure: present for trust, folded away for reading.
    --------------------------------------------------------------------------- */
 

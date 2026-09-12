@@ -6,6 +6,8 @@
  */
 
 import { NOT_MODELLED, metrics } from '../data'
+import { ClaimKinds, PipelineDiagram, SamplingDiagram } from '../components/Diagram'
+import { SourceKey } from '../components/SourceTag'
 
 /** The chapters of the 10-Year Health Plan this tool is actually built against. */
 const CHAPTERS: { n: string; title: string; how: string }[] = [
@@ -45,6 +47,18 @@ export function About() {
         {metrics.run.samples.toLocaleString('en-GB')} times.
       </p>
 
+      <div className="mt-6">
+        <PipelineDiagram />
+      </div>
+
+      <p className="mt-6">
+        Every number on screen says where it came from, and anything the evidence does not cover is
+        flagged rather than quietly filled in.
+      </p>
+      <div className="mt-4">
+        <SourceKey />
+      </div>
+
       <h2 className="h2 mt-7">Why three worlds</h2>
       <p className="mt-4">
         Every parameter is sampled from its published range. The three worlds are percentiles of
@@ -55,7 +69,11 @@ export function About() {
         worst value together describes a future with almost no chance of happening, which makes it
         useless to plan against.
       </p>
-      <p className="mt-3 muted">
+      <div className="mt-5">
+        <SamplingDiagram />
+      </div>
+
+      <p className="mt-5 muted">
         Winter pressure and staff shortage are separate switches, so pessimistic never becomes a
         bag of everything bad at the same time.
       </p>
@@ -65,7 +83,10 @@ export function About() {
         Never a single number. The output is a claim about direction, shape or threshold: better on
         average, worse for the complex tail, and only while community capacity holds.
       </p>
-      <p className="mt-3">
+      <div className="mt-5">
+        <ClaimKinds />
+      </div>
+      <p className="mt-4 muted">
         A conclusion that appears in only one world is labelled on screen and never presented as a
         result.
       </p>
@@ -78,7 +99,7 @@ export function About() {
         {CHAPTERS.map((c) => (
           <div className="boundary" key={c.n}>
             <dt className="boundary__term">
-              <span className="num muted">{c.n}</span> {c.title}
+              <span className="chapter__n">{c.n}</span>{c.title}
             </dt>
             <dd className="muted">{c.how}</dd>
           </div>
