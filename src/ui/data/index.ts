@@ -2,7 +2,7 @@
  * The interface's only data source.
  *
  * Every import here is a FIXTURE. When Kaavya's `run(params, seed) -> Metrics` lands, `metrics`
- * below becomes a call to it and nothing else in src/ui/ moves — that is the whole point of
+ * below becomes a call to it and nothing else in src/ui/ moves. That is the whole point of
  * having frozen the contracts first.
  *
  * `IS_SYNTHETIC` is rendered on screen, not hidden in a comment. Presenting a fabricated number
@@ -25,7 +25,7 @@ export const IS_SYNTHETIC = Boolean((metricsJson as { _synthetic?: string })._sy
 export const SYNTHETIC_NOTE = (metricsJson as { _synthetic?: string })._synthetic ?? ''
 
 // ---------------------------------------------------------------------------
-// Sweep — our own shape, standing in for precomputed/grid.json
+// Sweep: our own shape, standing in for precomputed/grid.json
 // ---------------------------------------------------------------------------
 
 export type WorldName = 'optimistic' | 'realistic' | 'pessimistic'

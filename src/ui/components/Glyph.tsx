@@ -4,7 +4,7 @@
  * The three world glyphs are the load-bearing ones: they place a tick at the percentile's own
  * height on a shared axis, so P10 sits low, P50 centre, P90 high. That encodes the world as a
  * MARK rather than a hue, which is what lets a finding survive a projector, a colourblind reader
- * and a greyscale print — the accessibility constraint in PRODUCT.md, discharged in the geometry
+ * and a greyscale print, the accessibility constraint in PRODUCT.md, discharged in the geometry
  * instead of apologised for in a footnote.
  *
  * One stroke weight throughout (1.5 at 16px), butt-free round caps, currentColor.

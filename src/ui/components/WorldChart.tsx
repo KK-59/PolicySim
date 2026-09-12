@@ -3,7 +3,7 @@
  *
  * One wide chart: every sampled run drawn as a ghost trace, the three worlds struck forward over
  * them, and a dashed line of no effect through zero. The y axis is DELTA against the locked
- * baseline, never an absolute — a house rule from src/ui/README.md and the reason the chart can
+ * baseline, never an absolute, a house rule from src/ui/README.md and the reason the chart can
  * be read without knowing what a good absolute wait would be.
  *
  * The ghosts are real sampled runs, not a drawn band. Where the evidence has no published range

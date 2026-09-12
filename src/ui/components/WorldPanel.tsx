@@ -3,7 +3,7 @@
  *
  * P10 / P50 / P90 sit under the friendly names so the method is visible without anyone having to
  * explain it. A finding that appears only in the optimistic world is rendered as a warning and
- * never as a result — the UI gates on `survivesAllThree` so that call is never left to the reader.
+ * never as a result. The UI gates on `survivesAllThree` so that call is never left to the reader.
  */
 
 import type { Finding } from '@/contracts/metrics'

@@ -35,7 +35,9 @@ h4,
 p,
 figure,
 ul,
-ol {
+ol,
+dl,
+dd {
   margin: 0;
 }
 
@@ -1014,6 +1016,14 @@ textarea::placeholder {
   margin-inline: auto;
 }
 
+.bar__inner > :last-child {
+  margin-left: auto;
+}
+
+.bar__inner .steps ~ :last-child {
+  margin-left: 0;
+}
+
 .wordmark {
   display: inline-flex;
   align-items: center;
@@ -1063,6 +1073,15 @@ textarea::placeholder {
 
 .page--narrow {
   max-width: 40rem;
+}
+
+/* Prose measure. Body text past about 75 characters a line gets hard to track back. */
+.page--reading {
+  max-width: 46rem;
+}
+
+.page--reading p {
+  max-width: 68ch;
 }
 
 /* ---------------------------------------------------------------------------
@@ -1203,6 +1222,12 @@ textarea::placeholder {
 }
 .mt-6 {
   margin-top: var(--s-6);
+}
+.mt-7 {
+  margin-top: var(--s-7);
+}
+.mt-8 {
+  margin-top: var(--s-8);
 }
 
 .sr-only {

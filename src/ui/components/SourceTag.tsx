@@ -1,6 +1,6 @@
 /**
  * Every number on screen carries where it came from. A parameter with no source is flagged,
- * never silently defaulted — PRODUCT.md principle 2, and the thing that makes "where did that
+ * never silently defaulted, PRODUCT.md principle 2, and the thing that makes "where did that
  * number come from" answerable in the room.
  */
 
