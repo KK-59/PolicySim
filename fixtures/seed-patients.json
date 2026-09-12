@@ -1,0 +1,5053 @@
+{
+ "source": "https://sim.animahacks.com \u00b7 world team-4551d2471320",
+ "capturedAt": "2026-09-12T16:23:45.858Z",
+ "note": "Demographics and the records each service holds, read from the simulator for the patients who are in a queue at the moment of capture. Real records; what happens to them after t=0 is the engine, not a recording. Repetitive wearable readings are capped at six per patient; the count omitted is recorded per patient so the panel can say how many were left out.",
+ "people": [
+  {
+   "id": "SIM-000001",
+   "name": "Amira Khan",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel",
+    "Stay at home with a clear contact for help"
+   ],
+   "needs": [
+    "Home visit",
+    "Carer involvement"
+   ],
+   "localIds": {
+    "gp": "RIV-0",
+    "legacy": "WH-90000",
+    "hospital": "NBG-10000"
+   },
+   "birthDate": "1952-05-12",
+   "synthetic": true,
+   "conditions": [
+    "Heart failure",
+    "CKD"
+   ],
+   "records": [
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1790003400000,
+     "dueAt": 1790089800000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789999800000,
+     "dueAt": 1790086200000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789996200000,
+     "dueAt": 1790082600000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "visit",
+     "status": "completed",
+     "title": "schedule visit",
+     "createdAt": 1789995420000,
+     "dueAt": 1790081820000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "test",
+     "status": "open",
+     "title": "order test",
+     "createdAt": 1789994820000,
+     "dueAt": 1790081220000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "Coordinator review: process_document conflicted",
+     "createdAt": 1789994520000,
+     "dueAt": 1790080920000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "Discharge follow-up: home-first pathway",
+     "createdAt": 1789993620000,
+     "dueAt": 1790080020000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "Discharge follow-up: home-first pathway",
+     "createdAt": 1789993320000,
+     "dueAt": 1790079720000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789992600000,
+     "dueAt": 1790079000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "test",
+     "status": "available",
+     "title": "order test",
+     "createdAt": 1789992120000,
+     "dueAt": 1790078520000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "create task",
+     "createdAt": 1789992120000,
+     "dueAt": 1790078520000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "prescription",
+     "status": "draft",
+     "title": "draft prescription",
+     "createdAt": 1789992120000,
+     "dueAt": 1790078520000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "visit",
+     "status": "completed",
+     "title": "schedule visit",
+     "createdAt": 1789992120000,
+     "dueAt": 1790078520000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "visit",
+     "status": "completed",
+     "title": "schedule visit",
+     "createdAt": 1789992120000,
+     "dueAt": 1790078520000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789989000000,
+     "dueAt": 1790075400000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789985400000,
+     "dueAt": 1790071800000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "visit",
+     "status": "completed",
+     "title": "capacity probe after 24h",
+     "createdAt": 1789300920000,
+     "dueAt": 1789387320000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "visit",
+     "status": "completed",
+     "title": "capacity probe 1",
+     "createdAt": 1789214520000,
+     "dueAt": 1789300920000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "prescription",
+     "status": "draft",
+     "title": "Synthetic medication order",
+     "createdAt": 1789207260000,
+     "dueAt": 1789293660000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "Arrange post-discharge monitoring",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "urgent"
+    },
+    {
+     "site": "gp",
+     "kind": "message",
+     "status": "open",
+     "title": "Respiratory: review worsening oxygen requirement",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "urgent"
+    },
+    {
+     "site": "gp",
+     "kind": "appointment",
+     "status": "booked",
+     "title": "Practice follow-up",
+     "createdAt": 1789200000000,
+     "dueAt": 1789200900000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "filed",
+     "title": "Discharge summary \u00b7 monitoring handover",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "verify-isolation",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "test",
+     "status": "available",
+     "title": "Full blood count",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "visit",
+     "status": "completed",
+     "title": "Post-discharge home visit",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "prescription",
+     "status": "draft",
+     "title": "Synthetic medication order",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "prescription",
+     "status": "draft",
+     "title": "Synthetic medication order",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "prescription",
+     "status": "draft",
+     "title": "Synthetic medication order",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "prescription",
+     "status": "draft",
+     "title": "Synthetic medication order",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "prescription",
+     "status": "draft",
+     "title": "Synthetic medication order",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "document",
+     "status": "available",
+     "title": "Discharge: monitoring required; medication list changed",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "urgent"
+    },
+    {
+     "site": "hospital",
+     "kind": "prescription",
+     "status": "approved",
+     "title": "Discharge medication supply",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "urgent"
+    },
+    {
+     "site": "hospital",
+     "kind": "message",
+     "status": "open",
+     "title": "Respiratory: review worsening oxygen requirement",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "urgent"
+    },
+    {
+     "site": "hospital",
+     "kind": "message",
+     "status": "open",
+     "title": "Discharge & flow: confirm medication handover",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "urgent"
+    },
+    {
+     "site": "hospital",
+     "kind": "bed",
+     "status": "occupied",
+     "title": "Acute medical bed 12",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "urgent"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "filed",
+     "title": "Discharge summary \u00b7 monitoring handover",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "message",
+     "status": "open",
+     "title": "Discharge & flow: confirm medication handover",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "urgent"
+    },
+    {
+     "site": "community",
+     "kind": "bed",
+     "status": "occupied",
+     "title": "Acute medical bed 12",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "urgent"
+    },
+    {
+     "site": "community",
+     "kind": "device",
+     "status": "active",
+     "title": "Home activity watch",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "visit",
+     "status": "completed",
+     "title": "Post-discharge home visit",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "hospital-attendance",
+     "status": "waiting",
+     "title": "Breathlessness",
+     "createdAt": 1789197900000,
+     "priority": "urgent"
+    },
+    {
+     "site": "gp",
+     "kind": "conversation",
+     "status": "open",
+     "title": "Appointment confirmation",
+     "createdAt": 1789156800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "reviewed",
+     "title": "Cardiology \u00b7 Monitoring handover",
+     "createdAt": 1789027200000,
+     "priority": "urgent"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "reviewed",
+     "title": "Cardiology \u00b7 Monitoring handover",
+     "createdAt": 1789027200000,
+     "priority": "urgent"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Recent practice consultation",
+     "createdAt": 1788422400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Follow-up consultation",
+     "createdAt": 1782028800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1781856000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Earlier practice contact",
+     "createdAt": 1768464000000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {
+    "observation": 220
+   }
+  },
+  {
+   "id": "SIM-000002",
+   "name": "George Evans",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel",
+    "Know who owns the next step in the referral"
+   ],
+   "needs": [
+    "Transport"
+   ],
+   "localIds": {
+    "gp": "RIV-1",
+    "legacy": "WH-90001",
+    "hospital": "NBG-10001"
+   },
+   "birthDate": "1984-05-12",
+   "synthetic": true,
+   "conditions": [
+    "Referral follow-up"
+   ],
+   "records": [
+    {
+     "site": "community",
+     "kind": "visit",
+     "status": "completed",
+     "title": "schedule visit",
+     "createdAt": 1789998720000,
+     "dueAt": 1790085120000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "test",
+     "status": "open",
+     "title": "order test",
+     "createdAt": 1789998120000,
+     "dueAt": 1790084520000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "Discharge follow-up: home-first pathway",
+     "createdAt": 1789996920000,
+     "dueAt": 1790083320000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "Discharge follow-up: home-first pathway",
+     "createdAt": 1789996020000,
+     "dueAt": 1790082420000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "visit",
+     "status": "completed",
+     "title": "capacity probe 2",
+     "createdAt": 1789214520000,
+     "dueAt": 1789300920000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "request",
+     "status": "open",
+     "title": "Fourth contact: what happened to my referral?",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "message",
+     "status": "reviewed",
+     "title": "Referral Exchange: imaging attachment located",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "appointment",
+     "status": "booked",
+     "title": "Practice follow-up",
+     "createdAt": 1789200000000,
+     "dueAt": 1789200900000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "referral",
+     "status": "rejected",
+     "title": "Referral blocked: imaging attachment missing",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "hospital-attendance",
+     "status": "waiting",
+     "title": "Abdominal pain",
+     "createdAt": 1789195680000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "conversation",
+     "status": "open",
+     "title": "Contact details check",
+     "createdAt": 1789160400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "reviewed",
+     "title": "Respiratory \u00b7 Assessment discharge letter",
+     "createdAt": 1788940800000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "reviewed",
+     "title": "Respiratory \u00b7 Assessment discharge letter",
+     "createdAt": 1788940800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Personal context and contact preferences",
+     "createdAt": 1788854400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Recent practice consultation",
+     "createdAt": 1788422400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1782029400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1782028800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Follow-up consultation",
+     "createdAt": 1782028800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1778141400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778140800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1775722200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1775721600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1772007000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1772006400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Earlier practice contact",
+     "createdAt": 1768464000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1766304600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1766304000000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000003",
+   "name": "Aisha Patel",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel",
+    "Fit reviews around night shifts"
+   ],
+   "needs": [
+    "Shift work",
+    "SMS preferred"
+   ],
+   "localIds": {
+    "gp": "RIV-2",
+    "legacy": "WH-90002",
+    "hospital": "NBG-10002"
+   },
+   "birthDate": "1992-05-12",
+   "synthetic": true,
+   "conditions": [
+    "Asthma"
+   ],
+   "records": [
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1790003400000,
+     "dueAt": 1790089800000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "visit",
+     "status": "scheduled",
+     "title": "schedule visit",
+     "createdAt": 1790001120000,
+     "dueAt": 1790087520000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "Coordinator review: order_test conflicted",
+     "createdAt": 1790000520000,
+     "dueAt": 1790086920000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789999800000,
+     "dueAt": 1790086200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "Discharge follow-up: home-first pathway",
+     "createdAt": 1789999320000,
+     "dueAt": 1790085720000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789996200000,
+     "dueAt": 1790082600000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789992600000,
+     "dueAt": 1790079000000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789989000000,
+     "dueAt": 1790075400000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789985400000,
+     "dueAt": 1790071800000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "visit",
+     "status": "completed",
+     "title": "capacity probe 3",
+     "createdAt": 1789214520000,
+     "dueAt": 1789300920000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "request",
+     "status": "open",
+     "title": "Appointment links expire during working shift",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "mental-health-plan",
+     "status": "open",
+     "title": "Crisis plan review due",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "appointment",
+     "status": "booked",
+     "title": "Practice follow-up",
+     "createdAt": 1789200000000,
+     "dueAt": 1789200900000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "A&E assessment waiting list",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "device",
+     "status": "active",
+     "title": "Home activity watch",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "hospital-attendance",
+     "status": "waiting",
+     "title": "Wheeze",
+     "createdAt": 1789193460000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "conversation",
+     "status": "open",
+     "title": "Form ready to collect",
+     "createdAt": 1789164000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "reviewed",
+     "title": "Orthopaedics \u00b7 Day-case discharge handover",
+     "createdAt": 1788854400000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "reviewed",
+     "title": "Orthopaedics \u00b7 Day-case discharge handover",
+     "createdAt": 1788854400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Recent practice consultation",
+     "createdAt": 1788422400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1782288000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Follow-up consultation",
+     "createdAt": 1782028800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778745600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Earlier practice contact",
+     "createdAt": 1768464000000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {
+    "observation": 221
+   }
+  },
+  {
+   "id": "SIM-000004",
+   "name": "Thomas Reed",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel",
+    "Understand the specialist letter before deciding on next steps"
+   ],
+   "needs": [
+    "Interpreter"
+   ],
+   "localIds": {
+    "gp": "RIV-3",
+    "legacy": "WH-90003",
+    "hospital": "NBG-10003"
+   },
+   "birthDate": "2004-05-12",
+   "synthetic": true,
+   "conditions": [
+    "Possible inherited disorder"
+   ],
+   "records": [
+    {
+     "site": "community",
+     "kind": "visit",
+     "status": "scheduled",
+     "title": "schedule visit",
+     "createdAt": 1790003520000,
+     "dueAt": 1790089920000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1790003400000,
+     "dueAt": 1790089800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "Coordinator review: order_test conflicted",
+     "createdAt": 1790002920000,
+     "dueAt": 1790089320000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "Discharge follow-up: home-first pathway",
+     "createdAt": 1790001720000,
+     "dueAt": 1790088120000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789999800000,
+     "dueAt": 1790086200000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789996200000,
+     "dueAt": 1790082600000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789992600000,
+     "dueAt": 1790079000000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789989000000,
+     "dueAt": 1790075400000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789985400000,
+     "dueAt": 1790071800000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "visit",
+     "status": "completed",
+     "title": "capacity probe 4",
+     "createdAt": 1789214520000,
+     "dueAt": 1789300920000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "appointment",
+     "status": "booked",
+     "title": "Practice follow-up",
+     "createdAt": 1789200000000,
+     "dueAt": 1789201800000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "genomic-test",
+     "status": "reviewed",
+     "title": "Rare-disease panel: consent and phenotype review",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "device",
+     "status": "active",
+     "title": "Home activity watch",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "hospital-attendance",
+     "status": "assessing",
+     "title": "Head injury",
+     "createdAt": 1789191240000,
+     "priority": "urgent"
+    },
+    {
+     "site": "gp",
+     "kind": "conversation",
+     "status": "open",
+     "title": "Hospital letter received",
+     "createdAt": 1789167600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "reviewed",
+     "title": "Gastroenterology \u00b7 Investigation episode handover",
+     "createdAt": 1788768000000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "reviewed",
+     "title": "Gastroenterology \u00b7 Investigation episode handover",
+     "createdAt": 1788768000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Recent practice consultation",
+     "createdAt": 1788422400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1783411200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Follow-up consultation",
+     "createdAt": 1782028800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1779523200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1775376000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1770969600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Earlier practice contact",
+     "createdAt": 1768464000000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {
+    "observation": 223
+   }
+  },
+  {
+   "id": "SIM-000005",
+   "name": "Grace Okafor",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel",
+    "Bring home measurements to a review without retyping them"
+   ],
+   "needs": [
+    "Device setup"
+   ],
+   "localIds": {
+    "gp": "RIV-4",
+    "legacy": "WH-90004",
+    "hospital": "NBG-10004"
+   },
+   "birthDate": "1991-05-12",
+   "synthetic": true,
+   "conditions": [
+    "Diabetes"
+   ],
+   "records": [
+    {
+     "site": "gp",
+     "kind": "appointment",
+     "status": "booked",
+     "title": "Practice follow-up",
+     "createdAt": 1789200000000,
+     "dueAt": 1789201800000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "hospital-attendance",
+     "status": "take",
+     "title": "Dizziness",
+     "createdAt": 1789189020000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "conversation",
+     "status": "open",
+     "title": "Appointment preference",
+     "createdAt": 1789171200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Personal context and contact preferences",
+     "createdAt": 1788854400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Older people's medicine \u00b7 Supported discharge coordination",
+     "createdAt": 1788681600000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Older people's medicine \u00b7 Supported discharge coordination",
+     "createdAt": 1788681600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Recent practice consultation",
+     "createdAt": 1788422400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Follow-up consultation",
+     "createdAt": 1782028800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1781597400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1781596800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Earlier practice contact",
+     "createdAt": 1768464000000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000006",
+   "name": "Eleanor Chen",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel",
+    "Attend local appointments with reliable transport"
+   ],
+   "needs": [
+    "Step-free access"
+   ],
+   "localIds": {
+    "gp": "RIV-5",
+    "legacy": "WH-90005",
+    "hospital": "NBG-10005"
+   },
+   "birthDate": "1943-05-12",
+   "synthetic": true,
+   "conditions": [
+    "Frailty"
+   ],
+   "records": [
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1790003400000,
+     "dueAt": 1790089800000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789999800000,
+     "dueAt": 1790086200000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789996200000,
+     "dueAt": 1790082600000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789992600000,
+     "dueAt": 1790079000000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789989000000,
+     "dueAt": 1790075400000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "observation",
+     "status": "available",
+     "title": "Home activity reading",
+     "createdAt": 1789985400000,
+     "dueAt": 1790071800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "appointment",
+     "status": "booked",
+     "title": "Practice follow-up",
+     "createdAt": 1789200000000,
+     "dueAt": 1789201800000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "device",
+     "status": "active",
+     "title": "Home activity watch",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "care-plan",
+     "status": "open",
+     "title": "Home support not yet arranged",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "care-package",
+     "status": "waiting",
+     "title": "Home care assessment awaiting allocation",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "community",
+     "kind": "visit",
+     "status": "completed",
+     "title": "dgsdg",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "hospital-attendance",
+     "status": "take",
+     "title": "Reduced mobility",
+     "createdAt": 1789186800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "conversation",
+     "status": "open",
+     "title": "Registration paperwork",
+     "createdAt": 1789174800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Renal \u00b7 Clinic discharge correspondence",
+     "createdAt": 1788595200000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Renal \u00b7 Clinic discharge correspondence",
+     "createdAt": 1788595200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Recent practice consultation",
+     "createdAt": 1788422400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1783497600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Follow-up consultation",
+     "createdAt": 1782028800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Earlier practice contact",
+     "createdAt": 1768464000000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {
+    "observation": 242
+   }
+  },
+  {
+   "id": "SIM-000007",
+   "name": "Mohammed Ali",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel",
+    "Plan work and travel around a confirmed operation date"
+   ],
+   "needs": [
+    "Transport"
+   ],
+   "localIds": {
+    "gp": "RIV-6",
+    "legacy": "WH-90006",
+    "hospital": "NBG-10006"
+   },
+   "birthDate": "1968-05-12",
+   "synthetic": true,
+   "conditions": [
+    "Awaiting elective surgery"
+   ],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "handover",
+     "status": "completed",
+     "title": "New ambulance handover",
+     "createdAt": 1789824000000,
+     "dueAt": 1789910400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "appointment",
+     "status": "booked",
+     "title": "Practice follow-up",
+     "createdAt": 1789200000000,
+     "dueAt": 1789202700000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "surgery",
+     "status": "waiting",
+     "title": "Elective list: robot and recovery bed required",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "theatre-slot",
+     "status": "waiting",
+     "title": "Robotic theatre list: two cases exceed staffed capacity",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "handover",
+     "status": "completed",
+     "title": "Ambulance handover awaiting staffed space",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "hospital-attendance",
+     "status": "inpatient",
+     "title": "Chest discomfort",
+     "createdAt": 1789184580000,
+     "priority": "urgent"
+    },
+    {
+     "site": "gp",
+     "kind": "conversation",
+     "status": "open",
+     "title": "Appointment confirmation",
+     "createdAt": 1789178400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Personal context and contact preferences",
+     "createdAt": 1788854400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Neurology \u00b7 Assessment episode summary",
+     "createdAt": 1788508800000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Neurology \u00b7 Assessment episode summary",
+     "createdAt": 1788508800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Recent practice consultation",
+     "createdAt": 1788422400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1783066200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1783065600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Follow-up consultation",
+     "createdAt": 1782028800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1778573400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778572800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1776067800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1776067200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1771402200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1771401600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Earlier practice contact",
+     "createdAt": 1768464000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1766823000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1766822400000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000008",
+   "name": "Sofia Williams",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel",
+    "Receive invitations without needing a smartphone"
+   ],
+   "needs": [
+    "Offline contact"
+   ],
+   "localIds": {
+    "gp": "RIV-7",
+    "legacy": "WH-90007",
+    "hospital": "NBG-10007"
+   },
+   "birthDate": "1978-05-12",
+   "synthetic": true,
+   "conditions": [
+    "Prevention review"
+   ],
+   "records": [
+    {
+     "site": "gp",
+     "kind": "screening",
+     "status": "open",
+     "title": "Screening invitation unanswered",
+     "createdAt": 1789200000000,
+     "dueAt": 1789286400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "appointment",
+     "status": "booked",
+     "title": "Practice follow-up",
+     "createdAt": 1789200000000,
+     "dueAt": 1789202700000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "hospital-attendance",
+     "status": "inpatient",
+     "title": "Fall at home",
+     "createdAt": 1789182360000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "conversation",
+     "status": "open",
+     "title": "Contact details check",
+     "createdAt": 1789182000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Personal context and contact preferences",
+     "createdAt": 1788854400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Recent practice consultation",
+     "createdAt": 1788422400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Diabetes service \u00b7 Education visit handover",
+     "createdAt": 1788422400000,
+     "priority": "urgent"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Diabetes service \u00b7 Education visit handover",
+     "createdAt": 1788422400000,
+     "priority": "urgent"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Follow-up consultation",
+     "createdAt": 1782028800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1781943000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1781942400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1779523800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1779523200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Earlier practice contact",
+     "createdAt": 1768464000000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000009",
+   "name": "Thomas Chen",
+   "death": {
+    "date": "2026-09-05",
+    "cause": "Road traffic collision",
+    "source": "authored-synthetic-mortality-v1",
+    "synthetic": true
+   },
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [],
+   "localIds": {
+    "gp": "RIV-8",
+    "legacy": "WH-90008",
+    "hospital": "NBG-10008"
+   },
+   "birthDate": "1975-04-12",
+   "synthetic": true,
+   "conditions": [
+    "Asthma"
+   ],
+   "records": [
+    {
+     "site": "gp",
+     "kind": "pharmacy-referral",
+     "status": "consulting",
+     "title": "Sore throat referral",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "conversation",
+     "status": "open",
+     "title": "Form ready to collect",
+     "createdAt": 1789185600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Emergency department \u00b7 Attendance discharge notification",
+     "createdAt": 1788336000000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Emergency department \u00b7 Attendance discharge notification",
+     "createdAt": 1788336000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1782029400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1782028800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1777709400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1777708800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1775031000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1775030400000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000010",
+   "name": "Oliver Khan",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "Transport"
+   ],
+   "localIds": {
+    "gp": "RIV-9",
+    "legacy": "WH-90009",
+    "hospital": "NBG-10009"
+   },
+   "birthDate": "1993-06-22",
+   "synthetic": true,
+   "conditions": [
+    "Diabetes"
+   ],
+   "records": [
+    {
+     "site": "gp",
+     "kind": "pharmacy-referral",
+     "status": "received",
+     "title": "Insect bite review request",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "conversation",
+     "status": "open",
+     "title": "Hospital letter received",
+     "createdAt": 1789189200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Ophthalmology \u00b7 Day-unit correspondence",
+     "createdAt": 1788249600000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Ophthalmology \u00b7 Day-unit correspondence",
+     "createdAt": 1788249600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1782720600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1782720000000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000011",
+   "name": "Zara Khan",
+   "death": {
+    "date": "2026-09-05",
+    "cause": "Pneumonia",
+    "source": "authored-synthetic-mortality-v1",
+    "synthetic": true
+   },
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "Step-free access"
+   ],
+   "localIds": {
+    "gp": "RIV-10",
+    "legacy": "WH-90010",
+    "hospital": "NBG-10010"
+   },
+   "birthDate": "1935-06-10",
+   "synthetic": true,
+   "conditions": [
+    "Hypertension",
+    "Heart failure"
+   ],
+   "records": [
+    {
+     "site": "gp",
+     "kind": "pharmacy-referral",
+     "status": "received",
+     "title": "Minor illness review",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "conversation",
+     "status": "done",
+     "title": "Appointment preference",
+     "createdAt": 1789192800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "Confirm follow-up arrangements",
+     "createdAt": 1788940800000,
+     "dueAt": 1789632000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "General surgery \u00b7 Post-episode handover",
+     "createdAt": 1788163200000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "General surgery \u00b7 Post-episode handover",
+     "createdAt": 1788163200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1783757400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1783756800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1778746200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778745600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1774685400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1774684800000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000012",
+   "name": "Mei Brown",
+   "death": {
+    "date": "2026-09-05",
+    "cause": "Sepsis",
+    "source": "authored-synthetic-mortality-v1",
+    "synthetic": true
+   },
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [],
+   "localIds": {
+    "gp": "RIV-11",
+    "legacy": "WH-90011",
+    "hospital": "NBG-10011"
+   },
+   "birthDate": "1946-04-20",
+   "synthetic": true,
+   "conditions": [],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "handover",
+     "status": "completed",
+     "title": "New ambulance handover",
+     "createdAt": 1789515600000,
+     "dueAt": 1789602000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "request",
+     "status": "open",
+     "title": "New synthetic patient request",
+     "createdAt": 1789373700000,
+     "dueAt": 1789460100000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "conversation",
+     "status": "done",
+     "title": "Registration paperwork",
+     "createdAt": 1789196400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "Confirm follow-up arrangements",
+     "createdAt": 1788940800000,
+     "dueAt": 1789804800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Therapy service \u00b7 Rehabilitation episode handover",
+     "createdAt": 1788076800000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Therapy service \u00b7 Rehabilitation episode handover",
+     "createdAt": 1788076800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1782375000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1782374400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1779264600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1779264000000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000013",
+   "name": "Freya Patel",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "Step-free access"
+   ],
+   "localIds": {
+    "gp": "RIV-12",
+    "legacy": "WH-90012",
+    "hospital": "NBG-10012"
+   },
+   "birthDate": "2011-10-28",
+   "synthetic": true,
+   "conditions": [],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Cardiology \u00b7 Monitoring handover",
+     "createdAt": 1787990400000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Cardiology \u00b7 Monitoring handover",
+     "createdAt": 1787990400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1783757400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1783756800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1779869400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1779868800000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000014",
+   "name": "Thomas Reed",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [],
+   "localIds": {
+    "gp": "RIV-13",
+    "legacy": "WH-90013",
+    "hospital": "NBG-10013"
+   },
+   "birthDate": "2017-10-28",
+   "synthetic": true,
+   "conditions": [],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Respiratory \u00b7 Assessment discharge letter",
+     "createdAt": 1787904000000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Respiratory \u00b7 Assessment discharge letter",
+     "createdAt": 1787904000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1783930200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1783929600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1780128600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1780128000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1775203800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1775203200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1772352600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1772352000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1766477400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1766476800000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000015",
+   "name": "Grace Shah",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "Carer involvement"
+   ],
+   "localIds": {
+    "gp": "RIV-14",
+    "legacy": "WH-90014",
+    "hospital": "NBG-10014"
+   },
+   "birthDate": "1959-01-23",
+   "synthetic": true,
+   "conditions": [
+    "Asthma",
+    "Diabetes",
+    "Arthritis"
+   ],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Orthopaedics \u00b7 Day-case discharge handover",
+     "createdAt": 1789027200000,
+     "priority": "urgent"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Orthopaedics \u00b7 Day-case discharge handover",
+     "createdAt": 1789027200000,
+     "priority": "urgent"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1782461400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1782460800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1777882200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1777881600000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000016",
+   "name": "Eleanor Reed",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [],
+   "localIds": {
+    "gp": "RIV-15",
+    "legacy": "WH-90015",
+    "hospital": "NBG-10015"
+   },
+   "birthDate": "1952-07-03",
+   "synthetic": true,
+   "conditions": [
+    "Asthma"
+   ],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Gastroenterology \u00b7 Investigation episode handover",
+     "createdAt": 1788940800000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Gastroenterology \u00b7 Investigation episode handover",
+     "createdAt": 1788940800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1782893400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1782892800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1778919000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778918400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1774858200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1774857600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1770192600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1770192000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1767600600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1767600000000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000017",
+   "name": "Mohammed Clarke",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [],
+   "localIds": {
+    "gp": "RIV-16",
+    "legacy": "WH-90016",
+    "hospital": "NBG-10016"
+   },
+   "birthDate": "1930-07-24",
+   "synthetic": true,
+   "conditions": [
+    "Asthma",
+    "CKD"
+   ],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Older people's medicine \u00b7 Supported discharge coordination",
+     "createdAt": 1788854400000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Older people's medicine \u00b7 Supported discharge coordination",
+     "createdAt": 1788854400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1782115800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1782115200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1778314200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778313600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1775981400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1775980800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1770883800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1770883200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1766823000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1766822400000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000018",
+   "name": "Zara Evans",
+   "death": {
+    "date": "2026-09-05",
+    "cause": "Cancer",
+    "source": "authored-synthetic-mortality-v1",
+    "synthetic": true
+   },
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [],
+   "localIds": {
+    "gp": "RIV-17",
+    "legacy": "WH-90017",
+    "hospital": "NBG-10017"
+   },
+   "birthDate": "2021-07-21",
+   "synthetic": true,
+   "conditions": [],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Renal \u00b7 Clinic discharge correspondence",
+     "createdAt": 1788768000000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Renal \u00b7 Clinic discharge correspondence",
+     "createdAt": 1788768000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1783843800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1783843200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1779264600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1779264000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1775203800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1775203200000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000019",
+   "name": "Thomas Lewis",
+   "death": {
+    "date": "2026-09-05",
+    "cause": "Stroke",
+    "source": "authored-synthetic-mortality-v1",
+    "synthetic": true
+   },
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "Transport"
+   ],
+   "localIds": {
+    "gp": "RIV-18",
+    "legacy": "WH-90018",
+    "hospital": "NBG-10018"
+   },
+   "birthDate": "1997-12-10",
+   "synthetic": true,
+   "conditions": [
+    "Diabetes",
+    "Hypertension"
+   ],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Neurology \u00b7 Assessment episode summary",
+     "createdAt": 1788681600000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Neurology \u00b7 Assessment episode summary",
+     "createdAt": 1788681600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1784016600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1784016000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1780128600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1780128000000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000020",
+   "name": "Freya Clarke",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "Transport"
+   ],
+   "localIds": {
+    "gp": "RIV-19",
+    "legacy": "WH-90019",
+    "hospital": "NBG-10019"
+   },
+   "birthDate": "2001-07-04",
+   "synthetic": true,
+   "conditions": [],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Diabetes service \u00b7 Education visit handover",
+     "createdAt": 1788595200000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Diabetes service \u00b7 Education visit handover",
+     "createdAt": 1788595200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1783671000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1783670400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1779264600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1779264000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1775203800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1775203200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1770538200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1770537600000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000021",
+   "name": "Eleanor Williams",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [],
+   "localIds": {
+    "gp": "RIV-20",
+    "legacy": "WH-90020",
+    "hospital": "NBG-10020"
+   },
+   "birthDate": "1992-07-27",
+   "synthetic": true,
+   "conditions": [],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "Confirm follow-up arrangements",
+     "createdAt": 1788940800000,
+     "dueAt": 1790150400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Emergency department \u00b7 Attendance discharge notification",
+     "createdAt": 1788508800000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Emergency department \u00b7 Attendance discharge notification",
+     "createdAt": 1788508800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1784103000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1784102400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1778746200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778745600000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000022",
+   "name": "Zara Lewis",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [],
+   "localIds": {
+    "gp": "RIV-21",
+    "legacy": "WH-90021",
+    "hospital": "NBG-10021"
+   },
+   "birthDate": "2002-11-07",
+   "synthetic": true,
+   "conditions": [],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Ophthalmology \u00b7 Day-unit correspondence",
+     "createdAt": 1788422400000,
+     "priority": "urgent"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Ophthalmology \u00b7 Day-unit correspondence",
+     "createdAt": 1788422400000,
+     "priority": "urgent"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1784016600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1784016000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1779610200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1779609600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1776067800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1776067200000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000023",
+   "name": "George Brown",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [],
+   "localIds": {
+    "gp": "RIV-22",
+    "legacy": "WH-90022",
+    "hospital": "NBG-10022"
+   },
+   "birthDate": "1945-06-23",
+   "synthetic": true,
+   "conditions": [
+    "Arthritis"
+   ],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "Confirm follow-up arrangements",
+     "createdAt": 1788940800000,
+     "dueAt": 1789632000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "General surgery \u00b7 Post-episode handover",
+     "createdAt": 1788336000000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "General surgery \u00b7 Post-episode handover",
+     "createdAt": 1788336000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1782720600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1782720000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1778659800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778659200000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000024",
+   "name": "Sofia Singh",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [],
+   "localIds": {
+    "gp": "RIV-23",
+    "legacy": "WH-90023",
+    "hospital": "NBG-10023"
+   },
+   "birthDate": "1977-09-14",
+   "synthetic": true,
+   "conditions": [],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Therapy service \u00b7 Rehabilitation episode handover",
+     "createdAt": 1788249600000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Therapy service \u00b7 Rehabilitation episode handover",
+     "createdAt": 1788249600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1784016600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1784016000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1779783000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1779782400000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000025",
+   "name": "Thomas Lewis",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [],
+   "localIds": {
+    "gp": "RIV-24",
+    "legacy": "WH-90024",
+    "hospital": "NBG-10024"
+   },
+   "birthDate": "1977-04-20",
+   "synthetic": true,
+   "conditions": [],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "handover",
+     "status": "completed",
+     "title": "New ambulance handover",
+     "createdAt": 1789376400000,
+     "dueAt": 1789462800000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Cardiology \u00b7 Monitoring handover",
+     "createdAt": 1788163200000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Cardiology \u00b7 Monitoring handover",
+     "createdAt": 1788163200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1783325400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1783324800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1778659800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778659200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1773907800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1773907200000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000026",
+   "name": "Freya Wilson",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "Transport"
+   ],
+   "localIds": {
+    "gp": "RIV-25",
+    "legacy": "WH-90025",
+    "hospital": "NBG-10025"
+   },
+   "birthDate": "1933-09-08",
+   "synthetic": true,
+   "conditions": [
+    "Diabetes",
+    "Hypertension"
+   ],
+   "records": [
+    {
+     "site": "gp",
+     "kind": "request",
+     "status": "open",
+     "title": "New synthetic patient request",
+     "createdAt": 1789865100000,
+     "dueAt": 1789951500000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Respiratory \u00b7 Assessment discharge letter",
+     "createdAt": 1788076800000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Respiratory \u00b7 Assessment discharge letter",
+     "createdAt": 1788076800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1783152600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1783152000000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000027",
+   "name": "Idris Taylor",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [],
+   "localIds": {
+    "gp": "RIV-26",
+    "legacy": "WH-90026",
+    "hospital": "NBG-10026"
+   },
+   "birthDate": "2010-10-02",
+   "synthetic": true,
+   "conditions": [],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "Confirm follow-up arrangements",
+     "createdAt": 1788940800000,
+     "dueAt": 1790064000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Orthopaedics \u00b7 Day-case discharge handover",
+     "createdAt": 1787990400000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Orthopaedics \u00b7 Day-case discharge handover",
+     "createdAt": 1787990400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1783066200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1783065600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1778832600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778832000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1776327000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1776326400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1772352600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1772352000000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000028",
+   "name": "Sofia Patel",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "Carer involvement"
+   ],
+   "localIds": {
+    "gp": "RIV-27",
+    "legacy": "WH-90027",
+    "hospital": "NBG-10027"
+   },
+   "birthDate": "2014-11-05",
+   "synthetic": true,
+   "conditions": [],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Gastroenterology \u00b7 Investigation episode handover",
+     "createdAt": 1787904000000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Gastroenterology \u00b7 Investigation episode handover",
+     "createdAt": 1787904000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1782461400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1782460800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1779264600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1779264000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1775635800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1775635200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1770451800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1770451200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1766045400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1766044800000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000029",
+   "name": "Priya Brown",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "Transport"
+   ],
+   "localIds": {
+    "gp": "RIV-28",
+    "legacy": "WH-90028",
+    "hospital": "NBG-10028"
+   },
+   "birthDate": "1995-07-04",
+   "synthetic": true,
+   "conditions": [
+    "Heart failure"
+   ],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Older people's medicine \u00b7 Supported discharge coordination",
+     "createdAt": 1789027200000,
+     "priority": "urgent"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Older people's medicine \u00b7 Supported discharge coordination",
+     "createdAt": 1789027200000,
+     "priority": "urgent"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1781597400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1781596800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1778659800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778659200000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000030",
+   "name": "Priya Evans",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "Offline contact"
+   ],
+   "localIds": {
+    "gp": "RIV-29",
+    "legacy": "WH-90029",
+    "hospital": "NBG-10029"
+   },
+   "birthDate": "1997-02-03",
+   "synthetic": true,
+   "conditions": [
+    "Heart failure"
+   ],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Renal \u00b7 Clinic discharge correspondence",
+     "createdAt": 1788940800000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Renal \u00b7 Clinic discharge correspondence",
+     "createdAt": 1788940800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1783152600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1783152000000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000031",
+   "name": "Priya Reed",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [],
+   "localIds": {
+    "gp": "RIV-30",
+    "legacy": "WH-90030",
+    "hospital": "NBG-10030"
+   },
+   "birthDate": "1977-09-03",
+   "synthetic": true,
+   "conditions": [],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Neurology \u00b7 Assessment episode summary",
+     "createdAt": 1788854400000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Neurology \u00b7 Assessment episode summary",
+     "createdAt": 1788854400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1784103000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1784102400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1778055000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778054400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1775895000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1775894400000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000032",
+   "name": "Eleanor Ahmed",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "Carer involvement"
+   ],
+   "localIds": {
+    "gp": "RIV-31",
+    "legacy": "WH-90031",
+    "hospital": "NBG-10031"
+   },
+   "birthDate": "1973-08-09",
+   "synthetic": true,
+   "conditions": [
+    "Hypertension",
+    "Arthritis"
+   ],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Diabetes service \u00b7 Education visit handover",
+     "createdAt": 1788768000000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Diabetes service \u00b7 Education visit handover",
+     "createdAt": 1788768000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1784016600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1784016000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1778659800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778659200000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000033",
+   "name": "Priya Chen",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [],
+   "localIds": {
+    "gp": "RIV-32",
+    "legacy": "WH-90032",
+    "hospital": "NBG-10032"
+   },
+   "birthDate": "1970-06-13",
+   "synthetic": true,
+   "conditions": [
+    "Hypertension",
+    "Heart failure"
+   ],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "Confirm follow-up arrangements",
+     "createdAt": 1788940800000,
+     "dueAt": 1790064000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Emergency department \u00b7 Attendance discharge notification",
+     "createdAt": 1788681600000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Emergency department \u00b7 Attendance discharge notification",
+     "createdAt": 1788681600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1781943000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1781942400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1778746200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778745600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1774858200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1774857600000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000034",
+   "name": "Priya Taylor",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "Interpreter"
+   ],
+   "localIds": {
+    "gp": "RIV-33",
+    "legacy": "WH-90033",
+    "hospital": "NBG-10033"
+   },
+   "birthDate": "1985-08-09",
+   "synthetic": true,
+   "conditions": [
+    "Diabetes"
+   ],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Ophthalmology \u00b7 Day-unit correspondence",
+     "createdAt": 1788595200000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Ophthalmology \u00b7 Day-unit correspondence",
+     "createdAt": 1788595200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1783584600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1783584000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1780128600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1780128000000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000035",
+   "name": "Sofia Okafor",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "Transport"
+   ],
+   "localIds": {
+    "gp": "RIV-34",
+    "legacy": "WH-90034",
+    "hospital": "NBG-10034"
+   },
+   "birthDate": "2025-06-10",
+   "synthetic": true,
+   "conditions": [],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "General surgery \u00b7 Post-episode handover",
+     "createdAt": 1788508800000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "General surgery \u00b7 Post-episode handover",
+     "createdAt": 1788508800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1782461400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1782460800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1778659800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778659200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1775549400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1775548800000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000036",
+   "name": "Mohammed Taylor",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "Step-free access"
+   ],
+   "localIds": {
+    "gp": "RIV-35",
+    "legacy": "WH-90035",
+    "hospital": "NBG-10035"
+   },
+   "birthDate": "1939-06-28",
+   "synthetic": true,
+   "conditions": [
+    "Asthma",
+    "Heart failure"
+   ],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Therapy service \u00b7 Rehabilitation episode handover",
+     "createdAt": 1788422400000,
+     "priority": "urgent"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "sent",
+     "title": "Therapy service \u00b7 Rehabilitation episode handover",
+     "createdAt": 1788422400000,
+     "priority": "urgent"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1783152600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1783152000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1778141400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778140800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1774080600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1774080000000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000037",
+   "name": "Aisha Okafor",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "SMS preferred"
+   ],
+   "localIds": {
+    "gp": "RIV-36",
+    "legacy": "WH-90036",
+    "hospital": "NBG-10036"
+   },
+   "birthDate": "2014-05-18",
+   "synthetic": true,
+   "conditions": [
+    "Asthma"
+   ],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "reviewed",
+     "title": "Cardiology \u00b7 Monitoring handover",
+     "createdAt": 1788336000000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "reviewed",
+     "title": "Cardiology \u00b7 Monitoring handover",
+     "createdAt": 1788336000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1782288600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1782288000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1778659800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778659200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1774944600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1774944000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1770797400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1770796800000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000038",
+   "name": "Sofia Reed",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "SMS preferred"
+   ],
+   "localIds": {
+    "gp": "RIV-37",
+    "legacy": "WH-90037",
+    "hospital": "NBG-10037"
+   },
+   "birthDate": "2007-02-04",
+   "synthetic": true,
+   "conditions": [
+    "CKD"
+   ],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "reviewed",
+     "title": "Respiratory \u00b7 Assessment discharge letter",
+     "createdAt": 1788249600000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "reviewed",
+     "title": "Respiratory \u00b7 Assessment discharge letter",
+     "createdAt": 1788249600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1782807000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1782806400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1779783000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1779782400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1775895000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1775894400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1772439000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1772438400000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000039",
+   "name": "Oliver Ahmed",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "Step-free access"
+   ],
+   "localIds": {
+    "gp": "RIV-38",
+    "legacy": "WH-90038",
+    "hospital": "NBG-10038"
+   },
+   "birthDate": "1955-09-28",
+   "synthetic": true,
+   "conditions": [
+    "Asthma",
+    "Hypertension"
+   ],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "task",
+     "status": "open",
+     "title": "Confirm follow-up arrangements",
+     "createdAt": 1788940800000,
+     "dueAt": 1789891200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "reviewed",
+     "title": "Orthopaedics \u00b7 Day-case discharge handover",
+     "createdAt": 1788163200000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "reviewed",
+     "title": "Orthopaedics \u00b7 Day-case discharge handover",
+     "createdAt": 1788163200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1784103000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1784102400000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1778659800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1778659200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1775203800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1775203200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1770624600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1770624000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1767514200000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1767513600000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  },
+  {
+   "id": "SIM-000040",
+   "name": "Freya Ahmed",
+   "goals": [
+    "Understand the next step",
+    "Avoid unnecessary travel"
+   ],
+   "needs": [
+    "Interpreter",
+    "Carer involvement"
+   ],
+   "localIds": {
+    "gp": "RIV-39",
+    "legacy": "WH-90039",
+    "hospital": "NBG-10039"
+   },
+   "birthDate": "1951-09-18",
+   "synthetic": true,
+   "conditions": [],
+   "records": [
+    {
+     "site": "hospital",
+     "kind": "genome-record",
+     "status": "available",
+     "title": "Synthetic CYP2C19 SNP panel for clopidogrel",
+     "createdAt": 1789200000000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "discharge-summary",
+     "status": "reviewed",
+     "title": "Gastroenterology \u00b7 Investigation episode handover",
+     "createdAt": 1788076800000,
+     "priority": "routine"
+    },
+    {
+     "site": "hospital",
+     "kind": "discharge-summary",
+     "status": "reviewed",
+     "title": "Gastroenterology \u00b7 Investigation episode handover",
+     "createdAt": 1788076800000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "observation",
+     "status": "completed",
+     "title": "Contact preference recorded",
+     "createdAt": 1782720600000,
+     "priority": "routine"
+    },
+    {
+     "site": "gp",
+     "kind": "encounter",
+     "status": "completed",
+     "title": "Primary care contact",
+     "createdAt": 1782720000000,
+     "priority": "routine"
+    }
+   ],
+   "recordsTrimmed": {}
+  }
+ ]
+}

@@ -13,6 +13,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Glyph } from '../components/Glyph'
 import { NeighbourhoodMap, NODE_SITE, type MapFlow, type SiteId } from '../components/NeighbourhoodMap'
+import { PatientRecord, hasRecord } from '../components/PatientRecord'
 import { navigate } from '../lib/router'
 import { useRun } from '../lib/store'
 import type { Metrics } from '@/contracts/metrics'
@@ -453,8 +454,16 @@ export function World() {
 
       {openItem !== null && journey.length > 0 && (
         <div className="journey mt-4">
-          <h2 className="h2">
-            {journey.find((e) => e.ref)?.ref ?? `Item #${openItem}`}
+          {/* The real record first, then what the model does with them. In that order, because
+              the record is fact and the pathway is a prediction, and a reader who meets them the
+              other way round will read both as the same kind of thing. */}
+          {(() => {
+            const ref = journey.find((e) => e.ref)?.ref
+            return hasRecord(ref) && ref ? <PatientRecord ref={ref} now={now} /> : null
+          })()}
+
+          <h2 className="h2 mt-4">
+            What the model does next
           </h2>
           {journey.find((e) => e.title) && (
             <p className="muted small">{journey.find((e) => e.title)?.title}</p>

@@ -206,6 +206,17 @@ export function simulateNetwork(spec: NetworkSpec): NetworkResult {
   };
 
   for (let i = 0; i < spec.entries.length; i++) scheduleArrival(i, 0);
+
+  // Wake the loop exactly when the seed is due.
+  //
+  // Without this, the snapshot is placed on whatever event happens to come next — twelve minutes
+  // late, in practice — so the world view opened on an empty neighbourhood that filled a moment
+  // afterwards. The backlog should be there the instant the window does.
+  const seedMoment = spec.seedAt ?? 0;
+  const firstNode = spec.nodes[0];
+  if (spec.seedItems !== undefined && spec.seedItems.length > 0 && firstNode !== undefined) {
+    events.push({ time: seedMoment, kind: 'session-open', node: firstNode.id });
+  }
   for (const config of spec.nodes) {
     const sched = config.schedule;
     if (sched === null) continue;

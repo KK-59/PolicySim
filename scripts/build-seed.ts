@@ -112,6 +112,110 @@ for (const r of community.resources ?? []) {
   });
 }
 
+// ---------------------------------------------------------------------------
+// The people behind the work
+// ---------------------------------------------------------------------------
+//
+// Demographics and the records each service holds, for the patients who are actually in a queue.
+// The PRD budgets a per-patient read for the drill-down cohort only, 20-40 people, and the
+// organisers can see the request log — so this is capped rather than run over all 50,000.
+
+const COHORT_CAP = Number(process.env['SEED_COHORT'] ?? 40);
+
+/** Practice-level furniture that comes back on every read and belongs to nobody. */
+const NOT_A_RECORD = new Set([
+  'appointment-session', 'message-template', 'capacity', 'ehr-record', 'report',
+]);
+
+interface PatientRecord {
+  site: string;
+  kind: string;
+  status: string;
+  title: string;
+  createdAt: number;
+  dueAt?: number;
+  priority?: string;
+}
+
+interface Person {
+  id: string;
+  /** Repetitive records left out, by kind, so the panel can say so. */
+  recordsTrimmed?: Record<string, number>;
+  name?: string;
+  birthDate?: string;
+  conditions?: string[];
+  needs?: string[];
+  goals?: string[];
+  localIds?: Record<string, string>;
+  records: PatientRecord[];
+}
+
+const ids = [...new Set(items.map((i) => i.ref).filter((r): r is string => Boolean(r)))]
+  .slice(0, COHORT_CAP);
+
+console.log(`reading ${ids.length} patients across gp, hospital and community…`);
+
+const people: Person[] = [];
+for (const id of ids) {
+  const directory = await get(`/api/sites/gp/patients?q=${encodeURIComponent(id)}`) as unknown as
+    { items?: Omit<Person, 'records'>[] };
+  const demographics = (directory.items ?? []).find((p) => p.id === id);
+
+  const records: PatientRecord[] = [];
+  for (const site of ['gp', 'hospital', 'community'] as const) {
+    const view = await get(`/api/sites/${site}/view?patient=${encodeURIComponent(id)}`);
+    for (const r of view.resources ?? []) {
+      const withPatient = r as Resource & { patientId?: string; dueAt?: number };
+      if (withPatient.patientId !== id) continue;
+      if (NOT_A_RECORD.has(r.kind)) continue;
+      records.push({
+        site,
+        kind: r.kind,
+        status: r.status,
+        title: r.title ?? r.kind,
+        createdAt: r.createdAt,
+        ...(withPatient.dueAt ? { dueAt: withPatient.dueAt } : {}),
+        ...(r.priority ? { priority: r.priority } : {}),
+      });
+    }
+  }
+
+  records.sort((a, b) => b.createdAt - a.createdAt);
+
+  // Wearable readings and genome records repeat by the hundred and say the same thing each time.
+  // Six of each is enough to show the stream exists; the rest are counted rather than carried, so
+  // the panel can say what it left out instead of quietly dropping it.
+  const NOISY = new Set(['observation', 'genome-record']);
+  const CAP = 6;
+  const seen: Record<string, number> = {};
+  const kept: PatientRecord[] = [];
+  for (const r of records) {
+    if (!NOISY.has(r.kind)) { kept.push(r); continue; }
+    const n = (seen[r.kind] ?? 0) + 1;
+    seen[r.kind] = n;
+    if (n <= CAP) kept.push(r);
+  }
+  const trimmed: Record<string, number> = {};
+  for (const [k, n] of Object.entries(seen)) if (n > CAP) trimmed[k] = n - CAP;
+
+  people.push({ id, ...(demographics ?? {}), records: kept, recordsTrimmed: trimmed });
+  process.stdout.write('.');
+}
+process.stdout.write('\n');
+
+writeFileSync('fixtures/seed-patients.json', JSON.stringify({
+  source: `${BASE} · world team-4551d2471320`,
+  capturedAt: new Date().toISOString(),
+  note:
+    'Demographics and the records each service holds, read from the simulator for the patients '
+    + 'who are in a queue at the moment of capture. Real records; what happens to them after t=0 '
+    + 'is the engine, not a recording.',
+  people,
+}, null, 1));
+
+console.log(`fixtures/seed-patients.json — ${people.length} people, `
+  + `${people.reduce((n, p) => n + p.records.length, 0)} records`);
+
 const byNode: Record<string, number> = {};
 for (const i of items) byNode[i.node] = (byNode[i.node] ?? 0) + 1;
 
