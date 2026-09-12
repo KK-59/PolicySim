@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#070b09" />
+    <title>Policy Workbench</title>
+  </head>
+  <body>
+    <!--
+      Albert's live controlled experiment, kept as its own entry point.
+
+      It is not folded into the PolicySim shell because policy-workbench.css styles html, body,
+      h1, h2, p, table and button globally for a dark console. Loading it beside the light product
+      would break both. A second entry costs one line of Vite config and keeps each intact.
+    -->
+    <div id="root"></div>
+    <script type="module" src="/src/ui/workbench-main.tsx"></script>
+  </body>
+</html>
