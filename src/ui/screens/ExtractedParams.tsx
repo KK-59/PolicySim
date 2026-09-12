@@ -15,36 +15,42 @@ import { EXTRACTION_NOTE, IS_EXTRACTION_SYNTHETIC } from '../data'
 export function ExtractedParams() {
   const run = useRun()
   const commitments = run.commitments
-  const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   /**
-   * The run, where the user asks for it. Sixty sampled runs across three worlds takes about ten
-   * seconds; the button says so rather than appearing to hang. Without parameters there is
-   * nothing to run, so the screen falls back to the baseline and says which on arrival.
+   * Send the parameters to the engine and go to the result.
+   *
+   * The values sent are whatever is on screen — extraction's reading plus any edit the user made
+   * to it. That is the point of showing them before the run rather than after.
+   *
+   * On failure the user stays here with a reason. Navigating anyway would show the precomputed
+   * baseline under a heading claiming it is their policy, which is the one thing this screen
+   * exists to prevent.
    */
-  const runWorlds = async () => {
-    if (!run.params) {
-      setRun({ hasRun: true })
-      navigate('/worlds')
-      return
-    }
-    setBusy(true)
+  async function runPolicy() {
     setError(null)
+    setRun({ running: true })
     try {
+      const levers: Record<string, number> = {}
+      for (const c of commitments) levers[c.paramPath] = c.value
+
       const response = await fetch('/api/run', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ params: run.params }),
+        body: JSON.stringify({ levers, samples: 16 }),
       })
       const payload = await response.json()
       if (!response.ok) throw new Error(payload?.error ?? `Run failed (${response.status})`)
-      setRun({ liveMetrics: payload.metrics, hasRun: true })
-      navigate('/worlds')
+
+      setRun({
+        hasRun: true,
+        result: { metrics: payload.metrics, sweep: payload.sweep },
+        running: false,
+      })
+      navigate('/world')
     } catch (cause) {
+      setRun({ running: false })
       setError(cause instanceof Error ? cause.message : String(cause))
-    } finally {
-      setBusy(false)
     }
   }
 
@@ -91,21 +97,22 @@ export function ExtractedParams() {
         <button
           type="button"
           className="btn btn--primary btn--lg"
-          disabled={busy}
-          onClick={() => void runWorlds()}
+          disabled={run.running}
+          onClick={() => {
+            void runPolicy()
+          }}
         >
-          {busy ? 'Running three worlds' : 'Run in three worlds'}
-          <Glyph name="arrow" size={16} />
+          {run.running ? 'Simulating…' : 'Run the three worlds'}
+          {!run.running && <Glyph name="arrow" size={16} />}
         </button>
       </div>
 
-      {busy && (
-        <p className="small muted mt-3">
-          Sixty sampled runs across three worlds, at the fidelity the published figures use. About
-          ten seconds.
+      {error && (
+        <p className="note mt-4" role="alert">
+          <Glyph name="warning" size={13} />
+          <span>{error}</span>
         </p>
       )}
-      {error && <p className="note mt-3">{error}</p>}
 
       <div className="tablewrap mt-5">
         <table>

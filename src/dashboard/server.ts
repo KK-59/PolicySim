@@ -3,11 +3,16 @@ import { createServer, type IncomingMessage, type ServerResponse } from "node:ht
 import { parseDocument } from "../extraction/parse.ts"
 import { extractCommitments } from "../extraction/commitments.ts"
 import { toParams } from "../extraction/to-params.ts"
+import { BASELINE } from "../contracts/baseline.ts"
+import { runWorlds } from "../worlds/index.ts"
+import { run } from "../engine/index.ts"
+import { sweepLever } from "../worlds/sweep.ts"
+import { selectWorlds } from "../worlds/select.ts"
+import SEED from "../../fixtures/seed-state.json" with { type: "json" }
+import type { Params } from "../contracts/params.ts"
 import { randomUUID } from "node:crypto"
 import { readFile } from "node:fs/promises"
 import { extname, join } from "node:path"
-import { runWorlds } from "../worlds/index.ts"
-import { BASELINE } from "../contracts/baseline.ts"
 import { runCommunityExperiment, type CommunityExperimentResult, type ExperimentProgress } from "../clinical/prevention/controlled-experiment.ts"
 import type { Resource, SiteView } from "../clinical/prevention/simulation-types.ts"
 import { NhsSimClient } from "../integration/nhssim-client.ts"
@@ -241,26 +246,152 @@ const server = createServer(async (request, response) => {
       return response.end(bytes)
     }
 
-    // --- the run -------------------------------------------------------------------------------
-    // The hop that was missing. /api/extract already computes the Params and threw them away, so
-    // whatever document you uploaded, the worlds screen showed the same precomputed baseline.
-    // This runs the engine on the parameters that came out of YOUR document.
     if (url.pathname === "/api/run" && request.method === "POST") {
-      const body = await requestJson(request, PARAMS_BODY) as { params?: unknown; samples?: unknown; horizonDays?: unknown }
-      if (!body.params || typeof body.params !== "object") throw new Error("params are required")
+      const body = await requestJson(request) as { levers?: unknown; samples?: unknown }
+      const overrides = (body.levers ?? {}) as Record<string, number>
 
-      // The fidelity the shipped fixtures are built at (scripts/build-ui-data.ts). Matching it is
-      // what makes this the real thing rather than a cheaper approximation of it.
-      const samples = typeof body.samples === "number" ? body.samples : 60
-      const horizonDays = typeof body.horizonDays === "number" ? body.horizonDays : 550
+      // Rebuild from BASELINE and apply only the lever values. The client never sends a whole
+      // Params: it has no business setting a measured capacity or a service time, and accepting
+      // one would let the page silently redefine the world it claims to be simulating.
+      const policy: Params = structuredClone(BASELINE)
+      const levers = policy.levers as unknown as Record<string, { value: number; bounds: readonly [number, number] }>
+      for (const [path, value] of Object.entries(overrides)) {
+        const key = path.startsWith("levers.") ? path.slice("levers.".length) : path
+        const leaf = levers[key]
+        if (!leaf || typeof value !== "number" || !Number.isFinite(value)) continue
+        leaf.value = Math.min(leaf.bounds[1], Math.max(leaf.bounds[0], value))
+      }
 
-      const startedAt = Date.now()
-      const metrics = runWorlds(body.params as Parameters<typeof runWorlds>[0], {
-        samples,
+      const samples = typeof body.samples === "number" ? Math.min(60, Math.max(8, body.samples)) : 24
+      const horizonDays = 450
+
+      const metrics = runWorlds(policy, { samples, horizonDays, baseline: BASELINE })
+
+      // Sweep the constraint the plan turns on, with the policy's own position marked.
+      const positions = [1, 1.5, 2, 2.5, 3, 4, 5, 6, 8]
+      const chosen = policy.levers.communityCapacityMultiplier.value
+      const nearest = positions.reduce(
+        (best, v, i) => (Math.abs(v - chosen) < Math.abs((positions[best] as number) - chosen) ? i : best),
+        0,
+      )
+      const sweep = sweepLever(policy, {
+        path: "levers.communityCapacityMultiplier",
+        label: "Community capacity",
+        unit: "x current",
+        baseValue: BASELINE.capacities.communitySlotsPerDay.value,
+        baseUnit: "visits per day",
+        positions,
+        policyIndex: nearest,
+        samples: Math.min(samples, 20),
         horizonDays,
-        baseline: BASELINE,
       })
-      return sendJson(response, { metrics, samples, horizonDays, elapsedMs: Date.now() - startedAt })
+
+      return sendJson(response, { metrics, sweep, ranAt: Date.now(), samples, horizonDays })
+    }
+
+    /**
+     * A traced window of the simulation, for the world view.
+     *
+     * Separate from /api/run because the costs are opposite: a run is seconds of sampling and a
+     * small result, this is one run and a large one. Asking for both at once would make the
+     * result screen wait on a payload it does not use.
+     *
+     * The window is short by construction. Fourteen sim-days is about five thousand events, which
+     * is a scrubber someone can actually drag; a year would be a download.
+     */
+    if (url.pathname === "/api/world" && request.method === "POST") {
+      const body = await requestJson(request) as {
+        levers?: unknown
+        days?: unknown
+        world?: unknown
+      }
+      const overrides = (body.levers ?? {}) as Record<string, number>
+      const days = typeof body.days === "number" ? Math.min(28, Math.max(3, body.days)) : 14
+      const wanted = body.world === "optimistic" || body.world === "pessimistic"
+        ? body.world
+        : "realistic" as const
+
+      const policy: Params = structuredClone(BASELINE)
+      const levers = policy.levers as unknown as Record<string, { value: number; bounds: readonly [number, number] }>
+      for (const [path, value] of Object.entries(overrides)) {
+        const key = path.startsWith("levers.") ? path.slice("levers.".length) : path
+        const leaf = levers[key]
+        if (!leaf || typeof value !== "number" || !Number.isFinite(value)) continue
+        leaf.value = Math.min(leaf.bounds[1], Math.max(leaf.bounds[0], value))
+      }
+
+      // Which of the three worlds to watch.
+      //
+      // Not a re-roll: the same draws, seed and scoring as the sweep, so the pessimistic world
+      // scrubbed here is the pessimistic world the chart was drawn from. Watching a differently
+      // sampled pessimistic run would be a second answer to the same question.
+      const selected = selectWorlds(policy, { samples: 16, horizonDays: 450, seed: 1 })[wanted]
+
+      // Warm up first, then watch. Opening on an empty waiting room would show a neighbourhood
+      // that has just been switched on rather than one that has been running.
+      const DAY = 1440
+      const warmupDays = 60
+      const world = structuredClone(selected.params)
+      world.sim.warmupDays = warmupDays
+      world.sim.horizonDays = warmupDays + days
+
+      // Start from the real world's open work, placed at the moment the window opens.
+      //
+      // This is the PRD's claim made literal: the simulator is ground truth, and the engine picks
+      // up where it left off. The people in the queue at t=0 are the ones NHS-SIM actually has
+      // waiting, with the time they have already waited carried over. Everything after is ours,
+      // and the page says so.
+      const traceOpts = { from: warmupDays * DAY, to: (warmupDays + days) * DAY }
+      const outcome = run(world, selected.seed, {
+        trace: traceOpts,
+        seedItems: SEED.items,
+        seedAt: warmupDays * DAY,
+      })
+
+      /**
+       * The same world with the policy switched off.
+       *
+       * Same seed, same parameter draw, same seeded backlog, same arrival stream — only the
+       * levers differ. That makes the difference between the two traces the policy's effect and
+       * nothing else, which is the whole reason for running a seeded simulation rather than
+       * observing a real one. Two runs you cannot hold everything else constant between can only
+       * be compared statistically; these can be compared item by item.
+       */
+      const control = structuredClone(selected.params)
+      control.sim.warmupDays = warmupDays
+      control.sim.horizonDays = warmupDays + days
+      for (const key of Object.keys(overrides)) {
+        const k = key.startsWith("levers.") ? key.slice("levers.".length) : key
+        const baseLeaf = (BASELINE.levers as unknown as Record<string, { value: number }>)[k]
+        const ctlLeaf = (control.levers as unknown as Record<string, { value: number }>)[k]
+        if (baseLeaf && ctlLeaf) ctlLeaf.value = baseLeaf.value
+      }
+      const controlOutcome = run(control, selected.seed, {
+        trace: traceOpts,
+        seedItems: SEED.items,
+        seedAt: warmupDays * DAY,
+      })
+
+      return sendJson(response, {
+        world: wanted,
+        seed: { capturedAt: SEED.capturedAt, items: SEED.items.length, source: SEED.source },
+        windowStart: warmupDays * DAY,
+        windowEnd: (warmupDays + days) * DAY,
+        days,
+        trace: outcome.trace ?? [],
+        controlTrace: controlOutcome.trace ?? [],
+        /** Which levers actually differ from baseline, for the legend. */
+        changed: Object.keys(overrides).filter((key) => {
+          const k = key.startsWith("levers.") ? key.slice("levers.".length) : key
+          const b = (BASELINE.levers as unknown as Record<string, { value: number }>)[k]
+          return b !== undefined && b.value !== overrides[key]
+        }),
+        nodes: Object.entries(outcome.perNode).map(([id, state]) => ({
+          id,
+          utilisation: state?.utilisation ?? 0,
+          stable: state?.stable ?? true,
+        })),
+      })
     }
 
     if (url.pathname === "/api/policy/interpret" && request.method === "POST") {

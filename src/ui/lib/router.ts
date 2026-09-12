@@ -9,9 +9,9 @@
 
 import { useCallback, useEffect, useSyncExternalStore } from 'react'
 
-export type Route = '/' | '/about' | '/upload' | '/parameters' | '/worlds'
+export type Route = '/' | '/about' | '/upload' | '/parameters' | '/worlds' | '/world'
 
-export const ROUTES: readonly Route[] = ['/', '/about', '/upload', '/parameters', '/worlds']
+export const ROUTES: readonly Route[] = ['/', '/about', '/upload', '/parameters', '/worlds', '/world']
 
 function currentPath(): Route {
   const raw = window.location.hash.replace(/^#/, '') || '/'

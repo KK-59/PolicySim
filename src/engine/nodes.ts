@@ -135,8 +135,18 @@ export interface WorkItem {
    * Keeping it opaque is what stops queueing code from acquiring clinical concepts.
    */
   tag?: string;
+  /** What the snapshot called this piece of work, for the world view. */
+  title?: string;
   /** How many times this item has been refused and sent back upstream. */
   bounces?: number;
+  /**
+   * The simulator's own identifier for this piece of work, where it came from a snapshot.
+   *
+   * Opaque to the engine, like `tag`. It exists so the world view can show the people NHS-SIM
+   * actually has waiting instead of anonymous demand — the model does not know or care who
+   * anyone is, and nothing downstream of here may start caring.
+   */
+  ref?: string;
   /**
    * Where the item is along its pathway. The router reads it to decide the next hop.
    *
@@ -370,6 +380,26 @@ export class QueueNode {
       this.heads.push(0);
     }
     (this.queues[p] as WorkItem[]).push(item);
+  }
+
+  /**
+   * Who is here right now: waiting and in service.
+   *
+   * For the world view. A trace that starts mid-run opens on a node that already has a queue, and
+   * without this the queue is invisible until each item happens to be served — so the backlog
+   * that matters most is the one the view cannot see.
+   */
+  contents(): { item: WorkItem; state: 'waiting' | 'service' }[] {
+    const out: { item: WorkItem; state: 'waiting' | 'service' }[] = [];
+    for (let p = 0; p < this.queues.length; p++) {
+      const q = this.queues[p] as WorkItem[];
+      for (let i = this.heads[p] as number; i < q.length; i++) {
+        out.push({ item: q[i] as WorkItem, state: 'waiting' });
+      }
+    }
+    // In-service items are not held in a list — the node tracks a count and their completion is
+    // already scheduled — so they are reported by the completion events that follow.
+    return out;
   }
 
   /** Close the books at the end of the run. */

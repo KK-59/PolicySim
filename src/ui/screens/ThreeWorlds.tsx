@@ -1,9 +1,11 @@
 /**
- * Three worlds. The result, and nothing else.
+ * The report.
  *
- * Chart, the lever that drives it, and the findings. Sensitivity and flags sit behind a disclosure
- * because they matter for trusting the answer but not for reading it. Everything is delta against
- * the locked baseline, never an absolute.
+ * Not a stage in the flow — the world view is where a reader lands, and this is what they open
+ * when they want the analysis behind it: the three worlds side by side, the sweep, the findings,
+ * and the sensitivity and flags behind a disclosure.
+ *
+ * Everything is delta against the locked baseline, never an absolute.
  */
 
 import { useState } from 'react'
@@ -11,27 +13,64 @@ import { Glyph } from '../components/Glyph'
 import { Tornado } from '../components/Tornado'
 import { WorldChart } from '../components/WorldChart'
 import { Findings } from '../components/WorldPanel'
-import { metrics as baselineMetrics, sweep, seriesFor, leverAt } from '../data'
+import { WorldOutcomes } from '../components/WorldOutcomes'
+import { metrics as baselineMetrics, sweep as baselineSweep } from '../data'
 import { useRun } from '../lib/store'
+import { href } from '../lib/router'
+import type { Metrics } from '@/contracts/metrics'
+import type { Sweep, SweepSeries } from '../data'
 
 export function ThreeWorlds() {
   const run = useRun()
-  // Outcomes for the document the user actually ran, when there are any. Otherwise the calibrated
-  // baseline. The screen must say which, because showing a precomputed figure while the user
-  // believes they are looking at their own policy is the one failure this project cannot have.
-  const metrics = run.liveMetrics ?? baselineMetrics
-  const isLive = run.liveMetrics !== null
+
+  /**
+   * This policy's own run, if it has one; the precomputed baseline otherwise.
+   *
+   * The fallback is not only for the first visit. It is the offline path: the grid is committed,
+   * so the worlds screen renders with no API, no key and no network — which is the state the
+   * demo has to survive if the server goes down again.
+   */
+  const metrics = (run.result?.metrics as Metrics | undefined) ?? baselineMetrics
+  const sweep = (run.result?.sweep as Sweep | undefined) ?? baselineSweep
+  const isLive = Boolean(run.result)
 
   const positions = sweep.lever.positions
   const [idx, setIdx] = useState(sweep.policyIndex)
   const [seriesId, setSeriesId] = useState<'complex' | 'routine'>('complex')
 
-  const series = seriesFor(seriesId)
-  const value = leverAt(idx)
+  const series: SweepSeries =
+    sweep.series.find((x) => x.patientClass === seriesId) ?? (sweep.series[0] as SweepSeries)
+  const value = positions[Math.min(idx, positions.length - 1)] ?? positions[0] ?? 1
 
   return (
     <section className="page">
+      {/* Which numbers these are. A reader must never have to guess whether the chart is their
+          policy or the shipped baseline. */}
+      {!isLive && (
+        <p className="note" role="note">
+          <Glyph name="warning" size={13} />
+          <span>
+            Showing the precomputed baseline sweep. Run a policy from the parameters screen to
+            simulate it.
+          </span>
+        </p>
+      )}
+
       <div className="row between">
+        <a className="btn btn--ghost" href={href('/world')}>
+          <Glyph name="arrow" size={14} />
+          Back to the world
+        </a>
+        <span className="muted small">
+          {isLive ? `${metrics.run.samples} sampled runs` : 'precomputed baseline'}
+        </span>
+      </div>
+
+      {/* What each world IS, before how it moves. A reader should be able to answer "what
+          happens if the pessimistic one is real" without reading a line chart. */}
+      <WorldOutcomes metrics={metrics} />
+
+      <div className="row between mt-6">
         <h1 className="h1">{series.label}</h1>
         <div className="row gap-2" role="group" aria-label="Which outcome to chart">
           <button
@@ -53,27 +92,13 @@ export function ThreeWorlds() {
         </div>
       </div>
 
-      <p className="small muted mt-3">
-        {isLive ? (
-          <>
-            <Glyph name="check" size={13} /> Findings below are the engine&rsquo;s output for{' '}
-            <strong>{run.document?.filename ?? 'your document'}</strong>. The curve is the
-            calibrated baseline sweep, which does not depend on the document.
-          </>
-        ) : (
-          <>
-            <Glyph name="warning" size={13} /> Showing the calibrated baseline. Run a document to
-            see what it changes.
-          </>
-        )}
-      </p>
-
       <div className="mt-5">
         <WorldChart
           series={series}
           value={value}
-          policyValue={leverAt(sweep.policyIndex)}
+          policyValue={positions[sweep.policyIndex] ?? value}
           breakpoint={sweep.breakpointByWorld.realistic}
+          sampleCount={metrics.run.samples}
           animate={false}
         />
       </div>

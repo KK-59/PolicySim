@@ -15,7 +15,6 @@ interface ExtractPayload {
   rejected?: { text: string; span: string; reason: string }[]
   truncated?: boolean
   charsRead?: number
-  params?: unknown
   error?: string
 }
 
@@ -25,7 +24,6 @@ function applyExtraction(payload: ExtractPayload, filename: string, sizeBytes: n
     commitments: (payload.rows ?? []).map((r, i) => ({ id: `c${i + 1}`, ...r })) as never,
     rejected: payload.rejected ?? [],
     truncated: payload.truncated ? { charsRead: payload.charsRead ?? 0 } : null,
-    params: payload.params ?? null,
     extracted: true,
   })
   navigate('/parameters')

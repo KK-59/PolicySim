@@ -5,7 +5,6 @@
 
 import { useSyncExternalStore } from 'react'
 import { extraction, type Commitment } from '../data'
-import type { Metrics } from '@/contracts/metrics'
 
 export interface RunState {
   /** Null until a document has been dropped. Guards /parameters and /worlds. */
@@ -28,25 +27,17 @@ export interface RunState {
   /** Set when the document was longer than the model could be sent in one call. */
   truncated: { charsRead: number } | null
   /**
-   * Outcomes the engine produced for THIS document, or null while the screen is showing the
-   * precomputed baseline. The worlds screen renders whichever it has and says which, because a
-   * fixture presented as the user's result is the one thing this project may not do.
+   * Engine output for THIS policy, once it has been run. Null until then, and the worlds screen
+   * falls back to the precomputed baseline sweep — which is also the offline path when there is
+   * no API to call.
    */
-  liveMetrics: Metrics | null
-  /**
-   * The Params the document mapped to, kept so the run can happen where the user asks for it
-   * rather than the moment the document is read. Opaque here on purpose: the store does not need
-   * to know the shape, only to carry it from the reading to the run.
-   */
-  params: unknown | null
-  /** What the run is doing right now. Null when idle. A real run takes about ten seconds. */
-  stage: string | null
+  result: { metrics: unknown; sweep: unknown } | null
+  running: boolean
   /**
    * A document taken off the shelf and dropped, waiting to be read.
    *
    * Dropping loads it into the box; it is not read until the user asks for it, exactly as when
-   * they choose a file of their own. Reading on drop meant the same gesture did two different
-   * things depending on where the document came from.
+   * they choose a file of their own.
    */
   pendingDoc: { id: string; title: string } | null
 }
@@ -61,9 +52,8 @@ const initial: RunState = {
   extracted: false,
   rejected: [],
   truncated: null,
-  liveMetrics: null,
-  params: null,
-  stage: null,
+  result: null,
+  running: false,
   pendingDoc: null,
 }
 
