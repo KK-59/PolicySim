@@ -27,7 +27,7 @@ export const BASELINE: Params = {
   // appointments are longer: 0.94 x 1,350 min/day / 17.25 min mean = 73.6 patients/day.
   arrivals: {
     perDay: {
-      routine: s(58.852, [0, 1000], 'literature', 'derived: 0.94 x 1350min / 17.25min x 0.80', {
+      routine: s(58.852, [0, 1000], 'assumed', 'derived: 0.94 x 1350min / 17.25min x 0.80', {
         derived: true,
         range: [46.5, 64.4], // rho and mix ranges propagated
         note: 'Derived, not measured. Re-derive with deriveGpDemand() if capacity or rho change.',
@@ -44,9 +44,9 @@ export const BASELINE: Params = {
       }),
     },
 
-    targetUtilisation: s(0.94, [0, 1.2], 'literature', undefined, {
+    targetUtilisation: s(0.94, [0, 1.2], 'assumed', undefined, {
       range: [0.85, 0.99],
-      note: 'TODO(albert): needs a real citation for utilisation in English general practice. '
+      note: '⚠️ No direct utilisation estimate for a matched English practice was found. '
         + 'Expect this at the top of the tornado — waiting time is convex in it, so its range '
         + 'drives the width of the three worlds more than anything else in the model.',
     }),
@@ -82,9 +82,10 @@ export const BASELINE: Params = {
       note: 'The binding constraint. Small base means the capacity multiplier bites hard.',
     }),
     staffedSpaces: s(8, [0, 100], 'measured', `${SNAP} · view.staffing (4 doctors, 4 nurses)`),
-    gpAdminShare: s(0.3, [0, 1], 'literature', undefined, {
-      note: 'TODO(albert): source this. It couples the clinic and admin queues, so the tornado '
-        + 'may well find it dominant.',
+    gpAdminShare: s(0.296, [0, 1], 'literature', 'gp-workload-trends-2024', {
+      range: [0.163, 0.296],
+      note: 'Derived from reported GP admin and total workload in 2005 and 2019. This is a '
+        + 'historical endpoint range, not a confidence interval.',
     }),
   },
 
@@ -144,7 +145,7 @@ export const BASELINE: Params = {
       note: 'Base is measurable; the EFFECT of monitoring on admission is not in the sim. '
         + 'Effect size must come from the corpus.',
     }),
-    hospitalToCommunityShare: s(0, [0, 1], 'literature', undefined, {
+    hospitalToCommunityShare: s(0, [0, 1], 'assumed', undefined, {
       note: '⚠️ NOT GROUNDED. The only 7 community visits in the world were created by team14. '
         + 'There is no baseline referral flow to measure.',
     }),
@@ -192,15 +193,15 @@ export const BASELINE: Params = {
   environment: {
     winterPressure: false,
     staffShortage: false,
-    winterDemandMultiplier: s(1.15, [1, 2], 'literature', undefined, {
+    winterDemandMultiplier: s(1.15, [1, 2], 'assumed', undefined, {
       range: [1.08, 1.25],
       note: 'TODO(albert): source winter demand uplift in primary care.',
     }),
-    winterUrgentMultiplier: s(1.6, [1, 5], 'literature', undefined, {
+    winterUrgentMultiplier: s(1.6, [1, 5], 'assumed', undefined, {
       range: [1.3, 2.2],
       note: 'NHS-SIM\'s winter-pressure scenario raises urgent arrivals; magnitude is ours.',
     }),
-    shortageCommunityMultiplier: s(0.6, [0, 1], 'literature', undefined, {
+    shortageCommunityMultiplier: s(0.6, [0, 1], 'assumed', undefined, {
       range: [0.45, 0.8],
       note: 'NHS-SIM\'s staff-shortage scenario reduces home-visit slots.',
     }),

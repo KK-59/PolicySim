@@ -219,7 +219,7 @@ export interface Levers {
   monitoringIntensity: Sourced;
   /**
    * Share of hospital discharges routed to community rather than outpatient.
-   * ⚠️ NOT GROUNDED — the sim has no baseline community referral flow. Tag `literature`.
+   * ⚠️ NOT GROUNDED — the sim has no baseline community referral flow. Tag `assumed`.
    */
   hospitalToCommunityShare: Sourced;
   /**
