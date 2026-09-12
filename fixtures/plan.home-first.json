@@ -1,0 +1,103 @@
+{
+  "_note": "Worked example of a Plan conforming to src/contracts/action.ts. Built by Oriol for the live-loop run. The CLI retargets it onto a patient with an unreviewed letter at run time, so it is patient-agnostic; Albert owns the real clinical plans and should replace the rationales with sourced ones. Every action here was verified against the live server.",
+  "_patient": "SIM-000001 Amira Khan. Goals: understand the next step, avoid unnecessary travel, stay at home with a clear contact. Needs: home visit, carer involvement.",
+  "_versions": "expectedVersion values are resolved at RUN TIME by re-reading the resource. The values below are the versions observed at authoring time; if the world has moved on, the loop gets a 409 'Stale resource version' and its reread-retry fallback fires. That is correct behaviour, not a bug.",
+  "id": "plan-home-first",
+  "patientId": "SIM-000001",
+  "rationale": "Keep the patient at home: review the discharge letter, bring the carer in, and take the monitoring to them rather than them to the clinic.",
+  "actions": [
+    {
+      "id": "a1",
+      "site": "gp",
+      "offsetMinutes": 0,
+      "tier": "low-risk",
+      "rationale": "Open a tracked task so the discharge handover cannot be dropped.",
+      "action": {
+        "type": "create_task",
+        "patientId": "SIM-000001",
+        "title": "Discharge follow-up: home-first pathway",
+        "text": "Monitoring handover received. Patient prefers to avoid travel; carer to be involved."
+      }
+    },
+    {
+      "id": "a2",
+      "site": "gp",
+      "offsetMinutes": 5,
+      "tier": "low-risk",
+      "rationale": "Assign the letter to the duty GP so it can be reviewed. Assignment is a prerequisite for review.",
+      "action": {
+        "type": "process_document",
+        "patientId": "SIM-000001",
+        "resourceId": "document-batch-2-001",
+        "expectedVersion": 2,
+        "documentCommand": "assign",
+        "clinician": "Duty GP"
+      }
+    },
+    {
+      "id": "a3",
+      "site": "gp",
+      "offsetMinutes": 15,
+      "tier": "requires-approval",
+      "rationale": "Clinical review of the discharge letter. A human signs this off; the agent never reviews a letter on its own.",
+      "action": {
+        "type": "process_document",
+        "patientId": "SIM-000001",
+        "resourceId": "document-batch-2-001",
+        "expectedVersion": 3,
+        "documentCommand": "review",
+        "text": "Monitoring handover checked. Home-first plan appropriate. Carer to be involved."
+      }
+    },
+    {
+      "id": "a4",
+      "site": "gp",
+      "offsetMinutes": 20,
+      "tier": "requires-approval",
+      "rationale": "Bloods to confirm the monitoring picture before changing anything. Routine, collected on the home visit rather than at clinic.",
+      "action": {
+        "type": "order_test",
+        "patientId": "SIM-000001",
+        "bloodTestOrder": {
+          "panel": "Full blood count and renal profile",
+          "panelId": "ue",
+          "specimen": "Venous blood",
+          "priority": "routine",
+          "collection": "next-round",
+          "clinicalDetails": "Post-discharge monitoring. Patient housebound by preference; collect at home visit."
+        }
+      }
+    },
+    {
+      "id": "a5",
+      "site": "community",
+      "offsetMinutes": 30,
+      "tier": "requires-approval",
+      "rationale": "The home visit is the whole point of the plan: it is what removes the journey.",
+      "action": {
+        "type": "schedule_visit",
+        "patientId": "SIM-000001",
+        "durationMinutes": 30,
+        "location": "Patient home",
+        "clinician": "Community nurse"
+      }
+    },
+    {
+      "id": "a6",
+      "site": "gp",
+      "offsetMinutes": 40,
+      "tier": "low-risk",
+      "rationale": "Give the patient the clear point of contact they asked for, in the conversation they already use.",
+      "action": {
+        "type": "messaging_action",
+        "patientId": "SIM-000001",
+        "resourceId": "messaging-example-1",
+        "expectedVersion": 1,
+        "messagingCommand": {
+          "kind": "note",
+          "body": "Home visit arranged with the community nurse. Bloods will be taken at home. Your carer is welcome to be there."
+        }
+      }
+    }
+  ]
+}

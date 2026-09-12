@@ -36,3 +36,4 @@ scratch/
 .idea/
 .vscode/*
 !.vscode/extensions.json
+live-run-*.log

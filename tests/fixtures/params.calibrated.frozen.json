@@ -1,0 +1,268 @@
+{
+  "meta": {
+    "site": "gp",
+    "observedAt": 1789993320000,
+    "observedAtIso": "2026-09-21T12:22:00.000Z",
+    "windowStart": 1789200900000,
+    "windowEnd": 1789993320000,
+    "windowDays": 9.172,
+    "resourcesObserved": 2000,
+    "arrivalsCounted": 890,
+    "historyExcluded": 1097,
+    "teamWritesExcluded": 13,
+    "resourceTotal": 375703,
+    "appointmentsDate": "2026-09-18"
+  },
+  "params": {
+    "population": 50000,
+    "arrivals": {
+      "routine": 97.039,
+      "complex": 0,
+      "urgent": 0
+    },
+    "capacities": {
+      "concurrentSlots": {
+        "gp": 6
+      },
+      "appointmentSessionVersion": 1,
+      "gpSessionsPerDay": 6,
+      "gpSlotMinutes": 15,
+      "gpSlotsPerDay": 90
+    },
+    "routing": {
+      "diagnostics->gp": 0.8636,
+      "diagnostics->population": 0.0455,
+      "diagnostics->triage": 0.0909,
+      "gp->diagnostics": 0.8182,
+      "gp->messaging": 0.0455,
+      "gp->triage": 0.1364,
+      "population->triage": 1,
+      "triage->mental": 0.5,
+      "triage->messaging": 0.5
+    },
+    "dueWindows": {
+      "test": 1440,
+      "prescription": 1440,
+      "visit": 1440
+    }
+  },
+  "_sources": {
+    "population": {
+      "units": "people",
+      "source": "measured",
+      "derivation": "population field of the site view payload",
+      "citation": "GET /api/sites/gp/view → population",
+      "range": [
+        1,
+        10000000
+      ]
+    },
+    "arrivals.routine": {
+      "units": "/sim-day",
+      "source": "measured",
+      "derivation": "890 routine arrivals with a patientId, created inside a 9.17 sim-day window, divided by that window",
+      "citation": "GET /api/sites/gp/view → resources[].kind + priority + createdAt",
+      "range": [
+        0,
+        100000
+      ]
+    },
+    "arrivals.complex": {
+      "units": "/sim-day",
+      "source": "measured",
+      "derivation": "0 complex arrivals with a patientId, created inside a 9.17 sim-day window, divided by that window",
+      "citation": "GET /api/sites/gp/view → resources[].kind + priority + createdAt",
+      "range": [
+        0,
+        100000
+      ]
+    },
+    "arrivals.urgent": {
+      "units": "/sim-day",
+      "source": "measured",
+      "derivation": "0 urgent arrivals with a patientId, created inside a 9.17 sim-day window, divided by that window",
+      "citation": "GET /api/sites/gp/view → resources[].kind + priority + createdAt",
+      "range": [
+        0,
+        100000
+      ]
+    },
+    "capacities.concurrentSlots.gp": {
+      "units": "concurrent slots",
+      "source": "documented",
+      "derivation": "capacity resource \"capacity-gp\" declares total 6",
+      "citation": "GET /api/sites/gp/view → resources[] where kind = capacity",
+      "range": [
+        0,
+        1000
+      ]
+    },
+    "capacities.appointmentSessionVersion": {
+      "units": "version",
+      "source": "documented",
+      "derivation": "appointment session config version the capacities below were read at",
+      "citation": "GET /api/sites/gp/view → counters.appointmentSessionVersion",
+      "range": [
+        0,
+        1000000
+      ]
+    },
+    "capacities.gpSessionsPerDay": {
+      "units": "sessions/day",
+      "source": "documented",
+      "derivation": "6 appointment sessions published for 2026-09-18",
+      "citation": "GET /api/sites/gp/appointments?date=2026-09-18 → sessions[]",
+      "range": [
+        0,
+        50
+      ]
+    },
+    "capacities.gpSlotMinutes": {
+      "units": "min",
+      "source": "documented",
+      "derivation": "commonest slotMinutes across 6 published sessions",
+      "citation": "GET /api/sites/gp/appointments?date=2026-09-18 → sessions[]",
+      "range": [
+        1,
+        120
+      ]
+    },
+    "capacities.gpSlotsPerDay": {
+      "units": "slots/day",
+      "source": "documented",
+      "derivation": "sum over 6 sessions of floor((endsAt - startsAt) / slotMinutes) minus blocked slots",
+      "citation": "GET /api/sites/gp/appointments?date=2026-09-18 → sessions[]",
+      "range": [
+        0,
+        2000
+      ]
+    },
+    "routing.diagnostics->gp": {
+      "units": "share",
+      "source": "measured",
+      "derivation": "19 of 22 observed handoffs out of diagnostics, from per-patient resource timelines",
+      "citation": "GET /api/sites/gp/view → resources[].owner ordered by patientId + createdAt",
+      "range": [
+        0,
+        1
+      ]
+    },
+    "routing.diagnostics->population": {
+      "units": "share",
+      "source": "measured",
+      "derivation": "1 of 22 observed handoffs out of diagnostics, from per-patient resource timelines",
+      "citation": "GET /api/sites/gp/view → resources[].owner ordered by patientId + createdAt",
+      "range": [
+        0,
+        1
+      ]
+    },
+    "routing.diagnostics->triage": {
+      "units": "share",
+      "source": "measured",
+      "derivation": "2 of 22 observed handoffs out of diagnostics, from per-patient resource timelines",
+      "citation": "GET /api/sites/gp/view → resources[].owner ordered by patientId + createdAt",
+      "range": [
+        0,
+        1
+      ]
+    },
+    "routing.gp->diagnostics": {
+      "units": "share",
+      "source": "measured",
+      "derivation": "18 of 22 observed handoffs out of gp, from per-patient resource timelines",
+      "citation": "GET /api/sites/gp/view → resources[].owner ordered by patientId + createdAt",
+      "range": [
+        0,
+        1
+      ]
+    },
+    "routing.gp->messaging": {
+      "units": "share",
+      "source": "measured",
+      "derivation": "1 of 22 observed handoffs out of gp, from per-patient resource timelines",
+      "citation": "GET /api/sites/gp/view → resources[].owner ordered by patientId + createdAt",
+      "range": [
+        0,
+        1
+      ]
+    },
+    "routing.gp->triage": {
+      "units": "share",
+      "source": "measured",
+      "derivation": "3 of 22 observed handoffs out of gp, from per-patient resource timelines",
+      "citation": "GET /api/sites/gp/view → resources[].owner ordered by patientId + createdAt",
+      "range": [
+        0,
+        1
+      ]
+    },
+    "routing.population->triage": {
+      "units": "share",
+      "source": "measured",
+      "derivation": "1 of 1 observed handoffs out of population, from per-patient resource timelines",
+      "citation": "GET /api/sites/gp/view → resources[].owner ordered by patientId + createdAt",
+      "range": [
+        0,
+        1
+      ]
+    },
+    "routing.triage->mental": {
+      "units": "share",
+      "source": "measured",
+      "derivation": "1 of 2 observed handoffs out of triage, from per-patient resource timelines",
+      "citation": "GET /api/sites/gp/view → resources[].owner ordered by patientId + createdAt",
+      "range": [
+        0,
+        1
+      ]
+    },
+    "routing.triage->messaging": {
+      "units": "share",
+      "source": "measured",
+      "derivation": "1 of 2 observed handoffs out of triage, from per-patient resource timelines",
+      "citation": "GET /api/sites/gp/view → resources[].owner ordered by patientId + createdAt",
+      "range": [
+        0,
+        1
+      ]
+    },
+    "dueWindows.test": {
+      "units": "min",
+      "source": "documented",
+      "derivation": "median dueAt - createdAt over 2 test resources (identical across every observation); server-set due window, not an observed service time",
+      "citation": "GET /api/sites/gp/view → resources[].dueAt - createdAt where kind = test",
+      "range": [
+        0,
+        129600
+      ]
+    },
+    "dueWindows.prescription": {
+      "units": "min",
+      "source": "documented",
+      "derivation": "median dueAt - createdAt over 7 prescription resources (identical across every observation); server-set due window, not an observed service time",
+      "citation": "GET /api/sites/gp/view → resources[].dueAt - createdAt where kind = prescription",
+      "range": [
+        0,
+        129600
+      ]
+    },
+    "dueWindows.visit": {
+      "units": "min",
+      "source": "documented",
+      "derivation": "median dueAt - createdAt over 2 visit resources (identical across every observation); server-set due window, not an observed service time",
+      "citation": "GET /api/sites/gp/view → resources[].dueAt - createdAt where kind = visit",
+      "range": [
+        0,
+        129600
+      ]
+    }
+  },
+  "gaps": [
+    "no complex arrivals observed in a 9.17 sim-day window; rate reported as 0, do not treat it as calibrated",
+    "no urgent arrivals observed in a 9.17 sim-day window; rate reported as 0, do not treat it as calibrated",
+    "no visit resources in this view; community visits per day come from the declared capacity only",
+    "routing shares out of triage, population rest on fewer than 5 observed transitions",
+    "no referral resources with a dueAt in this read; its turnaround window is unsourced"
+  ]
+}
