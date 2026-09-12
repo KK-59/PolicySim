@@ -92,6 +92,8 @@ export interface LiveLoopOptions extends ApprovalGateOptions {
   tailMinutes?: number
   /** Where the observed list is written. `false` disables writing (tests). */
   observedPath?: string | false
+  /** Where the full run report goes. false to skip. */
+  runPath?: string | false
   /** A previous partial result. Already-applied actions are skipped, not repeated. */
   resumeFrom?: LiveLoopResult
   /** Our team id, e.g. "team14". Learned from the first echoed write when omitted. */
@@ -218,9 +220,13 @@ export async function runLiveLoop(
       seenEventIds.add(event.id)
       const ours = OUR_EVENT_TYPES.has(event.type)
       if (ours && !teamId) teamId = event.actor // learn the team id from our own echo
+      // `clock.changed` carries our team as its actor, but it is the loop stepping the clock,
+      // not a clinical write. Counting it doubled `causedByUs` for a six-action plan, which
+      // would halve the matched percentage on the accuracy panel.
+      const isClockStep = event.type === 'clock.changed'
       const observedEvent: ObservedEvent = {
         ...event,
-        causedByUs: ours || (teamId !== undefined && event.actor === teamId),
+        causedByUs: !isClockStep && (ours || (teamId !== undefined && event.actor === teamId)),
         // Prefer the event's own timestamp: a window covers many minutes and the timing error
         // Kaavya measures is per event, not per step. `elapsedMinutes` is the fallback.
         atSimMinutes: typeof event.time === 'number' && startSimTime > 0
@@ -243,6 +249,11 @@ export async function runLiveLoop(
       startSimTime = typeof clock.now === 'number' ? clock.now : 0
       simTime = startSimTime
       endSimTime = startSimTime
+      // Everything the clock already knows about happened BEFORE this run. The world is paused,
+      // so the previous rehearsal's last events carry exactly this timestamp and a timestamp
+      // filter alone cannot separate them from our first write, which lands at the same instant.
+      // Recording their ids is the only reliable discriminator.
+      for (const event of clock.events ?? []) seenEventIds.add(event.id)
     }
 
     const pending = approved.filter((p) => !done.has(p.id))
@@ -306,7 +317,18 @@ export async function runLiveLoop(
     )
   } finally {
     // Runs on the abort path too: the world is never left changed without a record of it.
-    await writeObserved(options.observedPath ?? DEFAULT_OBSERVED_PATH, result())
+    const finished = result()
+    // A run that died before it saw anything has nothing to hand over. Writing an empty list
+    // would destroy the previous rehearsal's handoff, which may be the only one we have if the
+    // server is down at demo time.
+    if (finished.observed.length > 0 || finished.applied.length > 0) {
+      await writeObserved(options.observedPath ?? DEFAULT_OBSERVED_PATH, finished)
+    }
+    // Never blanks an existing handoff: a run that dies before it applies anything has nothing
+    // to say, and overwriting the previous rehearsal's report with an empty one loses evidence.
+    if (finished.applied.length > 0 || finished.observationGaps.length > 0) {
+      await writeRunReport(options.runPath ?? DEFAULT_RUN_PATH, finished)
+    }
   }
 }
 
@@ -315,6 +337,19 @@ export async function runLiveLoop(
 // ---------------------------------------------------------------------------
 
 /** Dynamic import so the module stays importable from the browser bundle Elsa builds. */
+/**
+ * Sibling of the observed file carrying the WHOLE run: what was applied, which fallbacks fired,
+ * and which windows we never saw. A gap that exists only in memory tells the accuracy diff the
+ * world did nothing, which is the exact conclusion the gap type exists to prevent.
+ */
+export const DEFAULT_RUN_PATH = 'fixtures/run.live.json'
+
+export async function writeRunReport(path: string | false, result: LiveLoopResult): Promise<void> {
+  if (path === false) return
+  const { writeFile } = await import('node:fs/promises')
+  await writeFile(path, JSON.stringify(result, null, 2))
+}
+
 export async function writeObserved(path: string | false, result: LiveLoopResult): Promise<void> {
   if (path === false) return
   try {

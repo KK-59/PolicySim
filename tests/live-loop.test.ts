@@ -28,7 +28,13 @@ interface Stub extends SimClient {
 
 /** Clock stub: advances exactly the minutes asked for, and echoes our writes back as events. */
 function makeStub(
-  options: { failClockOnAdvance?: number; failReadClock?: boolean; worldEvents?: ClockEvent[] } = {},
+  options: {
+    failClockOnAdvance?: number
+    failReadClock?: boolean
+    worldEvents?: ClockEvent[]
+    /** Events the clock already knows about before the run starts. */
+    preRunEvents?: ClockEvent[]
+  } = {},
 ): Stub {
   let seq = 0
   const pending: ClockEvent[] = []
@@ -40,7 +46,7 @@ function makeStub(
     async get<T>(path: string): Promise<T> {
       if (path === '/api/clock') {
         if (options.failReadClock) throw new Error('world unreachable')
-        return { now: stub.now, paused: true, speed: 60 } as T
+        return { now: stub.now, paused: true, speed: 60, events: options.preRunEvents ?? [] } as T
       }
       return { resources: [] } as T
     },
@@ -203,6 +209,43 @@ describe('observed events', () => {
     const result = await runLiveLoop(client, plan, [approve('a1'), approve('a2')], noFile)
 
     expect(result.observed.filter((e) => e.id === 'w-1')).toHaveLength(1)
+  })
+})
+
+describe('events from before the run', () => {
+  it('ignores a previous rehearsal stamped at exactly the start instant', async () => {
+    // The world is paused, so the last events of the previous run carry exactly T0, the same
+    // instant our own first write lands at. A timestamp filter cannot separate them; only the
+    // ids the clock already reported can. Without this the stale echo is attributed to a1.
+    const leftovers: ClockEvent[] = [
+      { id: 'old-1', time: T0, type: 'messaging_action', actor: 'team14', detail: 'previous run' },
+      { id: 'old-2', time: T0, type: 'clock.changed', actor: 'team14', detail: 'Advanced by 0' },
+    ]
+    const client = makeStub({ preRunEvents: leftovers, worldEvents: leftovers })
+    const plan = makePlan([planned('a1', 0, task('one'))])
+
+    const result = await runLiveLoop(client, plan, [approve('a1')], noFile)
+
+    expect(result.observed.map((e) => e.id)).not.toContain('old-1')
+    expect(result.observed.map((e) => e.id)).not.toContain('old-2')
+    // Our own write, at the same instant, still survives.
+    expect(result.observed.filter((e) => e.causedByUs).map((e) => e.type)).toEqual(['create_task'])
+  })
+
+  it('does not count its own clock steps as clinical writes', async () => {
+    // clock.changed carries our team as actor. Counting it doubled causedByUs for a six-action
+    // plan, which would halve the matched percentage on the accuracy panel.
+    const client = makeStub({
+      worldEvents: [
+        { id: 'c-1', time: T0, type: 'clock.changed', actor: 'team14', detail: 'Advanced by 5' },
+      ],
+    })
+    const plan = makePlan([planned('a1', 0, task('one'))])
+
+    const result = await runLiveLoop(client, plan, [approve('a1')], noFile)
+
+    expect(result.observed.find((e) => e.id === 'c-1')?.causedByUs).toBe(false)
+    expect(result.observed.filter((e) => e.causedByUs)).toHaveLength(1)
   })
 })
 

@@ -93,6 +93,10 @@ console.log('  Applying to the live world...\n')
 
 const result = await runLiveLoop(client, plan, gate.decisions(), {
   approver: 'Oriol (rehearsal)',
+  // Pinned rather than learned: attribution must be stable from the first event, and a
+  // coordinator task belongs in the GP's queue whichever site the conflict happened on.
+  teamId: 'team14',
+  coordinatorSite: 'gp',
   onStep: (step) => {
     const a = step.applied
     const tag = a.outcome === 'applied' ? 'OK  ' : a.outcome === 'rejected' ? 'SKIP' : 'FAIL'
@@ -113,4 +117,10 @@ console.log(`  applied            ${applied}/${result.applied.length}`)
 console.log(`  fallbacks fired    ${fallbacks.length}${fallbacks.length ? ' (' + fallbacks.map((f) => f.fallback.kind).join(', ') + ')' : ''}`)
 console.log(`  sim time           ${new Date(result.startSimTime).toISOString()} -> ${new Date(result.endSimTime).toISOString()}`)
 console.log(`  observed events    ${result.observed.length} (${ours.length} caused by us)`)
-console.log(`  handoff            fixtures/observed.live.json\n`)
+if (result.observationGaps.length) {
+  console.log(`  OBSERVATION GAPS   ${result.observationGaps.length} window(s) never seen:`)
+  for (const g of result.observationGaps) {
+    console.log(`                     after ${g.afterActionId}, ${g.minutes}min lost: ${g.error}`)
+  }
+}
+console.log(`  handoff            fixtures/observed.live.json + fixtures/run.live.json\n`)

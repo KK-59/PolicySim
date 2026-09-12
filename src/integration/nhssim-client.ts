@@ -78,6 +78,11 @@ export interface RequestOptions {
   idempotencyKey?: string
   query?: Record<string, string | number | undefined>
   signal?: AbortSignal
+  /**
+   * Override the retry budget. Use 0 for any write that is NOT idempotent: a retried
+   * `POST /api/clock` advances the world a second time, because it carries no idempotency key.
+   */
+  retries?: number
 }
 
 export class NhsSimClient {
@@ -89,6 +94,7 @@ export class NhsSimClient {
 
   async request<T>(path: string, options: RequestOptions = {}): Promise<T> {
     const { method = 'GET', body, idempotencyKey, query } = options
+    const maxRetries = options.retries ?? this.config.maxRetries
     const url = new URL(this.config.baseUrl + path)
     for (const [k, v] of Object.entries(query ?? {})) {
       if (v !== undefined) url.searchParams.set(k, String(v))
@@ -96,7 +102,7 @@ export class NhsSimClient {
 
     let lastTransient: Error | undefined
 
-    for (let attempt = 0; attempt <= this.config.maxRetries; attempt++) {
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
       if (attempt > 0) await sleep(backoffMs(attempt))
 
       const controller = new AbortController()
@@ -128,7 +134,7 @@ export class NhsSimClient {
 
         if (res.status === 409) throw new ConflictError(code, message, path)
 
-        if (RETRYABLE_STATUS.has(res.status) && attempt < this.config.maxRetries) {
+        if (RETRYABLE_STATUS.has(res.status) && attempt < maxRetries) {
           lastTransient = new ApiError(res.status, code, message, path)
           continue
         }
@@ -138,7 +144,7 @@ export class NhsSimClient {
 
         const isAbort = err instanceof Error && err.name === 'AbortError'
         const transient = isAbort ? new TimeoutError(path, this.config.timeoutMs) : (err as Error)
-        if (attempt < this.config.maxRetries) {
+        if (attempt < maxRetries) {
           lastTransient = transient
           continue
         }
@@ -156,7 +162,10 @@ export class NhsSimClient {
   }
 
   post<T>(path: string, body: unknown, idempotencyKey?: string): Promise<T> {
-    return this.request<T>(path, { method: 'POST', body, idempotencyKey })
+    // The clock is the one write with no idempotency key, so a retry moves the world twice.
+    // Better to surface the timeout and record an observation gap than to advance it again.
+    const retries = path === '/api/clock' ? 0 : undefined
+    return this.request<T>(path, { method: 'POST', body, idempotencyKey, retries })
   }
 }
 

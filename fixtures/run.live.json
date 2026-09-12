@@ -1,0 +1,850 @@
+{
+  "applied": [
+    {
+      "plannedActionId": "a1",
+      "outcome": "applied",
+      "result": {
+        "id": "r-13486",
+        "kind": "task",
+        "title": "Discharge follow-up: home-first pathway",
+        "owner": "gp",
+        "visibleTo": [
+          "gp",
+          "patient"
+        ],
+        "patientId": "SIM-000003",
+        "status": "open",
+        "priority": "routine",
+        "createdAt": 1789999320000,
+        "dueAt": 1790085720000,
+        "data": {},
+        "version": 1,
+        "provenance": {
+          "created": {
+            "actor": {
+              "kind": "team",
+              "name": "team14"
+            },
+            "source": "gp",
+            "action": "create_task",
+            "time": 1789999320000,
+            "version": 1
+          },
+          "changes": [
+            {
+              "actor": {
+                "kind": "team",
+                "name": "team14"
+              },
+              "source": "gp",
+              "action": "create_task",
+              "time": 1789999320000,
+              "version": 1
+            }
+          ]
+        }
+      },
+      "simTime": 1789999320000
+    },
+    {
+      "plannedActionId": "a2",
+      "outcome": "applied",
+      "result": {
+        "id": "document-batch-2-003",
+        "data": {
+          "tags": [],
+          "snomedCodes": [],
+          "sections": {
+            "reason": "Planned orthopaedic day-case attendance. This is a fictional episode for document workflow practice.",
+            "course": "The day-case episode is complete. The transport booking was confirmed before departure. The discharge coordinator recorded the handover for Aisha Patel.",
+            "diagnoses": "No new coded diagnosis is asserted by this training letter. Check the simulated patient record when classifying the correspondence.",
+            "medicationChanges": "A discharge medication list is recorded separately in the synthetic hospital chart. No changes are transcribed here.",
+            "results": "No investigation attachment is expected for this administrative handover.",
+            "followUp": "A physiotherapy appointment request is pending acknowledgement by the booking team.",
+            "gpActions": "Check that the physiotherapy referral is visible, record the receiving service and file after clinician review."
+          },
+          "assignee": "Duty GP",
+          "sentAt": 1788858000000,
+          "sentBy": "Dr Jamie Frame",
+          "stage": "sent"
+        },
+        "kind": "discharge-summary",
+        "owner": "hospital",
+        "title": "Orthopaedics · Day-case discharge handover",
+        "status": "sent",
+        "version": 3,
+        "priority": "routine",
+        "createdAt": 1788854400000,
+        "patientId": "SIM-000003",
+        "visibleTo": [
+          "hospital",
+          "gp"
+        ],
+        "provenance": {
+          "changes": [
+            {
+              "time": 1788858000000,
+              "actor": {
+                "kind": "simulation",
+                "name": "Dr Jamie Frame"
+              },
+              "action": "seed_document_sent",
+              "source": "hospital",
+              "version": 2
+            },
+            {
+              "actor": {
+                "kind": "team",
+                "name": "team14"
+              },
+              "source": "gp",
+              "action": "process_document",
+              "time": 1789999620000,
+              "version": 3
+            }
+          ],
+          "created": {
+            "time": 1788854400000,
+            "actor": {
+              "kind": "simulation",
+              "name": "Dr Jamie Frame"
+            },
+            "action": "seed",
+            "source": "hospital",
+            "version": 1
+          }
+        }
+      },
+      "simTime": 1789999620000
+    },
+    {
+      "plannedActionId": "a3",
+      "outcome": "applied",
+      "result": {
+        "id": "document-batch-2-003",
+        "data": {
+          "tags": [],
+          "snomedCodes": [],
+          "sections": {
+            "reason": "Planned orthopaedic day-case attendance. This is a fictional episode for document workflow practice.",
+            "course": "The day-case episode is complete. The transport booking was confirmed before departure. The discharge coordinator recorded the handover for Aisha Patel.",
+            "diagnoses": "No new coded diagnosis is asserted by this training letter. Check the simulated patient record when classifying the correspondence.",
+            "medicationChanges": "A discharge medication list is recorded separately in the synthetic hospital chart. No changes are transcribed here.",
+            "results": "No investigation attachment is expected for this administrative handover.",
+            "followUp": "A physiotherapy appointment request is pending acknowledgement by the booking team.",
+            "gpActions": "Check that the physiotherapy referral is visible, record the receiving service and file after clinician review."
+          },
+          "assignee": "Duty GP",
+          "sentAt": 1788858000000,
+          "sentBy": "Dr Jamie Frame",
+          "stage": "reviewed",
+          "reviewedAt": 1790000220000,
+          "reviewedBy": "team14",
+          "reviewNote": "Monitoring handover checked. Home-first plan appropriate. Carer to be involved."
+        },
+        "kind": "discharge-summary",
+        "owner": "hospital",
+        "title": "Orthopaedics · Day-case discharge handover",
+        "status": "reviewed",
+        "version": 4,
+        "priority": "routine",
+        "createdAt": 1788854400000,
+        "patientId": "SIM-000003",
+        "visibleTo": [
+          "hospital",
+          "gp"
+        ],
+        "provenance": {
+          "changes": [
+            {
+              "time": 1788858000000,
+              "actor": {
+                "kind": "simulation",
+                "name": "Dr Jamie Frame"
+              },
+              "action": "seed_document_sent",
+              "source": "hospital",
+              "version": 2
+            },
+            {
+              "actor": {
+                "kind": "team",
+                "name": "team14"
+              },
+              "source": "gp",
+              "action": "process_document",
+              "time": 1789999620000,
+              "version": 3
+            },
+            {
+              "actor": {
+                "kind": "team",
+                "name": "team14"
+              },
+              "source": "gp",
+              "action": "process_document",
+              "time": 1790000220000,
+              "version": 4
+            }
+          ],
+          "created": {
+            "time": 1788854400000,
+            "actor": {
+              "kind": "simulation",
+              "name": "Dr Jamie Frame"
+            },
+            "action": "seed",
+            "source": "hospital",
+            "version": 1
+          }
+        }
+      },
+      "simTime": 1790000220000
+    },
+    {
+      "plannedActionId": "a4",
+      "outcome": "failed",
+      "result": {
+        "id": "r-13510",
+        "kind": "task",
+        "title": "Coordinator review: order_test conflicted",
+        "owner": "gp",
+        "visibleTo": [
+          "gp",
+          "patient"
+        ],
+        "patientId": "SIM-000003",
+        "status": "open",
+        "priority": "routine",
+        "createdAt": 1790000520000,
+        "dueAt": 1790086920000,
+        "data": {},
+        "version": 1,
+        "provenance": {
+          "created": {
+            "actor": {
+              "kind": "team",
+              "name": "team14"
+            },
+            "source": "gp",
+            "action": "create_task",
+            "time": 1790000520000,
+            "version": 1
+          },
+          "changes": [
+            {
+              "actor": {
+                "kind": "team",
+                "name": "team14"
+              },
+              "source": "gp",
+              "action": "create_task",
+              "time": 1790000520000,
+              "version": 1
+            }
+          ]
+        }
+      },
+      "fallback": {
+        "kind": "coordinator-task",
+        "reason": "No service capacity",
+        "attempts": 2
+      },
+      "error": "409 No service capacity: No service capacity",
+      "simTime": 1790000520000
+    },
+    {
+      "plannedActionId": "a5",
+      "outcome": "applied",
+      "result": {
+        "id": "r-13518",
+        "kind": "visit",
+        "title": "schedule visit",
+        "owner": "community",
+        "visibleTo": [
+          "community",
+          "patient"
+        ],
+        "patientId": "SIM-000003",
+        "status": "scheduled",
+        "priority": "routine",
+        "createdAt": 1790001120000,
+        "dueAt": 1790087520000,
+        "data": {},
+        "version": 1,
+        "provenance": {
+          "created": {
+            "actor": {
+              "kind": "team",
+              "name": "team14"
+            },
+            "source": "community",
+            "action": "schedule_visit",
+            "time": 1790001120000,
+            "version": 1
+          },
+          "changes": [
+            {
+              "actor": {
+                "kind": "team",
+                "name": "team14"
+              },
+              "source": "community",
+              "action": "schedule_visit",
+              "time": 1790001120000,
+              "version": 1
+            }
+          ]
+        }
+      },
+      "simTime": 1790001120000
+    },
+    {
+      "plannedActionId": "a6",
+      "outcome": "applied",
+      "result": {
+        "id": "messaging-example-3",
+        "data": {
+          "assignee": "Alex Ledger · Practice administrator",
+          "allowReply": true,
+          "entries": [
+            {
+              "id": "messaging-example-3-1",
+              "body": "Your requested administrative form is ready for collection at reception.",
+              "at": 1789164000000,
+              "actor": {
+                "kind": "simulation",
+                "name": "Alex Ledger · Practice administrator"
+              },
+              "direction": "outgoing",
+              "channel": "sms",
+              "delivery": [
+                {
+                  "status": "queued",
+                  "at": 1789164000000,
+                  "actor": {
+                    "kind": "simulation",
+                    "name": "Alex Ledger · Practice administrator"
+                  }
+                },
+                {
+                  "status": "failed",
+                  "at": 1789164001000,
+                  "actor": {
+                    "kind": "simulation",
+                    "name": "Alex Ledger · Practice administrator"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "messaging-example-3-2",
+              "body": "Home visit arranged with the community nurse. Bloods will be taken at home. Your carer is welcome to be there.",
+              "at": 1790001720000,
+              "actor": {
+                "kind": "team",
+                "name": "team14"
+              },
+              "direction": "internal"
+            }
+          ]
+        },
+        "kind": "conversation",
+        "owner": "gp",
+        "title": "Form ready to collect",
+        "status": "open",
+        "version": 2,
+        "priority": "routine",
+        "createdAt": 1789164000000,
+        "patientId": "SIM-000003",
+        "visibleTo": [
+          "gp",
+          "patient"
+        ],
+        "provenance": {
+          "changes": [
+            {
+              "actor": {
+                "kind": "team",
+                "name": "team14"
+              },
+              "source": "gp",
+              "action": "messaging_action",
+              "time": 1790001720000,
+              "version": 2
+            }
+          ],
+          "created": {
+            "time": 1789164000000,
+            "actor": {
+              "kind": "simulation",
+              "name": "Alex Ledger · Practice administrator"
+            },
+            "action": "seed",
+            "source": "gp",
+            "version": 1
+          }
+        }
+      },
+      "simTime": 1790001120000
+    }
+  ],
+  "observed": [
+    {
+      "id": "e-13487",
+      "time": 1789999320000,
+      "type": "create_task",
+      "actor": "team14",
+      "detail": "Discharge follow-up: home-first pathway",
+      "resourceId": "r-13486",
+      "patientId": "SIM-000003",
+      "visibleTo": [
+        "gp",
+        "patient"
+      ],
+      "causedByUs": true,
+      "atSimMinutes": 0,
+      "sourceActionId": "a1",
+      "site": "gp"
+    },
+    {
+      "id": "e-13488",
+      "time": 1789999620000,
+      "type": "clock.changed",
+      "actor": "team14",
+      "detail": "Advanced simulation by 5 minutes; clock paused",
+      "visibleTo": [
+        "control"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 5,
+      "sourceActionId": "a1",
+      "site": "gp"
+    },
+    {
+      "id": "e-13489",
+      "time": 1789999620000,
+      "type": "process_document",
+      "actor": "team14",
+      "detail": "Orthopaedics · Day-case discharge handover",
+      "resourceId": "document-batch-2-003",
+      "patientId": "SIM-000003",
+      "visibleTo": [
+        "hospital",
+        "gp"
+      ],
+      "causedByUs": true,
+      "atSimMinutes": 5,
+      "sourceActionId": "a2",
+      "site": "gp"
+    },
+    {
+      "id": "e-13491",
+      "time": 1789999800000,
+      "type": "observation.received",
+      "actor": "home-monitor",
+      "detail": "Home activity reading",
+      "resourceId": "r-13490",
+      "patientId": "SIM-000006",
+      "visibleTo": [
+        "wearables",
+        "community",
+        "patient"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 8,
+      "sourceActionId": "a2",
+      "site": "gp"
+    },
+    {
+      "id": "e-13493",
+      "time": 1789999800000,
+      "type": "observation.received",
+      "actor": "home-monitor",
+      "detail": "Home activity reading",
+      "resourceId": "r-13492",
+      "patientId": "SIM-000001",
+      "visibleTo": [
+        "wearables",
+        "community",
+        "patient"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 8,
+      "sourceActionId": "a2",
+      "site": "gp"
+    },
+    {
+      "id": "e-13495",
+      "time": 1789999800000,
+      "type": "observation.received",
+      "actor": "home-monitor",
+      "detail": "Home activity reading",
+      "resourceId": "r-13494",
+      "patientId": "SIM-000004",
+      "visibleTo": [
+        "wearables",
+        "community",
+        "patient"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 8,
+      "sourceActionId": "a2",
+      "site": "gp"
+    },
+    {
+      "id": "e-13497",
+      "time": 1789999800000,
+      "type": "observation.received",
+      "actor": "home-monitor",
+      "detail": "Home activity reading",
+      "resourceId": "r-13496",
+      "patientId": "SIM-000003",
+      "visibleTo": [
+        "wearables",
+        "community",
+        "patient"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 8,
+      "sourceActionId": "a2",
+      "site": "gp"
+    },
+    {
+      "id": "e-13499",
+      "time": 1790000100000,
+      "type": "request.arrived",
+      "actor": "patient-demand",
+      "detail": "New synthetic patient request",
+      "resourceId": "r-13498",
+      "patientId": "SIM-000231",
+      "visibleTo": [
+        "triage",
+        "gp",
+        "patient"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 13,
+      "sourceActionId": "a2",
+      "site": "gp"
+    },
+    {
+      "id": "e-13500",
+      "time": 1790000220000,
+      "type": "clock.changed",
+      "actor": "team14",
+      "detail": "Advanced simulation by 10 minutes; clock paused",
+      "visibleTo": [
+        "control"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 15,
+      "sourceActionId": "a2",
+      "site": "gp"
+    },
+    {
+      "id": "e-13501",
+      "time": 1790000220000,
+      "type": "process_document",
+      "actor": "team14",
+      "detail": "Orthopaedics · Day-case discharge handover",
+      "resourceId": "document-batch-2-003",
+      "patientId": "SIM-000003",
+      "visibleTo": [
+        "hospital",
+        "gp"
+      ],
+      "causedByUs": true,
+      "atSimMinutes": 15,
+      "sourceActionId": "a3",
+      "site": "gp"
+    },
+    {
+      "id": "e-13502",
+      "time": 1790000400000,
+      "type": "assessment.completed",
+      "actor": "acute-flow",
+      "detail": "Synthetic assessment slot completed",
+      "resourceId": "r-13474",
+      "patientId": "SIM-004243",
+      "visibleTo": [
+        "ambulance",
+        "hospital"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 18,
+      "sourceActionId": "a3",
+      "site": "gp"
+    },
+    {
+      "id": "e-13504",
+      "time": 1790000400000,
+      "type": "emergency.arrived",
+      "actor": "acute-flow",
+      "detail": "New ambulance handover",
+      "resourceId": "r-13503",
+      "patientId": "SIM-005822",
+      "visibleTo": [
+        "ambulance",
+        "hospital"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 18,
+      "sourceActionId": "a3",
+      "site": "gp"
+    },
+    {
+      "id": "e-13506",
+      "time": 1790000400000,
+      "type": "emergency.arrived",
+      "actor": "acute-flow",
+      "detail": "New A&E arrival",
+      "resourceId": "r-13505",
+      "patientId": "SIM-014857",
+      "visibleTo": [
+        "ambulance",
+        "hospital"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 18,
+      "sourceActionId": "a3",
+      "site": "gp"
+    },
+    {
+      "id": "e-13508",
+      "time": 1790000400000,
+      "type": "emergency.arrived",
+      "actor": "acute-flow",
+      "detail": "New A&E arrival",
+      "resourceId": "r-13507",
+      "patientId": "SIM-001464",
+      "visibleTo": [
+        "ambulance",
+        "hospital"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 18,
+      "sourceActionId": "a3",
+      "site": "gp"
+    },
+    {
+      "id": "e-13509",
+      "time": 1790000520000,
+      "type": "clock.changed",
+      "actor": "team14",
+      "detail": "Advanced simulation by 5 minutes; clock paused",
+      "visibleTo": [
+        "control"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 20,
+      "sourceActionId": "a3",
+      "site": "gp"
+    },
+    {
+      "id": "e-13511",
+      "time": 1790000520000,
+      "type": "create_task",
+      "actor": "team14",
+      "detail": "Coordinator review: order_test conflicted",
+      "resourceId": "r-13510",
+      "patientId": "SIM-000003",
+      "visibleTo": [
+        "gp",
+        "patient"
+      ],
+      "causedByUs": true,
+      "atSimMinutes": 20,
+      "sourceActionId": "a4",
+      "site": "gp"
+    },
+    {
+      "id": "e-13512",
+      "time": 1790000820000,
+      "type": "visit.completed",
+      "actor": "logistics",
+      "detail": "schedule visit",
+      "resourceId": "r-13404",
+      "patientId": "SIM-000001",
+      "visibleTo": [
+        "community",
+        "patient"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 25,
+      "sourceActionId": "a4",
+      "site": "gp"
+    },
+    {
+      "id": "e-13516",
+      "time": 1790001000000,
+      "type": "request.arrived",
+      "actor": "patient-demand",
+      "detail": "New synthetic patient request",
+      "resourceId": "r-13515",
+      "patientId": "SIM-035762",
+      "visibleTo": [
+        "triage",
+        "gp",
+        "patient"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 28,
+      "sourceActionId": "a4",
+      "site": "gp"
+    },
+    {
+      "id": "e-13517",
+      "time": 1790001120000,
+      "type": "clock.changed",
+      "actor": "team14",
+      "detail": "Advanced simulation by 10 minutes; clock paused",
+      "visibleTo": [
+        "control"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 30,
+      "sourceActionId": "a4",
+      "site": "gp"
+    },
+    {
+      "id": "e-13519",
+      "time": 1790001120000,
+      "type": "schedule_visit",
+      "actor": "team14",
+      "detail": "schedule visit",
+      "resourceId": "r-13518",
+      "patientId": "SIM-000003",
+      "visibleTo": [
+        "community",
+        "patient"
+      ],
+      "causedByUs": true,
+      "atSimMinutes": 30,
+      "sourceActionId": "a6",
+      "site": "gp"
+    },
+    {
+      "id": "e-13520",
+      "time": 1790001600000,
+      "type": "assessment.completed",
+      "actor": "acute-flow",
+      "detail": "Synthetic assessment slot completed",
+      "resourceId": "r-13503",
+      "patientId": "SIM-005822",
+      "visibleTo": [
+        "ambulance",
+        "hospital"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 38,
+      "sourceActionId": "a6",
+      "site": "gp"
+    },
+    {
+      "id": "e-13522",
+      "time": 1790001600000,
+      "type": "emergency.arrived",
+      "actor": "acute-flow",
+      "detail": "New ambulance handover",
+      "resourceId": "r-13521",
+      "patientId": "SIM-014349",
+      "visibleTo": [
+        "ambulance",
+        "hospital"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 38,
+      "sourceActionId": "a6",
+      "site": "gp"
+    },
+    {
+      "id": "e-13524",
+      "time": 1790001600000,
+      "type": "emergency.arrived",
+      "actor": "acute-flow",
+      "detail": "New A&E arrival",
+      "resourceId": "r-13523",
+      "patientId": "SIM-043804",
+      "visibleTo": [
+        "ambulance",
+        "hospital"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 38,
+      "sourceActionId": "a6",
+      "site": "gp"
+    },
+    {
+      "id": "e-13526",
+      "time": 1790001600000,
+      "type": "emergency.arrived",
+      "actor": "acute-flow",
+      "detail": "New A&E arrival",
+      "resourceId": "r-13525",
+      "patientId": "SIM-017839",
+      "visibleTo": [
+        "ambulance",
+        "hospital"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 38,
+      "sourceActionId": "a6",
+      "site": "gp"
+    },
+    {
+      "id": "e-13527",
+      "time": 1790001720000,
+      "type": "clock.changed",
+      "actor": "team14",
+      "detail": "Advanced simulation by 10 minutes; clock paused",
+      "visibleTo": [
+        "control"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 40,
+      "sourceActionId": "a6",
+      "site": "gp"
+    },
+    {
+      "id": "e-13528",
+      "time": 1790001720000,
+      "type": "messaging_action",
+      "actor": "team14",
+      "detail": "Form ready to collect",
+      "resourceId": "messaging-example-3",
+      "patientId": "SIM-000003",
+      "visibleTo": [
+        "gp",
+        "patient"
+      ],
+      "causedByUs": true,
+      "atSimMinutes": 40,
+      "sourceActionId": "a6",
+      "site": "gp"
+    },
+    {
+      "id": "e-13529",
+      "time": 1790001720000,
+      "type": "clock.changed",
+      "actor": "team14",
+      "detail": "Advanced simulation by 0 minutes; clock paused",
+      "visibleTo": [
+        "control"
+      ],
+      "causedByUs": false,
+      "atSimMinutes": 40,
+      "sourceActionId": "a6",
+      "site": "gp"
+    }
+  ],
+  "startSimTime": 1789999320000,
+  "endSimTime": 1790001720000,
+  "observationGaps": [
+    {
+      "afterActionId": "a5",
+      "minutes": 10,
+      "error": "Request to /api/clock timed out after 20000ms"
+    }
+  ]
+}

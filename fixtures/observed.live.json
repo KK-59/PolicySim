@@ -1,26 +1,12 @@
 [
   {
-    "id": "e-13442",
-    "time": 1789996920000,
-    "type": "clock.changed",
-    "actor": "team14",
-    "detail": "Advanced simulation by 5 minutes; clock paused",
-    "visibleTo": [
-      "control"
-    ],
-    "causedByUs": false,
-    "atSimMinutes": 0,
-    "sourceActionId": "a1",
-    "site": "gp"
-  },
-  {
-    "id": "e-13444",
-    "time": 1789996920000,
+    "id": "e-13487",
+    "time": 1789999320000,
     "type": "create_task",
     "actor": "team14",
     "detail": "Discharge follow-up: home-first pathway",
-    "resourceId": "r-13443",
-    "patientId": "SIM-000002",
+    "resourceId": "r-13486",
+    "patientId": "SIM-000003",
     "visibleTo": [
       "gp",
       "patient"
@@ -31,27 +17,27 @@
     "site": "gp"
   },
   {
-    "id": "e-13445",
-    "time": 1789997220000,
+    "id": "e-13488",
+    "time": 1789999620000,
     "type": "clock.changed",
     "actor": "team14",
     "detail": "Advanced simulation by 5 minutes; clock paused",
     "visibleTo": [
       "control"
     ],
-    "causedByUs": true,
+    "causedByUs": false,
     "atSimMinutes": 5,
     "sourceActionId": "a1",
     "site": "gp"
   },
   {
-    "id": "e-13446",
-    "time": 1789997220000,
+    "id": "e-13489",
+    "time": 1789999620000,
     "type": "process_document",
     "actor": "team14",
-    "detail": "Respiratory · Assessment discharge letter",
-    "resourceId": "document-batch-2-002",
-    "patientId": "SIM-000002",
+    "detail": "Orthopaedics · Day-case discharge handover",
+    "resourceId": "document-batch-2-003",
+    "patientId": "SIM-000003",
     "visibleTo": [
       "hospital",
       "gp"
@@ -62,16 +48,16 @@
     "site": "gp"
   },
   {
-    "id": "e-13450",
-    "time": 1789997400000,
-    "type": "request.arrived",
-    "actor": "patient-demand",
-    "detail": "New synthetic patient request",
-    "resourceId": "r-13449",
-    "patientId": "SIM-004989",
+    "id": "e-13491",
+    "time": 1789999800000,
+    "type": "observation.received",
+    "actor": "home-monitor",
+    "detail": "Home activity reading",
+    "resourceId": "r-13490",
+    "patientId": "SIM-000006",
     "visibleTo": [
-      "triage",
-      "gp",
+      "wearables",
+      "community",
       "patient"
     ],
     "causedByUs": false,
@@ -80,45 +66,99 @@
     "site": "gp"
   },
   {
-    "id": "e-13451",
-    "time": 1789997520000,
-    "type": "visit.completed",
-    "actor": "logistics",
-    "detail": "schedule visit",
-    "resourceId": "r-13353",
+    "id": "e-13493",
+    "time": 1789999800000,
+    "type": "observation.received",
+    "actor": "home-monitor",
+    "detail": "Home activity reading",
+    "resourceId": "r-13492",
     "patientId": "SIM-000001",
     "visibleTo": [
+      "wearables",
       "community",
-      "gp",
       "patient"
     ],
     "causedByUs": false,
-    "atSimMinutes": 10,
+    "atSimMinutes": 8,
     "sourceActionId": "a2",
     "site": "gp"
   },
   {
-    "id": "e-13452",
-    "time": 1789997820000,
+    "id": "e-13495",
+    "time": 1789999800000,
+    "type": "observation.received",
+    "actor": "home-monitor",
+    "detail": "Home activity reading",
+    "resourceId": "r-13494",
+    "patientId": "SIM-000004",
+    "visibleTo": [
+      "wearables",
+      "community",
+      "patient"
+    ],
+    "causedByUs": false,
+    "atSimMinutes": 8,
+    "sourceActionId": "a2",
+    "site": "gp"
+  },
+  {
+    "id": "e-13497",
+    "time": 1789999800000,
+    "type": "observation.received",
+    "actor": "home-monitor",
+    "detail": "Home activity reading",
+    "resourceId": "r-13496",
+    "patientId": "SIM-000003",
+    "visibleTo": [
+      "wearables",
+      "community",
+      "patient"
+    ],
+    "causedByUs": false,
+    "atSimMinutes": 8,
+    "sourceActionId": "a2",
+    "site": "gp"
+  },
+  {
+    "id": "e-13499",
+    "time": 1790000100000,
+    "type": "request.arrived",
+    "actor": "patient-demand",
+    "detail": "New synthetic patient request",
+    "resourceId": "r-13498",
+    "patientId": "SIM-000231",
+    "visibleTo": [
+      "triage",
+      "gp",
+      "patient"
+    ],
+    "causedByUs": false,
+    "atSimMinutes": 13,
+    "sourceActionId": "a2",
+    "site": "gp"
+  },
+  {
+    "id": "e-13500",
+    "time": 1790000220000,
     "type": "clock.changed",
     "actor": "team14",
     "detail": "Advanced simulation by 10 minutes; clock paused",
     "visibleTo": [
       "control"
     ],
-    "causedByUs": true,
+    "causedByUs": false,
     "atSimMinutes": 15,
     "sourceActionId": "a2",
     "site": "gp"
   },
   {
-    "id": "e-13453",
-    "time": 1789997820000,
+    "id": "e-13501",
+    "time": 1790000220000,
     "type": "process_document",
     "actor": "team14",
-    "detail": "Respiratory · Assessment discharge letter",
-    "resourceId": "document-batch-2-002",
-    "patientId": "SIM-000002",
+    "detail": "Orthopaedics · Day-case discharge handover",
+    "resourceId": "document-batch-2-003",
+    "patientId": "SIM-000003",
     "visibleTo": [
       "hospital",
       "gp"
@@ -129,211 +169,11 @@
     "site": "gp"
   },
   {
-    "id": "e-13454",
-    "time": 1789998000000,
+    "id": "e-13502",
+    "time": 1790000400000,
     "type": "assessment.completed",
     "actor": "acute-flow",
     "detail": "Synthetic assessment slot completed",
-    "resourceId": "r-13436",
-    "patientId": "SIM-042073",
-    "visibleTo": [
-      "ambulance",
-      "hospital"
-    ],
-    "causedByUs": false,
-    "atSimMinutes": 18,
-    "sourceActionId": "a3",
-    "site": "gp"
-  },
-  {
-    "id": "e-13456",
-    "time": 1789998000000,
-    "type": "emergency.arrived",
-    "actor": "acute-flow",
-    "detail": "New ambulance handover",
-    "resourceId": "r-13455",
-    "patientId": "SIM-036348",
-    "visibleTo": [
-      "ambulance",
-      "hospital"
-    ],
-    "causedByUs": false,
-    "atSimMinutes": 18,
-    "sourceActionId": "a3",
-    "site": "gp"
-  },
-  {
-    "id": "e-13458",
-    "time": 1789998000000,
-    "type": "emergency.arrived",
-    "actor": "acute-flow",
-    "detail": "New A&E arrival",
-    "resourceId": "r-13457",
-    "patientId": "SIM-034111",
-    "visibleTo": [
-      "ambulance",
-      "hospital"
-    ],
-    "causedByUs": false,
-    "atSimMinutes": 18,
-    "sourceActionId": "a3",
-    "site": "gp"
-  },
-  {
-    "id": "e-13460",
-    "time": 1789998000000,
-    "type": "emergency.arrived",
-    "actor": "acute-flow",
-    "detail": "New A&E arrival",
-    "resourceId": "r-13459",
-    "patientId": "SIM-017302",
-    "visibleTo": [
-      "ambulance",
-      "hospital"
-    ],
-    "causedByUs": false,
-    "atSimMinutes": 18,
-    "sourceActionId": "a3",
-    "site": "gp"
-  },
-  {
-    "id": "e-13461",
-    "time": 1789998120000,
-    "type": "clock.changed",
-    "actor": "team14",
-    "detail": "Advanced simulation by 5 minutes; clock paused",
-    "visibleTo": [
-      "control"
-    ],
-    "causedByUs": true,
-    "atSimMinutes": 20,
-    "sourceActionId": "a3",
-    "site": "gp"
-  },
-  {
-    "id": "e-13463",
-    "time": 1789998120000,
-    "type": "order_test",
-    "actor": "team14",
-    "detail": "order test",
-    "resourceId": "r-13462",
-    "patientId": "SIM-000002",
-    "visibleTo": [
-      "diagnostics",
-      "gp",
-      "patient"
-    ],
-    "causedByUs": true,
-    "atSimMinutes": 20,
-    "sourceActionId": "a4",
-    "site": "gp"
-  },
-  {
-    "id": "e-13465",
-    "time": 1789998300000,
-    "type": "request.arrived",
-    "actor": "patient-demand",
-    "detail": "New synthetic patient request",
-    "resourceId": "r-13464",
-    "patientId": "SIM-026097",
-    "visibleTo": [
-      "triage",
-      "gp",
-      "patient"
-    ],
-    "causedByUs": false,
-    "atSimMinutes": 23,
-    "sourceActionId": "a4",
-    "site": "gp"
-  },
-  {
-    "id": "e-13466",
-    "time": 1789998720000,
-    "type": "clock.changed",
-    "actor": "team14",
-    "detail": "Advanced simulation by 10 minutes; clock paused",
-    "visibleTo": [
-      "control"
-    ],
-    "causedByUs": true,
-    "atSimMinutes": 30,
-    "sourceActionId": "a4",
-    "site": "gp"
-  },
-  {
-    "id": "e-13468",
-    "time": 1789998720000,
-    "type": "schedule_visit",
-    "actor": "team14",
-    "detail": "schedule visit",
-    "resourceId": "r-13467",
-    "patientId": "SIM-000002",
-    "visibleTo": [
-      "community",
-      "patient"
-    ],
-    "causedByUs": true,
-    "atSimMinutes": 30,
-    "sourceActionId": "a5",
-    "site": "community"
-  },
-  {
-    "id": "e-13470",
-    "time": 1789999200000,
-    "type": "flow.pressure",
-    "actor": "bed-flow",
-    "detail": "Demand exceeds staffed bed availability",
-    "resourceId": "r-13469",
-    "visibleTo": [
-      "beds",
-      "hospital",
-      "icb"
-    ],
-    "causedByUs": false,
-    "atSimMinutes": 38,
-    "sourceActionId": "a5",
-    "site": "community"
-  },
-  {
-    "id": "e-13472",
-    "time": 1789999200000,
-    "type": "service.requested",
-    "actor": "service-demand",
-    "detail": "New prescription awaiting review",
-    "resourceId": "r-13471",
-    "patientId": "SIM-019308",
-    "visibleTo": [
-      "pharmacy",
-      "patient"
-    ],
-    "causedByUs": false,
-    "atSimMinutes": 38,
-    "sourceActionId": "a5",
-    "site": "community"
-  },
-  {
-    "id": "e-13473",
-    "time": 1789999200000,
-    "type": "assessment.completed",
-    "actor": "acute-flow",
-    "detail": "Synthetic assessment slot completed",
-    "resourceId": "r-13455",
-    "patientId": "SIM-036348",
-    "visibleTo": [
-      "ambulance",
-      "hospital"
-    ],
-    "causedByUs": false,
-    "atSimMinutes": 38,
-    "sourceActionId": "a5",
-    "site": "community"
-  },
-  {
-    "id": "e-13475",
-    "time": 1789999200000,
-    "type": "emergency.arrived",
-    "actor": "acute-flow",
-    "detail": "New ambulance handover",
     "resourceId": "r-13474",
     "patientId": "SIM-004243",
     "visibleTo": [
@@ -341,102 +181,248 @@
       "hospital"
     ],
     "causedByUs": false,
-    "atSimMinutes": 38,
-    "sourceActionId": "a5",
-    "site": "community"
+    "atSimMinutes": 18,
+    "sourceActionId": "a3",
+    "site": "gp"
   },
   {
-    "id": "e-13477",
-    "time": 1789999200000,
+    "id": "e-13504",
+    "time": 1790000400000,
     "type": "emergency.arrived",
     "actor": "acute-flow",
-    "detail": "New A&E arrival",
-    "resourceId": "r-13476",
-    "patientId": "SIM-025418",
+    "detail": "New ambulance handover",
+    "resourceId": "r-13503",
+    "patientId": "SIM-005822",
     "visibleTo": [
       "ambulance",
       "hospital"
     ],
     "causedByUs": false,
-    "atSimMinutes": 38,
-    "sourceActionId": "a5",
-    "site": "community"
+    "atSimMinutes": 18,
+    "sourceActionId": "a3",
+    "site": "gp"
   },
   {
-    "id": "e-13479",
-    "time": 1789999200000,
+    "id": "e-13506",
+    "time": 1790000400000,
     "type": "emergency.arrived",
     "actor": "acute-flow",
     "detail": "New A&E arrival",
-    "resourceId": "r-13478",
-    "patientId": "SIM-031429",
+    "resourceId": "r-13505",
+    "patientId": "SIM-014857",
     "visibleTo": [
       "ambulance",
       "hospital"
     ],
     "causedByUs": false,
-    "atSimMinutes": 38,
-    "sourceActionId": "a5",
-    "site": "community"
+    "atSimMinutes": 18,
+    "sourceActionId": "a3",
+    "site": "gp"
   },
   {
-    "id": "e-13481",
-    "time": 1789999200000,
+    "id": "e-13508",
+    "time": 1790000400000,
+    "type": "emergency.arrived",
+    "actor": "acute-flow",
+    "detail": "New A&E arrival",
+    "resourceId": "r-13507",
+    "patientId": "SIM-001464",
+    "visibleTo": [
+      "ambulance",
+      "hospital"
+    ],
+    "causedByUs": false,
+    "atSimMinutes": 18,
+    "sourceActionId": "a3",
+    "site": "gp"
+  },
+  {
+    "id": "e-13509",
+    "time": 1790000520000,
+    "type": "clock.changed",
+    "actor": "team14",
+    "detail": "Advanced simulation by 5 minutes; clock paused",
+    "visibleTo": [
+      "control"
+    ],
+    "causedByUs": false,
+    "atSimMinutes": 20,
+    "sourceActionId": "a3",
+    "site": "gp"
+  },
+  {
+    "id": "e-13511",
+    "time": 1790000520000,
+    "type": "create_task",
+    "actor": "team14",
+    "detail": "Coordinator review: order_test conflicted",
+    "resourceId": "r-13510",
+    "patientId": "SIM-000003",
+    "visibleTo": [
+      "gp",
+      "patient"
+    ],
+    "causedByUs": true,
+    "atSimMinutes": 20,
+    "sourceActionId": "a4",
+    "site": "gp"
+  },
+  {
+    "id": "e-13512",
+    "time": 1790000820000,
+    "type": "visit.completed",
+    "actor": "logistics",
+    "detail": "schedule visit",
+    "resourceId": "r-13404",
+    "patientId": "SIM-000001",
+    "visibleTo": [
+      "community",
+      "patient"
+    ],
+    "causedByUs": false,
+    "atSimMinutes": 25,
+    "sourceActionId": "a4",
+    "site": "gp"
+  },
+  {
+    "id": "e-13516",
+    "time": 1790001000000,
     "type": "request.arrived",
     "actor": "patient-demand",
     "detail": "New synthetic patient request",
-    "resourceId": "r-13480",
-    "patientId": "SIM-007732",
+    "resourceId": "r-13515",
+    "patientId": "SIM-035762",
     "visibleTo": [
       "triage",
       "gp",
       "patient"
     ],
     "causedByUs": false,
-    "atSimMinutes": 38,
-    "sourceActionId": "a5",
-    "site": "community"
+    "atSimMinutes": 28,
+    "sourceActionId": "a4",
+    "site": "gp"
   },
   {
-    "id": "e-13482",
-    "time": 1789999320000,
-    "type": "result.available",
-    "actor": "laboratory",
-    "detail": "order test",
-    "resourceId": "r-13347",
-    "patientId": "SIM-000001",
-    "visibleTo": [
-      "diagnostics",
-      "gp",
-      "patient"
-    ],
-    "causedByUs": false,
-    "atSimMinutes": 40,
-    "sourceActionId": "a5",
-    "site": "community"
-  },
-  {
-    "id": "e-13483",
-    "time": 1789999320000,
+    "id": "e-13517",
+    "time": 1790001120000,
     "type": "clock.changed",
     "actor": "team14",
     "detail": "Advanced simulation by 10 minutes; clock paused",
     "visibleTo": [
       "control"
     ],
-    "causedByUs": true,
-    "atSimMinutes": 40,
-    "sourceActionId": "a5",
-    "site": "community"
+    "causedByUs": false,
+    "atSimMinutes": 30,
+    "sourceActionId": "a4",
+    "site": "gp"
   },
   {
-    "id": "e-13484",
-    "time": 1789999320000,
+    "id": "e-13519",
+    "time": 1790001120000,
+    "type": "schedule_visit",
+    "actor": "team14",
+    "detail": "schedule visit",
+    "resourceId": "r-13518",
+    "patientId": "SIM-000003",
+    "visibleTo": [
+      "community",
+      "patient"
+    ],
+    "causedByUs": true,
+    "atSimMinutes": 30,
+    "sourceActionId": "a6",
+    "site": "gp"
+  },
+  {
+    "id": "e-13520",
+    "time": 1790001600000,
+    "type": "assessment.completed",
+    "actor": "acute-flow",
+    "detail": "Synthetic assessment slot completed",
+    "resourceId": "r-13503",
+    "patientId": "SIM-005822",
+    "visibleTo": [
+      "ambulance",
+      "hospital"
+    ],
+    "causedByUs": false,
+    "atSimMinutes": 38,
+    "sourceActionId": "a6",
+    "site": "gp"
+  },
+  {
+    "id": "e-13522",
+    "time": 1790001600000,
+    "type": "emergency.arrived",
+    "actor": "acute-flow",
+    "detail": "New ambulance handover",
+    "resourceId": "r-13521",
+    "patientId": "SIM-014349",
+    "visibleTo": [
+      "ambulance",
+      "hospital"
+    ],
+    "causedByUs": false,
+    "atSimMinutes": 38,
+    "sourceActionId": "a6",
+    "site": "gp"
+  },
+  {
+    "id": "e-13524",
+    "time": 1790001600000,
+    "type": "emergency.arrived",
+    "actor": "acute-flow",
+    "detail": "New A&E arrival",
+    "resourceId": "r-13523",
+    "patientId": "SIM-043804",
+    "visibleTo": [
+      "ambulance",
+      "hospital"
+    ],
+    "causedByUs": false,
+    "atSimMinutes": 38,
+    "sourceActionId": "a6",
+    "site": "gp"
+  },
+  {
+    "id": "e-13526",
+    "time": 1790001600000,
+    "type": "emergency.arrived",
+    "actor": "acute-flow",
+    "detail": "New A&E arrival",
+    "resourceId": "r-13525",
+    "patientId": "SIM-017839",
+    "visibleTo": [
+      "ambulance",
+      "hospital"
+    ],
+    "causedByUs": false,
+    "atSimMinutes": 38,
+    "sourceActionId": "a6",
+    "site": "gp"
+  },
+  {
+    "id": "e-13527",
+    "time": 1790001720000,
+    "type": "clock.changed",
+    "actor": "team14",
+    "detail": "Advanced simulation by 10 minutes; clock paused",
+    "visibleTo": [
+      "control"
+    ],
+    "causedByUs": false,
+    "atSimMinutes": 40,
+    "sourceActionId": "a6",
+    "site": "gp"
+  },
+  {
+    "id": "e-13528",
+    "time": 1790001720000,
     "type": "messaging_action",
     "actor": "team14",
-    "detail": "Contact details check",
-    "resourceId": "messaging-example-2",
-    "patientId": "SIM-000002",
+    "detail": "Form ready to collect",
+    "resourceId": "messaging-example-3",
+    "patientId": "SIM-000003",
     "visibleTo": [
       "gp",
       "patient"
@@ -447,15 +433,15 @@
     "site": "gp"
   },
   {
-    "id": "e-13485",
-    "time": 1789999320000,
+    "id": "e-13529",
+    "time": 1790001720000,
     "type": "clock.changed",
     "actor": "team14",
     "detail": "Advanced simulation by 0 minutes; clock paused",
     "visibleTo": [
       "control"
     ],
-    "causedByUs": true,
+    "causedByUs": false,
     "atSimMinutes": 40,
     "sourceActionId": "a6",
     "site": "gp"
